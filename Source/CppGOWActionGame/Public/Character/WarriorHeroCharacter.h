@@ -3,9 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "InputActionValue.h"
 #include "Character/WarriorBaseCharacter.h"
 #include "WarriorHeroCharacter.generated.h"
 
+class UDataAsset_InputConfig;
 class UCameraComponent;
 class USpringArmComponent;
 /**
@@ -18,6 +20,7 @@ class CPPGOWACTIONGAME_API AWarriorHeroCharacter : public AWarriorBaseCharacter
 
 protected:
 	virtual void BeginPlay() override;
+	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 public:
 	AWarriorHeroCharacter();
 	
@@ -29,4 +32,15 @@ private:
 	UCameraComponent* FollowCamera;
 	
 #pragma endregion
+
+#pragma region Inputs
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly,Category="CharacterData",meta=(AllowPrivateAccess=true))
+	UDataAsset_InputConfig* InputConfigDataAsset;
+
+	void Input_Move(const FInputActionValue& InputActionValue);
+	void Input_Look(const FInputActionValue& InputActionValue);
+	
+	
+#pragma endregion 
+
 };

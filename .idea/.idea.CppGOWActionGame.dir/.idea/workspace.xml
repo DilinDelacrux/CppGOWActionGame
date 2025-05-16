@@ -9,14 +9,59 @@
   <component name="ChangeListManager">
     <list default="true" id="705d53a4-018f-426e-b050-6cfad142ff31" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CppGOWActionGame.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CppGOWActionGame.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Blueprint/DA_InputConfig.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Blueprint/DA_InputConfig.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Blueprint/HeroCharacter.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Blueprint/HeroGameMode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Blueprint/HeroGameMode.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/CppGOWActionGame/Private/Character/WarriorHeroCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/CppGOWActionGame/Private/Character/WarriorHeroCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/CppGOWActionGame/Private/DataAssets/Input/DataAsset_InputConfig.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/CppGOWActionGame/Private/DataAssets/Input/DataAsset_InputConfig.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/CppGOWActionGame/Private/WarriorGameplayTags.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/CppGOWActionGame/Private/WarriorGameplayTags.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/CppGOWActionGame/Public/Character/WarriorHeroCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/CppGOWActionGame/Public/Character/WarriorHeroCharacter.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/CppGOWActionGame/Public/WarriorGameplayTags.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/CppGOWActionGame/Public/WarriorGameplayTags.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultEditor.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEditor.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/Blueprint/MyWarriorHeroCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Blueprint/MyWarriorHeroCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Frost_Giant/SK_Enemy_FrostGiant_Captain.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Frost_Giant/SK_Enemy_FrostGiant_Captain.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/SK_Troll_Poison.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/SK_Troll_Poison.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_AxeBlock.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_AxeBlock.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_AxeBlockReactLarge.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_AxeBlockReactLarge.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_Ability_Light.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_Ability_Light.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_Equip.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_Equip.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_HeavyAttack_1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_HeavyAttack_1.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_HeavyAttack_2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_HeavyAttack_2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_JogFwd_Loop.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_JogFwd_Loop.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_JumpAttack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_JumpAttack.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_LightAttack_1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_LightAttack_1.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_LightAttack_2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_LightAttack_2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_LightAttack_3.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_LightAttack_3.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_LightAttack_4.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_LightAttack_4.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_Shout.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_Shout.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_Shout_Adjusted.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_Shout_Adjusted.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_TurnLeft_90.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_TurnLeft_90.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_TurnRight_90.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_TurnRight_90.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_Unequip.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_Unequip.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_Walk_Bwd.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_Walk_Bwd.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_Walk_BwdRight.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_Walk_BwdRight.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_Walk_Fwd.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_Walk_Fwd.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_Walk_FwdLeft.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_Walk_FwdLeft.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_Walk_Left.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_Walk_Left.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_Walk_Right.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Axe_Walk_Right.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Death_Fallback.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Death_Fallback.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_DisarmAxeStand.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_DisarmAxeStand.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_HitReactLarge_Front.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_HitReactLarge_Front.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_HitReactLarge_Left.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_HitReactLarge_Left.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_HitReactLarge_Right.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_HitReactLarge_Right.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_HitReact_Back.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_HitReact_Back.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_HitReact_Front.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_HitReact_Front.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_HitReact_Left.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_HitReact_Left.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_HitReact_Right.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_HitReact_Right.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Idle_Axe.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Idle_Axe.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Idle_AxeRelax_1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Idle_AxeRelax_1.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Idle_AxeRelax_2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Idle_AxeRelax_2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Roll.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Roll.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_StandingBlock_Idle.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_StandingBlock_Idle.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Sword_Death_1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Sword_Death_1.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Unarmed_Idle.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Unarmed_Idle.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Unarmed_Idle_Relax_1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Unarmed_Idle_Relax_1.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Unarmed_Idle_Relax_2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Unarmed_Idle_Relax_2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Unarmed_Jog_Fwd.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Unarmed_Jog_Fwd.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Unarmed_TurnLeft90.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Unarmed_TurnLeft90.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Unarmed_TurnRight90.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/Animations/Axe/Hero_Unarmed_TurnRight90.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/SK_CharM_Barbarous.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/SK_CharM_Barbarous.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/SK_CharM_Warrior.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/SK_CharM_Warrior.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/SK_Hero.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/SK_Hero.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CppGOWActionGame.uproject.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/CppGOWActionGame.uproject.DotSettings.user" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,114 +84,12 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="cidr-memory-view://2" root0="FORCE_HIGHLIGHTING" />
-    <setting file="cidr-memory-view://3" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../UE_5.3/Engine/Source/Runtime/Core/Public/Containers/Array.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../UE_5.3/Engine/Source/Runtime/Core/Public/Math/MathFwd.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_5.3/Engine/Source/Runtime/Core/Public/Templates/UniqueObj.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_5.3/Engine/Source/Runtime/Core/Public/Templates/UniquePtr.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_5.3/Engine/Source/Runtime/Engine/Classes/Animation/AnimInstance.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_5.3/Engine/Source/Runtime/Engine/Classes/GameFramework/Character.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/CppGOWActionGame/CppGOWActionGame.Build.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/CppGOWActionGame/Private/Character/WarriorHeroCharacter.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/CppGOWActionGame/Private/Component/Input/WarriorInputComponent.cpp" root0="FORCE_HIGHLIGHTING" />
@@ -170,19 +113,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Uproject.CppGOWActionGame.executor": "Debug",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Uproject.CppGOWActionGame.executor&quot;: &quot;Debug&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="CppGOWActionGame" type="Uproject" factoryName="rider.uproject">
       <configuration_1>
@@ -340,7 +283,9 @@
       <workItem from="1742374047745" duration="5000" />
       <workItem from="1742374145630" duration="4162000" />
       <workItem from="1742378795738" duration="6615000" />
-      <workItem from="1742860971325" duration="4482000" />
+      <workItem from="1742860971325" duration="4624000" />
+      <workItem from="1743028406472" duration="2578000" />
+      <workItem from="1747429655653" duration="1915000" />
     </task>
     <servers />
   </component>
@@ -355,11 +300,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Source/CppGOWActionGame/Private/Character/WarriorHeroCharacter.cpp</url>
-          <line>60</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/Source/CppGOWActionGame/Private/Character/WarriorHeroCharacter.cpp</url>
           <line>77</line>

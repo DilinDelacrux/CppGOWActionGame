@@ -4,28 +4,26 @@
 
 #include "CoreMinimal.h"
 #include "AnimInstance/WarriorCharacterAnimInstance.h"
-#include "Character/WarriorBaseCharacter.h"
 #include "WarriorHeroAnimInstance.generated.h"
 
 
+class AWarriorHeroCharacter;
 
 UCLASS()
 class CPPGOWACTIONGAME_API UWarriorHeroAnimInstance : public UWarriorCharacterAnimInstance
 {
 	GENERATED_BODY()
-
 public:
+	
 	virtual void NativeInitializeAnimation() override;
 	virtual void NativeThreadSafeUpdateAnimation(float DeltaSeconds) override;
-
 protected:
-	UPROPERTY()
-	AWarriorBaseCharacter* OwningCharacter;
-	UPROPERTY()
-	UCharacterMovementComponent* OwningMovementComponent;
-	
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly,Category="AnimData|Reference")
+	AWarriorHeroCharacter* OwningHeroCharacter;
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly,Category="AnimData|LocomotionData")
-	float GroundSpeed;
-	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly,Category="AnimData|LocomotionData")
-	bool bHasAcceleration;
+	bool bShouldEnterRelaxState;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly,Category="AnimData|LocomotionData")
+	float EnterRelaxStateThreshold=5.f;
+
+	float IdleElapsedTime;
 };

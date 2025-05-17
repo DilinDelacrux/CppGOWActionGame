@@ -23,6 +23,8 @@ protected:
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 public:
 	AWarriorHeroCharacter();
+	virtual void PossessedBy(AController* NewController) override;
+
 	
 private:
 #pragma region component

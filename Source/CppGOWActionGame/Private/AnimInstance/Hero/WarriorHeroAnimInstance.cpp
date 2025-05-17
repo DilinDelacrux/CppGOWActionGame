@@ -3,26 +3,30 @@
 
 #include "AnimInstance/Hero/WarriorHeroAnimInstance.h"
 
-#include "GameFramework/CharacterMovementComponent.h"
+#include "Character/WarriorHeroCharacter.h"
+
 
 void UWarriorHeroAnimInstance::NativeInitializeAnimation()
 {
 	Super::NativeInitializeAnimation();
-	OwningCharacter=Cast<AWarriorBaseCharacter>(TryGetPawnOwner());
-
 	if(OwningCharacter)
 	{
-		OwningMovementComponent=OwningCharacter->GetCharacterMovement();
+		OwningHeroCharacter=Cast<AWarriorHeroCharacter>(OwningCharacter);
 	}
 }
 
 void UWarriorHeroAnimInstance::NativeThreadSafeUpdateAnimation(float DeltaSeconds)
 {
 	Super::NativeThreadSafeUpdateAnimation(DeltaSeconds);
-	if(!OwningCharacter||!OwningMovementComponent)
+	if(bHasAcceleration)
 	{
-		return;	
+		IdleElapsedTime=.0f;
+		bShouldEnterRelaxState=false;
 	}
-	GroundSpeed=OwningCharacter->GetVelocity().Size2D();
-	bHasAcceleration=OwningMovementComponent->GetCurrentAcceleration().SizeSquared2D()>0;
+	else
+	{
+		IdleElapsedTime+=DeltaSeconds;
+		bShouldEnterRelaxState=(IdleElapsedTime>=EnterRelaxStateThreshold);
+	}
+	
 }

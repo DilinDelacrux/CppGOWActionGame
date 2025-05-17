@@ -3,15 +3,23 @@
 
 #include "Character/WarriorBaseCharacter.h"
 
+#include "WarriorAttributeSet.h"
+#include "AbilitySystem/WarriorAbilitySystemComponent.h"
+
 // Sets default values
 AWarriorBaseCharacter::AWarriorBaseCharacter()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 	PrimaryActorTick.bStartWithTickEnabled=false;
-
 	GetMesh()->bReceivesDecals=false;
+	WarriorAbilitySystemComponent=CreateDefaultSubobject<UWarriorAbilitySystemComponent>("WarriorAbilitySystemComponent");
+	WarriorAttributeSet=CreateDefaultSubobject<UWarriorAttributeSet>("WarriorAttributeSet");
 
+}
+
+UAbilitySystemComponent* AWarriorBaseCharacter::GetAbilitySystemComponent() const
+{
+	return GetWarriorAbilitySystemComponent();
 }
 
 // Called when the game starts or when spawned
@@ -19,6 +27,16 @@ void AWarriorBaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
+}
+
+void AWarriorBaseCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	if(WarriorAbilitySystemComponent)
+	{
+		WarriorAbilitySystemComponent->InitAbilityActorInfo(this,this);
+	}
 }
 
 // Called every frame

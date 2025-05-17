@@ -56,6 +56,15 @@ AWarriorHeroCharacter::AWarriorHeroCharacter()
 	GetCharacterMovement()->BrakingDecelerationWalking=2000.f;
 }
 
+void AWarriorHeroCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+	if(WarriorAbilitySystemComponent&&WarriorAttributeSet)
+	{
+		Debug::Print("PossessedBy WarriorAbilitySystemComponent");
+	}
+}
+
 void AWarriorHeroCharacter::Input_Move(const FInputActionValue& InputActionValue)
 {
 	const FVector2D movementVector=InputActionValue.Get<FVector2D>();

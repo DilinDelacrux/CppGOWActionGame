@@ -36,7 +36,4 @@ public:
 	TArray<FWarriorInputActionConfig> NativeInputActions;
 
 	UInputAction* FindNativeInputActionByTag(const FGameplayTag& InInputTag) const; 
-	
-	
-	
 };

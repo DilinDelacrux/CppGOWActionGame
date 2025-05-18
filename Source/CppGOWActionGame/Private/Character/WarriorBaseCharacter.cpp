@@ -3,8 +3,9 @@
 
 #include "Character/WarriorBaseCharacter.h"
 
-#include "WarriorAttributeSet.h"
+#include "AbilitySystem/WarriorAttributeSet.h"
 #include "AbilitySystem/WarriorAbilitySystemComponent.h"
+#include "Misc/WarriorDebugHelper.h"
 
 // Sets default values
 AWarriorBaseCharacter::AWarriorBaseCharacter()
@@ -36,6 +37,11 @@ void AWarriorBaseCharacter::PossessedBy(AController* NewController)
 	if(WarriorAbilitySystemComponent)
 	{
 		WarriorAbilitySystemComponent->InitAbilityActorInfo(this,this);
+		ensureMsgf(!CharacterStartUpData.IsNull(),TEXT("%s CharacterStartUpData is null"),*GetName());
+		// if(CharacterStartUpData.IsNull())
+		// {
+		// 	  FString Message = FString::Printf(this->GetName()+"CharacterStartUpData is null");
+		// }
 	}
 }
 

@@ -38,10 +38,6 @@ void AWarriorBaseCharacter::PossessedBy(AController* NewController)
 	{
 		WarriorAbilitySystemComponent->InitAbilityActorInfo(this,this);
 		ensureMsgf(!CharacterStartUpData.IsNull(),TEXT("%s CharacterStartUpData is null"),*GetName());
-		// if(CharacterStartUpData.IsNull())
-		// {
-		// 	  FString Message = FString::Printf(this->GetName()+"CharacterStartUpData is null");
-		// }
 	}
 }
 

@@ -7,6 +7,7 @@
 #include "Character/WarriorBaseCharacter.h"
 #include "WarriorHeroCharacter.generated.h"
 
+class UHeroCombatComponent;
 class UDataAsset_InputConfig;
 class UCameraComponent;
 class USpringArmComponent;
@@ -32,6 +33,8 @@ private:
 	USpringArmComponent* CameraBoom;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly,Category="Camera",meta=(AllowPrivateAccess=true))
 	UCameraComponent* FollowCamera;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly,Category="Combat",meta=(AllowPrivateAccess=true))
+	UHeroCombatComponent *HeroCombatComponent;
 	
 #pragma endregion
 
@@ -45,4 +48,6 @@ private:
 	
 #pragma endregion 
 
+public:
+	FORCEINLINE UHeroCombatComponent* GetHeroCombatComponent() const { return HeroCombatComponent; }
 };

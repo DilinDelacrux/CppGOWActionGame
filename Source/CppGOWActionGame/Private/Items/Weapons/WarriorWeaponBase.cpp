@@ -17,7 +17,6 @@ AWarriorWeaponBase::AWarriorWeaponBase()
 	WeaponCollisionBox->SetupAttachment(GetRootComponent());
 	WeaponCollisionBox->SetBoxExtent(FVector(20.f));
 	WeaponCollisionBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-
 }
 
 // Called when the game starts or when spawned

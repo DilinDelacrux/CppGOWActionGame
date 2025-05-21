@@ -22,6 +22,11 @@ public:
 	FGameplayTag InputTag;
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
 	UInputAction* InputAction;
+
+	bool IsVaild() const
+	{
+		return InputTag.IsValid()&&InputAction!=nullptr;
+	}
 };
 UCLASS()
 class CPPGOWACTIONGAME_API UDataAsset_InputConfig : public UDataAsset
@@ -35,5 +40,9 @@ public:
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly,meta=(TitleProperty="InputTag"))
 	TArray<FWarriorInputActionConfig> NativeInputActions;
 
-	UInputAction* FindNativeInputActionByTag(const FGameplayTag& InInputTag) const; 
+	UInputAction* FindNativeInputActionByTag(const FGameplayTag& InInputTag) const;
+
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly,meta=(TitleProperty="InputTag"))
+	TArray<FWarriorInputActionConfig> AbilityInputActions;
+		
 };

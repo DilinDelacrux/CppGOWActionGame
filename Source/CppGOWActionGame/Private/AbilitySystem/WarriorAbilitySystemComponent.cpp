@@ -2,6 +2,7 @@
 
 
 #include "AbilitySystem/WarriorAbilitySystemComponent.h"
+#include "AbilitySystem/Abilities/WarriorGameplayAbility.h"
 
 void UWarriorAbilitySystemComponent::OnAbilityInputPressed(const FGameplayTag& InInputTag)
 {
@@ -19,3 +20,35 @@ void UWarriorAbilitySystemComponent::OnAbilityInputReleased(const FGameplayTag& 
 {
 	
 }
+
+void UWarriorAbilitySystemComponent::GrantHeroWeaponAbilities(
+	const TArray<FWarriorHeroAbilitySet>& InDefaultWeaponAbilities, int ApplyLevel,
+	TArray<FGameplayAbilitySpecHandle>& OutGrantedAbilitySpecHandles)
+{
+	if(InDefaultWeaponAbilities.IsEmpty()) return;
+	for(const FWarriorHeroAbilitySet& AbilitySet:InDefaultWeaponAbilities)
+	{
+		if(!AbilitySet.IsValid()) continue;
+		FGameplayAbilitySpec AbilitySpec(AbilitySet.AbilityToGrant);
+		AbilitySpec.SourceObject = GetAvatarActor();
+		AbilitySpec.Level = ApplyLevel;
+		AbilitySpec.DynamicAbilityTags.AddTag(AbilitySet.InputTag);
+		OutGrantedAbilitySpecHandles.Add(GiveAbility(AbilitySpec));
+	}
+}
+
+void UWarriorAbilitySystemComponent::RemovedGrantedWeaponAbilities(
+	TArray<FGameplayAbilitySpecHandle>& InSpecHandlesToRemove)
+{
+	if(InSpecHandlesToRemove.IsEmpty()) return;
+	
+	for(const FGameplayAbilitySpecHandle& AbilitySpec:InSpecHandlesToRemove)
+	{
+		if(AbilitySpec.IsValid())
+		{
+			ClearAbility(AbilitySpec);
+		}
+		InSpecHandlesToRemove.Empty();
+	}
+}
+

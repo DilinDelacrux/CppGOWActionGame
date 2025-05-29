@@ -25,9 +25,12 @@ void UWarriorGameplayAbility::EndAbility(const FGameplayAbilitySpecHandle Handle
                                          bool bReplicateEndAbility, bool bWasCancelled)
 {
 	Super::EndAbility(Handle, ActorInfo, ActivationInfo, bReplicateEndAbility, bWasCancelled);
-	if(ActorInfo)
+	if (ActivationPolicy == EWarriorAbilityActivationPolicy::OnGiven)
 	{
-		ActorInfo->AbilitySystemComponent->ClearAbility(Handle);
+		if (ActorInfo)
+		{
+			ActorInfo->AbilitySystemComponent->ClearAbility(Handle);
+		}
 	}
 }
 

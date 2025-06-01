@@ -30,6 +30,11 @@ void AWarriorEnemyCharacter::PossessedBy(AController* NewController)
 	InitEnemySetupData();
 }
 
+UPawnCombatComponent* AWarriorEnemyCharacter::GetPawnCombatComponent() const
+{
+	return CombatComponent;
+}
+
 void AWarriorEnemyCharacter::InitEnemySetupData()
 {
 	if(CharacterStartUpData.IsNull()) return;

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "GameplayTagContainer.h"
+#include "ScalableFloat.h"
 #include "WarriorStructTypes.generated.h"
 
 class UWarriorHeroGameplayAbility;
@@ -29,10 +30,14 @@ struct FWarriorHeroWeaponData
 
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
 	TSubclassOf<UWarriorHeroLinkedAnimLayer> WeaponAnimLayerToLink;
+	
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly,meta=(category="InputTag"))
 	TArray<FWarriorHeroAbilitySet> DefaultWeaponAbilities;
 
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
 	UInputMappingContext* WeaponInputMappingContext;
+
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
+	FScalableFloat WeaponBaseDamage;
 	
 };

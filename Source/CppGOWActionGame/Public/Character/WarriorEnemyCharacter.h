@@ -18,7 +18,7 @@ class CPPGOWACTIONGAME_API AWarriorEnemyCharacter : public AWarriorBaseCharacter
 public:
 	AWarriorEnemyCharacter();
 	virtual void PossessedBy(AController* NewController) override;
-
+	virtual UPawnCombatComponent* GetPawnCombatComponent() const;
 
 protected:
 	UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="Combat")

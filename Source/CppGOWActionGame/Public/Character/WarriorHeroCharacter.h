@@ -26,6 +26,7 @@ protected:
 public:
 	AWarriorHeroCharacter();
 	virtual void PossessedBy(AController* NewController) override;
+	virtual UPawnCombatComponent* GetPawnCombatComponent() const;
 
 	
 private:

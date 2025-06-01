@@ -13,5 +13,8 @@ UCLASS()
 class CPPGOWACTIONGAME_API UEnemyCombatComponent : public UPawnCombatComponent
 {
 	GENERATED_BODY()
-	
+
+public:
+	virtual void OnHitTargetActor(AActor* HitActor);
+	virtual void OnWeaponPulledFromTargetActor(AActor* HitActor);
 };

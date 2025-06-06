@@ -9,33 +9,68 @@
   <component name="ChangeListManager">
     <list default="true" id="705d53a4-018f-426e-b050-6cfad142ff31" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CppGOWActionGame.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CppGOWActionGame.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Animation/ABP_Hero.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Animation/ABP_Hero.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Blueprint/GA_Hero_EquipAxe.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Blueprint/GA_Hero_EquipAxe.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/SK_Hero.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/SK_Hero.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/CppGOWActionGame/Private/AnimInstance/Hero/WarriorHeroLinkedAnimLayer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/CppGOWActionGame/Private/AnimInstance/Hero/WarriorHeroLinkedAnimLayer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultGame.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultGame.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Gruntling/Enemy_Gruntling_Guardian/Materials/CharM_Gruntling_Guardian.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Gruntling/Enemy_Gruntling_Guardian/Materials/CharM_Gruntling_Guardian.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Gruntling/Enemy_Gruntling_Guardian/SK_Gruntling_Guardian.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Gruntling/Enemy_Gruntling_Guardian/SK_Gruntling_Guardian.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Gruntling/Weapons/Enemy_Gruntling_Weapons/Materials/M_Gruntling_weapons.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Gruntling/Weapons/Enemy_Gruntling_Weapons/Materials/M_Gruntling_weapons.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Gruntling/Weapons/Enemy_Gruntling_Weapons/Meshes/SM_Gruntling_Weapon01_Internal.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Gruntling/Weapons/Enemy_Gruntling_Weapons/Meshes/SM_Gruntling_Weapon01_Internal.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Dissolve/NS_Dissolve_Guradian.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Niagara/Dissolve/NS_Dissolve_Guradian.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/Sounds/Creatures/Guardian/SC_Guardian_Death.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Sounds/Creatures/Guardian/SC_Guardian_Death.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/Sounds/Creatures/Guardian/SC_Guardian_Roar.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Sounds/Creatures/Guardian/SC_Guardian_Roar.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/Sounds/Weapons/Axe/SC_AxeHitLoud.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Sounds/Weapons/Axe/SC_AxeHitLoud.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/AM_Hero_Axe_Equip.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/AM_Hero_Axe_Equip.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/AM_Hero_Axe_Unequip.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/AM_Hero_Axe_Unequip.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Attack/AM_Hero_Axe_HeavyAttack_1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Attack/AM_Hero_Axe_HeavyAttack_1.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Attack/AM_Hero_Axe_HeavyAttack_2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Attack/AM_Hero_Axe_HeavyAttack_2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Attack/AM_Hero_Axe_LightAttack_1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Attack/AM_Hero_Axe_LightAttack_1.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Attack/AM_Hero_Axe_LightAttack_2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Attack/AM_Hero_Axe_LightAttack_2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Attack/AM_Hero_Axe_LightAttack_3.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Attack/AM_Hero_Axe_LightAttack_3.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Attack/AM_Hero_Axe_LightAttack_4.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Attack/AM_Hero_Axe_LightAttack_4.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Ability/GA_HeroSpawnWeapon.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Ability/GA_HeroSpawnWeapon.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Ability/GA_Hero_EquipAxe.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Ability/GA_Hero_EquipAxe.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Ability/GA_Hero_HeavyAttackMaster.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Ability/GA_Hero_HeavyAttackMaster.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Ability/GA_Hero_HeavyAttack_Axe.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Ability/GA_Hero_HeavyAttack_Axe.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Ability/GA_Hero_LightAttackMaster.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Ability/GA_Hero_LightAttackMaster.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Ability/GA_Hero_LightAttack_Axe.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Ability/GA_Hero_LightAttack_Axe.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/BP_EnemyCharacter_Base.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/BP_EnemyCharacter_Base.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/BP_Gruntling_Guardian.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/BP_Gruntling_Guardian.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/BP_Guardian_Weapon.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/BP_Guardian_Weapon.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/DA_Guardian.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/DA_Guardian.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/DA_Hero.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/DA_Hero.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Shared/AnimNotifyState/ANS_SlowMotion.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Shared/AnimNotifyState/ANS_ToggleWeaponCollision.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Shared/GameplayAbility/AnimNotify/AN_SendGameplayEventToOwner.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Shared/GameplayAbility/GA_Guardian_SpawnWeapon.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Shared/GameplayAbility/GA_SharedSpawnWeapon_Base.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/CppGOWActionGame/Private/AbilitySystem/GEExecCalc/GEExecCalc_DamageTaken.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/CppGOWActionGame/Private/AbilitySystem/GEExecCalc/GEExecCalc_DamageTaken.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/CppGOWActionGame/Private/AbilitySystem/WarriorAttributeSet.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/CppGOWActionGame/Private/AbilitySystem/WarriorAttributeSet.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/CppGOWActionGame/Private/Character/WarriorEnemyCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/CppGOWActionGame/Private/Character/WarriorEnemyCharacter.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/CppGOWActionGame/Private/Components/HeroCombatComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/CppGOWActionGame/Private/Components/HeroCombatComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/CppGOWActionGame/Public/AnimInstance/Hero/WarriorHeroLinkedAnimLayer.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/CppGOWActionGame/Public/AnimInstance/Hero/WarriorHeroLinkedAnimLayer.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/CppGOWActionGame/Public/Components/HeroCombatComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/CppGOWActionGame/Public/Components/HeroCombatComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/CppGOWActionGame/Public/Items/Weapons/WarriorHeroWeapon.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/CppGOWActionGame/Public/Items/Weapons/WarriorHeroWeapon.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/CppGOWActionGame/Private/WarriorGameplayTags.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/CppGOWActionGame/Private/WarriorGameplayTags.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/CppGOWActionGame/Public/AbilitySystem/WarriorAttributeSet.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/CppGOWActionGame/Public/AbilitySystem/WarriorAttributeSet.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/CppGOWActionGame/Public/WarriorGameplayTags.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/CppGOWActionGame/Public/WarriorGameplayTags.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DpaMonitoringSettings">
+    <option name="autoShow" value="false" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "history": [
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;history&quot;: [
     {
-      "assignee": "DilinDelacrux"
+      &quot;assignee&quot;: &quot;DilinDelacrux&quot;
     }
   ],
-  "lastFilter": {
-    "assignee": "DilinDelacrux"
+  &quot;lastFilter&quot;: {
+    &quot;assignee&quot;: &quot;DilinDelacrux&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/DilinDelacrux/CppGOWActionGame.git&quot;,
@@ -43,129 +78,6 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="cidr-memory-view://4" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../UE_5.3/Engine/Source/Runtime/Core/Public/Containers/Array.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../UE_5.3/Engine/Source/Runtime/Core/Public/Delegates/DelegateInstancesImpl.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../UE_5.3/Engine/Source/Runtime/Core/Public/Delegates/DelegateSignatureImpl.inl" root0="FORCE_HIGHLIGHTING" />
@@ -176,54 +88,35 @@
     <setting file="file://$PROJECT_DIR$/../../UE_5.3/Engine/Source/Runtime/Core/Public/Templates/UniquePtr.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../UE_5.3/Engine/Source/Runtime/Core/Public/UObject/NameTypes.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../UE_5.3/Engine/Source/Runtime/Engine/Classes/Animation/AnimInstance.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_5.3/Engine/Source/Runtime/Engine/Classes/Components/PrimitiveComponent.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../UE_5.3/Engine/Source/Runtime/Engine/Classes/GameFramework/Character.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../UE_5.3/Engine/Source/Runtime/Engine/Classes/GameFramework/CharacterMovementComponent.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_5.3/Engine/Source/Runtime/Engine/Private/AssetManager.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_5.3/Engine/Source/Runtime/Engine/Private/Engine/ViewportStatsSubsystem.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../UE_5.3/Engine/Source/Runtime/GameplayTags/Classes/GameplayTagContainer.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../UE_5.3/Engine/Source/Runtime/GameplayTags/Public/NativeGameplayTags.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/CppGOWActionGame/CppGOWActionGame.Build.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/_Unreal/CppGOWActionGame/Source/CppGOWActionGame/Private/AbilitySystem/Abilities/WarriorGameplayAbility.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/_Unreal/CppGOWActionGame/Source/CppGOWActionGame/Private/AbilitySystem/Abilities/WarriorGameplayAbility.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/_Unreal/CppGOWActionGame/Source/CppGOWActionGame/Private/AbilitySystem/Abilities/WarriorGameplayAbility.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/CppGOWActionGame/Private/AbilitySystem/Abilities/WarriorGameplayAbility.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/CppGOWActionGame/Private/AbilitySystem/WarriorAbilitySystemComponent.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://D:/_Unreal/CppGOWActionGame/Source/CppGOWActionGame/Private/AbilitySystem/WarriorAttributeSet.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/CppGOWActionGame/Private/AbilitySystem/WarriorAttributeSet.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/CppGOWActionGame/Private/Character/WarriorBaseCharacter.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://D:/_Unreal/CppGOWActionGame/Source/CppGOWActionGame/Private/Character/WarriorBaseCharacter.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/_Unreal/CppGOWActionGame/Source/CppGOWActionGame/Private/Character/WarriorBaseCharacter.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/_Unreal/CppGOWActionGame/Source/CppGOWActionGame/Private/Character/WarriorHeroCharacter.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/CppGOWActionGame/Private/Character/WarriorHeroCharacter.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://D:/_Unreal/CppGOWActionGame/Source/CppGOWActionGame/Private/Character/WarriorHeroCharacter.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/_Unreal/CppGOWActionGame/Source/CppGOWActionGame/Private/Components/Input/WarriorInputComponent.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/CppGOWActionGame/Private/Components/Input/WarriorInputComponent.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://D:/_Unreal/CppGOWActionGame/Source/CppGOWActionGame/Private/Components/PawnCombatComponent.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/_Unreal/CppGOWActionGame/Source/CppGOWActionGame/Private/Components/PawnExtensionComponentBase.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/CppGOWActionGame/Private/DataAssets/Input/DataAsset_InputConfig.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://D:/_Unreal/CppGOWActionGame/Source/CppGOWActionGame/Private/Items/Weapons/WarriorWeaponBase.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/_Unreal/CppGOWActionGame/Source/CppGOWActionGame/Private/Items/Weapons/WarriorWeaponBase.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/_Unreal/CppGOWActionGame/Source/CppGOWActionGame/Private/WarriorGameplayTags.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/_Unreal/CppGOWActionGame/Source/CppGOWActionGame/Private/WarriorGameplayTags.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/CppGOWActionGame/Private/WarriorGameplayTags.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://D:/_Unreal/CppGOWActionGame/Source/CppGOWActionGame/Public/AbilitySystem/Abilities/WarriorGameplayAbility.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/_Unreal/CppGOWActionGame/Source/CppGOWActionGame/Public/AbilitySystem/Abilities/WarriorGameplayAbility.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/CppGOWActionGame/Public/AbilitySystem/Abilities/WarriorGameplayAbility.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/CppGOWActionGame/Public/AbilitySystem/WarriorAbilitySystemComponent.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/CppGOWActionGame/Public/AbilitySystem/WarriorAttributeSet.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/CppGOWActionGame/Public/Character/WarriorBaseCharacter.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://D:/_Unreal/CppGOWActionGame/Source/CppGOWActionGame/Public/Character/WarriorHeroCharacter.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/CppGOWActionGame/Public/Character/WarriorHeroCharacter.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://D:/_Unreal/CppGOWActionGame/Source/CppGOWActionGame/Public/Character/WarriorHeroCharacter.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/_Unreal/CppGOWActionGame/Source/CppGOWActionGame/Public/Components/HeroCombatComponent.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/CppGOWActionGame/Public/Components/Input/WarriorInputComponent.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://D:/_Unreal/CppGOWActionGame/Source/CppGOWActionGame/Public/Components/PawnCombatComponent.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/_Unreal/CppGOWActionGame/Source/CppGOWActionGame/Public/Components/PawnExtensionComponentBase.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/CppGOWActionGame/Public/Controllers/WarriorHeroController.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/CppGOWActionGame/Public/DataAssets/Input/DataAsset_InputConfig.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/CppGOWActionGame/Public/WarriorGameplayTags.h" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="Toolset" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
@@ -236,7 +129,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Uproject.CppGOWActionGame.executor&quot;: &quot;Debug&quot;,
+    &quot;Uproject.CppGOWActionGame.executor&quot;: &quot;Run&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -413,6 +306,8 @@
       <workItem from="1743028406472" duration="2578000" />
       <workItem from="1747429655653" duration="12352000" />
       <workItem from="1747604763921" duration="34561000" />
+      <workItem from="1747969046630" duration="70461000" />
+      <workItem from="1748806382237" duration="16367000" />
     </task>
     <task id="LOCAL-00001" summary="fix asset&#10;add animation">
       <option name="closed" value="true" />
@@ -462,7 +357,55 @@
       <option name="project" value="LOCAL" />
       <updated>1747905101740</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="link animation layer">
+      <option name="closed" value="true" />
+      <created>1747971730100</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1747971730101</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Handle Unequip Axe">
+      <option name="closed" value="true" />
+      <created>1748414259800</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1748414259801</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Combo System Done">
+      <option name="closed" value="true" />
+      <created>1748534849551</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1748534849551</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Apply AttributeSet">
+      <option name="closed" value="true" />
+      <created>1748609931258</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1748609931258</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Apply Attribute2">
+      <option name="closed" value="true" />
+      <created>1748609950954</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1748609950954</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Apply Damage">
+      <option name="closed" value="true" />
+      <created>1748794964397</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1748794964397</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -470,6 +413,17 @@
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="GitHub.CommitStatus" />
+      </list>
+    </option>
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -490,18 +444,13 @@
     <MESSAGE value="Add Pwan Extension Component" />
     <MESSAGE value="Grant Input Ability" />
     <MESSAGE value="Equip Weapon" />
-    <option name="LAST_COMMIT_MESSAGE" value="Equip Weapon" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Source/CppGOWActionGame/Private/Character/WarriorHeroCharacter.cpp</url>
-          <line>37</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="link animation layer" />
+    <MESSAGE value="Handle Unequip Axe" />
+    <MESSAGE value="Combo System Done" />
+    <MESSAGE value="Apply AttributeSet" />
+    <MESSAGE value="Apply Attribute2" />
+    <MESSAGE value="Apply Damage" />
+    <option name="LAST_COMMIT_MESSAGE" value="Apply Damage" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

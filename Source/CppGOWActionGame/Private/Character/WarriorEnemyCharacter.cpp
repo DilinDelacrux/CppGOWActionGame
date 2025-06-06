@@ -50,6 +50,4 @@ void AWarriorEnemyCharacter::InitEnemySetupData()
 			}
 		})
 		);
-
-	
 }

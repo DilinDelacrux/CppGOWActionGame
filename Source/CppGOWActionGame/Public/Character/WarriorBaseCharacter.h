@@ -5,14 +5,16 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "AbilitySystemInterface.h"
+#include "Components/UI/PawnUIComponent.h"
 #include "Interfaces/PawnCombatInterface.h"
+#include "Interfaces/PawnUIInterface.h"
 #include "WarriorBaseCharacter.generated.h"
 
 class UDataAsset_StartUpDataBase;
 class UWarriorAbilitySystemComponent;
 class UWarriorAttributeSet;
 UCLASS()
-class CPPGOWACTIONGAME_API AWarriorBaseCharacter : public ACharacter,public IAbilitySystemInterface,public IPawnCombatInterface
+class CPPGOWACTIONGAME_API AWarriorBaseCharacter : public ACharacter,public IAbilitySystemInterface,public IPawnCombatInterface,public IPawnUIInterface
 {
 	GENERATED_BODY()
 
@@ -21,6 +23,10 @@ public:
 	AWarriorBaseCharacter();
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const ;
 	virtual UPawnCombatComponent* GetPawnCombatComponent() const;
+	virtual UPawnUIComponent* GetPawnUIComponent() const;
+	virtual UHeroUIComponent* GetHeroUIComponent() const;
+	virtual UEnemyUIComponent* GetEnemyUIComponent() const;
+	
 
 
 protected:

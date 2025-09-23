@@ -28,6 +28,21 @@ UPawnCombatComponent* AWarriorBaseCharacter::GetPawnCombatComponent() const
 	return nullptr;
 }
 
+UPawnUIComponent* AWarriorBaseCharacter::GetPawnUIComponent() const
+{
+	return nullptr;
+}
+
+UHeroUIComponent* AWarriorBaseCharacter::GetHeroUIComponent() const
+{
+	return nullptr;
+}
+
+UEnemyUIComponent* AWarriorBaseCharacter::GetEnemyUIComponent() const
+{
+	return nullptr;
+}
+
 // Called when the game starts or when spawned
 void AWarriorBaseCharacter::BeginPlay()
 {

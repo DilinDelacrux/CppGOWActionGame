@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GenericTeamAgentInterface.h"
 #include "GameFramework/PlayerController.h"
 #include "WarriorHeroController.generated.h"
 
@@ -10,8 +11,14 @@
  * 
  */
 UCLASS()
-class CPPGOWACTIONGAME_API AWarriorHeroController : public APlayerController
+class CPPGOWACTIONGAME_API AWarriorHeroController : public APlayerController, public IGenericTeamAgentInterface
 {
 	GENERATED_BODY()
-	
+
+public:
+	AWarriorHeroController();
+	virtual FGenericTeamId GetGenericTeamId() const override;
+
+private:
+	FGenericTeamId HeroTeamID;
 };

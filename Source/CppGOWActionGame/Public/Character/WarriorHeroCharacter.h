@@ -8,6 +8,7 @@
 #include "Character/WarriorBaseCharacter.h"
 #include "WarriorHeroCharacter.generated.h"
 
+class UHeroUIComponent;
 class UHeroCombatComponent;
 class UDataAsset_InputConfig;
 class UCameraComponent;
@@ -27,6 +28,9 @@ public:
 	AWarriorHeroCharacter();
 	virtual void PossessedBy(AController* NewController) override;
 	virtual UPawnCombatComponent* GetPawnCombatComponent() const;
+	virtual UPawnUIComponent* GetPawnUIComponent() const override;
+	virtual UHeroUIComponent* GetHeroUIComponent() const override;
+	
 
 	
 private:
@@ -37,6 +41,8 @@ private:
 	UCameraComponent* FollowCamera;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly,Category="Combat",meta=(AllowPrivateAccess=true))
 	UHeroCombatComponent *HeroCombatComponent;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly,Category="UI",meta=(AllowPrivateAccess=true))
+	UHeroUIComponent* HeroUIComponent;
 	
 #pragma endregion
 

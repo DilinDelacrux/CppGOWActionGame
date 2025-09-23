@@ -15,7 +15,9 @@ public class CppGOWActionGame : ModuleRules
 			"InputCore",
 			"GameplayTags",
 			"EnhancedInput",
-			"GameplayTasks"
+			"GameplayTasks",
+			"UMG",
+			"AIModule"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });

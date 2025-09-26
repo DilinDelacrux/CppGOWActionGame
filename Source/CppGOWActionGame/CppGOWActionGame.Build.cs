@@ -17,7 +17,10 @@ public class CppGOWActionGame : ModuleRules
 			"EnhancedInput",
 			"GameplayTasks",
 			"UMG",
-			"AIModule"
+			"AIModule",
+			"AnimGraphRuntime", 
+			"GameplayAbilities",
+			"MotionWarping"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });

@@ -13,6 +13,7 @@
 class UDataAsset_StartUpDataBase;
 class UWarriorAbilitySystemComponent;
 class UWarriorAttributeSet;
+class UMotionWarpingComponent;
 UCLASS()
 class CPPGOWACTIONGAME_API AWarriorBaseCharacter : public ACharacter,public IAbilitySystemInterface,public IPawnCombatInterface,public IPawnUIInterface
 {
@@ -43,6 +44,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly,Category="CharacterData",meta=(AllowPrivateAccess=true))
 	TSoftObjectPtr<UDataAsset_StartUpDataBase> CharacterStartUpData;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "MotionWarping")
+	UMotionWarpingComponent* MotionWarpingComponent;
+	
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

@@ -5,6 +5,7 @@
 
 #include "AbilitySystem/WarriorAttributeSet.h"
 #include "AbilitySystem/WarriorAbilitySystemComponent.h"
+#include "MotionWarpingComponent.h"
 #include "Misc/WarriorDebugHelper.h"
 
 // Sets default values
@@ -15,6 +16,7 @@ AWarriorBaseCharacter::AWarriorBaseCharacter()
 	GetMesh()->bReceivesDecals=false;
 	WarriorAbilitySystemComponent=CreateDefaultSubobject<UWarriorAbilitySystemComponent>("WarriorAbilitySystemComponent");
 	WarriorAttributeSet=CreateDefaultSubobject<UWarriorAttributeSet>("WarriorAttributeSet");
+	MotionWarpingComponent = CreateDefaultSubobject<UMotionWarpingComponent>(TEXT("MotionWarpingComponent"));
 
 }
 

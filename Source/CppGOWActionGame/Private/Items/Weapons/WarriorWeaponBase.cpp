@@ -3,6 +3,7 @@
 
 #include "Items/Weapons/WarriorWeaponBase.h"
 
+#include "WarriorFunctionLibrary.h"
 #include "Components/BoxComponent.h"
 #include "Misc/WarriorDebugHelper.h"
 
@@ -26,18 +27,19 @@ void AWarriorWeaponBase::OnCollisionBoxBeginOverlap(UPrimitiveComponent* Overlap
 	int32 OtherBodyIndex,bool bFromSweep, const FHitResult& SweepResult)
 {
 	APawn* WeaponOwningPawn = GetInstigator<APawn>();
-		checkf(WeaponOwningPawn,TEXT("Forgot to assign an instiagtor as the owning pawn of the weapon: %s"),*GetName());
+	checkf(WeaponOwningPawn,TEXT("Forgot to assign an instiagtor as the owning pawn of the weapon: %s"),*GetName());
 
 	if (APawn* HitPawn = Cast<APawn>(OtherActor))
 	{
-		if (WeaponOwningPawn != HitPawn)
+		if (UWarriorFunctionLibrary::IsTargetPawnHostile(WeaponOwningPawn,HitPawn))
 		{
-			// Debug::Print(GetName() + TEXT(" begin overlap with ") + HitPawn->GetName(),FColor::Green);
-			OnWeaponHitTarget.ExecuteIfBound(OtherActor);
+			if (WeaponOwningPawn != HitPawn)
+			{
+				OnWeaponHitTarget.ExecuteIfBound(OtherActor);
+			}
 		}
-
-		//TODO:Implement hit check for enemy characters
 	}
+
 }
 
 void AWarriorWeaponBase::OnCollisionBoxEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
@@ -46,19 +48,15 @@ void AWarriorWeaponBase::OnCollisionBoxEndOverlap(UPrimitiveComponent* Overlappe
 	APawn* WeaponOwningPawn = GetInstigator<APawn>();
 
 	checkf(WeaponOwningPawn,TEXT("Forgot to assign an instiagtor as the owning pawn of the weapon: %s"),*GetName());
-
+	
 	if (APawn* HitPawn = Cast<APawn>(OtherActor))
 	{
-		if (WeaponOwningPawn != HitPawn)
+		if (UWarriorFunctionLibrary::IsTargetPawnHostile(WeaponOwningPawn,HitPawn))
 		{
 			OnWeaponPulledFromTarget.ExecuteIfBound(OtherActor);
-			// Debug::Print(GetName() + TEXT(" end overlap with ") + HitPawn->GetName(),FColor::Red);
 		}
-
-		//TODO:Implement hit check for enemy characters
 	}
 }
 
-// Called when the game starts or when spawned
 
 

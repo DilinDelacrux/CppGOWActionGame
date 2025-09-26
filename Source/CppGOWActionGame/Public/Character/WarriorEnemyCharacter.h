@@ -3,9 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayEffectTypes.h"
 #include "Character/WarriorBaseCharacter.h"
 #include "WarriorEnemyCharacter.generated.h"
 
+struct FScalableFloat;
+class UGameplayEffect;
 class UWidgetComponent;
 class UEnemyUIComponent;
 class UEnemyCombatComponent;

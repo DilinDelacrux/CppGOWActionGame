@@ -21,7 +21,8 @@ public class CppGOWActionGame : ModuleRules
 			"AnimGraphRuntime", 
 			"GameplayAbilities",
 			"MotionWarping",
-			"Niagara"
+			"Niagara",
+			"NavigationSystem"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });

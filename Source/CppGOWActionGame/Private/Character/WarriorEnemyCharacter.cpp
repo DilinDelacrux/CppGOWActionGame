@@ -3,12 +3,14 @@
 
 #include "Character/WarriorEnemyCharacter.h"
 
+#include "WarriorFunctionLibrary.h"
 #include "Engine/AssetManager.h"
 #include "Components/EnemyCombatComponent.h"
 #include "Components/WidgetComponent.h"
 #include "Components/UI/EnemyUIComponent.h"
 #include "DataAssets/StartUpData/DataAsset_StartUpDataBase.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Components/BoxComponent.h"
 #include "Misc/WarriorDebugHelper.h"
 #include "Widgets/WarriorWidgetBase.h"
 
@@ -29,6 +31,16 @@ AWarriorEnemyCharacter::AWarriorEnemyCharacter()
 	EnemyUIComponent=CreateDefaultSubobject<UEnemyUIComponent>("EnemyUIComponent");
 	EnemyHealthWidgetComponent = CreateDefaultSubobject<UWidgetComponent>("EnemyHealthWidgetComponent");
 	EnemyHealthWidgetComponent->SetupAttachment(GetMesh());
+	
+	LeftHandCollisionBox = CreateDefaultSubobject<UBoxComponent>("LeftHandCollisionBox");
+    LeftHandCollisionBox->SetupAttachment(GetMesh());
+    LeftHandCollisionBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+    LeftHandCollisionBox->OnComponentBeginOverlap.AddUniqueDynamic(this,&ThisClass::OnBodyCollisionBoxBeginOverlap);
+
+    RightHandCollisionBox = CreateDefaultSubobject<UBoxComponent>("RightHandCollisionBox");
+    RightHandCollisionBox->SetupAttachment(GetMesh());
+    RightHandCollisionBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+    RightHandCollisionBox->OnComponentBeginOverlap.AddUniqueDynamic(this,&ThisClass::OnBodyCollisionBoxBeginOverlap);
 }
 
 void AWarriorEnemyCharacter::PossessedBy(AController* NewController)
@@ -61,6 +73,19 @@ void AWarriorEnemyCharacter::BeginPlay()
 	}
 }
 
+void AWarriorEnemyCharacter::OnBodyCollisionBoxBeginOverlap(UPrimitiveComponent* OverlappedComponent,
+	AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep,
+	const FHitResult& SweepResult)
+{
+	if (APawn* HitPawn = Cast<APawn>(OtherActor))
+	{
+		if (UWarriorFunctionLibrary::IsTargetPawnHostile(this,HitPawn))
+		{
+			CombatComponent->OnHitTargetActor(HitPawn);
+		}
+	}
+}
+
 void AWarriorEnemyCharacter::InitEnemySetupData()
 {
 	if(CharacterStartUpData.IsNull()) return;
@@ -77,3 +102,20 @@ void AWarriorEnemyCharacter::InitEnemySetupData()
 		})
 		);
 }
+
+#if WITH_EDITOR
+void AWarriorEnemyCharacter::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent)
+{
+	Super::PostEditChangeProperty(PropertyChangedEvent);
+
+	if (PropertyChangedEvent.GetMemberPropertyName() == GET_MEMBER_NAME_CHECKED(ThisClass,LeftHandCollisionBoxAttachBoneName))
+	{
+		LeftHandCollisionBox->AttachToComponent(GetMesh(),FAttachmentTransformRules::SnapToTargetNotIncludingScale,LeftHandCollisionBoxAttachBoneName);
+	}
+
+	if (PropertyChangedEvent.GetMemberPropertyName() == GET_MEMBER_NAME_CHECKED(ThisClass,RightHandCollisionBoxAttachBoneName))
+	{
+		RightHandCollisionBox->AttachToComponent(GetMesh(),FAttachmentTransformRules::SnapToTargetNotIncludingScale,RightHandCollisionBoxAttachBoneName);
+	}
+}
+#endif

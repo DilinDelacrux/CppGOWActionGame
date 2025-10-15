@@ -25,7 +25,8 @@ namespace WarriorGameplayTags
 
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_SpecialWeaponAbility_Light,"InputTag.SpecialWeaponAbility.Light");
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_SpecialWeaponAbility_Heavy,"InputTag.SpecialWeaponAbility.Heavy");
-
+	UE_DEFINE_GAMEPLAY_TAG(InputTag_PickUp_Stones,"InputTag.PickUp.Stones");
+	//Weapon
 	UE_DEFINE_GAMEPLAY_TAG(Player_Weapon_Axe,"Player.Weapon.Axe")
 	//PlayerAbility
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Equip_Axe,"Player.Ability.Equip.Axe")
@@ -39,6 +40,8 @@ namespace WarriorGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Rage,"Player.Ability.Rage");
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_SpecialWeaponAbility_Light,"Player.Ability.SpecialWeaponAbility.Light");
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_SpecialWeaponAbility_Heavy,"Player.Ability.SpecialWeaponAbility.Heavy");
+	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_PickUp_Stones,"Player.Ability.PickUp.Stones");
+	
 	//PlayerEvent
 	UE_DEFINE_GAMEPLAY_TAG(Player_Event_Equip_Axe,"Player.Event.Equip.Axe")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Event_Unequip_Axe,"Player.Event.Unequip.Axe")
@@ -48,6 +51,7 @@ namespace WarriorGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Player_Event_SwitchTarget_Right,"Player.Event.SwitchTarget.Right");
 	UE_DEFINE_GAMEPLAY_TAG(Player_Event_ActivateRage,"Player.Event.ActivateRage");
 	UE_DEFINE_GAMEPLAY_TAG(Player_Event_AOE,"Player.Event.AOE");
+	UE_DEFINE_GAMEPLAY_TAG(Player_Event_ConsumeStones,"Player.Event.ConsumeStones");
 	//PlayerStatus
 	UE_DEFINE_GAMEPLAY_TAG(Player_Status_JumpToFinisher,"Player.Status.JumpToFinisher")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Status_Rolling,"Player.Status.Rolling");
@@ -65,10 +69,13 @@ namespace WarriorGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Enemy_Ability_Melee,"Enemy.Ability.Melee");
 	UE_DEFINE_GAMEPLAY_TAG(Enemy_Ability_Ranged,"Enemy.Ability.Ranged");
 	UE_DEFINE_GAMEPLAY_TAG(Enemy_Ability_SummonEnemies,"Enemy.Ability.SummonEnemies");
+	UE_DEFINE_GAMEPLAY_TAG(Enemy_Ability_SpawnStones,"Enemy.Ability.SpawnStones");
+	
 	//EnemyStatus
 	UE_DEFINE_GAMEPLAY_TAG(Enemy_Status_Strafing,"Enemy.Status.Strafing");
 	UE_DEFINE_GAMEPLAY_TAG(Enemy_Status_UnderAttack,"Enemy.Status.UnderAttack");
 	UE_DEFINE_GAMEPLAY_TAG(Enemy_Status_Unblockable,"Enemy.Status.Unblockable");
+	
 	
 	//Shared Status
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Status_Dead,"Shared.Status.Dead");

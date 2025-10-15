@@ -20,4 +20,6 @@ public:
 	FOnAbilityIconSlotUpdatedDelegate OnAbilityIconSlotUpdated;
 	UPROPERTY(BlueprintCallable,BlueprintAssignable)
 	FOnAbilityCooldownBeginDelegate OnAbilityCooldownBegin;
+	UPROPERTY(BlueprintCallable,BlueprintAssignable)
+	FOnStoneInteractedDelegate OnStoneInteracted;
 };

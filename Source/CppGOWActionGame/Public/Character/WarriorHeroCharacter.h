@@ -56,6 +56,8 @@ private:
 	void Input_AbilityInputReleased(FGameplayTag InInputTag);
 	void Input_SwitchTargetTriggered(const FInputActionValue& InputActionValue);
 	void Input_SwitchTargetCompleted(const FInputActionValue& InputActionValue);
+	void Input_PickUpStonesStarted(const FInputActionValue& InputActionValue);
+	
 	FVector2D SwitchDirection = FVector2D::ZeroVector;
 	
 #pragma endregion 

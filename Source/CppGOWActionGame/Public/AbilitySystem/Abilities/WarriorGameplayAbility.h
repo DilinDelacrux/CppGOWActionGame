@@ -43,4 +43,6 @@ protected:
 
 	UFUNCTION(BlueprintCallable, Category = "Warrior|Ability")
 	void ApplyGameplayEffectSpecHandleToHitResults(const FGameplayEffectSpecHandle& InSpecHandle,const TArray<FHitResult>& InHitResults);
+
+
 };

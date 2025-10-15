@@ -3,12 +3,13 @@
 
 #include "DataAssets/StartUpData/DataAsset_HeroStartUpData.h"
 #include "WarriorStructTypes.h"
-#include "AbilitySystem/Abilities/WarriorGameplayAbility.h"
 #include "AbilitySystem/WarriorAbilitySystemComponent.h"
+#include "AbilitySystem/Abilities/WarriorHeroGameplayAbility.h"
+#include "GameplayAbilitySpec.h"
 
 
 void UDataAsset_HeroStartUpData::GiveToAbilitySystemComponent(UWarriorAbilitySystemComponent* InWarriorASCToGive,
-	int32 ApplyLevel)
+                                                              int32 ApplyLevel)
 {
 	Super::GiveToAbilitySystemComponent(InWarriorASCToGive, ApplyLevel);
 
@@ -23,4 +24,7 @@ void UDataAsset_HeroStartUpData::GiveToAbilitySystemComponent(UWarriorAbilitySys
 		
 		InWarriorASCToGive->GiveAbility(AbilitySpec);
 	}
+
+
+
 }

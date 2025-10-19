@@ -22,10 +22,10 @@ public class CppGOWActionGame : ModuleRules
 			"GameplayAbilities",
 			"MotionWarping",
 			"Niagara",
-			"NavigationSystem"
+			"NavigationSystem",
+			"MoviePlayer"
 		});
-
-		PrivateDependencyModuleNames.AddRange(new string[] {  });
+		PrivateDependencyModuleNames.AddRange(new string[] { "MoviePlayer" });
 
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });

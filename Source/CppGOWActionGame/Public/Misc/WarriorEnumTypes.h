@@ -34,3 +34,33 @@ enum class EWarriorCountDownActionOutput : uint8
 	Completed,
 	Cancelled
 };
+UENUM(BlueprintType)
+enum class EWarriorAbilityActivationPolicy : uint8
+{
+	OnTrigger,
+	OnGiven
+};
+UENUM(BlueprintType)
+enum class EWarriorSurvivalGameModeState : uint8
+{
+	WaitSpawnNewWave,
+	SpawningNewWave,
+	InProgress,
+	WaveCompleted,
+	AllWavesDone,
+	PlayerDied
+};
+UENUM(BlueprintType)
+enum class EWarriorGameDifficulty : uint8
+{
+	Easy,
+	Normal,
+	Hard,
+	VeryHard
+};
+UENUM(BlueprintType)
+enum class EWarriorInputMode : uint8
+{
+	GameOnly,
+	UIOnly
+};

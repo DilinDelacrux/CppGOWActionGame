@@ -11,6 +11,7 @@
 #include "DataAssets/StartUpData/DataAsset_StartUpDataBase.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Components/BoxComponent.h"
+#include "GameMode/GWOGameMode.h"
 #include "Misc/WarriorDebugHelper.h"
 #include "Widgets/WarriorWidgetBase.h"
 
@@ -89,14 +90,42 @@ void AWarriorEnemyCharacter::OnBodyCollisionBoxBeginOverlap(UPrimitiveComponent*
 void AWarriorEnemyCharacter::InitEnemySetupData()
 {
 	if(CharacterStartUpData.IsNull()) return;
+
+	int32 AbilityApplyLevel = 1;
+
+	if (AGWOGameMode* BaseGameMode = GetWorld()->GetAuthGameMode<AGWOGameMode>())
+	{
+		switch (BaseGameMode->GetCurrentGameDifficulty())
+		{
+		case EWarriorGameDifficulty::Easy:
+			AbilityApplyLevel = 1;
+			break;
+
+		case EWarriorGameDifficulty::Normal:
+			AbilityApplyLevel = 2;
+			break;
+
+		case EWarriorGameDifficulty::Hard:
+			AbilityApplyLevel = 3;
+			break;
+
+		case EWarriorGameDifficulty::VeryHard:
+			AbilityApplyLevel = 4;
+			break;
+
+		default:
+			break;
+		}
+	}
+	
 	UAssetManager::GetStreamableManager().RequestAsyncLoad(
 		CharacterStartUpData.ToSoftObjectPath(),
 
-		FStreamableDelegate::CreateLambda([this]()
+		FStreamableDelegate::CreateLambda([this,AbilityApplyLevel]()
 		{
 			if(UDataAsset_StartUpDataBase* LoadedData=CharacterStartUpData.Get())
 			{
-				LoadedData->GiveToAbilitySystemComponent(WarriorAbilitySystemComponent);
+				LoadedData->GiveToAbilitySystemComponent(WarriorAbilitySystemComponent,AbilityApplyLevel);
 				Debug::Print(TEXT("EnemyStartUpDataLoaded"),FColor::Green);
 			}
 		})

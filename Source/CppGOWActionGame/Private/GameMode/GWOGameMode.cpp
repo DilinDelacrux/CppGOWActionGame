@@ -2,4 +2,11 @@
 
 
 #include "GameMode/GWOGameMode.h"
+#include "Misc/WarriorEnumTypes.h"
+AGWOGameMode::AGWOGameMode()
+{
+	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bStartWithTickEnabled=true;
 
+	CurrentGameDifficulty=EWarriorGameDifficulty::Easy;
+}

@@ -10,12 +10,7 @@
 class UWarriorAbilitySystemComponent;
 class UPawnCombatComponent;
 
-UENUM(BlueprintType)
-enum class EWarriorAbilityActivationPolicy : uint8
-{
-	OnTrigger,
-	OnGiven
-};
+
 /**
  * 
  */

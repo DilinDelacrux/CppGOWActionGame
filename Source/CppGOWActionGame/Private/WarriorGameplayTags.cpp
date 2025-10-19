@@ -1,11 +1,11 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+//FilloutyourcopyrightnoticeintheDescriptionpageofProjectSettings.
 
 
-#include "WarriorGameplayTags.h"
+#include"WarriorGameplayTags.h"
 
 namespace WarriorGameplayTags
 {
-	//Input Tag
+	//InputTag
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_Move,"InputTag.Move")
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_Look,"InputTag.Look")
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_EquipAxe,"InputTag.EquipAxe")
@@ -77,20 +77,20 @@ namespace WarriorGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Enemy_Status_Unblockable,"Enemy.Status.Unblockable");
 	
 	
-	//Shared Status
+	//SharedStatus
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Status_Dead,"Shared.Status.Dead");
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Status_HitReact_Front,"Shared.Status.HitReact.Front");
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Status_HitReact_Left,"Shared.Status.HitReact.Left");
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Status_HitReact_Right,"Shared.Status.HitReact.Right");
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Status_HitReact_Back,"Shared.Status.HitReact.Back");
 	
-	//Shared Event
+	//SharedEvent
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_MeleeHit,"Shared.Event.MeleeHit");
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_HitReact,"Shared.Event.HitReact");
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_SpawnProjectile,"Shared.Event.SpawnProjectile");
 	
 	UE_DEFINE_GAMEPLAY_TAG(Enemy_Event_SummonEnemies,"Enemy.Event.SummonEnemies");
-	//Shared Ability
+	//SharedAbility
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Ability_HitReact,"Shared.Ability.HitReact");
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Ability_Death,"Shared.Ability.Death");
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Status_Invincible,"Shared.Status.Invincible");
@@ -98,9 +98,19 @@ namespace WarriorGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Shared_SetByCaller_BaseDamage,"Shared.SetByCaller.BaseDamage")
 	UE_DEFINE_GAMEPLAY_TAG(Player_SetByCaller_AttackType_Light,"Player.SetByCaller.AttackType.Light")
 	UE_DEFINE_GAMEPLAY_TAG(Player_SetByCaller_AttackType_Heavy,"Player.SetByCaller.AttackType.Heavy")
-	// Game Data tags
+	//GameDatatags
 	UE_DEFINE_GAMEPLAY_TAG(GameData_Level_SurvivalGameModeMap,"GameData.Level.SurvivalGameModeMap");
 	UE_DEFINE_GAMEPLAY_TAG(GameData_Level_MainMenuMap,"GameData.Level.MainMenuMap");
 
 	UE_DEFINE_GAMEPLAY_TAG(GameData_SaveGame_Slot_1,"GameData.SaveGame.Slot.1");
-}
+
+	// UE_DEFINE_GAMEPLAY_TAG(GameplayCue_FX_MagicShield,"GameplayCue.FX.MagicShield");
+	// UE_DEFINE_GAMEPLAY_TAG(GameplayCue_FX_MagicShield_PerfectBlock,"GameplayCue.FX.MagicShield.PerfectBlock");
+	// UE_DEFINE_GAMEPLAY_TAG(GameplayCue_FX_MagicShield_SuccessfullyBlock,"GameplayCue.FX.MagicShield.SuccessfullyBlock");
+	// UE_DEFINE_GAMEPLAY_TAG(GameplayCue_FX_Rage_Activating,"GameplayCue.FX.Rage.Activating")
+	// UE_DEFINE_GAMEPLAY_TAG(GameplayCue_FX_Unblockable_Warning,"GameplayCue.FX.Unblockable.Warning")
+	// UE_DEFINE_GAMEPLAY_TAG(GameplayCue_Sound_Death_rostGiant,"GameplayCue.Sound.Death.FrostGiant")
+	// UE_DEFINE_GAMEPLAY_TAG(GameplayCue_Sound_Death_Guardian,"GameplayCue.Sound.Death.Guardian")
+	// UE_DEFINE_GAMEPLAY_TAG(GameplayCue_Sound_MeleeHit_Axe,"GameplayCue.Sound.MeleeHit.Axe")
+	// UE_DEFINE_GAMEPLAY_TAG(GameplayCue_Sound_MeleeHit_Stick,"GameplayCue.Sound.MeleeHit.Stick")
+};

@@ -9,98 +9,18 @@
   <component name="ChangeListManager">
     <list default="true" id="705d53a4-018f-426e-b050-6cfad142ff31" name="更改" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CppGOWActionGame.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CppGOWActionGame.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Config/DefaultGame.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultGame.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Aggro.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Aggro.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Attack.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Attack.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Attack_B.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Attack_B.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Attack_C.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Attack_C.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Attack_Charge.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Attack_Charge.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Attack_HandSwipe.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Attack_HandSwipe.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Attack_Overhead.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Attack_Overhead.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Attack_Vomit.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Attack_Vomit.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Death_.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Death_.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Hit_React.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Hit_React.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Idle_Home.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Idle_Home.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Idle_New.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Idle_New.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Intro_Drop_Down_B.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Intro_Drop_Down_B.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_React_Death.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_React_Death.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_React_Heavy_Front.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_React_Heavy_Front.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_React_KnowckBack_Front.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_React_KnowckBack_Front.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_React_Spawn_Climb.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_React_Spawn_Climb.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_React_Stunned.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_React_Stunned.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_React_Stunned_Enter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_React_Stunned_Enter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_React_Stunned_Exit.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_React_Stunned_Exit.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_React_Stunned_Idle.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_React_Stunned_Idle.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Turn_Left.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Turn_Left.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Turn_Right.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Turn_Right.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Walk_Bwd_New.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Walk_Bwd_New.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Walk_Bwd_Right.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Walk_Bwd_Right.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Walk_Fwd.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Walk_Fwd.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Walk_Fwd_Left.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Walk_Fwd_Left.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Walk_Left.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Walk_Left.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Walk_Right.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Enemies/Enemy_Troll/Enemy_Troll_Poison_Animation/ExoGame_Troll_Walk_Right.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultGameplayTags.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultGameplayTags.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Asset/Level/GamemodeTestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Level/GamemodeTestMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Level/MainMenuMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Level/MainMenuMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Level/SurvivalGamemodeMap.umap" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Impact/MI_FireyProjectileFlare.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Niagara/Impact/MI_FireyProjectileFlare.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Weapons/Axe/M_Blade_Hatchet02.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/Weapons/Axe/M_Blade_Hatchet02.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Enemy/AM_ExoGame_FrostGiant_Aggro.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Enemy/AM_ExoGame_FrostGiant_Attck_Melee_A.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Enemy/AM_ExoGame_FrostGiant_Attck_Melee_C.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Enemy/AM_ExoGame_FrostGiant_Attck_Melee_Combo.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Enemy/AM_ExoGame_FrostGiant_Intro.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Enemy/AM_ExoGame_Gruntling_Cast.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Enemy/AM_ExoGame_Gruntling_Death.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Enemy/AM_ExoGame_Gruntling_Death_Small.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Enemy/AM_ExoGame_Gruntling_Death_Small_03.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Enemy/AM_ExoGame_Gruntling_Death_Small_04.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Enemy/AM_ExoGame_Gruntling_Death_Small_05.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Enemy/AM_ExoGame_Gruntling_Death_Small_Alt.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Enemy/AM_ExoGame_Gruntling_Intro_ClimbingUp.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Enemy/AM_ExoGame_Gruntling_Intro_DropDown.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Enemy/AM_ExoGame_Gruntling_Intro_Summon.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Enemy/AM_ExoGame_Gruntling_React_Light_Front.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Enemy/AM_ExoGame_Gruntling_React_Light_Front_Alt.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Enemy/AM_ExoGame_Troll_React_Death.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Enemy/AM_Glacer_MeleeAttack_1.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Enemy/AM_GuardiantMeleeAttack_1_Adjusted.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Enemy/AM_GuardiantMeleeAttack_2.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/BP_MainMenuGamemode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/BP_MainMenuGamemode.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/BP_SurvivalGamemode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/BP_SurvivalGamemode.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/BP_WarriorGameInstance.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/BP_WarriorGameInstance.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/Ability/GA_Enemy_SpawnStone_Base.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/Ability/GA_Enemy_SpawnStone_Base.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/Ability/GA_FrostGiant_MeleeAttack_1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/Ability/GA_FrostGiant_MeleeAttack_1.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/Ability/GA_FrostGiant_MeleeAttack_2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/Ability/GA_FrostGiant_MeleeAttack_2.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/Ability/GA_FrostGiant_MeleeAttack_3.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/Ability/GA_FrostGiant_MeleeAttack_3.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/Ability/GA_Glacer_Death.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/Ability/GA_Glacer_Death.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/Ability/GA_Glacer_Melee1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/Ability/GA_Glacer_Melee1.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/Ability/GA_Glacer_Projectile.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/Ability/GA_Glacer_Projectile.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/Ability/GA_Guardian_Death.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/Ability/GA_Guardian_Death.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/Ability/GA_Guardian_HitReact.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/Ability/GA_Guardian_HitReact.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/Ability/GA_Guardian_Melee_1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/Ability/GA_Guardian_Melee_1.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/Ability/GA_Guardian_Melee_2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/Ability/GA_Guardian_Melee_2.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/Ability/GA_SummonEnemy_FrostGiant.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/Ability/GA_SummonEnemy_FrostGiant.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/BP_Gruntling_Base.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/BP_Gruntling_Base.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Hero/Ability/GA_HeroSpawnWeapon.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Hero/Ability/GA_HeroSpawnWeapon.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Hero/BP_HeroWeapon.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Hero/BP_HeroWeapon_Child.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Hero/HeroController.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Hero/MyWarriorHeroCharacter.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/HeroGameMode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/HeroGameMode.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Items/Stones/BP_Stone_RageStone.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Items/Stones/BP_Stone_RageStone.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Shared/GameplayAbility/GA_FrostGiant_Death.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Shared/GameplayAbility/GA_FrostGiant_Death.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/GameplayCues/GC_Enemy_AttackWarning.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/GameplayCues/GC_Enemy_AttackWarning.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/GameplayCues/GC_Enemy_HitSound_Stick.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/GameplayCues/GC_Enemy_HitSound_Stick.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/GameplayCues/GC_FrostGiant_DeathSound.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/GameplayCues/GC_FrostGiant_DeathSound.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/GameplayCues/GC_Guardian_DeadSound.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/GameplayCues/GC_Guardian_DeadSound.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/BP_EnemyCharacter_Base.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/BP_EnemyCharacter_Base.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Hero/Ability/GA_Hero_Rage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Hero/Ability/GA_Hero_Rage.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Hero/Ability/GA_Hero_WeaponAbility_Axe_Heavy.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Hero/Ability/GA_Hero_WeaponAbility_Axe_Heavy.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/GameplayCues/GC_Hero_ActivateRage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/GameplayCues/GC_Hero_ActivateRage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/GameplayCues/GC_Hero_AxeHit.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/GameplayCues/GC_Hero_AxeHit.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/GameplayCues/GC_Hero_AxeHit1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/GameplayCues/GC_Hero_AxeHit1.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/GameplayCues/GC_Hero_MagicShield.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/GameplayCues/GC_Hero_MagicShield.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/GameplayCues/GC_Hero_PerfectBlock.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/GameplayCues/GC_Hero_PerfectBlock.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/GameplayCues/GC_Hero_SuccessfullyBlock.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/GameplayCues/GC_Hero_SuccessfullyBlock.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Asset/Level/GamemodeTestMap/D/K8/GWR1KKWVY87OXOFR1A7T6O.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/Asset/Level/GamemodeTestMap/D/K8/GWR1KKWVY87OXOFR1A7T6O.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CppGOWActionGame.uproject.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/CppGOWActionGame.uproject.DotSettings.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/CppGOWActionGame/CppGOWActionGame.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Source/CppGOWActionGame/CppGOWActionGame.Build.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/CppGOWActionGame/Private/WarriorGameplayTags.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/CppGOWActionGame/Private/WarriorGameplayTags.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/CppGOWActionGame/Public/WarriorGameplayTags.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/CppGOWActionGame/Public/WarriorGameplayTags.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,14 +50,20 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="cidr-memory-view://0" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="cidr-memory-view://4" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Plugins/AI/MLAdapter/Source/MLAdapter/Public/Debug/DebugHelpers.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Plugins/Runtime/GameplayAbilities/Source/GameplayAbilities/Private/AttributeSet.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Plugins/Runtime/GameplayAbilities/Source/GameplayAbilities/Public/GameplayCueNotify_Actor.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Plugins/Runtime/GameplayAbilities/Source/GameplayAbilities/Public/GameplayCueNotify_Actor.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Plugins/Runtime/GameplayAbilities/Source/GameplayAbilities/Public/GameplayEffectComponents/AbilitiesGameplayEffectComponent.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Developer/FunctionalTesting/Classes/FunctionalTestUtilityLibrary.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Developer/Windows/LiveCodingServer/Private/External/LC_FunctionPatcher.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Editor/BehaviorTreeEditor/Private/BehaviorTreeGraphNode.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Editor/BlueprintGraph/Classes/K2Node_LoadAsset.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Editor/BlueprintGraph/Private/K2Node_LoadAsset.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/AIModule/Classes/AIController.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/AIModule/Classes/BehaviorTree/BTAuxiliaryNode.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/AIModule/Classes/BehaviorTree/BTNode.h" root0="FORCE_HIGHLIGHTING" />
@@ -155,6 +81,7 @@
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/AIModule/Private/Navigation/CrowdFollowingComponent.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/Core/Public/Containers/Array.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/Core/Public/Containers/ContainerAllocationPolicies.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/Core/Public/Containers/Map.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/Core/Public/Experimental/ConcurrentLinearAllocator.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/Core/Public/Templates/Tuple.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/Core/Public/UObject/NameTypes.h" root0="FORCE_HIGHLIGHTING" />
@@ -166,6 +93,7 @@
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/Engine/Classes/Engine/LatentActionManager.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/Engine/Classes/GameFramework/PlayerController.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/Engine/Classes/Kismet/KismetSystemLibrary.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/Engine/Private/AsyncActionLoadPrimaryAsset.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/Engine/Private/KismetSystemLibrary.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/Engine/Public/LatentActions.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/GameplayTags/Public/NativeGameplayTags.h" root0="FORCE_HIGHLIGHTING" />
@@ -587,6 +515,16 @@
           <url>file://$PROJECT_DIR$/Source/CppGOWActionGame/Public/GameMode/GWOGameMode.h</url>
           <line>22</line>
           <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Plugins/Runtime/GameplayAbilities/Source/GameplayAbilities/Private/Abilities/GameplayAbility.cpp</url>
+          <line>1506</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Plugins/Runtime/GameplayAbilities/Source/GameplayAbilities/Private/AbilitySystemComponent.cpp</url>
+          <line>1289</line>
+          <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

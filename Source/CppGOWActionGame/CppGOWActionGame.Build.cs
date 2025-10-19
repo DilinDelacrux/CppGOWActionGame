@@ -25,7 +25,7 @@ public class CppGOWActionGame : ModuleRules
 			"NavigationSystem",
 			"MoviePlayer"
 		});
-		PrivateDependencyModuleNames.AddRange(new string[] { "MoviePlayer" });
+		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });

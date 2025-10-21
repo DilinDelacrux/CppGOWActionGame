@@ -16,6 +16,7 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "Widgets/WarriorWidgetBase.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "Misc/WarriorDebugHelper.h"
 
 void UHeroGameplayAbility_TargetLock::ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData)
 {	
@@ -48,27 +49,30 @@ void UHeroGameplayAbility_TargetLock::OnTargetLockTick(float DeltaTime)
 
 	SetTargetLockWidgetPosition();
 
-	const bool bShouldOverrideRotation =
-	!UWarriorFunctionLibrary::NativeDoesActorHaveTag(GetHeroCharacterFromActorInfo(),WarriorGameplayTags::Player_Status_Rolling)
-	&&
-	!UWarriorFunctionLibrary::NativeDoesActorHaveTag(GetHeroCharacterFromActorInfo(),WarriorGameplayTags::Player_Status_Blocking);
+	const bool bShouldOverrideRotation=!UWarriorFunctionLibrary::NativeDoesActorHaveTag(GetHeroCharacterFromActorInfo(),WarriorGameplayTags::Player_Status_Rolling)&&
+										!UWarriorFunctionLibrary::NativeDoesActorHaveTag(GetHeroCharacterFromActorInfo(),WarriorGameplayTags::Player_Status_Blocking);
 
+
+	// UWarriorFunctionLibrary::NativeDoesActorHaveTag(GetHeroCharacterFromActorInfo(),WarriorGameplayTags::Player_Status_ForceFocusingTarget)?true:
+	
+	// Debug::Print(UWarriorFunctionLibrary::NativeDoesActorHaveTag(GetHeroCharacterFromActorInfo(),WarriorGameplayTags::Player_Status_ForceFocusingTarget)?TEXT("true"):TEXT("false"));
+
+	const FRotator CurrentControlRot = GetHeroControllerFromActorInfo()->GetControlRotation();
+	
+	FRotator LookAtRot = UKismetMathLibrary::FindLookAtRotation(GetHeroCharacterFromActorInfo()->GetActorLocation(),CurrentLockedActor->GetActorLocation());
+	
+	const FRotator TargetRot = FMath::RInterpTo(CurrentControlRot,LookAtRot,DeltaTime,TargetLockRotationInterpSpeed);
+
+	
+	GetHeroControllerFromActorInfo()->SetControlRotation(FRotator(UKismetMathLibrary::Clamp(TargetRot.Pitch,MinPitch,MaxPitch),TargetRot.Yaw,0.f));
+	
 	if (bShouldOverrideRotation)
 	{
-		FRotator LookAtRot = UKismetMathLibrary::FindLookAtRotation(
-			GetHeroCharacterFromActorInfo()->GetActorLocation(),
-			CurrentLockedActor->GetActorLocation()
-		);
-		
 		LookAtRot -= FRotator(TargetLockCameraOffsetDistance,0.f,0.f);
-		const FRotator CurrentControlRot = GetHeroControllerFromActorInfo()->GetControlRotation();
-		const FRotator TargetRot = FMath::RInterpTo(CurrentControlRot,LookAtRot,DeltaTime,TargetLockRotationInterpSpeed);
-		
-		
-		GetHeroControllerFromActorInfo()->SetControlRotation(FRotator(TargetRot.Pitch,TargetRot.Yaw,0.f));
 		GetHeroCharacterFromActorInfo()->SetActorRotation(FRotator(0.f,TargetRot.Yaw,0.f));
-		
 	}
+
+	
 }
 
 void UHeroGameplayAbility_TargetLock::SwitchTarget(const FGameplayTag& InSwitchDirectionTag)

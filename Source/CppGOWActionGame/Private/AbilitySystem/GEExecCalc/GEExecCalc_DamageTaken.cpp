@@ -30,17 +30,6 @@ static const FWarriorDamageCapture& GetWarriorDamageCapture()
 
 UGEExecCalc_DamageTaken::UGEExecCalc_DamageTaken()
 {
-	// // slow way to do 
-	// FProperty* AttackPowerProperty = FindFieldChecked<FProperty>(
-	// 	UWarriorAttributeSet::StaticClass(),
-	// 	GET_MEMBER_NAME_CHECKED(UWarriorAttributeSet,AttackPower));
-	//
-	// FGameplayEffectAttributeCaptureDefinition AttackPowerCaptureDefinition(
-	// 	AttackPowerProperty,
-	// 	EGameplayEffectAttributeCaptureSource::Source,
-	// 	false);
-	//
-	// RelevantAttributesToCapture.Add(AttackPowerCaptureDefinition);
 	RelevantAttributesToCapture.Add(GetWarriorDamageCapture().AttackPowerDef);
 	RelevantAttributesToCapture.Add(GetWarriorDamageCapture().DefensePowerDef);
 }
@@ -50,21 +39,15 @@ void UGEExecCalc_DamageTaken::Execute_Implementation(const FGameplayEffectCustom
 {
 	const FGameplayEffectSpec& EffectSpec = ExecutionParams.GetOwningSpec();
 	
-	/*EffectSpec.GetContext().GetSourceObject();
-	EffectSpec.GetContext().GetAbility();
-	EffectSpec.GetContext().GetInstigator();
-	EffectSpec.GetContext().GetEffectCauser();*/
-	
 	FAggregatorEvaluateParameters EvaluateParameters;
 	EvaluateParameters.SourceTags = EffectSpec.CapturedSourceTags.GetAggregatedTags();
 	EvaluateParameters.TargetTags = EffectSpec.CapturedTargetTags.GetAggregatedTags();
 
 	float SourceAttackPower = 0.f;
-	// Debug::Print(TEXT("SourceAttackPower"),SourceAttackPower);
 	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(GetWarriorDamageCapture().AttackPowerDef,EvaluateParameters,SourceAttackPower);
 
 	float BaseDamage = 0.f;
-	int32 UsedLightAttckComboCount = 0;
+	int32 UsedLightAttackComboCount = 0;
 	int32 UsedHeavyAttackComboCount = 0;
 
 	for (const TPair<FGameplayTag, float>& TagMagnitude : EffectSpec.SetByCallerTagMagnitudes)
@@ -77,7 +60,7 @@ void UGEExecCalc_DamageTaken::Execute_Implementation(const FGameplayEffectCustom
 
 		if (TagMagnitude.Key.MatchesTagExact(WarriorGameplayTags::Player_SetByCaller_AttackType_Light))
 		{
-			UsedLightAttckComboCount = TagMagnitude.Value;
+			UsedLightAttackComboCount = TagMagnitude.Value;
 			// Debug::Print(TEXT("UsedLightAttckComboCount"),UsedLightAttckComboCount);	
 		}
 
@@ -93,9 +76,9 @@ void UGEExecCalc_DamageTaken::Execute_Implementation(const FGameplayEffectCustom
 
 	// Debug::Print(TEXT("TargetDefensePower"),TargetDefensePower);
 
-	if (UsedLightAttckComboCount != 0)
+	if (UsedLightAttackComboCount != 0)
 	{
-		const float DamageIncreasePercentLight = (UsedLightAttckComboCount - 1) * 0.05 + 1.f;
+		const float DamageIncreasePercentLight = (UsedLightAttackComboCount - 1) * 0.05 + 1.f;
 
 		BaseDamage *= DamageIncreasePercentLight;
 		// Debug::Print(TEXT("ScaledBaseDamageLight"),BaseDamage);

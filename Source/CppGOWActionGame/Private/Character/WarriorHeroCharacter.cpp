@@ -81,30 +81,30 @@ void AWarriorHeroCharacter::PossessedBy(AController* NewController)
 			// LoadedData->GiveToAbilitySystemComponent(WarriorAbilitySystemComponent);
 			int32 AbilityApplyLevel = 1;
 
-			if (AGWOGameMode* BaseGameMode = GetWorld()->GetAuthGameMode<AGWOGameMode>())
-			{
-				switch (BaseGameMode->GetCurrentGameDifficulty())
-				{
-				case EWarriorGameDifficulty::Easy:
-					AbilityApplyLevel = 4;
-					break;
-
-				case EWarriorGameDifficulty::Normal:
-					AbilityApplyLevel = 3;
-					break;
-
-				case EWarriorGameDifficulty::Hard:
-					AbilityApplyLevel = 2;
-					break;
-
-				case EWarriorGameDifficulty::VeryHard:
-					AbilityApplyLevel = 1;
-					break;
-
-				default:
-					break;
-				}
-			}
+			// if (AGWOGameMode* BaseGameMode = GetWorld()->GetAuthGameMode<AGWOGameMode>())
+			// {
+			// 	switch (BaseGameMode->GetCurrentGameDifficulty())
+			// 	{
+			// 	case EWarriorGameDifficulty::Easy:
+			// 		AbilityApplyLevel = 4;
+			// 		break;
+			//
+			// 	case EWarriorGameDifficulty::Normal:
+			// 		AbilityApplyLevel = 3;
+			// 		break;
+			//
+			// 	case EWarriorGameDifficulty::Hard:
+			// 		AbilityApplyLevel = 2;
+			// 		break;
+			//
+			// 	case EWarriorGameDifficulty::VeryHard:
+			// 		AbilityApplyLevel = 1;
+			// 		break;
+			//
+			// 	default:
+			// 		break;
+			// 	}
+			// }
 			
 			LoadedData->GiveToAbilitySystemComponent(WarriorAbilitySystemComponent,AbilityApplyLevel);
 			

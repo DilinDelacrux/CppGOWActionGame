@@ -18,6 +18,8 @@ UWarriorAttributeSet::UWarriorAttributeSet()
 	InitMaxRage(1.f);
 	InitAttackPower(1.f);
 	InitDefensePower(1.f);
+	InitFireResistance(0.1f);
+	InitIceResistance(0.1f);
 }
 
 void UWarriorAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data)
@@ -27,11 +29,7 @@ void UWarriorAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffec
 		CachedPawnUIInterface = TWeakInterfacePtr<IPawnUIInterface>(Data.Target.GetAvatarActor());
 	}
 
-	checkf(CachedPawnUIInterface.IsValid(),TEXT("%s didn't implement IPawnUIInterface"),*Data.Target.GetAvatarActor()->GetActorNameOrLabel());
-
 	UPawnUIComponent* PawnUIComponent = CachedPawnUIInterface->GetPawnUIComponent();
-
-	checkf(PawnUIComponent,TEXT("Couldn't extract a PawnUIComponent from %s"),*Data.Target.GetAvatarActor()->GetActorNameOrLabel());
 	
 	if(Data.EvaluatedData.Attribute==GetCurrentHealthAttribute())
 	{
@@ -74,7 +72,7 @@ void UWarriorAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffec
 		SetCurrentHealth(NewCurrentHealth);
 
 		const FString DebugString = FString::Printf(
-			TEXT("Old Health: %f, Damage Done: %f, NewCurrentHealth: %f"),
+			TEXT("Old Health: %.2f, Damage Done: %.2f, NewCurrentHealth: %.2f"),
 			OldHealth,
 			DamageDone,
 			NewCurrentHealth

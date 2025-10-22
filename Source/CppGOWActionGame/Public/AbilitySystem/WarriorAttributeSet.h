@@ -57,6 +57,14 @@ public:
 	FGameplayAttributeData DamageTaken;
 	ATTRIBUTE_ACCESSORS(UWarriorAttributeSet,DamageTaken)
 
+	UPROPERTY(BlueprintReadOnly, Category = "Resistance")
+	FGameplayAttributeData IceResistance;
+	ATTRIBUTE_ACCESSORS(UWarriorAttributeSet,IceResistance)
+
+	UPROPERTY(BlueprintReadOnly, Category = "Resistance")
+	FGameplayAttributeData FireResistance;
+	ATTRIBUTE_ACCESSORS(UWarriorAttributeSet,FireResistance)
+
 private:
 	TWeakInterfacePtr<IPawnUIInterface> CachedPawnUIInterface;
 	

@@ -22,6 +22,11 @@ UWarriorAttributeSet::UWarriorAttributeSet()
 	InitIceResistance(0.1f);
 }
 
+// bool UWarriorAttributeSet::PreGameplayEffectExecute(struct FGameplayEffectModCallbackData& Data)
+// {
+// 	return Super::PreGameplayEffectExecute(Data);
+// }
+
 void UWarriorAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data)
 {
 	if (!CachedPawnUIInterface.IsValid())
@@ -30,7 +35,6 @@ void UWarriorAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffec
 	}
 
 	UPawnUIComponent* PawnUIComponent = CachedPawnUIInterface->GetPawnUIComponent();
-	
 	if(Data.EvaluatedData.Attribute==GetCurrentHealthAttribute())
 	{
 		const float NewCurrentHealth=FMath::Clamp(GetCurrentHealth(),0.0f,GetMaxHealth());
@@ -66,9 +70,20 @@ void UWarriorAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffec
 	{
 		const float OldHealth = GetCurrentHealth();
 		const float DamageDone = GetDamageTaken();
-
 		const float NewCurrentHealth = FMath::Clamp(OldHealth - DamageDone,0.f,GetMaxHealth());
-
+		if (Data.EffectSpec.Def->GetAssetTags().HasTagExact(WarriorGameplayTags::Shared_DamageType_Fire))
+		{
+			PawnUIComponent->OnReceiveDamage.Broadcast(DamageDone,EDamageType::Fire);
+		}
+		else if (Data.EffectSpec.Def->GetAssetTags().HasTagExact(WarriorGameplayTags::Shared_DamageType_Ice))
+		{
+			PawnUIComponent->OnReceiveDamage.Broadcast(DamageDone,EDamageType::Ice);
+		}
+		else
+		{
+			PawnUIComponent->OnReceiveDamage.Broadcast(DamageDone,EDamageType::Physical);
+		}
+		
 		SetCurrentHealth(NewCurrentHealth);
 
 		const FString DebugString = FString::Printf(

@@ -20,6 +20,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void RemoveEnemyDrawnWidgetsIfAny();
 
+
 private:
 	/**
 	 * 

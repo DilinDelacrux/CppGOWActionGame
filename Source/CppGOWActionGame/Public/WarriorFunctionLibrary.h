@@ -70,4 +70,7 @@ public:
 
 	UFUNCTION(BlueprintCallable,Category = "Warrior|FunctionLibrary")
 	static bool TryLoadSavedGameDifficulty(EWarriorGameDifficulty& OutSavedDifficulty);
+
+	UFUNCTION(BlueprintCallable,Category = "Warrior|FunctionLibrary")
+	static FVector2D CalculateUIScreenPositionByActor(AActor* Actor, FVector2D WidgetSize);
 };

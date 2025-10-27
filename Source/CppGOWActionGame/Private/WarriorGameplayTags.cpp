@@ -61,6 +61,10 @@ namespace WarriorGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Player_Status_Rage_Active,"Player.Status.Rage.Active")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Status_Rage_Full,"Player.Status.Rage.Full")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Status_Rage_None,"Player.Status.Rage.None")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Status_Uninterruptible,"Player.Status.Uninterruptible")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Status_Anim_Startup,"Player.Status.Anim.Startup")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Status_Anim_Active,"Player.Status.Anim.Active")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Status_Anim_Recovery,"Player.Status.Anim.Recovery")
 	
 	UE_DEFINE_GAMEPLAY_TAG(Player_Status_ForceFocusingTarget,"Player.Status.ForceFocusingTarget")
 	//PlayerCoolDown

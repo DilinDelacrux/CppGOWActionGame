@@ -57,9 +57,9 @@ float UGEExecCalc_DamageTaken::HandlePhysicalDamage(float SourceAttackPower, flo
 	}
 	float FinalDamage = BaseDamage * SourceAttackPower / TargetDefensePower;
 	
-	Debug::Print(FString::Printf(TEXT("物理伤害计算: 基础伤害=%.1f, 轻击连段=%d, 重击连段=%d, 攻击力=%.1f, 防御力=%.1f, 最终伤害=%.1f"), 
-		OriginalBaseDamage, UsedLightAttackComboCount, UsedHeavyAttackComboCount, SourceAttackPower, TargetDefensePower, FinalDamage), 
-		FColor::Cyan);
+	// Debug::Print(FString::Printf(TEXT("物理伤害计算: 基础伤害=%.1f, 轻击连段=%d, 重击连段=%d, 攻击力=%.1f, 防御力=%.1f, 最终伤害=%.1f"), 
+	// 	OriginalBaseDamage, UsedLightAttackComboCount, UsedHeavyAttackComboCount, SourceAttackPower, TargetDefensePower, FinalDamage), 
+	// 	FColor::Cyan);
 	
 	return FinalDamage;
 
@@ -72,9 +72,9 @@ float UGEExecCalc_DamageTaken::HandleIceDamage(float BaseDamage,int StackCount, 
 	// 计算抗性减免后的基础伤害
 	float ResistanceReduction = 1.0f - IceResistance;
 	float FinalDamage = BaseDamage * ResistanceReduction * VulnerabilityMultiplier;
-	Debug::Print(FString::Printf(TEXT("冰霜伤害计算: 基础伤害=%.1f, 层数=%d, 冰抗=%.2f, 易伤系数=%.2f, 最终伤害=%.1f"), 
-		BaseDamage, StackCount, IceResistance, VulnerabilityMultiplier, FinalDamage), 
-		FColor::Blue);
+	// Debug::Print(FString::Printf(TEXT("冰霜伤害计算: 基础伤害=%.1f, 层数=%d, 冰抗=%.2f, 易伤系数=%.2f, 最终伤害=%.1f"), 
+	// 	BaseDamage, StackCount, IceResistance, VulnerabilityMultiplier, FinalDamage), 
+	// 	FColor::Blue);
 	return FinalDamage;
 }
 
@@ -85,9 +85,9 @@ float UGEExecCalc_DamageTaken::HandleFireDamage(float BaseDamage, int StackCount
 	float DamageMultiplier = 1.0f + FMath::Min(StackBonus, 1.0f); // 最多100%加成
 	float ResistanceReduction = 1.0f - FireResistance;
 	float FinalDamage = BaseDamage * ResistanceReduction * DamageMultiplier;
-	Debug::Print(FString::Printf(TEXT("火焰伤害计算: 基础伤害=%.1f, 层数=%d, 火抗=%.2f, 伤害系数=%.2f, 最终伤害=%.1f"), 
-		BaseDamage, StackCount, FireResistance, DamageMultiplier, FinalDamage), 
-		FColor::Red);
+	// Debug::Print(FString::Printf(TEXT("火焰伤害计算: 基础伤害=%.1f, 层数=%d, 火抗=%.2f, 伤害系数=%.2f, 最终伤害=%.1f"), 
+	// 	BaseDamage, StackCount, FireResistance, DamageMultiplier, FinalDamage), 
+	// 	FColor::Red);
 	return FinalDamage;
 }
 

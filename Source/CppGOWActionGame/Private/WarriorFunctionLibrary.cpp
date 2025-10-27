@@ -11,6 +11,8 @@
 #include "Misc/WarriorCountDownAction.h"
 #include "Misc/WarriorDebugHelper.h"
 #include "WarriorGameInstance.h"
+#include "Blueprint/WidgetLayoutLibrary.h"
+#include "Components/SizeBox.h"
 #include "Kismet/GameplayStatics.h"
 #include "SaveGame/WarriorSaveGame.h"
 
@@ -270,4 +272,36 @@ bool UWarriorFunctionLibrary::TryLoadSavedGameDifficulty(EWarriorGameDifficulty&
 	}
 
 	return false;
+}
+
+FVector2D UWarriorFunctionLibrary::CalculateUIScreenPositionByActor(AActor* Actor,FVector2D WidgetSize)
+{
+	FVector2D ScreenPosition = FVector2D::ZeroVector; 
+	
+    if (!Actor)
+    {
+        return ScreenPosition;
+    }
+    APlayerController* PlayerController = UGameplayStatics::GetPlayerController(Actor->GetWorld(), 0); 
+    
+    if (!PlayerController)
+    {
+        return ScreenPosition;
+    }
+    UWidgetLayoutLibrary::ProjectWorldLocationToWidgetPosition(
+       PlayerController, // 传入 PlayerController
+       Actor->GetActorLocation(),
+       ScreenPosition,
+       true
+    );
+
+    // 如果 `WidgetSize` 不是零，则进行居中偏移。
+    if (WidgetSize != FVector2D::ZeroVector)
+    {
+        // 计算 UI 控件需要偏移的量，以使其中心对准世界位置的投影点
+        ScreenPosition -= (WidgetSize / 2.f);
+    }
+    // ⚠️ 注意：如果 WidgetSize 为零，UI 将不会被正确居中。
+
+    return ScreenPosition;
 }

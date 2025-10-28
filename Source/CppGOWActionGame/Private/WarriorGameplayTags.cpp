@@ -8,11 +8,17 @@ namespace WarriorGameplayTags
 	//InputTag
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_Move,"InputTag.Move")
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_Look,"InputTag.Look")
+	
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_EquipAxe,"InputTag.EquipAxe")
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_UnequipAxe,"InputTag.UnequipAxe")
-	
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_LightAttack_Axe,"InputTag.LightAttack.Axe")
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_HeavyAttack_Axe,"InputTag.HeavyAttack.Axe")
+	
+	UE_DEFINE_GAMEPLAY_TAG(InputTag_EquipLegArmour,"InputTag.EquipLegArmour")
+	UE_DEFINE_GAMEPLAY_TAG(InputTag_UnequipLegArmour,"InputTag.UnequipLegArmour")
+	UE_DEFINE_GAMEPLAY_TAG(InputTag_LightAttack_LegArmour,"InputTag.LightAttack.LegArmour")
+	UE_DEFINE_GAMEPLAY_TAG(InputTag_HeavyAttack_LegArmour,"InputTag.HeavyAttack.LegArmour")
+	
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_Roll,"InputTag.Roll")
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_SwitchTarget,"InputTag.SwitchTarget")
 
@@ -28,6 +34,7 @@ namespace WarriorGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_PickUp_Stones,"InputTag.PickUp.Stones")
 	//Weapon
 	UE_DEFINE_GAMEPLAY_TAG(Player_Weapon_Axe,"Player.Weapon.Axe")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Weapon_LegArmour,"Player.Weapon.LegArmour")
 	//PlayerAbility
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Equip_Axe,"Player.Ability.Equip.Axe")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Unequip_Axe,"Player.Ability.Unequip.Axe")
@@ -42,6 +49,11 @@ namespace WarriorGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_SpecialWeaponAbility_Heavy,"Player.Ability.SpecialWeaponAbility.Heavy")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_PickUp_Stones,"Player.Ability.PickUp.Stones")
 	
+	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Equip_LegArmour,"Player.Ability.Equip.LegArmour")
+    UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Unequip_LegArmour,"Player.Ability.Unequip.LegArmour")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Attack_Light_LegArmour,"Player.Ability.Attack.Light.LegArmour")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Attack_Heavy_LegArmour,"Player.Ability.Attack.Heavy.LegArmour")
+	
 	//PlayerEvent
 	UE_DEFINE_GAMEPLAY_TAG(Player_Event_Equip_Axe,"Player.Event.Equip.Axe")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Event_Unequip_Axe,"Player.Event.Unequip.Axe")
@@ -52,6 +64,9 @@ namespace WarriorGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Player_Event_ActivateRage,"Player.Event.ActivateRage")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Event_AOE,"Player.Event.AOE")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Event_ConsumeStones,"Player.Event.ConsumeStones")
+
+	UE_DEFINE_GAMEPLAY_TAG(Player_Event_Equip_LegArmour,"Player.Event.Equip.LegArmour")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Event_Unequip_LegArmour,"Player.Event.Unequip.LegArmour")
 	//PlayerStatus
 	UE_DEFINE_GAMEPLAY_TAG(Player_Status_JumpToFinisher,"Player.Status.JumpToFinisher")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Status_Rolling,"Player.Status.Rolling")
@@ -129,6 +144,6 @@ namespace WarriorGameplayTags
 	// UE_DEFINE_GAMEPLAY_TAG(GameplayCue_FX_Unblockable_Warning,"GameplayCue.FX.Unblockable.Warning")
 	// UE_DEFINE_GAMEPLAY_TAG(GameplayCue_Sound_Death_rostGiant,"GameplayCue.Sound.Death.FrostGiant")
 	// UE_DEFINE_GAMEPLAY_TAG(GameplayCue_Sound_Death_Guardian,"GameplayCue.Sound.Death.Guardian")
-	// UE_DEFINE_GAMEPLAY_TAG(GameplayCue_Sound_MeleeHit_Axe,"GameplayCue.Sound.MeleeHit.Axe")
+	// UE_DEFINE_GAMEPLAY_TAG(GameplayCue_Sound_MeleeHit_LegArmour,"GameplayCue.Sound.MeleeHit.LegArmour")
 	// UE_DEFINE_GAMEPLAY_TAG(GameplayCue_Sound_MeleeHit_Stick,"GameplayCue.Sound.MeleeHit.Stick")
 }

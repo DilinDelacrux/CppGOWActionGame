@@ -22,11 +22,6 @@ UWarriorAttributeSet::UWarriorAttributeSet()
 	InitIceResistance(0.1f);
 }
 
-// bool UWarriorAttributeSet::PreGameplayEffectExecute(struct FGameplayEffectModCallbackData& Data)
-// {
-// 	return Super::PreGameplayEffectExecute(Data);
-// }
-
 void UWarriorAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data)
 {
 	if (!CachedPawnUIInterface.IsValid())

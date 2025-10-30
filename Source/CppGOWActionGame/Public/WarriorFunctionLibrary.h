@@ -73,4 +73,10 @@ public:
 
 	UFUNCTION(BlueprintCallable,Category = "Warrior|FunctionLibrary")
 	static FVector2D CalculateUIScreenPositionByActor(AActor* Actor, FVector2D WidgetSize);
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Trace|Utilities", meta = (DisplayName = "Find Closest Hit Ignore Actors"))
+	static bool FindClosestHitIgnoreActors(const TArray<FHitResult>& HitResults,FHitResult& OutClosestHit,const TArray<AActor*>& ActorsToIgnore);
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Trace|Utilities", meta = (DisplayName = "Find Closest Hit To Reference Point"))
+	static bool FindClosestHitToReferencePoint(const TArray<FHitResult>& HitResults,const FVector& ReferencePoint,FHitResult& OutClosestHit,AActor* ActorToIgnore = nullptr);
 };

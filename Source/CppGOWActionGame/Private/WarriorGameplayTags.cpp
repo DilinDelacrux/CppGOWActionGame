@@ -20,6 +20,9 @@ namespace WarriorGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_HeavyAttack_LegArmour,"InputTag.HeavyAttack.LegArmour")
 	
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_Roll,"InputTag.Roll")
+	UE_DEFINE_GAMEPLAY_TAG(InputTag_Roll_Axe,"InputTag.Roll.Axe")
+	UE_DEFINE_GAMEPLAY_TAG(InputTag_Roll_LegArmour,"InputTag.Roll.LegArmour")
+
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_SwitchTarget,"InputTag.SwitchTarget")
 
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_MustBeHeld,"InputTag.MustBeHeld")
@@ -42,6 +45,7 @@ namespace WarriorGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Attack_Heavy_Axe,"Player.Ability.Attack.Heavy.Axe")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_HitPause,"Player.Ability.HitPause")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Roll,"Player.Ability.Roll")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Roll_Axe,"Player.Ability.Roll.Axe")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Block,"Player.Ability.Block")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_TargetLock,"Player.Ability.TargetLock")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Rage,"Player.Ability.Rage")
@@ -53,6 +57,8 @@ namespace WarriorGameplayTags
     UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Unequip_LegArmour,"Player.Ability.Unequip.LegArmour")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Attack_Light_LegArmour,"Player.Ability.Attack.Light.LegArmour")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Attack_Heavy_LegArmour,"Player.Ability.Attack.Heavy.LegArmour")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Roll_LegArmour,"Player.Ability.Roll.LegArmour")
+	
 	
 	//PlayerEvent
 	UE_DEFINE_GAMEPLAY_TAG(Player_Event_Equip_Axe,"Player.Event.Equip.Axe")
@@ -80,6 +86,8 @@ namespace WarriorGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Player_Status_Anim_Startup,"Player.Status.Anim.Startup")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Status_Anim_Active,"Player.Status.Anim.Active")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Status_Anim_Recovery,"Player.Status.Anim.Recovery")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Status_WeaponEquip,"Player.Status.WeaponEquip")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Status_BareHand,"Player.Status.BareHand")
 	
 	UE_DEFINE_GAMEPLAY_TAG(Player_Status_ForceFocusingTarget,"Player.Status.ForceFocusingTarget")
 	//PlayerCoolDown

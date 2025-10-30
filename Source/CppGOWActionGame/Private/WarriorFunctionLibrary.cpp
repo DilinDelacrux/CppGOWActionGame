@@ -305,3 +305,101 @@ FVector2D UWarriorFunctionLibrary::CalculateUIScreenPositionByActor(AActor* Acto
 
     return ScreenPosition;
 }
+
+bool UWarriorFunctionLibrary::FindClosestHitIgnoreActors(const TArray<FHitResult>& HitResults,
+	FHitResult& OutClosestHit, const TArray<AActor*>& ActorsToIgnore)
+{
+	if (HitResults.IsEmpty())
+	{
+		return false;
+	}
+
+	float ClosestDistance = FLT_MAX;
+	FHitResult ClosestHit;
+	bool bFoundValidHit = false;
+
+	for (const FHitResult& Hit : HitResults)
+	{
+		if (!Hit.IsValidBlockingHit() || !Hit.GetActor())
+		{
+			continue;
+		}
+
+		// 检查是否在忽略列表中
+		bool bShouldIgnore = false;
+		for (AActor* IgnoredActor : ActorsToIgnore)
+		{
+			if (IgnoredActor && Hit.GetActor() == IgnoredActor)
+			{
+				bShouldIgnore = true;
+				break;
+			}
+		}
+
+		if (bShouldIgnore)
+		{
+			continue;
+		}
+
+		if (Hit.Distance < ClosestDistance)
+		{
+			ClosestDistance = Hit.Distance;
+			ClosestHit = Hit;
+			bFoundValidHit = true;
+		}
+	}
+
+	if (bFoundValidHit)
+	{
+		OutClosestHit = ClosestHit;
+		return true;
+	}
+
+	return false;
+}
+
+bool UWarriorFunctionLibrary::FindClosestHitToReferencePoint(const TArray<FHitResult>& HitResults,
+	const FVector& ReferencePoint, FHitResult& OutClosestHit, AActor* ActorToIgnore)
+{
+	if (HitResults.IsEmpty())
+	{
+		return false;
+	}
+
+	float ClosestDistance = FLT_MAX;
+	FHitResult ClosestHit;
+	bool bFoundValidHit = false;
+
+	for (const FHitResult& Hit : HitResults)
+	{
+		// 跳过无效的Hit
+		if (!Hit.IsValidBlockingHit() || !Hit.GetActor())
+		{
+			continue;
+		}
+
+		// 跳过指定的Actor
+		if (ActorToIgnore && Hit.GetActor() == ActorToIgnore)
+		{
+			continue;
+		}
+
+		// 使用参照点到Hit位置的距离（而不是Trace的距离）
+		float DistanceToReference = FVector::Distance(ReferencePoint, Hit.ImpactPoint);
+        
+		if (DistanceToReference < ClosestDistance)
+		{
+			ClosestDistance = DistanceToReference;
+			ClosestHit = Hit;
+			bFoundValidHit = true;
+		}
+	}
+
+	if (bFoundValidHit)
+	{
+		OutClosestHit = ClosestHit;
+		return true;
+	}
+
+	return false;
+}

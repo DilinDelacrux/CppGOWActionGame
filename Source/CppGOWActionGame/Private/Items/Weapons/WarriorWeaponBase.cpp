@@ -19,12 +19,52 @@ AWarriorWeaponBase::AWarriorWeaponBase()
 	WeaponCollisionBox->SetupAttachment(GetRootComponent());
 	WeaponCollisionBox->SetBoxExtent(FVector(20.f));
 	WeaponCollisionBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-	WeaponCollisionBox->OnComponentBeginOverlap.AddUniqueDynamic(this,&ThisClass::OnCollisionBoxBeginOverlap);
-	WeaponCollisionBox->OnComponentEndOverlap.AddUniqueDynamic(this,&ThisClass::OnCollisionBoxEndOverlap);
+	WeaponCollisionBox->OnComponentBeginOverlap.AddUniqueDynamic(this,&ThisClass::HandleBeginOverlap);
+	WeaponCollisionBox->OnComponentEndOverlap.AddUniqueDynamic(this,&ThisClass::HandleEndOverlap);
 }
 
-void AWarriorWeaponBase::OnCollisionBoxBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
-	int32 OtherBodyIndex,bool bFromSweep, const FHitResult& SweepResult)
+void AWarriorWeaponBase::EquipWeapon(USkeletalMeshComponent* TargetMesh)
+{
+	
+	BP_OnEquipWeapon(TargetMesh);
+}
+
+void AWarriorWeaponBase::Unequip(USkeletalMeshComponent* TargetMesh)
+{
+	BP_OnUnequip(TargetMesh);
+}
+
+void AWarriorWeaponBase::HandleBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	OnCollisionBoxBeginOverlap_Implementation(OverlappedComponent, OtherActor, OtherComp, OtherBodyIndex, bFromSweep, SweepResult);
+}
+
+void AWarriorWeaponBase::HandleEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	OnCollisionBoxEndOverlap(OverlappedComponent, OtherActor, OtherComp, OtherBodyIndex);
+}
+
+void AWarriorWeaponBase::OnCollisionBoxEndOverlap_Implementation(UPrimitiveComponent* OverlappedComponent,
+	AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	APawn* WeaponOwningPawn = GetInstigator<APawn>();
+
+	checkf(WeaponOwningPawn,TEXT("Forgot to assign an instiagtor as the owning pawn of the weapon: %s"),*GetName());
+	
+	if (APawn* HitPawn = Cast<APawn>(OtherActor))
+	{
+		if (UWarriorFunctionLibrary::IsTargetPawnHostile(WeaponOwningPawn,HitPawn))
+		{
+			OnWeaponPulledFromTarget.ExecuteIfBound(OtherActor);
+		}
+	}
+}
+
+void AWarriorWeaponBase::OnCollisionBoxBeginOverlap_Implementation(UPrimitiveComponent* OverlappedComponent,
+                                                                   AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep,
+                                                                   const FHitResult& SweepResult)
 {
 	APawn* WeaponOwningPawn = GetInstigator<APawn>();
 	checkf(WeaponOwningPawn,TEXT("Forgot to assign an instiagtor as the owning pawn of the weapon: %s"),*GetName());
@@ -37,23 +77,6 @@ void AWarriorWeaponBase::OnCollisionBoxBeginOverlap(UPrimitiveComponent* Overlap
 			{
 				OnWeaponHitTarget.ExecuteIfBound(OtherActor);
 			}
-		}
-	}
-
-}
-
-void AWarriorWeaponBase::OnCollisionBoxEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
-{
-	APawn* WeaponOwningPawn = GetInstigator<APawn>();
-
-	checkf(WeaponOwningPawn,TEXT("Forgot to assign an instiagtor as the owning pawn of the weapon: %s"),*GetName());
-	
-	if (APawn* HitPawn = Cast<APawn>(OtherActor))
-	{
-		if (UWarriorFunctionLibrary::IsTargetPawnHostile(WeaponOwningPawn,HitPawn))
-		{
-			OnWeaponPulledFromTarget.ExecuteIfBound(OtherActor);
 		}
 	}
 }

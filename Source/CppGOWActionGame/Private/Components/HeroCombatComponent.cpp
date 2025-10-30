@@ -57,3 +57,8 @@ void UHeroCombatComponent::OnWeaponPulledFromTargetActor(AActor* HitActor)
 	FGameplayEventData()
 );
 }
+
+void UHeroCombatComponent::ToggleWeaponCollision(bool bShouldEnable, EToggleDamageType ToggleDamageType)
+{
+	ToggleCurrentEquippedWeaponCollision(bShouldEnable,ToggleDamageType);
+}

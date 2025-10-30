@@ -16,7 +16,9 @@ enum class EToggleDamageType : uint8
 {
 	CurrentEquippedWeapon,
 	LeftHand,
-	RightHand
+	RightHand,
+	LeftLeg,
+	RightLeg
 };
 UCLASS()
 class CPPGOWACTIONGAME_API UPawnCombatComponent : public UPawnExtensionComponentBase
@@ -32,13 +34,14 @@ public:
 	UFUNCTION(BlueprintCallable,Category="Warrior|Combat")
 	AWarriorWeaponBase* GetCharacterCurrentEquippedWeapon() const;
 
-	UFUNCTION(BlueprintCallable, Category = "Warrior|Combat")
-	void ToggleWeaponCollision(bool bShouldEnable,EToggleDamageType ToggleDamageType = EToggleDamageType::CurrentEquippedWeapon);
+	UFUNCTION(BlueprintCallable, Category = "Warrior|Combat", DisplayName = "Toggle Weapon Collision")
+	void BP_ToggleWeaponCollision(bool bShouldEnable,EToggleDamageType ToggleDamageType = EToggleDamageType::CurrentEquippedWeapon);
 
+	virtual void ToggleWeaponCollision(bool bShouldEnable,EToggleDamageType ToggleDamageType = EToggleDamageType::CurrentEquippedWeapon);
 	virtual void OnHitTargetActor(AActor* HitActor);
 	virtual void OnWeaponPulledFromTargetActor(AActor* HitActor);
 protected:
-	virtual void ToggleCurrentEquippedWeaponCollision(bool bShouldEnable);
+	virtual void ToggleCurrentEquippedWeaponCollision(bool bShouldEnable, EToggleDamageType ToggleDamageType);
 	virtual void ToggleBodyCollisionBoxCollision(bool bShouldEnable,EToggleDamageType ToggleDamageType);
 	
 	TArray<AActor*> OverlappedActors;

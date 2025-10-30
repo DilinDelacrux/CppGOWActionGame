@@ -9,6 +9,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "WarriorFunctionLibrary.h"
 #include "WarriorGameplayTags.h"
 #include "AbilitySystem/WarriorAbilitySystemComponent.h"
 #include "Components/HeroCombatComponent.h"
@@ -78,38 +79,11 @@ void AWarriorHeroCharacter::PossessedBy(AController* NewController)
 	{
 		if(UDataAsset_StartUpDataBase* LoadedData=CharacterStartUpData.LoadSynchronous())
 		{
-			// LoadedData->GiveToAbilitySystemComponent(WarriorAbilitySystemComponent);
 			int32 AbilityApplyLevel = 1;
-
-			// if (AGWOGameMode* BaseGameMode = GetWorld()->GetAuthGameMode<AGWOGameMode>())
-			// {
-			// 	switch (BaseGameMode->GetCurrentGameDifficulty())
-			// 	{
-			// 	case EWarriorGameDifficulty::Easy:
-			// 		AbilityApplyLevel = 4;
-			// 		break;
-			//
-			// 	case EWarriorGameDifficulty::Normal:
-			// 		AbilityApplyLevel = 3;
-			// 		break;
-			//
-			// 	case EWarriorGameDifficulty::Hard:
-			// 		AbilityApplyLevel = 2;
-			// 		break;
-			//
-			// 	case EWarriorGameDifficulty::VeryHard:
-			// 		AbilityApplyLevel = 1;
-			// 		break;
-			//
-			// 	default:
-			// 		break;
-			// 	}
-			// }
-			
 			LoadedData->GiveToAbilitySystemComponent(WarriorAbilitySystemComponent,AbilityApplyLevel);
-			
 		}
 	}
+	UWarriorFunctionLibrary::AddGameplayTagToActorIfNone(this,WarriorGameplayTags::Player_Status_BareHand);
 }
 
 UPawnCombatComponent* AWarriorHeroCharacter::GetPawnCombatComponent() const

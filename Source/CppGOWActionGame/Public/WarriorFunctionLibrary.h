@@ -79,4 +79,33 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Trace|Utilities", meta = (DisplayName = "Find Closest Hit To Reference Point"))
 	static bool FindClosestHitToReferencePoint(const TArray<FHitResult>& HitResults,const FVector& ReferencePoint,FHitResult& OutClosestHit,AActor* ActorToIgnore = nullptr);
+
+	/**
+	 * 在指定范围和体积内，查找距离最近的敌对Pawn。
+	 * 使用Actor的世界坐标、一个中心点偏移和半长宽高来定义搜索范围。
+	 * @param WorldContextObject 用于获取世界的对象（通常为 'this' 或任意对象）
+	 * @param QueryActor 发起查询的Actor，用于确定搜索范围的原点。
+	 * @param BoxCenterOffset 相对于QueryActor位置的中心偏移。
+	 * @param BoxHalfSize 搜索盒的半长宽高（Half Extents）。
+	 * @param OutNearestPawn 找到的最近的敌对Pawn（如果找到）。
+	 * @return 如果成功找到一个最近的敌对Pawn，则返回true。
+	 */
+	/**
+		 * 在指定范围和体积内，查找距离最近的敌对Actor。
+		 * 使用Actor的世界坐标、一个中心点偏移和半长宽高来定义搜索范围。
+		 * @param WorldContextObject 用于获取世界的对象（通常为 'this' 或任意对象）
+		 * @param QueryActor 发起查询的Actor，用于确定搜索范围的原点。
+		 * @param BoxCenterOffset 相对于QueryActor位置的中心偏移。
+		 * @param BoxHalfSize 搜索盒的半长宽高（Half Extents）。
+		 * @param OutNearestActor 找到的最近的敌对Actor（如果找到）。
+		 * @return 如果成功找到一个最近的敌对Actor，则返回true。
+		 */
+	UFUNCTION(BlueprintCallable, Category = "Warrior|FunctionLibrary", meta = (WorldContext = "WorldContextObject", DeterminesOutputType = "OutNearestActor"))
+	static bool FindNearestHostileActorInBox(
+		const UObject* WorldContextObject, 
+		AActor* QueryActor, 
+		const FVector BoxCenterOffset, 
+		const FVector BoxHalfSize, 
+		AActor*& OutNearestActor
+	);
 };

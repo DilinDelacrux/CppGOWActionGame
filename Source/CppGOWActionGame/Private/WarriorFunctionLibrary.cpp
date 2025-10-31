@@ -403,3 +403,79 @@ bool UWarriorFunctionLibrary::FindClosestHitToReferencePoint(const TArray<FHitRe
 
 	return false;
 }
+
+bool UWarriorFunctionLibrary::FindNearestHostileActorInBox(const UObject* WorldContextObject, AActor* QueryActor,
+	const FVector BoxCenterOffset, const FVector BoxHalfSize, AActor*& OutNearestActor)
+{
+	OutNearestActor = nullptr;
+
+	if (!WorldContextObject || !QueryActor)
+	{
+		return false;
+	}
+
+	APawn* QueryPawn = Cast<APawn>(QueryActor);
+	if (!QueryPawn) 
+	{
+		// 如果发起查询的Actor不是Pawn，则无法判断敌对关系，返回失败
+		return false; 
+	}
+    
+	// 1. 计算搜索盒的世界中心位置
+	const FVector SearchBoxCenter = QueryActor->GetActorLocation() + BoxCenterOffset;
+
+	// 2. 准备 BoxOverlapActors 的参数
+	TArray<AActor*> OverlappingActors;
+	
+	// 定义要忽略的Actor，通常是自身
+	TArray<AActor*> ActorsToIgnore;
+	ActorsToIgnore.Add(QueryActor);
+
+	// 使用 KismetSystemLibrary::BoxOverlapActors 进行碰撞查询。
+	// ECC_Pawn 是一个常见且适用于Pawn的碰撞通道，您可能需要根据项目设置调整。
+	// APawn::StaticClass() 意味着我们只关心那些是 Pawn 类的 Actor。
+	bool bOverlapped = UKismetSystemLibrary::BoxOverlapActors(
+		WorldContextObject, 
+		SearchBoxCenter, 
+		BoxHalfSize, 
+		// 目标 Actor 类型：只查询 Pawn 类
+		TArray<TEnumAsByte<EObjectTypeQuery>>({ UEngineTypes::ConvertToObjectType(ECollisionChannel::ECC_Pawn) }),
+		APawn::StaticClass(), 
+		ActorsToIgnore, 
+		OverlappingActors
+	);
+
+	if (!bOverlapped || OverlappingActors.Num() == 0)
+	{
+		return false;
+	}
+
+	float NearestSqDistance = FLT_MAX;
+	AActor* CurrentNearestActor = nullptr;
+    
+	// 3. 遍历找到的Actor，筛选敌对Actor/Pawn，并找到最近的一个
+	for (AActor* Actor : OverlappingActors)
+	{
+		// Cast 确保它是 Pawn，因为 IsTargetPawnHostile 需要 Pawn
+		APawn* TargetPawn = Cast<APawn>(Actor);
+
+		if (TargetPawn)
+		{
+			// 使用提供的函数判断是否敌对
+			if (IsTargetPawnHostile(QueryPawn, TargetPawn))
+			{
+				// 计算平方距离以避免开方运算，提高性能
+				const float SqDistance = FVector::DistSquared(QueryActor->GetActorLocation(), Actor->GetActorLocation());
+				
+				if (SqDistance < NearestSqDistance)
+				{
+					NearestSqDistance = SqDistance;
+					CurrentNearestActor = Actor; // 保存 Actor (符合您的要求)
+				}
+			}
+		}
+	}
+
+	OutNearestActor = CurrentNearestActor;
+	return OutNearestActor != nullptr;
+}

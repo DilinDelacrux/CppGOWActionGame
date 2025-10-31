@@ -17,7 +17,7 @@ AWarriorProjectileBase::AWarriorProjectileBase()
 	ProjectileCollisionBox->SetCollisionResponseToChannel(ECC_Pawn,ECR_Block);
 	ProjectileCollisionBox->SetCollisionResponseToChannel(ECC_WorldDynamic,ECR_Block);
 	ProjectileCollisionBox->SetCollisionResponseToChannel(ECC_WorldStatic,ECR_Block);
-	
+	ProjectileCollisionBox->IgnoreActorWhenMoving(GetOwner(), true);
 	ProjectileNiagaraComponent = CreateDefaultSubobject<UNiagaraComponent>(TEXT("ProjectileNiagaraComponent"));
 	ProjectileNiagaraComponent->SetupAttachment(GetRootComponent());
 
@@ -26,7 +26,6 @@ AWarriorProjectileBase::AWarriorProjectileBase()
 	ProjectileMovementComp->MaxSpeed = 900.f;
 	ProjectileMovementComp->Velocity = FVector(1.f,0.f,0.f);
 	ProjectileMovementComp->ProjectileGravityScale = 0.f;
-
 	ProjectileCollisionBox->OnComponentHit.AddUniqueDynamic(this,&ThisClass::OnProjectileHit);
 	ProjectileCollisionBox->OnComponentBeginOverlap.AddUniqueDynamic(this,&ThisClass::OnProjectileBeginOverlap);
 

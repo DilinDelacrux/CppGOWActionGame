@@ -88,6 +88,8 @@ namespace WarriorGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Player_Status_Anim_Recovery,"Player.Status.Anim.Recovery")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Status_WeaponEquip,"Player.Status.WeaponEquip")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Status_BareHand,"Player.Status.BareHand")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Status_Climbing,"Player.Status.Climbing")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Status_Vaulting,"Player.Status.Vaulting")
 	
 	UE_DEFINE_GAMEPLAY_TAG(Player_Status_ForceFocusingTarget,"Player.Status.ForceFocusingTarget")
 	//PlayerCoolDown

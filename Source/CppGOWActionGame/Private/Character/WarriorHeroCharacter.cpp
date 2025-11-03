@@ -12,6 +12,7 @@
 #include "WarriorFunctionLibrary.h"
 #include "WarriorGameplayTags.h"
 #include "AbilitySystem/WarriorAbilitySystemComponent.h"
+#include "Components/CustomMovementComponent.h"
 #include "Components/HeroCombatComponent.h"
 #include "Components/Input/WarriorInputComponent.h"
 #include "Components/UI/EnemyUIComponent.h"
@@ -70,6 +71,7 @@ AWarriorHeroCharacter::AWarriorHeroCharacter()
 
 	HeroCombatComponent=CreateDefaultSubobject<UHeroCombatComponent>(TEXT("HeroCombatComponent"));
 	HeroUIComponent=CreateDefaultSubobject<UHeroUIComponent>(TEXT("HeroUIComponent"));
+	CustomMovementComponent=CreateDefaultSubobject<UCustomMovementComponent>(TEXT("CustomMovementComponent"));
 }
 
 void AWarriorHeroCharacter::PossessedBy(AController* NewController)

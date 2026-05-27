@@ -18,4 +18,9 @@ public:
 	UGEExecCalc_DamageTaken();
 
 	virtual void Execute_Implementation(const FGameplayEffectCustomExecutionParameters& ExecutionParams, FGameplayEffectCustomExecutionOutput& OutExecutionOutput) const override;
+	
+private:
+	float HandlePhysicalDamage(float SourceAttackPower, float BaseDamage, int32 UsedLightAttackComboCount,int32 UsedHeavyAttackComboCount, float TargetDefensePower) const;
+	float HandleIceDamage(float BaseDamage,int StackCount, float IceResistance) const;
+	float HandleFireDamage(float BaseDamage,int StackCount, float FireResistance) const;
 };

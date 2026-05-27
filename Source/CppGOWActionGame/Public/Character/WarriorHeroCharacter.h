@@ -8,6 +8,7 @@
 #include "Character/WarriorBaseCharacter.h"
 #include "WarriorHeroCharacter.generated.h"
 
+class UCustomMovementComponent;
 class UHeroUIComponent;
 class UHeroCombatComponent;
 class UDataAsset_InputConfig;
@@ -43,6 +44,10 @@ private:
 	UHeroCombatComponent *HeroCombatComponent;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly,Category="UI",meta=(AllowPrivateAccess=true))
 	UHeroUIComponent* HeroUIComponent;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly,Category="UI",meta=(AllowPrivateAccess=true))
+	UCustomMovementComponent* CustomMovementComponent;
+	// UPROPERTY(VisibleAnywhere, BlueprintReadOnly,Category="Animation",meta=(AllowPrivateAccess=true))
+	// UMotionWarpingComponent* MotionWarpingComponent;
 	
 #pragma endregion
 
@@ -64,4 +69,5 @@ private:
 
 public:
 	FORCEINLINE UHeroCombatComponent* GetHeroCombatComponent() const { return HeroCombatComponent; }
+	FORCEINLINE UMotionWarpingComponent* GetMotionWarpingComponent() const { return MotionWarpingComponent; }
 };

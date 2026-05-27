@@ -27,6 +27,7 @@ class CPPGOWACTIONGAME_API UWarriorAttributeSet : public UAttributeSet
 public:
 	UWarriorAttributeSet();
 
+	// virtual bool PreGameplayEffectExecute(struct FGameplayEffectModCallbackData& Data) override;;
 	virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data) override;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Health")
@@ -56,6 +57,14 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "Damage")
 	FGameplayAttributeData DamageTaken;
 	ATTRIBUTE_ACCESSORS(UWarriorAttributeSet,DamageTaken)
+
+	UPROPERTY(BlueprintReadOnly, Category = "Resistance")
+	FGameplayAttributeData IceResistance;
+	ATTRIBUTE_ACCESSORS(UWarriorAttributeSet,IceResistance)
+
+	UPROPERTY(BlueprintReadOnly, Category = "Resistance")
+	FGameplayAttributeData FireResistance;
+	ATTRIBUTE_ACCESSORS(UWarriorAttributeSet,FireResistance)
 
 private:
 	TWeakInterfacePtr<IPawnUIInterface> CachedPawnUIInterface;

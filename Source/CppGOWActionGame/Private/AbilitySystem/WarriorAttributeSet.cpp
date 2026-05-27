@@ -18,6 +18,8 @@ UWarriorAttributeSet::UWarriorAttributeSet()
 	InitMaxRage(1.f);
 	InitAttackPower(1.f);
 	InitDefensePower(1.f);
+	InitFireResistance(0.1f);
+	InitIceResistance(0.1f);
 }
 
 void UWarriorAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data)
@@ -27,12 +29,7 @@ void UWarriorAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffec
 		CachedPawnUIInterface = TWeakInterfacePtr<IPawnUIInterface>(Data.Target.GetAvatarActor());
 	}
 
-	checkf(CachedPawnUIInterface.IsValid(),TEXT("%s didn't implement IPawnUIInterface"),*Data.Target.GetAvatarActor()->GetActorNameOrLabel());
-
 	UPawnUIComponent* PawnUIComponent = CachedPawnUIInterface->GetPawnUIComponent();
-
-	checkf(PawnUIComponent,TEXT("Couldn't extract a PawnUIComponent from %s"),*Data.Target.GetAvatarActor()->GetActorNameOrLabel());
-	
 	if(Data.EvaluatedData.Attribute==GetCurrentHealthAttribute())
 	{
 		const float NewCurrentHealth=FMath::Clamp(GetCurrentHealth(),0.0f,GetMaxHealth());
@@ -68,13 +65,24 @@ void UWarriorAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffec
 	{
 		const float OldHealth = GetCurrentHealth();
 		const float DamageDone = GetDamageTaken();
-
 		const float NewCurrentHealth = FMath::Clamp(OldHealth - DamageDone,0.f,GetMaxHealth());
-
+		if (Data.EffectSpec.Def->GetAssetTags().HasTagExact(WarriorGameplayTags::Shared_DamageType_Fire))
+		{
+			PawnUIComponent->OnReceiveDamage.Broadcast(DamageDone,EDamageType::Fire);
+		}
+		else if (Data.EffectSpec.Def->GetAssetTags().HasTagExact(WarriorGameplayTags::Shared_DamageType_Ice))
+		{
+			PawnUIComponent->OnReceiveDamage.Broadcast(DamageDone,EDamageType::Ice);
+		}
+		else
+		{
+			PawnUIComponent->OnReceiveDamage.Broadcast(DamageDone,EDamageType::Physical);
+		}
+		
 		SetCurrentHealth(NewCurrentHealth);
 
 		const FString DebugString = FString::Printf(
-			TEXT("Old Health: %f, Damage Done: %f, NewCurrentHealth: %f"),
+			TEXT("Old Health: %.2f, Damage Done: %.2f, NewCurrentHealth: %.2f"),
 			OldHealth,
 			DamageDone,
 			NewCurrentHealth

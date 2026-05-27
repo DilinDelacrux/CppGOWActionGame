@@ -9,6 +9,11 @@
         "processed": true,
         "isBP": true
     },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/TypeScript/TsItem2.ts": {
+        "version": "161d034ecd033409b6e4a0a35e090d46",
+        "processed": true,
+        "isBP": true
+    },
     "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Typing/cpp/index.d.ts": {
         "version": "c8ef9a18626590710faec2c33ed7b151",
         "processed": false
@@ -500,15 +505,5 @@
     "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.dom.iterable.d.ts": {
         "version": "977f6792324dbfc2fcc8eadc6f1b0452",
         "processed": false
-    },
-    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/TypeScript/TsItem copy.ts": {
-        "version": "50bf13da175559cb1969de024304271d",
-        "processed": true,
-        "isBP": false
-    },
-    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/TypeScript/TsItem2.ts": {
-        "version": "161d034ecd033409b6e4a0a35e090d46",
-        "processed": true,
-        "isBP": true
     }
 }

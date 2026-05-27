@@ -29,5 +29,6 @@ public:
 
 private:
 	TArray<FGameplayAbilitySpecHandle> GrantedAbilitySpecHandles;
-	
+
+
 };

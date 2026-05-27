@@ -17,6 +17,7 @@ class CPPGOWACTIONGAME_API UHeroCombatComponent : public UPawnCombatComponent
 public:
 	UFUNCTION(BlueprintCallable,Category="Warrior|Combat")
 	AWarriorHeroWeapon* GetHeroCarriedWeaponByTag(FGameplayTag InWeaponTag)const;
+	
 
 	UFUNCTION(BlueprintCallable,Category="Warrior|Combat")
 	AWarriorHeroWeapon* GetHeroCurrentEquipWeapon()const;
@@ -26,5 +27,6 @@ public:
 	
 	virtual void OnHitTargetActor(AActor* HitActor) override;
 	virtual void OnWeaponPulledFromTargetActor(AActor* HitActor) override;
+	virtual void ToggleWeaponCollision(bool bShouldEnable,EToggleDamageType ToggleDamageType = EToggleDamageType::CurrentEquippedWeapon)override;
 	
 };

@@ -1,0 +1,514 @@
+{
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/TypeScript/TsGI.ts": {
+        "version": "5adfc57364b882f76333f2e9296a05a0",
+        "processed": true,
+        "isBP": true
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/TypeScript/TsItem.ts": {
+        "version": "50bf13da175559cb1969de024304271d",
+        "processed": true,
+        "isBP": true
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Typing/cpp/index.d.ts": {
+        "version": "c8ef9a18626590710faec2c33ed7b151",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Typing/ffi/index.d.ts": {
+        "version": "a371a5609d4ee418c7557ae5aa47afae",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Typing/puerts/index.d.ts": {
+        "version": "c8471a147fadc739548c074909483529",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Typing/ue/index.d.ts": {
+        "version": "a535f8c266d274cbd519ec126ac2a2a7",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Typing/ue/puerts.d.ts": {
+        "version": "325690ea61be7f69f6cd5bd0add51c23",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Typing/ue/ue.d.ts": {
+        "version": "0c187d3f5b858dce18d661df76501626",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Typing/ue/puerts_decorators.d.ts": {
+        "version": "9fb1fa72f383c2560fd83bb22d51e984",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Typing/ue/ue_bp.d.ts": {
+        "version": "e070b7492a877102797c47a80df13fe5",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/mocha/index.d.ts": {
+        "version": "ba8f495173348d497975706804dea9b2",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/ts5.6/index.d.ts": {
+        "version": "eac6b2aa6eb73228c4abaa8a1fbae5dc",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/compatibility/index.d.ts": {
+        "version": "1b6e9baf8cfb19e400876f8ff7e0e20d",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/compatibility/indexable.d.ts": {
+        "version": "abc248fe1f4d232ac70859a6d765f8d6",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/compatibility/iterators.d.ts": {
+        "version": "89d8ef6cd706991cc1177a0c486ffc0c",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/ts5.6/globals.typedarray.d.ts": {
+        "version": "19d4f97fd4d5caa44d3f4b8348ff63b5",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/ts5.6/buffer.buffer.d.ts": {
+        "version": "6f0e75f46eaf6240c93d450f5e7da9e9",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/globals.d.ts": {
+        "version": "aab21d392a3cb8ec9a3cc521c8a1073b",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/assert.d.ts": {
+        "version": "40c843f3aa46c63bae34c2dba09207a4",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/assert/strict.d.ts": {
+        "version": "543d7e122f76fcc38335e560dc9d4505",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/async_hooks.d.ts": {
+        "version": "3832de491c14e5e776f6529858c5ee81",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/buffer.d.ts": {
+        "version": "db24a39d7279e57db3cb87d2aa1119db",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/child_process.d.ts": {
+        "version": "7db4653017e05d8dbe1b1796e7c268be",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/cluster.d.ts": {
+        "version": "a89ad97e07a68388fa01bdac27a67db7",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/console.d.ts": {
+        "version": "b178a75d2f77a6fa58fe21cbc4ab16f0",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/constants.d.ts": {
+        "version": "a46cf1f3859a4c34c8efd6747ca17a18",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/crypto.d.ts": {
+        "version": "ea10e398e0fcbe943f27e63e0c80458a",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/dgram.d.ts": {
+        "version": "42d4b2cb018ceacc3ebc4d45c9406d7b",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/diagnostics_channel.d.ts": {
+        "version": "876b86bdeade38c1d03ae77c79d1a46b",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/dns.d.ts": {
+        "version": "2e5b50e0fa0cc93d53b10f7364249223",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/dns/promises.d.ts": {
+        "version": "dd12ab0540fd72cd52ce605dc094ab91",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/dom-events.d.ts": {
+        "version": "6c4dbe86dd6daaea307be9bc2f07b286",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/domain.d.ts": {
+        "version": "03f9e5f8044e85351b2c1d98b22c65a6",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/events.d.ts": {
+        "version": "e9492963efa224cae48970bec44d00bc",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/fs.d.ts": {
+        "version": "86f19e57676685a2203185a6acbe40e8",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/fs/promises.d.ts": {
+        "version": "e3feec391adeec99bcead8b3add2d5f8",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/http.d.ts": {
+        "version": "beda36728b9ffa3263b30797c66691ff",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/http2.d.ts": {
+        "version": "61fd71575d8f4bf0d566c45f29a9d848",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/https.d.ts": {
+        "version": "7938361e14958eb3860f667bdf2af02a",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/inspector.d.ts": {
+        "version": "e208fd971319c4c1a07b30d9dceaecff",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/module.d.ts": {
+        "version": "7b454a46af44837f091d7208b1d43c56",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/net.d.ts": {
+        "version": "1d02f31786220ee7a42f5cc357488953",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/os.d.ts": {
+        "version": "9128a5beccd12cfc8bf67f958ce465f1",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/path.d.ts": {
+        "version": "a91518cc46f73f884a4b81327911ae44",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/perf_hooks.d.ts": {
+        "version": "6934bf922b83303d4280a5de0aeb9f1b",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/process.d.ts": {
+        "version": "0f186021737c88a6327602b31494f41e",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/punycode.d.ts": {
+        "version": "1c406b5607633ea87ed18dde7a947bed",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/querystring.d.ts": {
+        "version": "dd452793304400a71dca28cef300be08",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/readline.d.ts": {
+        "version": "880b46bded5d1e32328428feb66a975b",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/repl.d.ts": {
+        "version": "f418c57270a6a64c082d87e7b7bdc665",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/stream.d.ts": {
+        "version": "80718a1282b701eb698268015b962fbb",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/stream/promises.d.ts": {
+        "version": "bc01789c305367aa4a7e0a965052af7d",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/stream/consumers.d.ts": {
+        "version": "f50f08181c3d3400fd110917e5b70e9a",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/stream/web.d.ts": {
+        "version": "7b9a3c0b8314d96342f98692b57e34e4",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/string_decoder.d.ts": {
+        "version": "de57d4422328c36dc9822b084e7d7b24",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/test.d.ts": {
+        "version": "2ebc9101262aa4094ad709d420720ca2",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/timers.d.ts": {
+        "version": "99b4163c8a9ee1ae52ece6e08bd0f169",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/timers/promises.d.ts": {
+        "version": "68e0ddf1059e48fc933e895dea81a4f3",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/tls.d.ts": {
+        "version": "0f538b84cd471d3f3a82707f0aa0e993",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/trace_events.d.ts": {
+        "version": "26638173eaa7902e42d59e55a96fe2a9",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/tty.d.ts": {
+        "version": "42989c4fdfebce4bf3ced50696c4bb3a",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/url.d.ts": {
+        "version": "01344be34612bdbd31ebd96237a0269f",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/util.d.ts": {
+        "version": "41cde47ea9bf9ac3a0f039c00b08530f",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/v8.d.ts": {
+        "version": "9a3c72cc8dfbc02f93e4f273bae7bb48",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/vm.d.ts": {
+        "version": "a67ff771cc12e29e9e7fcfd15f210650",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/wasi.d.ts": {
+        "version": "e434abd8b34ec763cff9f576f1dbe78f",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/worker_threads.d.ts": {
+        "version": "c93fd8478327bc45c9d72845fbde7659",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/node/zlib.d.ts": {
+        "version": "6541fb47982e54ca2a1ff7f96018a0b7",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2020.d.ts": {
+        "version": "ac1a7be05fb1b9c013e43625092682a6",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2019.d.ts": {
+        "version": "cd0c5a09c07ec5f8afc61aa2b1fa7423",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2018.d.ts": {
+        "version": "2386d7c6b908ac2fd9aba2f2e9848ff6",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2017.d.ts": {
+        "version": "0e93dcd71800d254b9a23f37e01a269a",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2016.d.ts": {
+        "version": "d9251682af70ae8d7dda27fa40a06fa9",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2015.d.ts": {
+        "version": "fa5d95410f405f71a5c120c96e8078cd",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es5.d.ts": {
+        "version": "7d57bfda1bd5fdeeba5631c439b602e9",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2015.core.d.ts": {
+        "version": "fd827778956b0a66ecc3dd583f69505d",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2015.collection.d.ts": {
+        "version": "e88ef07e0335356f4c4421d205fb3a07",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2015.iterable.d.ts": {
+        "version": "1f143671fbbcfc7a342cdd59c034b99d",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2015.symbol.d.ts": {
+        "version": "e31c7b7f544b12b19b1b86904c800861",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2015.generator.d.ts": {
+        "version": "ee71a67d7b3b1ec15da4fe07fbcea399",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2015.promise.d.ts": {
+        "version": "de04cbb69b06073ee1e3d71049cae7f6",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2015.proxy.d.ts": {
+        "version": "dfad872c6fa1ef330ea138352998979e",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2015.reflect.d.ts": {
+        "version": "03952833d4a16330d654f5a91c7651d1",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts": {
+        "version": "2762bb76aac6c9408d281f0275be9901",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2016.array.include.d.ts": {
+        "version": "e87e1af357219f43749e7c2b8806f28d",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2017.object.d.ts": {
+        "version": "f42da8ceb86edcc708bce30aee506796",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2017.sharedmemory.d.ts": {
+        "version": "8baaaf18f9f6d6ed7718e48e45d9647e",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2017.string.d.ts": {
+        "version": "2da6f747809673f26b54943757aef21a",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2017.intl.d.ts": {
+        "version": "ad8f3074684284206cfcdf939ee19edd",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2017.typedarrays.d.ts": {
+        "version": "b01acced18ae37e8af25b691553cc465",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2018.asynciterable.d.ts": {
+        "version": "2f4c680025060bd78e943d99f2e36c32",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2018.asyncgenerator.d.ts": {
+        "version": "06415404c983b6db8dde99cd70c84169",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2018.promise.d.ts": {
+        "version": "c9853fa1a3bfdeab45180d36e24fd25e",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2018.regexp.d.ts": {
+        "version": "da0d2a2e1a523557a9ccc0999d58cf97",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2018.intl.d.ts": {
+        "version": "1b69274a5e1ab0f679ea170442fea7da",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2019.array.d.ts": {
+        "version": "7a4d83badb045910c921de448fcab21e",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2019.object.d.ts": {
+        "version": "7dc1ee5c2b69a42c0a860b1b017330f6",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2019.string.d.ts": {
+        "version": "89238ba5378bc40590c970a9ad501b8f",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2019.symbol.d.ts": {
+        "version": "22deec6e62e6af39eb8aef1953beb342",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2020.bigint.d.ts": {
+        "version": "5c1c13ddc1f76d86d461051f713b7be3",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2020.intl.d.ts": {
+        "version": "e847b1d309dae6427ac39b74acaae908",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2020.date.d.ts": {
+        "version": "8f62ccc480d423f9f226c3ed1614bbb9",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2020.number.d.ts": {
+        "version": "336ca75bc11b2e21c7376d2d5b2a8c47",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2020.promise.d.ts": {
+        "version": "f8100d7ee20f0f01a9b4e48eabaf7b65",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2020.sharedmemory.d.ts": {
+        "version": "f885bad8ff21bf27eaea9b00c2a9f2c3",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2020.string.d.ts": {
+        "version": "ad13aba3cfe23bcf84d1a3523b20ccff",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2020.symbol.wellknown.d.ts": {
+        "version": "6366b5ee8171e2675c993cca1ba5ee95",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.esnext.full.d.ts": {
+        "version": "640887e9cf03e5b23f982d1aacbe65b5",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.esnext.d.ts": {
+        "version": "972b17c2f584a9ba51be62b36e771358",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2022.d.ts": {
+        "version": "8a542313cd22d4f2ad71b626257ad693",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2021.d.ts": {
+        "version": "dbc372554e4010a81b9c9e26f29d87a3",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2021.promise.d.ts": {
+        "version": "2dda66c6dd476f059cedafa354d23961",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2021.string.d.ts": {
+        "version": "2e3641e4c932e882ca16a7df09113e08",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2021.weakref.d.ts": {
+        "version": "73715204148040acad37cad78634a364",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2021.intl.d.ts": {
+        "version": "e489aeecdc7a686bdfa5a8ded9ad5e90",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2022.array.d.ts": {
+        "version": "3e444dd8706b0561b0daa6921a50c5ca",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2022.error.d.ts": {
+        "version": "5c186562ca473e488e8c9bdda93bf680",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2022.intl.d.ts": {
+        "version": "73f9e1637cf4e25952d7516491411c8b",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2022.object.d.ts": {
+        "version": "4ea16af860a022b10bc9d2178b528af0",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.es2022.string.d.ts": {
+        "version": "c43ab716f7814a036d76e55e83ec6912",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.esnext.intl.d.ts": {
+        "version": "5d5ebbfd4db25017ef0dd751055e0696",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.dom.d.ts": {
+        "version": "994a9940e8c69321671accc2df60b5cf",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.webworker.importscripts.d.ts": {
+        "version": "cf7ba547edb99d8bcdd3f9436970a178",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.scripthost.d.ts": {
+        "version": "5f2b2fe7e14d8a4441e955215928535b",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.dom.iterable.d.ts": {
+        "version": "977f6792324dbfc2fcc8eadc6f1b0452",
+        "processed": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/TypeScript/TsItem copy.ts": {
+        "version": "50bf13da175559cb1969de024304271d",
+        "processed": true,
+        "isBP": false
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/TypeScript/TsItem2.ts": {
+        "version": "161d034ecd033409b6e4a0a35e090d46",
+        "processed": true,
+        "isBP": true
+    }
+}

@@ -27,6 +27,7 @@
         //"strict": true,
         //"strictNullChecks": true, 
         //"lib": ["es2021"],
+        
         "typeRoots": [
             "Typing",
             "./node_modules/@types"

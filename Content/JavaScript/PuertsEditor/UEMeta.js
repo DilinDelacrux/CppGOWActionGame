@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.compilePropertyMetaData = exports.compileParamMetaData = exports.compileFunctionMetaData = exports.compileClassMetaData = void 0;
 const UE = require("ue");
 const ts = require("typescript");
 /**
@@ -8,20 +7,16 @@ const ts = require("typescript");
  */
 class MetaSpecifier {
     /**
-     * the identity of the specifier
-     */
-    Specifier = "";
-    /**
-     * the value
-     */
-    Values;
-    /**
      * the constructor
      * @param specifier
      * @param values
      * @returns
      */
     constructor(specifier, values) {
+        /**
+         * the identity of the specifier
+         */
+        this.Specifier = "";
         this.Specifier = specifier;
         this.Values = values;
     }
@@ -77,107 +72,107 @@ class MetaSpecifier {
     IsMetaKeyValues() {
         return this.Values != null;
     }
-    /**
-     * the common meta data, the behavior is sync with unreal engine 5.0 early preview
-     */
-    static CommonMetaData = new Map([
-        ["DisplayName", (specifier, metaData) => {
-                if (specifier.IsMetaKeyValue()) {
-                    metaData.set("DisplayName", specifier.Values[0]);
-                    return true;
-                }
-                return false;
-            }],
-        ["FriendlyName", (specifier, metaData) => {
-                if (specifier.IsMetaKeyValue()) {
-                    metaData.set("FriendlyName", specifier.Values[0]);
-                    return true;
-                }
-                return false;
-            }],
-        ["BlueprintInternalUseOnly", (specifier, metaData) => {
-                if (specifier.IsMetaKey()) {
-                    metaData.set("BlueprintInternalUseOnly", 'true');
-                    metaData.set("BlueprintType", 'true');
-                    return true;
-                }
-                return false;
-            }],
-        ["BlueprintType", (specifier, metaData) => {
-                if (specifier.IsMetaKey()) {
-                    metaData.set("BlueprintType", 'true');
-                    return true;
-                }
-                return false;
-            }],
-        ["NotBlueprintType", (specifier, metaData) => {
-                if (specifier.IsMetaKey()) {
-                    metaData.set("NotBlueprintType", 'true');
-                    metaData.delete('BlueprintType');
-                    return true;
-                }
-                return false;
-            }],
-        ["Blueprintable", (specifier, metaData) => {
-                if (specifier.IsMetaKey()) {
-                    metaData.set("IsBlueprintBase", 'true');
-                    metaData.set("BlueprintType", 'true');
-                    return true;
-                }
-                return false;
-            }],
-        ["CallInEditor", (specifier, metaData) => {
-                if (specifier.IsMetaKey()) {
-                    metaData.set("CallInEditor", 'true');
-                    return true;
-                }
-                return false;
-            }],
-        ["NotBlueprintable", (specifier, metaData) => {
-                if (specifier.IsMetaKey()) {
-                    metaData.set("IsBlueprintBase", 'false');
-                    metaData.delete("BlueprintType");
-                    return true;
-                }
-                return false;
-            }],
-        ["Category", (specifier, metaData) => {
-                if (specifier.IsMetaKeyValue()) {
-                    metaData.set("Category", specifier.Values[0]);
-                    return true;
-                }
-                return false;
-            }],
-        ["Experimental", (specifier, metaData) => {
-                if (specifier.IsMetaKey()) {
-                    metaData.set("DevelopmentStatus", "Experimental");
-                    return true;
-                }
-                return false;
-            }],
-        ["EarlyAccessPreview", (specifier, metaData) => {
-                if (specifier.IsMetaKey()) {
-                    metaData.set("DevelopmentStatus", "EarlyAccessPreview");
-                    return true;
-                }
-                return false;
-            }],
-        ["DocumentationPolicy", (specifier, metaData) => {
-                if (specifier.IsMetaKey()) {
-                    metaData.set("DocumentationPolicy", 'Strict');
-                    return true;
-                }
-                return false;
-            }],
-        ["SparseClassDataType", (specifier, metaData) => {
-                if (specifier.IsMetaKeyValue()) {
-                    metaData.set("SparseClassDataType", specifier.Values[0]);
-                    return true;
-                }
-                return false;
-            }]
-    ]);
 }
+/**
+ * the common meta data, the behavior is sync with unreal engine 5.0 early preview
+ */
+MetaSpecifier.CommonMetaData = new Map([
+    ["DisplayName", (specifier, metaData) => {
+            if (specifier.IsMetaKeyValue()) {
+                metaData.set("DisplayName", specifier.Values[0]);
+                return true;
+            }
+            return false;
+        }],
+    ["FriendlyName", (specifier, metaData) => {
+            if (specifier.IsMetaKeyValue()) {
+                metaData.set("FriendlyName", specifier.Values[0]);
+                return true;
+            }
+            return false;
+        }],
+    ["BlueprintInternalUseOnly", (specifier, metaData) => {
+            if (specifier.IsMetaKey()) {
+                metaData.set("BlueprintInternalUseOnly", 'true');
+                metaData.set("BlueprintType", 'true');
+                return true;
+            }
+            return false;
+        }],
+    ["BlueprintType", (specifier, metaData) => {
+            if (specifier.IsMetaKey()) {
+                metaData.set("BlueprintType", 'true');
+                return true;
+            }
+            return false;
+        }],
+    ["NotBlueprintType", (specifier, metaData) => {
+            if (specifier.IsMetaKey()) {
+                metaData.set("NotBlueprintType", 'true');
+                metaData.delete('BlueprintType');
+                return true;
+            }
+            return false;
+        }],
+    ["Blueprintable", (specifier, metaData) => {
+            if (specifier.IsMetaKey()) {
+                metaData.set("IsBlueprintBase", 'true');
+                metaData.set("BlueprintType", 'true');
+                return true;
+            }
+            return false;
+        }],
+    ["CallInEditor", (specifier, metaData) => {
+            if (specifier.IsMetaKey()) {
+                metaData.set("CallInEditor", 'true');
+                return true;
+            }
+            return false;
+        }],
+    ["NotBlueprintable", (specifier, metaData) => {
+            if (specifier.IsMetaKey()) {
+                metaData.set("IsBlueprintBase", 'false');
+                metaData.delete("BlueprintType");
+                return true;
+            }
+            return false;
+        }],
+    ["Category", (specifier, metaData) => {
+            if (specifier.IsMetaKeyValue()) {
+                metaData.set("Category", specifier.Values[0]);
+                return true;
+            }
+            return false;
+        }],
+    ["Experimental", (specifier, metaData) => {
+            if (specifier.IsMetaKey()) {
+                metaData.set("DevelopmentStatus", "Experimental");
+                return true;
+            }
+            return false;
+        }],
+    ["EarlyAccessPreview", (specifier, metaData) => {
+            if (specifier.IsMetaKey()) {
+                metaData.set("DevelopmentStatus", "EarlyAccessPreview");
+                return true;
+            }
+            return false;
+        }],
+    ["DocumentationPolicy", (specifier, metaData) => {
+            if (specifier.IsMetaKey()) {
+                metaData.set("DocumentationPolicy", 'Strict');
+                return true;
+            }
+            return false;
+        }],
+    ["SparseClassDataType", (specifier, metaData) => {
+            if (specifier.IsMetaKeyValue()) {
+                metaData.set("SparseClassDataType", specifier.Values[0]);
+                return true;
+            }
+            return false;
+        }]
+]);
 ;
 /**
  * a helper function used to extract the meta key from an expression
@@ -187,20 +182,12 @@ class MetaSpecifier {
  * @returns
  */
 function extractMetaSpecifierFromExpression(expression, prefix, regExp) {
-    let specifierName = null;
-    if (ts.isPropertyAccessExpression(expression)) {
-        specifierName = expression.name.text;
-    }
-    else if (ts.isIdentifier(expression)) {
-        specifierName = expression.text;
-    }
-    else {
+    const execRegExp = regExp == null ? new RegExp(`^${prefix}\.([A-Za-z]+)$`) : regExp;
+    const execResult = execRegExp.exec(expression.getText().trim());
+    if (execResult == null) { // should capture the result
         return null;
     }
-    if (specifierName) {
-        return new MetaSpecifier(specifierName);
-    }
-    return null;
+    return new MetaSpecifier(execResult[1]);
 }
 /**
  * a helper function used to extract the meta key value from an expression
@@ -210,15 +197,9 @@ function extractMetaSpecifierFromExpression(expression, prefix, regExp) {
  * @returns
  */
 function extractMetaSpecifierFromBinaryExpression(expression, prefix, regExp) {
-    let specifierKey = null;
-    const leftExpr = expression.left;
-    if (ts.isPropertyAccessExpression(leftExpr)) {
-        specifierKey = leftExpr.name.text;
-    }
-    else if (ts.isIdentifier(leftExpr)) {
-        specifierKey = leftExpr.text;
-    }
-    if (!specifierKey) {
+    const execRegExp = regExp == null ? new RegExp(`^${prefix}\.([A-Za-z]+)$`) : regExp;
+    const execResult = execRegExp.exec(expression.left.getText().trim());
+    if (execResult == null) {
         return null;
     }
     let values = new Array();
@@ -244,7 +225,7 @@ function extractMetaSpecifierFromBinaryExpression(expression, prefix, regExp) {
     else { // invalid format
         return null;
     }
-    return new MetaSpecifier(specifierKey, values);
+    return new MetaSpecifier(execResult[1], values);
 }
 /**
  * collect the meta data from the prefix section, @see ObjectMacros.h namespace uc,
@@ -268,11 +249,12 @@ function collectMetaDataFromIdentifyDecorator(expressions, prefix, specifiers, m
             metaSpecifier = extractMetaSpecifierFromExpression(value, prefix, MetaKeyRegExp);
         }
         if (metaSpecifier == null) {
+            console.warn(`the ${prefix}: ${value.getFullText()} is not valid meta data`);
             return;
         }
         const applyResult = metaSpecifier.ApplyInIdentity(metaData);
         if (applyResult == null) {
-            // meta data is invalid
+            console.warn(`the ${prefix}: ${value.getFullText()} is not valid meta data`);
         }
         else if (applyResult == false) { // unknown specifier currently
             specifiers.push(metaSpecifier);
@@ -301,14 +283,15 @@ function collectMetaDataFromMetaDecorator(expressions, prefix, specifiers, metaD
             metaSpecifier = extractMetaSpecifierFromExpression(value, prefix, MetaKeyRegExp);
         }
         if (metaSpecifier == null) {
+            console.warn(`the umeta: ${value.getFullText()} is not valid meta data`);
             return;
         }
         const applyResult = metaSpecifier.ApplyInMeta(metaData);
         if (applyResult == null) {
-            // meta data is invalid
+            console.warn(`the umeta: ${value.getFullText()} is not valid meta data`);
         }
         else if (applyResult == false) { // unknown specifier currently, this should never happen
-            // logic error
+            console.warn(`logic error: umeta data should never be unrecognized`);
         }
     });
 }
@@ -324,18 +307,13 @@ function collectMetaDataFromDecorator(decorator, prefix, specifiers, metaData) {
     if (!ts.isCallExpression(expression)) {
         return;
     }
-    const expressionText = expression.expression.getFullText().trim(); //  get the callable signature
+    const expressionText = expression.expression.getFullText(); //  get the callable signature
     //  should use cache to hold the reg exp object ?
-    const expectedDecoratorName = `.${prefix}.${prefix}`;
-    const expectedUmetaName = `.${prefix}.umeta`;
-    if (expressionText.endsWith(expectedDecoratorName) || expressionText === prefix + "." + prefix) {
+    if (new RegExp(`^${prefix}\.${prefix}$`).test(expressionText)) { // the decorator match @prefix.prefix
         collectMetaDataFromIdentifyDecorator(expression.arguments, prefix, specifiers, metaData);
     }
-    else if (expressionText.endsWith(expectedUmetaName) || expressionText === prefix + ".umeta") {
+    else if (new RegExp(`^${prefix}\.umeta$`).test(expressionText)) { // the decorator match @prefix.umeta
         collectMetaDataFromMetaDecorator(expression.arguments, prefix, specifiers, metaData);
-    }
-    else {
-        // no match
     }
 }
 /**
@@ -461,7 +439,7 @@ function processClassMetaData(specifiers, metaData) {
                 ClassFlags = ClassFlags | UE.ClassFlags.CLASS_HideDropDown;
                 break;
             case 'DependsOn'.toLowerCase():
-                // specifier not supported
+                console.log('currently depend on meta data specifier is not supported');
                 break;
             case 'MinimalAPI'.toLowerCase():
                 if (!value.IsMetaKey()) { // should be the meta key
@@ -641,6 +619,7 @@ function processClassMetaData(specifiers, metaData) {
         parseClassMetaSpecifier(value);
     });
     if (!bValidSpecifiers) {
+        console.warn(`invalid specifier for uclass: ${InvalidSpecifier}`);
         return null;
     }
     let metaDataResult = new UE.PEClassMetaData();
@@ -1017,6 +996,7 @@ function processFunctionMetaData(specifiers, metaData) {
         validateFunctionFlags();
     }
     if (!bValidSpecifiers) {
+        console.warn(`invalid meta data for ufunction: ${InvalidMessage}`);
         return null;
     }
     let metaDataResult = new UE.PEFunctionMetaData();
@@ -1089,6 +1069,7 @@ function processParamMetaData(specifiers, metaData) {
         parseParamMetaSpecifier(value);
     });
     if (!bValidSpecifiers) {
+        console.warn(`invalid meta data for uparam: ${InvalidMessage}`);
         return null;
     }
     let metaDataResult = new UE.PEParamMetaData();
@@ -1179,7 +1160,7 @@ function processPropertyMetaData(specifiers, metaData) {
                 PropertyFlags = PropertyFlags | (BigInt(UE.PropertyFlags.CPF_Edit) | BigInt(UE.PropertyFlags.CPF_EditConst) | BigInt(UE.PropertyFlags.CPF_DisableEditOnTemplate));
                 bSeenEditSpecifier = true;
                 break;
-            case 'VisibleDefaultsOnly'.toLowerCase():
+            case 'VisibleDefaultOnly'.toLowerCase():
                 if (!value.IsMetaKey()) {
                     return markInvalidSince(`${value.Specifier} should be a meta key`);
                 }
@@ -1242,7 +1223,7 @@ function processPropertyMetaData(specifiers, metaData) {
                 PropertyFlags = PropertyFlags | (BigInt(UE.PropertyFlags.CPF_GlobalConfig) | BigInt(UE.PropertyFlags.CPF_Config));
                 break;
             case `Localized`.toLowerCase():
-                // specifier is deprecated
+                console.warn(`the localized specifier is deprecated`);
                 break;
             case `Transient`.toLowerCase():
                 if (!value.IsMetaKey()) {
@@ -1266,7 +1247,7 @@ function processPropertyMetaData(specifiers, metaData) {
                 if (!value.IsMetaKey()) {
                     return markInvalidSince(`${value.Specifier} should be a meta key`);
                 }
-                // NonPIETransient is deprecated
+                console.warn('NonPIETransient is deprecated - NonPIEDuplicateTransient should be used instead');
                 PropertyFlags = PropertyFlags | BigInt(UE.PropertyFlags.CPF_NonPIEDuplicateTransient);
                 break;
             case `NonPIEDuplicateTransient`.toLowerCase():
@@ -1315,7 +1296,7 @@ function processPropertyMetaData(specifiers, metaData) {
                 PropertyFlags = PropertyFlags | BigInt(UE.PropertyFlags.CPF_RepSkip);
                 break;
             case `RepRetry`.toLowerCase():
-                // RepRetry is deprecated
+                console.error('RepRetry is deprecated');
                 break;
             case `Interp`.toLowerCase():
                 if (!value.IsMetaKey()) {
@@ -1437,14 +1418,13 @@ function processPropertyMetaData(specifiers, metaData) {
         validatePropertyFlags();
     }
     if (!bValidSpecifiers) {
+        console.warn(`invalid meta data for uproperty: ${InvalidMessage}`);
         return null;
     }
     let metaDataResult = new UE.PEPropertyMetaData();
     const FinalFlags = PropertyFlags | ImpliedPropertyFlags;
     metaDataResult.SetPropertyFlags(Number(FinalFlags >> 32n), Number(FinalFlags & 0xffffffffn));
-    metaData.forEach((value, key) => { 
-        metaDataResult.SetMetaData(key, value); 
-    });
+    metaData.forEach((value, key) => { metaDataResult.SetMetaData(key, value); });
     metaDataResult.SetRepCallbackName(RepCallbackName);
     return metaDataResult;
 }
@@ -1502,12 +1482,11 @@ exports.compileParamMetaData = compileParamMetaData;
 function compilePropertyMetaData(prop) {
     //  fetch the decorator
     const decorators = prop.valueDeclaration != null ? prop.valueDeclaration.decorators : null;
-    if (decorators == null) { //  no decorators
+    if (decorators == null) {
         return null;
     }
     let [specifiers, metaData] = getMetaDataFromDecorators(decorators, 'uproperty');
-    const result = processPropertyMetaData(specifiers, metaData);
-    return result;
+    return processPropertyMetaData(specifiers, metaData);
 }
 exports.compilePropertyMetaData = compilePropertyMetaData;
 //# sourceMappingURL=UEMeta.js.map

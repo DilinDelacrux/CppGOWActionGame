@@ -1,6 +1,6 @@
 /*
  * Tencent is pleased to support the open source community by making Puerts available.
- * Copyright (C) 2020 Tencent.  All rights reserved.
+ * Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
  * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may
  * be subject to their corresponding license terms. This file is subject to the terms and conditions defined in file 'LICENSE',
  * which is part of this source code package.
@@ -379,11 +379,6 @@ private:
             return Arg;
         }
 
-        void SetArgument(typename ArgumentType<T>::type InArg)
-        {
-            Arg = InArg;
-        }
-
         void SetRef(typename API::ContextType context, typename API::ValueType holder)
         {
         }
@@ -423,11 +418,6 @@ private:
             return Arg;
         }
 
-        void SetArgument(typename ArgumentType<T>::type InArg)
-        {
-            Arg = InArg;
-        }
-
         void SetRef(typename API::ContextType context, typename API::ValueType holder)
         {
             if (&Buf != &(Arg.get()))
@@ -462,11 +452,6 @@ private:
             return Arg;
         }
 
-        void SetArgument(typename ArgumentType<T>::type InArg)
-        {
-            Arg = InArg;
-        }
-
         void SetRef(typename API::ContextType context, typename API::ValueType holder)
         {
         }
@@ -489,15 +474,6 @@ private:
         typename ArgumentType<T>::type& GetArgument()
         {
             return Arg;
-        }
-
-        using BuffType = typename std::remove_const<typename std::remove_reference<T>::type>::type;
-        BuffType Buf;
-
-        void SetArgument(BuffType InArg)
-        {
-            Buf = InArg;
-            Arg = Buf;
         }
 
         void SetRef(typename API::ContextType context, typename API::ValueType holder)
@@ -523,11 +499,6 @@ private:
         typename ArgumentType<T>::type& GetArgument()
         {
             return Arg;
-        }
-
-        void SetArgument(typename ArgumentType<T>::type InArg)
-        {
-            Arg = InArg;
         }
 
         void SetRef(typename API::ContextType context, typename API::ValueType holder)
@@ -556,11 +527,6 @@ private:
             return Arg ? Arg : &Buf;
         }
 
-        void SetArgument(BuffType InArg)
-        {
-            Buf = InArg;
-        }
-
         void SetRef(typename API::ContextType context, typename API::ValueType holder)
         {
             API::UpdateRefValue(context, holder, API::template Converter<BuffType>::toScript(context, Buf));
@@ -585,11 +551,6 @@ private:
             return Arg;
         }
 
-        void SetArgument(T InArg)
-        {
-            Arg = InArg;
-        }
-
         void SetRef(typename API::ContextType context, typename API::ValueType holder)
         {
         }
@@ -611,11 +572,6 @@ private:
         typename ArgumentType<T>::type GetArgument()
         {
             return Arg;
-        }
-
-        void SetArgument(typename ArgumentType<T>::type InArg)
-        {
-            Arg = InArg;
         }
 
         void SetRef(typename API::ContextType context, typename API::ValueType holder)
@@ -659,7 +615,7 @@ private:
         {
             if (argCount <= Pos)
             {
-                std::get<Pos>(cppArgHolders).SetArgument(defaultValue);
+                std::get<Pos>(cppArgHolders).Arg = defaultValue;
             }
             DefaultValueSetter<0, Pos + 1, FullArgs...>::Set(cppArgHolders, argCount, rest...);
         }

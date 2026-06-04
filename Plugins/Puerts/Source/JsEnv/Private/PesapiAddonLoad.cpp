@@ -1,6 +1,6 @@
 /*
  * Tencent is pleased to support the open source community by making Puerts available.
- * Copyright (C) 2020 Tencent.  All rights reserved.
+ * Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
  * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may
  * be subject to their corresponding license terms. This file is subject to the terms and conditions defined in file 'LICENSE',
  * which is part of this source code package.
@@ -11,7 +11,6 @@
 #include "pesapi.h"
 #include "CoreMinimal.h"
 #include "V8Utils.h"
-#include "PString.h"
 
 #include <map>
 #include <string>
@@ -20,10 +19,10 @@
 #define STRINGIFY_(x) #x
 #define STRINGIFY(x) STRINGIFY_(x)
 
-static std::map<puerts::PString, puerts::PString> LoadedModules;
+static std::map<std::string, std::string> LoadedModules;
 
 #if PLATFORM_IOS
-int PesapiLoadFramework(puerts::PString frameworkName, puerts::PString entryClassName, pesapi_func_ptr* funcPtrArray);
+int PesapiLoadFramework(std::string frameworkName, std::string entryClassName, pesapi_func_ptr* funcPtrArray);
 #endif
 
 MSVC_PRAGMA(warning(push))

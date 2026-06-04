@@ -1,6 +1,6 @@
 ﻿/*
  * Tencent is pleased to support the open source community by making Puerts available.
- * Copyright (C) 2020 Tencent.  All rights reserved.
+ * Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
  * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may
  * be subject to their corresponding license terms. This file is subject to the terms and conditions defined in file 'LICENSE',
  * which is part of this source code package.
@@ -303,7 +303,7 @@ public:
     static v8::Local<v8::Value> FindOrAddCData(
         v8::Isolate* Isolate, v8::Local<v8::Context> Context, const void* TypeId, const void* Ptr, bool PassByPointer);
 
-    static bool IsInstanceOf(v8::Isolate* Isolate, const void* TypeId, v8::Local<v8::Value> JsObject);
+    static bool IsInstanceOf(v8::Isolate* Isolate, const void* TypeId, v8::Local<v8::Object> JsObject);
 
     static v8::Local<v8::Value> UnRef(v8::Isolate* Isolate, const v8::Local<v8::Value>& Value);
 
@@ -331,12 +331,12 @@ public:
         v8::Isolate* Isolate, v8::Local<v8::Context> Context, UScriptStruct* ScriptStruct, void* Ptr, bool PassByPointer);
 
     template <typename T>
-    static bool IsInstanceOf(v8::Isolate* Isolate, v8::Local<v8::Value> JsObject)
+    static bool IsInstanceOf(v8::Isolate* Isolate, v8::Local<v8::Object> JsObject)
     {
         return IsInstanceOf(Isolate, TScriptStructTraits<T>::Get(), JsObject);
     }
 
-    static bool IsInstanceOf(v8::Isolate* Isolate, UStruct* Struct, v8::Local<v8::Value> JsObject);
+    static bool IsInstanceOf(v8::Isolate* Isolate, UStruct* Struct, v8::Local<v8::Object> JsObject);
 
     static FString ToFString(v8::Isolate* Isolate, v8::Local<v8::Value> Value);
 

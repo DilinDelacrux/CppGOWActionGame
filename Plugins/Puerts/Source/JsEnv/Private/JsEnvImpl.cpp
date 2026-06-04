@@ -1,6 +1,6 @@
 /*
  * Tencent is pleased to support the open source community by making Puerts available.
- * Copyright (C) 2020 Tencent.  All rights reserved.
+ * Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
  * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may
  * be subject to their corresponding license terms. This file is subject to the terms and conditions defined in file 'LICENSE',
  * which is part of this source code package.
@@ -20,6 +20,7 @@
 #include "JSLogger.h"
 #if !defined(ENGINE_INDEPENDENT_JSENV)
 #include "JSGeneratedClass.h"
+#include "JSAnimGeneratedClass.h"
 #include "JSWidgetGeneratedClass.h"
 #include "JSGeneratedFunction.h"
 #endif
@@ -154,12 +155,6 @@ static void ToCPtrArray(const v8::FunctionCallbackInfo<v8::Value>& Info)
         Buff[i] = Ptr;
     }
     Info.GetReturnValue().Set(Ret);
-}
-
-static void GetFNameString(const v8::FunctionCallbackInfo<v8::Value>& Info)
-{
-    FName RequiredFName(*FV8Utils::ToFString(Info.GetIsolate(), Info[0]));
-    Info.GetReturnValue().Set(FV8Utils::ToV8String(Info.GetIsolate(), RequiredFName));
 }
 
 #if defined(WITH_NODEJS)
@@ -498,11 +493,6 @@ FJsEnvImpl::FJsEnvImpl(std::shared_ptr<IJSModuleLoader> InModuleLoader, std::sha
 
     MethodBindingHelper<&FJsEnvImpl::LoadCppType>::Bind(Isolate, Context, PuertsObj, "loadCPPType", This);
 
-    PuertsObj
-        ->Set(Context, FV8Utils::ToV8String(Isolate, "getFNameString"),
-            v8::FunctionTemplate::New(Isolate, GetFNameString)->GetFunction(Context).ToLocalChecked())
-        .Check();
-
     MethodBindingHelper<&FJsEnvImpl::UEClassToJSClass>::Bind(Isolate, Context, Global, "__tgjsUEClassToJSClass", This);
 
     MethodBindingHelper<&FJsEnvImpl::NewContainer>::Bind(Isolate, Context, Global, "__tgjsNewContainer", This);
@@ -688,10 +678,6 @@ FJsEnvImpl::FJsEnvImpl(std::shared_ptr<IJSModuleLoader> InModuleLoader, std::sha
     InitWebsocketPPWrap(Context);
     ExecuteModule("puerts/websocketpp.js");
 #endif
-#ifdef WITH_QUICKJS
-    auto rt = Isolate->runtime_;
-    JS_SetMaxStackSize(rt, 1024 * 1024);
-#endif
 }
 
 // #lizard forgives
@@ -840,6 +826,13 @@ FJsEnvImpl::~FJsEnvImpl()
                 if (JSWidgetGeneratedClass->IsValidLowLevelFast() && !UEObjectIsPendingKill(JSWidgetGeneratedClass))
                 {
                     JSWidgetGeneratedClass->Release();
+                }
+            }
+            else if (auto JSAnimGeneratedClass = Cast<UJSAnimGeneratedClass>(GeneratedClass))
+            {
+                if (JSWidgetGeneratedClass->IsValidLowLevelFast() && !UEObjectIsPendingKill(JSWidgetGeneratedClass))
+                {
+                    JSAnimGeneratedClass->Release();
                 }
             }
         }
@@ -1513,7 +1506,7 @@ void FJsEnvImpl::ReloadModule(FName ModuleName, const FString& JsSource)
     JsHotReload(ModuleName, JsSource);
 }
 
-void FJsEnvImpl::ReloadSource(const FString& Path, const PString& JsSource)
+void FJsEnvImpl::ReloadSource(const FString& Path, const std::string& JsSource)
 {
 #ifdef SINGLE_THREAD_VERIFY
     ensureMsgf(BoundThreadId == FPlatformTLS::GetCurrentThreadId(), TEXT("Access by illegal thread!"));
@@ -1711,7 +1704,7 @@ FString FJsEnvImpl::CurrentStackTrace()
     v8::Isolate::Scope IsolateScope(Isolate);
     v8::HandleScope HandleScope(Isolate);
 
-    PString StackTrace = StackTraceToString(Isolate, v8::StackTrace::CurrentStackTrace(Isolate, 10, v8::StackTrace::kDetailed));
+    std::string StackTrace = StackTraceToString(Isolate, v8::StackTrace::CurrentStackTrace(Isolate, 10, v8::StackTrace::kDetailed));
     return UTF8_TO_TCHAR(StackTrace.c_str());
 #else
     return TEXT("");
@@ -2648,18 +2641,6 @@ bool FJsEnvImpl::RemoveFromDelegate(
         return false;
     }
 
-    if (!Iter->second.Owner.IsValid())
-    {
-        Logger->Warn("try to unbind a delegate with invalid owner!");
-        ClearDelegate(Isolate, Context, DelegatePtr);
-        if (!Iter->second.PassByPointer)
-        {
-            delete ((FScriptDelegate*) Iter->first);
-        }
-        DelegateMap.erase(Iter);
-        return false;
-    }
-
     FScriptDelegate Delegate;
 
     if (Iter->second.DelegateProperty)
@@ -2934,8 +2915,7 @@ void FJsEnvImpl::BindStruct(
         auto CacheNodePtr = StructCache.Find(Ptr);
         if (CacheNodePtr)
         {
-            auto Temp = CacheNodePtr->Find(ScriptStructWrapper->Struct.Get());
-            CacheNodePtr = Temp ? Temp : CacheNodePtr->Add(ScriptStructWrapper->Struct.Get());
+            CacheNodePtr = CacheNodePtr->Add(ScriptStructWrapper->Struct.Get());
         }
         else
         {
@@ -4424,22 +4404,18 @@ void FJsEnvImpl::Mixin(const v8::FunctionCallbackInfo<v8::Value>& Info)
         New->Bind();
         New->StaticLink(true);
 
-        auto CDO = New->GetDefaultObject();
-        if (auto WidgetClass = Cast<UWidgetBlueprintGeneratedClass>(New))
+        (void) (New->GetDefaultObject());
+        if (auto AnimClass = Cast<UAnimBlueprintGeneratedClass>(New))
+        {
+            AnimClass->UpdateCustomPropertyListForPostConstruction();
+        }
+        else if (auto WidgetClass = Cast<UWidgetBlueprintGeneratedClass>(New))
         {
             WidgetClass->UpdateCustomPropertyListForPostConstruction();
         }
         else if (auto BPClass = Cast<UBlueprintGeneratedClass>(New))
         {
             BPClass->UpdateCustomPropertyListForPostConstruction();
-        }
-
-        if (CDO->IsA<AActor>())
-        {
-            if (UBlueprintGeneratedClass* BPGClass = Cast<UBlueprintGeneratedClass>(New))
-            {
-                BPGClass->bCooked = true;
-            }
         }
 
 #if ENGINE_MAJOR_VERSION == 4 && ENGINE_MINOR_VERSION > 12
@@ -4485,7 +4461,7 @@ void FJsEnvImpl::FindModule(const v8::FunctionCallbackInfo<v8::Value>& Info)
 
     CHECK_V8_ARGS(EArgString);
 
-    PString Name = *(v8::String::Utf8Value(Isolate, Info[0]));
+    std::string Name = *(v8::String::Utf8Value(Isolate, Info[0]));
 
     auto Func = FindAddonRegisterFunc(Name);
 

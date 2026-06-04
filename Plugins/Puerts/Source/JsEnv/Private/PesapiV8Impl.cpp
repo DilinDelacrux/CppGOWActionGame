@@ -1,6 +1,6 @@
 ﻿/*
  * Tencent is pleased to support the open source community by making Puerts available.
- * Copyright (C) 2020 Tencent.  All rights reserved.
+ * Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
  * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may
  * be subject to their corresponding license terms. This file is subject to the terms and conditions defined in file 'LICENSE',
  * which is part of this source code package.
@@ -17,7 +17,6 @@
 #include <sstream>
 #include <vector>
 #include <cstring>
-#include "PString.h"
 
 struct pesapi_env_ref__
 {
@@ -54,7 +53,7 @@ struct pesapi_scope__
     }
     v8::HandleScope scope;
     v8::TryCatch trycatch;
-    puerts::PString errinfo;
+    std::string errinfo;
 };
 
 static_assert(sizeof(pesapi_scope_memory) >= sizeof(pesapi_scope__), "sizeof(pesapi_scope__) > sizeof(pesapi_scope_memory__)");
@@ -568,7 +567,7 @@ const char* pesapi_get_exception_as_string(pesapi_scope scope, bool with_stack)
         std::ostringstream stm;
         v8::String::Utf8Value fileName(isolate, message->GetScriptResourceName());
         int lineNum = message->GetLineNumber(context).FromJust();
-        stm << *fileName << ":" << lineNum << ": " << scope->errinfo.c_str();
+        stm << *fileName << ":" << lineNum << ": " << scope->errinfo;
 
         stm << std::endl;
 
@@ -579,7 +578,7 @@ const char* pesapi_get_exception_as_string(pesapi_scope scope, bool with_stack)
             v8::String::Utf8Value stackTraceVal(isolate, stackTrace);
             stm << std::endl << *stackTraceVal;
         }
-        scope->errinfo = stm.str().c_str();
+        scope->errinfo = stm.str();
     }
     return scope->errinfo.c_str();
 }
@@ -944,7 +943,7 @@ void pesapi_define_class(const void* type_id, const void* super_type_id, const c
     puerts::JSClassDefinition classDef = JSClassEmptyDefinition;
     classDef.TypeId = type_id;
     classDef.SuperTypeId = super_type_id;
-    puerts::PString ScriptNameWithModuleName = GPesapiModuleName == nullptr ? puerts::PString() : GPesapiModuleName;
+    std::string ScriptNameWithModuleName = GPesapiModuleName == nullptr ? std::string() : GPesapiModuleName;
     if (GPesapiModuleName)
     {
         ScriptNameWithModuleName += ".";
@@ -1041,7 +1040,7 @@ void pesapi_class_type_info(const char* proto_magic_id, const void* type_id, con
 
 const void* pesapi_find_type_id(const char* module_name, const char* type_name)
 {
-    puerts::PString fullname = module_name;
+    std::string fullname = module_name;
     fullname += ".";
     fullname += type_name;
     const auto class_def = puerts::FindCppTypeClassByName(fullname);

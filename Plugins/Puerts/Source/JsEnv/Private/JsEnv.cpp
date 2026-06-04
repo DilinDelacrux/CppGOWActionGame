@@ -1,6 +1,6 @@
 /*
  * Tencent is pleased to support the open source community by making Puerts available.
- * Copyright (C) 2020 Tencent.  All rights reserved.
+ * Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
  * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may
  * be subject to their corresponding license terms. This file is subject to the terms and conditions defined in file 'LICENSE',
  * which is part of this source code package.
@@ -81,7 +81,7 @@ void FJsEnv::ReloadModule(FName ModuleName, const FString& JsSource)
     GameScript->ReloadModule(ModuleName, JsSource);
 }
 
-void FJsEnv::ReloadSource(const FString& Path, const PString& JsSource)
+void FJsEnv::ReloadSource(const FString& Path, const std::string& JsSource)
 {
     GameScript->ReloadSource(Path, JsSource);
 }

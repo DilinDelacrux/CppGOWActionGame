@@ -1,6 +1,6 @@
 /*
  * Tencent is pleased to support the open source community by making Puerts available.
- * Copyright (C) 2020 Tencent.  All rights reserved.
+ * Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
  * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may
  * be subject to their corresponding license terms. This file is subject to the terms and conditions defined in file 'LICENSE',
  * which is part of this source code package.
@@ -27,7 +27,7 @@ struct AutoRegisterForFVector2D
             .Method("op_Equality", MakeFunction(&FVector2D::operator==))
             .Method("op_Inequality", MakeFunction(&FVector2D::operator!=))
             .Method("op_UnaryNegation", SelectFunction(FVector2D(FVector2D::*)() const, &FVector2D::operator-))
-#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION > 0
+#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION > 2
             .Method("op_Addition",
                 CombineOverloads(MakeOverload(FVector2D(FVector2D::*)(const FVector2D&) const, &FVector2D::operator+),
                     MakeOverload(FVector2D(FVector2D::*)(double) const, &FVector2D::operator+)))
@@ -62,7 +62,7 @@ struct AutoRegisterForFVector2D
             .Function("DistSquared", MakeFunction(&FVector2D::DistSquared))
             .Function("Distance", MakeFunction(&FVector2D::Distance))
             .Function("CrossProduct", MakeFunction(&FVector2D::CrossProduct))
-            .Method("Equals", MakeFunction(&FVector2D::Equals, KINDA_SMALL_NUMBER))
+            .Method("Equals", MakeFunction(&FVector2D::Equals))
             .Method("Set", MakeFunction(&FVector2D::Set))
             .Method("GetMax", MakeFunction(&FVector2D::GetMax))
             .Method("GetAbsMax", MakeFunction(&FVector2D::GetAbsMax))
@@ -70,9 +70,9 @@ struct AutoRegisterForFVector2D
             .Method("Size", MakeFunction(&FVector2D::Size))
             .Method("SizeSquared", MakeFunction(&FVector2D::SizeSquared))
             .Method("GetRotated", MakeFunction(&FVector2D::GetRotated))
-            .Method("GetSafeNormal", MakeFunction(&FVector2D::GetSafeNormal, SMALL_NUMBER))
-            .Method("Normalize", MakeFunction(&FVector2D::Normalize, SMALL_NUMBER))
-            .Method("IsNearlyZero", MakeFunction(&FVector2D::IsNearlyZero, KINDA_SMALL_NUMBER))
+            .Method("GetSafeNormal", MakeFunction(&FVector2D::GetSafeNormal))
+            .Method("Normalize", MakeFunction(&FVector2D::Normalize))
+            .Method("IsNearlyZero", MakeFunction(&FVector2D::IsNearlyZero))
             .Method("ToDirectionAndLength",
                 SelectFunction(void (FVector2D::*)(FVector2D&, float&) const, &FVector2D::ToDirectionAndLength))
             .Method("IsZero", MakeFunction(&FVector2D::IsZero))

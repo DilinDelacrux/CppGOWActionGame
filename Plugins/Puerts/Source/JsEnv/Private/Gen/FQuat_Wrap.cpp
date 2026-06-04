@@ -1,6 +1,6 @@
 /*
  * Tencent is pleased to support the open source community by making Puerts available.
- * Copyright (C) 2020 Tencent.  All rights reserved.
+ * Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
  * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may
  * be subject to their corresponding license terms. This file is subject to the terms and conditions defined in file 'LICENSE',
  * which is part of this source code package.
@@ -25,8 +25,8 @@ struct AutoRegisterForFQuat
             .Property("W", MakeProperty(&FQuat::W))
             .Method("op_Addition", MakeFunction(&FQuat::operator+))
             .Method("op_Subtraction", SelectFunction(FQuat(FQuat::*)(const FQuat& Q) const, &FQuat::operator-))
-            .Method("Equals", MakeFunction(&FQuat::Equals, KINDA_SMALL_NUMBER))
-            .Method("IsIdentity", MakeFunction(&FQuat::IsIdentity, SMALL_NUMBER))
+            .Method("Equals", MakeFunction(&FQuat::Equals))
+            .Method("IsIdentity", MakeFunction(&FQuat::IsIdentity))
             .Method("op_Multiply", CombineOverloads(MakeOverload(FQuat(FQuat::*)(const FQuat&) const, &FQuat::operator*),
                                        MakeOverload(FVector(FQuat::*)(const FVector&) const, &FQuat::operator*),
                                        MakeOverload(FQuat(FQuat::*)(const float) const, &FQuat::operator*)))
@@ -36,8 +36,8 @@ struct AutoRegisterForFQuat
             .Method("op_BitwiseOr", MakeFunction(&FQuat::operator|))
             .Function("MakeFromEuler", MakeFunction(&FQuat::MakeFromEuler))
             .Method("Euler", MakeFunction(&FQuat::Euler))
-            .Method("Normalize", MakeFunction(&FQuat::Normalize, SMALL_NUMBER))
-            .Method("GetNormalized", MakeFunction(&FQuat::GetNormalized, SMALL_NUMBER))
+            .Method("Normalize", MakeFunction(&FQuat::Normalize))
+            .Method("GetNormalized", MakeFunction(&FQuat::GetNormalized))
             .Method("IsNormalized", MakeFunction(&FQuat::IsNormalized))
             .Method("Size", MakeFunction(&FQuat::Size))
             .Method("SizeSquared", MakeFunction(&FQuat::SizeSquared))

@@ -1,6 +1,6 @@
 /*
  * Tencent is pleased to support the open source community by making Puerts available.
- * Copyright (C) 2020 Tencent.  All rights reserved.
+ * Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
  * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may
  * be subject to their corresponding license terms. This file is subject to the terms and conditions defined in file 'LICENSE',
  * which is part of this source code package.
@@ -8,7 +8,6 @@
 
 #include "CppObjectMapper.h"
 #include "DataTransfer.h"
-#include "PString.h"
 
 namespace PUERTS_NAMESPACE
 {
@@ -32,7 +31,7 @@ void FCppObjectMapper::LoadCppType(const v8::FunctionCallbackInfo<v8::Value>& In
         return;
     }
 
-    PString TypeName = *(v8::String::Utf8Value(Isolate, Info[0]));
+    std::string TypeName = *(v8::String::Utf8Value(Isolate, Info[0]));
 
     auto ClassDef = FindCppTypeClassByName(TypeName);
     if (ClassDef)
@@ -41,7 +40,7 @@ void FCppObjectMapper::LoadCppType(const v8::FunctionCallbackInfo<v8::Value>& In
     }
     else
     {
-        PString ErrMsg = "can not find type: " + TypeName;
+        const std::string ErrMsg = "can not find type: " + TypeName;
         ThrowException(Isolate, ErrMsg.c_str());
     }
 }
@@ -170,7 +169,7 @@ v8::Local<v8::FunctionTemplate> FCppObjectMapper::GetTemplateOfClass(v8::Isolate
         Template->InstanceTemplate()->SetInternalFieldCount(4);
 
         JSPropertyInfo* PropertyInfo = ClassDefinition->Properties;
-        while (PropertyInfo && PropertyInfo->Name)
+        while (PropertyInfo && PropertyInfo->Name && PropertyInfo->Getter)
         {
             v8::PropertyAttribute PropertyAttribute = v8::DontDelete;
             if (!PropertyInfo->Setter)
@@ -188,7 +187,7 @@ v8::Local<v8::FunctionTemplate> FCppObjectMapper::GetTemplateOfClass(v8::Isolate
         }
 
         PropertyInfo = ClassDefinition->Variables;
-        while (PropertyInfo && PropertyInfo->Name)
+        while (PropertyInfo && PropertyInfo->Name && PropertyInfo->Getter)
         {
             v8::PropertyAttribute PropertyAttribute = v8::DontDelete;
             if (!PropertyInfo->Setter)
@@ -305,8 +304,7 @@ void FCppObjectMapper::BindCppObject(
     FObjectCacheNode* CacheNodePtr;
     if (Iter != CDataCache.end())
     {
-        auto Temp = Iter->second.Find(ClassDefinition->TypeId);
-        CacheNodePtr = Temp ? Temp : Iter->second.Add(ClassDefinition->TypeId);
+        CacheNodePtr = Iter->second.Add(ClassDefinition->TypeId);
     }
     else
     {

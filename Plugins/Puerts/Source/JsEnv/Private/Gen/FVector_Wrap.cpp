@@ -1,6 +1,6 @@
 /*
  * Tencent is pleased to support the open source community by making Puerts available.
- * Copyright (C) 2020 Tencent.  All rights reserved.
+ * Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
  * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may
  * be subject to their corresponding license terms. This file is subject to the terms and conditions defined in file 'LICENSE',
  * which is part of this source code package.
@@ -39,10 +39,10 @@ struct AutoRegisterForFVector
                                        MakeOverload(FVector(FVector::*)(const FVector&) const, &FVector::operator/)))
             .Method("op_Equality", MakeFunction(&FVector::operator==))
             .Method("op_Inequality", MakeFunction(&FVector::operator!=))
-            .Method("Equals", MakeFunction(&FVector::Equals, KINDA_SMALL_NUMBER))
+            .Method("Equals", MakeFunction(&FVector::Equals))
             .Method("AllComponentsEqual", MakeFunction(&FVector::AllComponentsEqual))
             .Method("op_UnaryNegation", SelectFunction(FVector(FVector::*)() const, &FVector::operator-))
-#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION > 0
+#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION > 2
             .Method("set_Item", SelectFunction(double& (FVector::*) (int32), &FVector::operator[]))
             .Method("get_Item", SelectFunction(double (FVector::*)(int32) const, &FVector::operator[]))
             .Method("Component", CombineOverloads(MakeOverload(double& (FVector::*) (int32), &FVector::Component),
@@ -67,19 +67,14 @@ struct AutoRegisterForFVector
             .Method("SizeSquared", MakeFunction(&FVector::SizeSquared))
             .Method("Size2D", MakeFunction(&FVector::Size2D))
             .Method("SizeSquared2D", MakeFunction(&FVector::SizeSquared2D))
-            .Method("IsNearlyZero", MakeFunction(&FVector::IsNearlyZero, KINDA_SMALL_NUMBER))
+            .Method("IsNearlyZero", MakeFunction(&FVector::IsNearlyZero))
             .Method("IsZero", MakeFunction(&FVector::IsZero))
-            .Method("IsUnit", MakeFunction(&FVector::IsUnit, KINDA_SMALL_NUMBER))
+            .Method("IsUnit", MakeFunction(&FVector::IsUnit))
             .Method("IsNormalized", MakeFunction(&FVector::IsNormalized))
-            .Method("Normalize", MakeFunction(&FVector::Normalize, SMALL_NUMBER))
+            .Method("Normalize", MakeFunction(&FVector::Normalize))
             .Method("GetUnsafeNormal", MakeFunction(&FVector::GetUnsafeNormal))
-#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION >= 1
-            .Method("GetSafeNormal", MakeFunction(&FVector::GetSafeNormal, SMALL_NUMBER, FVector::ZeroVector))
-            .Method("GetSafeNormal2D", MakeFunction(&FVector::GetSafeNormal2D, SMALL_NUMBER, FVector::ZeroVector))
-#else
-            .Method("GetSafeNormal", MakeFunction(&FVector::GetSafeNormal, SMALL_NUMBER))
-            .Method("GetSafeNormal2D", MakeFunction(&FVector::GetSafeNormal2D, SMALL_NUMBER))
-#endif
+            .Method("GetSafeNormal", MakeFunction(&FVector::GetSafeNormal))
+            .Method("GetSafeNormal2D", MakeFunction(&FVector::GetSafeNormal2D))
             .Method(
                 "ToDirectionAndLength", SelectFunction(void (FVector::*)(FVector&, float&) const, &FVector::ToDirectionAndLength))
             .Method("GetSignVector", MakeFunction(&FVector::GetSignVector))
@@ -94,7 +89,7 @@ struct AutoRegisterForFVector
             .Method("GetClampedToMaxSize2D", MakeFunction(&FVector::GetClampedToMaxSize2D))
             .Method("AddBounded", MakeFunction(&FVector::AddBounded))
             .Method("Reciprocal", MakeFunction(&FVector::Reciprocal))
-            .Method("IsUniform", MakeFunction(&FVector::IsUniform, KINDA_SMALL_NUMBER))
+            .Method("IsUniform", MakeFunction(&FVector::IsUniform))
             .Method("MirrorByVector", MakeFunction(&FVector::MirrorByVector))
             .Method("MirrorByPlane", MakeFunction(&FVector::MirrorByPlane))
             .Method("RotateAngleAxis", MakeFunction(&FVector::RotateAngleAxis))
@@ -132,10 +127,10 @@ struct AutoRegisterForFVector
             .Function("DistSquaredXY", MakeFunction(&FVector::DistSquaredXY))
             .Function("DistSquared2D", MakeFunction(&FVector::DistSquared2D))
             .Function("BoxPushOut", MakeFunction(&FVector::BoxPushOut))
-            .Function("Parallel", MakeFunction(&FVector::Parallel, THRESH_NORMALS_ARE_PARALLEL))
-            .Function("Coincident", MakeFunction(&FVector::Coincident, THRESH_NORMALS_ARE_PARALLEL))
-            .Function("Orthogonal", MakeFunction(&FVector::Orthogonal, THRESH_NORMALS_ARE_ORTHOGONAL))
-            .Function("Coplanar", MakeFunction(&FVector::Coplanar, THRESH_NORMALS_ARE_PARALLEL))
+            .Function("Parallel", MakeFunction(&FVector::Parallel))
+            .Function("Coincident", MakeFunction(&FVector::Coincident))
+            .Function("Orthogonal", MakeFunction(&FVector::Orthogonal))
+            .Function("Coplanar", MakeFunction(&FVector::Coplanar))
             .Function("Triple", MakeFunction(&FVector::Triple))
             .Function("RadiansToDegrees", MakeFunction(&FVector::RadiansToDegrees))
             .Function("DegreesToRadians", MakeFunction(&FVector::DegreesToRadians))

@@ -1,33 +1,10 @@
 {
     "compilerOptions": {
-        //参照: https://www.npmjs.com/package/@tsconfig/node16
-        "target": "ESNext",
-        "module": "CommonJS",
-        "moduleResolution": "node",
-        "experimentalDecorators": true,
+        "target": "esnext",
+        "module": "commonjs",
         "jsx": "react",
-        "sourceMap": false,
-        "forceConsistentCasingInFileNames": true, // 检查文件名大小写
-        "noImplicitThis": true, //禁止类型不明确的this
-        "alwaysStrict": true, //总是以严格模式对代码进行编译
-        //"noImplicitAny": true, //禁止隐式的any类型
-        "strictBindCallApply": true, //严格检查bind、call和apply的参数列表
-        "strictFunctionTypes": true, //严格检查函数的类型
-        //"strictNullChecks": true, //严格的空值检查
-        //"strictPropertyInitialization": true, //严格检查属性是否初始化
-        "noFallthroughCasesInSwitch": true, //检查switch语句包含正确的break
-        // "noImplicitReturns": true, //检查函数没有隐式的返回值
-        // "noUnusedLocals": true, //检查未使用的局部变量
-        // "noUnusedParameters": true, //检查未使用的参数
-        // "allowUnreachableCode": false, //true，忽略不可达代码, false，不可达代码将引起错误
-        "noEmitOnError": true, //有错误的情况下不进行编译
-        //"esModuleInterop": true,
-        //"skipLibCheck": true, // 跳过lib的检查
-        //"esModuleInterop": true,  //使用import XX from 'XX',  否则用import * as XX from 'XX'
-        //"strict": true,
-        //"strictNullChecks": true, 
-        //"lib": ["es2021"],
-        
+        "sourceMap": true,
+        "experimentalDecorators": true,
         "typeRoots": [
             "Typing",
             "./node_modules/@types"

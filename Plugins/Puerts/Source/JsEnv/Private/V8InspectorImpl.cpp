@@ -1,6 +1,6 @@
 ﻿/*
  * Tencent is pleased to support the open source community by making Puerts available.
- * Copyright (C) 2020 Tencent.  All rights reserved.
+ * Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
  * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may
  * be subject to their corresponding license terms. This file is subject to the terms and conditions defined in file 'LICENSE',
  * which is part of this source code package.
@@ -191,11 +191,6 @@ public:
     bool Tick() override;
 
     V8InspectorChannel* CreateV8InspectorChannel() override;
-
-    v8::Local<v8::Context> ensureDefaultContextInGroup(int group_id) override
-    {
-        return Context.Get(Isolate);
-    }
 
 private:
     void OnHTTP(wspp_connection_hdl Handle);
@@ -428,7 +423,7 @@ bool V8InspectorClientImpl::Tick(float /* DeltaTime */)
                 v8::Context::Scope ContextScope(LocalContext);
                 v8::TryCatch TryCatch(Isolate);
 
-                (void) (MicroTasksRunner.Get(Isolate)->Call(LocalContext, LocalContext->Global(), 0, nullptr));
+                MicroTasksRunner.Get(Isolate)->Call(LocalContext, LocalContext->Global(), 0, nullptr);
             }
         }
     }

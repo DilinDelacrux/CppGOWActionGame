@@ -1,6 +1,6 @@
 /*
  * Tencent is pleased to support the open source community by making Puerts available.
- * Copyright (C) 2020 Tencent.  All rights reserved.
+ * Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
  * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may
  * be subject to their corresponding license terms. This file is subject to the terms and conditions defined in file 'LICENSE',
  * which is part of this source code package.
@@ -21,10 +21,9 @@ v8::Local<v8::Value> DataTransfer::FindOrAddCData(
         Isolate, Context, TypeId, const_cast<void*>(Ptr), PassByPointer);
 }
 
-bool DataTransfer::IsInstanceOf(v8::Isolate* Isolate, const void* TypeId, v8::Local<v8::Value> JsObject)
+bool DataTransfer::IsInstanceOf(v8::Isolate* Isolate, const void* TypeId, v8::Local<v8::Object> JsObject)
 {
-    return JsObject->IsObject() &&
-           IsolateData<ICppObjectMapper>(Isolate)->IsInstanceOfCppObject(Isolate, TypeId, JsObject.As<v8::Object>());
+    return IsolateData<ICppObjectMapper>(Isolate)->IsInstanceOfCppObject(Isolate, TypeId, JsObject);
 }
 
 v8::Local<v8::Value> DataTransfer::UnRef(v8::Isolate* Isolate, const v8::Local<v8::Value>& Value)
@@ -65,9 +64,9 @@ v8::Local<v8::Value> DataTransfer::FindOrAddStruct(
     return FV8Utils::IsolateData<IObjectMapper>(Isolate)->FindOrAddStruct(Isolate, Context, ScriptStruct, Ptr, PassByPointer);
 }
 
-bool DataTransfer::IsInstanceOf(v8::Isolate* Isolate, UStruct* Struct, v8::Local<v8::Value> JsObject)
+bool DataTransfer::IsInstanceOf(v8::Isolate* Isolate, UStruct* Struct, v8::Local<v8::Object> JsObject)
 {
-    return JsObject->IsObject() && FV8Utils::IsolateData<IObjectMapper>(Isolate)->IsInstanceOf(Struct, JsObject.As<v8::Object>());
+    return FV8Utils::IsolateData<IObjectMapper>(Isolate)->IsInstanceOf(Struct, JsObject);
 }
 
 void DataTransfer::ThrowException(v8::Isolate* Isolate, const char* Message)

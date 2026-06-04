@@ -1,6 +1,6 @@
 ﻿/*
  * Tencent is pleased to support the open source community by making Puerts available.
- * Copyright (C) 2020 Tencent.  All rights reserved.
+ * Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
  * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may
  * be subject to their corresponding license terms. This file is subject to the terms and conditions defined in file 'LICENSE',
  * which is part of this source code package.
@@ -28,11 +28,7 @@
 #include "Widgets/Notifications/SNotificationList.h"
 // #include "Misc/MessageDialog.h"
 #include "Framework/MultiBox/MultiBoxBuilder.h"
-#if (ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 5)
-#include "StructUtils/UserDefinedStruct.h"
-#else
 #include "Engine/UserDefinedStruct.h"
-#endif
 #include "Engine/UserDefinedEnum.h"
 #include "Engine/Blueprint.h"
 #include "CodeGenerator.h"
@@ -55,15 +51,6 @@
 #define TYPE_DECL_START "// __TYPE_DECL_START: "
 #define TYPE_DECL_END "// __TYPE_DECL_END"
 #define TYPE_ASSOCIATION "ASSOCIATION"
-
-bool bSearchAllPluginBP = true;
-static FAutoConsoleVariableRef CVarSearchAllPluginBP(TEXT("bSearchAllPluginBP"), bSearchAllPluginBP, TEXT(".\n"), ECVF_Default);
-
-#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION > 5
-#define GET_VERSION_ID(PD) LexToString(PD->CookedHash)
-#else
-#define GET_VERSION_ID(PD) PD->PackageGuid.ToString()
-#endif
 
 bool IsTypeScriptKeyword(const FString& InputString)
 {
@@ -415,15 +402,10 @@ void FTypeScriptDeclarationGenerator::GenTypeScriptDeclaration(bool InGenStruct,
     End();
 
     IPlatformFile& PlatformFile = FPlatformFileManager::Get().GetPlatformFile();
-    // 删除旧版本提交到Plugin的ue/ue_bp d.ts 避免残留污染编译
-    FString PuertsBaseDir = IPluginManager::Get().FindPlugin("Puerts")->GetBaseDir();
-    PlatformFile.DeleteFile(*(PuertsBaseDir / TEXT("Typing/ue/ue.d.ts")));
-    PlatformFile.DeleteFile(*(PuertsBaseDir / TEXT("Typing/ue/ue_bp.d.ts")));
-
-    FString ProjectTypingDir = (FPaths::ProjectDir() / TEXT("Typing"));
-    PlatformFile.CopyDirectoryTree(*ProjectTypingDir, *(PuertsBaseDir / TEXT("Typing")), false);
-    PlatformFile.CopyDirectoryTree(
-        *(FPaths::ProjectContentDir() / TEXT("JavaScript")), *(PuertsBaseDir / TEXT("Content") / TEXT("JavaScript")), true);
+    PlatformFile.CopyDirectoryTree(*(FPaths::ProjectDir() / TEXT("Typing")),
+        *(IPluginManager::Get().FindPlugin("Puerts")->GetBaseDir() / TEXT("Typing")), false);
+    PlatformFile.CopyDirectoryTree(*(FPaths::ProjectContentDir() / TEXT("JavaScript")),
+        *(IPluginManager::Get().FindPlugin("Puerts")->GetBaseDir() / TEXT("Content") / TEXT("JavaScript")), true);
 
     const FString UEDeclarationFilePath = FPaths::ProjectDir() / TEXT("Typing/ue/ue.d.ts");
 
@@ -530,27 +512,18 @@ void FTypeScriptDeclarationGenerator::NamespaceEnd(UObject* Obj, FStringBuffer& 
 void FTypeScriptDeclarationGenerator::WriteOutput(UObject* Obj, const FStringBuffer& Buff)
 {
     const UPackage* Pkg = GetPackage(Obj);
-    if (Pkg && !Obj->IsNative())
+    bool IsPluginBPClass = Pkg && !Obj->IsNative() && !Pkg->GetName().StartsWith(TEXT("/Game/"));
+    if (Pkg && !Obj->IsNative() && !IsPluginBPClass && BlueprintTypeDeclInfoCache.Find(Pkg->GetFName()))
     {
         FStringBuffer Temp;
         Temp.Prefix = Output.Prefix;
         NamespaceBegin(Obj, Temp);
         Temp << Buff;
         NamespaceEnd(Obj, Temp);
-
-        BlueprintTypeDeclInfo* BlueprintTypeDeclInfo = BlueprintTypeDeclInfoCache.Find(Pkg->GetFName());
-        if (!BlueprintTypeDeclInfo)
-        {
-            BlueprintTypeDeclInfoCache.Add(Pkg->GetFName(), {TMap<FName, FString>(), FString(TEXT("")), true, false, true});
-        }
-        BlueprintTypeDeclInfo = BlueprintTypeDeclInfoCache.Find(Pkg->GetFName());
-        if (BlueprintTypeDeclInfo)
-        {
-            BlueprintTypeDeclInfo->NameToDecl.Add(Obj->GetFName(), Temp.Buffer);
-            BlueprintTypeDeclInfo->IsExist = true;
-        }
+        BlueprintTypeDeclInfoCache[Pkg->GetFName()].NameToDecl.Add(Obj->GetFName(), Temp.Buffer);
+        BlueprintTypeDeclInfoCache[Pkg->GetFName()].IsExist = true;
     }
-    else
+    else if (Obj->IsNative() || IsPluginBPClass)
     {
         NamespaceBegin(Obj, Output);
         Output << Buff;
@@ -632,20 +605,6 @@ void FTypeScriptDeclarationGenerator::LoadAllWidgetBlueprint(FName InSearchPath,
     FARFilter BPFilter;
     BPFilter.PackagePaths.Add(PackagePath);
     BPFilter.PackagePaths.Add(FName(TEXT("/Engine")));
-    if (bSearchAllPluginBP)
-    {
-        TArray<TSharedRef<IPlugin>> AllPlugins = IPluginManager::Get().GetDiscoveredPlugins();
-        for (TSharedRef<IPlugin> Plugin : AllPlugins)
-        {
-            if (!Plugin->CanContainContent())
-            {
-                continue;
-            }
-            FString PluginConfigFilename = Plugin->GetBaseDir();
-            FString PluginName = Plugin->GetName();
-            BPFilter.PackagePaths.Add(FName(FString::Printf(TEXT("/%s"), *PluginName)));
-        }
-    }
     BPFilter.bRecursivePaths = true;
     BPFilter.bRecursiveClasses = true;
 #if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION > 0
@@ -675,7 +634,7 @@ void FTypeScriptDeclarationGenerator::LoadAllWidgetBlueprint(FName InSearchPath,
 
         if (PackageData && BlueprintTypeDeclInfoPtr)
         {
-            auto FileVersion = GET_VERSION_ID(PackageData);
+            auto FileVersion = PackageData->PackageGuid.ToString();
             BlueprintTypeDeclInfoPtr->IsExist = true;
             BlueprintTypeDeclInfoPtr->Changed = InGenFull || (FileVersion != BlueprintTypeDeclInfoPtr->FileVersionString);
             BlueprintTypeDeclInfoPtr->FileVersionString = FileVersion;
@@ -683,7 +642,7 @@ void FTypeScriptDeclarationGenerator::LoadAllWidgetBlueprint(FName InSearchPath,
         else
         {
             BlueprintTypeDeclInfoCache.Add(AssetData.PackageName,
-                {TMap<FName, FString>(), PackageData ? GET_VERSION_ID(PackageData) : FString(TEXT("")), true, true, false});
+                {TMap<FName, FString>(), PackageData ? PackageData->PackageGuid.ToString() : FString(TEXT("")), true, true, false});
         }
     }
 }
@@ -992,11 +951,7 @@ bool FTypeScriptDeclarationGenerator::GenFunction(
             else
             {
                 FStringBuffer TmpBuf;
-#if ENGINE_MAJOR_VERSION >= 5 && ENGINE_MINOR_VERSION > 5
-                TMap<FName, FString>* MetaMap = FMetaData::GetMapForObject(Function);
-#else
                 TMap<FName, FString>* MetaMap = UMetaData::GetMapForObject(Function);
-#endif
                 const FName MetadataCppDefaultValueKey(*(FString(TEXT("CPP_Default_")) + Property->GetName()));
                 FString* DefaultValuePtr = nullptr;
                 if (MetaMap)
@@ -1445,8 +1400,7 @@ void FTypeScriptDeclarationGenerator::GenStruct(UStruct* Struct)
     auto GenConstrutor = [&]()
     {
         auto ClassDefinition = PUERTS_NAMESPACE::FindClassByType(Struct);
-        if (ClassDefinition && ClassDefinition->ConstructorInfos && ClassDefinition->ConstructorInfos->Name &&
-            ClassDefinition->ConstructorInfos->Type)
+        if (ClassDefinition && ClassDefinition->ConstructorInfos)
         {
             PUERTS_NAMESPACE::NamedFunctionInfo* ConstructorInfo = ClassDefinition->ConstructorInfos;
             while (ConstructorInfo && ConstructorInfo->Name && ConstructorInfo->Type)
@@ -1628,7 +1582,7 @@ private:
 
         FName PackagePath = (InSearchPath == NAME_None) ? FName(TEXT("/Game")) : InSearchPath;
 
-        FString DialogMessage = FString::Printf(TEXT("generate finish, %s store in %s, ([PATH=%s])"), TEXT("ue.d.ts"),
+        FString DialogMessage = FString::Printf(TEXT("genertate finish, %s store in %s, ([PATH=%s])"), TEXT("ue.d.ts"),
             TEXT("Content/Typing/ue"), *PackagePath.ToString());
 
         FText DialogText = FText::Format(LOCTEXT("PluginButtonDialogText", "{0}"), FText::FromString(DialogMessage));
@@ -1683,7 +1637,7 @@ public:
 
                     for (auto& Arg : Args)
                     {
-                        if (Arg.ToUpper().Contains(TEXT("FULL")))
+                        if (Arg.ToUpper().Equals(TEXT("FULL")))
                         {
                             GenFull = true;
                         }

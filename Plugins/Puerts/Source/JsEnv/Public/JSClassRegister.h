@@ -1,6 +1,6 @@
 ﻿/*
  * Tencent is pleased to support the open source community by making Puerts available.
- * Copyright (C) 2020 Tencent.  All rights reserved.
+ * Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
  * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may
  * be subject to their corresponding license terms. This file is subject to the terms and conditions defined in file 'LICENSE',
  * which is part of this source code package.
@@ -30,7 +30,6 @@ PRAGMA_ENABLE_UNDEFINED_IDENTIFIER_WARNINGS
 
 #include "pesapi.h"
 #include "TypeInfo.hpp"
-#include "PString.h"
 
 #if USING_IN_UNREAL_ENGINE
 static const FAnsiStringView EditorOnlyPropertySuffix = "_EditorOnly";
@@ -147,14 +146,14 @@ JSENV_API void OnClassNotFound(pesapi_class_not_found_callback Callback);
 
 JSENV_API const JSClassDefinition* LoadClassByID(const void* TypeId);
 
-JSENV_API const JSClassDefinition* FindCppTypeClassByName(const PString& Name);
+JSENV_API const JSClassDefinition* FindCppTypeClassByName(const std::string& Name);
 
 JSENV_API bool TraceObjectLifecycle(const void* TypeId, pesapi_on_native_object_enter OnEnter, pesapi_on_native_object_exit OnExit);
 
 #if USING_IN_UNREAL_ENGINE
 typedef void (*AddonRegisterFunc)(v8::Local<v8::Context> Context, v8::Local<v8::Object> Exports);
 
-AddonRegisterFunc FindAddonRegisterFunc(const PString& Name);
+AddonRegisterFunc FindAddonRegisterFunc(const std::string& Name);
 
 void RegisterAddon(const char* Name, AddonRegisterFunc RegisterFunc);
 

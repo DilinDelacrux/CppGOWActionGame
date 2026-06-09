@@ -8,188 +8,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="705d53a4-018f-426e-b050-6cfad142ff31" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Config/DefaultAdvancedFrontedUI.ini" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Source/AdvancedFrontedUI/FrontendDebugHelper.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Source/AdvancedFrontedUI/Private/FrontendGameplayTags.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Source/AdvancedFrontedUI/Private/FrontendPlayerController.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Source/AdvancedFrontedUI/Private/Subsystems/FrontendUISubsystem.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Source/AdvancedFrontedUI/Private/Widget/Widget_ActivatableBase.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Source/AdvancedFrontedUI/Private/Widget/Widget_PrimaryLayout.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Source/AdvancedFrontedUI/Public/FrontendGameplayTags.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Source/AdvancedFrontedUI/Public/FrontendPlayerController.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Source/AdvancedFrontedUI/Public/Subsystems/FrontendUISubsystem.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Source/AdvancedFrontedUI/Public/Widget/Widget_ActivatableBase.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Source/AdvancedFrontedUI/Public/Widget/Widget_PrimaryLayout.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CppGOWActionGame.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CppGOWActionGame.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/HeroCharacter/SK_Hero.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/HeroCharacter/SK_Hero.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/AxeHeavyAOE/Debris/MF_ObjAdjustments.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/AxeHeavyAOE/Debris/MI_Concrete_Rubble_rhlxZ_2K.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/AxeHeavyAOE/Debris/M_MS_Default_Material.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/AxeHeavyAOE/Debris/S_Concrete_Rubble_rhlxZ_lod3_Var10.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/AxeHeavyAOE/Debris/S_Concrete_Rubble_rhlxZ_lod3_Var2.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/AxeHeavyAOE/Debris/S_Concrete_Rubble_rhlxZ_lod3_Var3.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/AxeHeavyAOE/Debris/S_Concrete_Rubble_rhlxZ_lod3_Var4.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/AxeHeavyAOE/Debris/S_Concrete_Rubble_rhlxZ_lod3_Var5.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/AxeHeavyAOE/Debris/S_Concrete_Rubble_rhlxZ_lod3_Var6.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/AxeHeavyAOE/Debris/S_Concrete_Rubble_rhlxZ_lod3_Var7.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/AxeHeavyAOE/Debris/S_Concrete_Rubble_rhlxZ_lod3_Var8.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/AxeHeavyAOE/Debris/S_Concrete_Rubble_rhlxZ_lod3_Var9.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/AxeHeavyAOE/Debris/T_ConcreteRubble_rhlxZ_2K_DpR.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/AxeHeavyAOE/Debris/T_Concrete_Rubble_rhlxZ_2K_D.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/AxeHeavyAOE/Debris/T_Concrete_Rubble_rhlxZ_2K_N.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/AxeHeavyAOE/MI_AOEBurstSmoke.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/AxeHeavyAOE/MI_AOEGroundFire.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/AxeHeavyAOE/MI_AOEGroundMark.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/AxeHeavyAOE/MI_AOEShockWave.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/AxeHeavyAOE/NS_AxeHeavyAOE.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/AxeHeavyAOE/T_BlastMark_Rock01.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/AxeHeavyAOE/T_RingLarger.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/AxeHeavyAOE/T_SmokeBall_01_8_8.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/AxeHeavyAOE/T_Turbulence_Seamless.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/AxeHeavyAOE/T_Vert_Gradient_Softer_Clamped.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/AxeHeavyAOE/T_WaterFlow_Tiling02.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Dissolve/MI_GiantDissolve.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Dissolve/MI_GlacierDissolve.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Dissolve/MI_GuardianDissolve.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Dissolve/MI_TrollDissolve.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Dissolve/M_EnemyDissolveMaster.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Dissolve/NS_Dissolve_FrostGiant.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Dissolve/NS_Dissolve_Glacer.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Dissolve/NS_Dissolve_Guradian.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Dissolve/NS_Dissolve_Troll.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/GroundRocks/M_RockBase.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/GroundRocks/NS_GroundBurstRocks.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/GroundRocks/SM_RedBuff_RocksGround.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/GroundRocks/T_CliffRockTile_03_D.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/GroundRocks/T_RockGraniteLarge_Grey_Mossy_pjtsT_4K_Displacement.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/GroundRocks/T_RockGranite_Large_Grey_Mossy_pjtsT_4K_Normal_LOD1.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/GroundRocks/T_Rock_Granite_Large_Grey_Mossy_pjtsT_4K_Albedo.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Impact/MI_FireyProjectileFlare.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Impact/NS_BlockImpact.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Impact/NS_TrollImpact.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Impact/T_Flare_02.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/MainMenuFire/NS_LoopFire.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/MasterMaterial/MI_Debris.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/MasterMaterial/M_BasicDot_Trans.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/MasterMaterial/M_FlareMaster.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/MasterMaterial/M_SingleTextureDecalMaster_Trans.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/MasterMaterial/M_SingleTextureMaster_Additive.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/MasterMaterial/M_SingleTextureMaster_Trans.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Projectiles/Impact/MI_ImpactBurstFire.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Projectiles/Impact/NS_FireyImpact.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Projectiles/Impact/T_Fire_B.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Projectiles/Impact/T_Fire_subUV_6X6.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Projectiles/MilkyFire/MI_MilkyFire.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Projectiles/MilkyFire/M_MilkyFire.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Projectiles/MilkyFire/T_Coil_ImpactDecalSplashEmissiveMask.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Projectiles/MilkyFire/T_Lightning_B_Tile_Chromatic.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Projectiles/MilkyFire/T_Swirly_Noise_highContrast.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Projectiles/Muzzle/MI_FireyProjectileMuzzle.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Projectiles/Muzzle/NS_FireyProjectileMuzzle.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Projectiles/Muzzle/T_Spark_B.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Projectiles/NS_FireyProjectile.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Projectiles/ProjectileMain/MI_ProjectileBlack.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Projectiles/ProjectileMain/MI_ProjectileShell.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Projectiles/ProjectileMain/M_ProjectileShell.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Projectiles/ProjectileMain/T_Plasma_Aurora_Seamless.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Projectiles/ProjectileMain/T_ShieldLightrays.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Projectiles/ProjectileMain/T_SmokeRend_N.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Projectiles/ProjectileMain/T_SmokeTile.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Projectiles/ProjectileMain/T_Soft_Noise.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Projectiles/SM_Projectile.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Rage/MI_ChromaLoop.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Rage/MI_EnergStrike_Additive.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Rage/MI_EnergStrike_Trans.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Rage/MI_EnergyStrikeGroundMark_Trans.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Rage/MI_RageActivateFire_Additive.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Rage/MI_SKEmber_Additive.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Rage/MI_SKEmber_Trans.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Rage/M_Chroma.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Rage/M_FlareMaster.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Rage/M_PanDistortDynParamMaster_Additive.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Rage/M_PanDistortDynParamMaster_Trans.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Rage/M_RageActivation.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Rage/M_SingleTextureMaster_Additive.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Rage/M_SubUVMaster_Additive.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Rage/NS_RageActivate.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Rage/NS_SampleSKFire.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Rage/SM_CleanseBubble.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Rage/T_FireTrail_Desat.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Rage/T_Fire_subUV_6X6.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Rage/T_Flare_02.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Rage/T_GradientLaserSoft_M.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Rage/T_MarbleNoise_1.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Rage/T_MarbleNoise_3.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Rage/T_Perlin_Soft_Packed.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Rage/T_Plasma_Aurora_Seamless.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Rage/T_Scorch_Lightning_01.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Rage/T_ShieldLightrays.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Rage/T_SmokeRend_N.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Rage/T_Spark_B.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Rage/T_Sparrow_Poster_Tendrils_v2_Seamless.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/RageSlash/AxeSlash.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/RageSlash/MI_SlashMaster.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/RageSlash/M_SlashMaster_Additive.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/RageSlash/M_SlashMaster_Trans.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/RageSlash/NS_RageSlash.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Refraction/MI_RefractionBurst.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Refraction/M_RefractionBurst_Master.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Refraction/NS_RefractionBurst.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Refraction/SM_Shockwave.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Refraction/T_NoiseNormal_A.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Refraction/T_Perlin_Noise_M.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Shield/MI_Shield01.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Shield/MI_ShieldFire_Additive.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Shield/MI_ShieldFocalPoint_Additive.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Shield/MI_ShieldParticlesTrans.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Shield/MI_ShieldParticles_Additive.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Shield/M_PanDistortMaster_Additive.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Shield/M_ShieldMaster.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Shield/M_SingleTextureMaster_Additive.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Shield/NS_Shield_1.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Shield/Noise/MarbleNoise/T_MarbleNoise_2.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Shield/Noise/PerlinNoise/T_PerlinNoise_3.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Shield/Noise/PerlinNoise/T_PerlinNoise_4.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Shield/Noise/PerlinNoise/T_PerlinNoise_6.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Shield/SM_PlaneFaceCamera.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Shield/T_FireTrail_Desat.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Shield/T_Inky_Smoke_Tile.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Shield/T_Shield_1.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Shield/T_Spark_B.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Stones/NS_ConsumeHealingStoneBurst.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Stones/NS_ConsumeRageStoneBurst1.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Stones/NS_HealingStone.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Stones/NS_RageStone.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Summon/NS_GiantSummon.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Trails/M_TrailMaster_Trans.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Trails/NS_Giant_Trail.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Trails/NS_Glacer_Trail.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Trails/NS_Hero_Trail.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Trails/NS_Troll_Trail.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Trails/T_Inky_Smoke_Tile.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Trails/T_Streak_Soft_Trail_02.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Trails/T_Trail_Mask.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Trails/T_Venus_Trail.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Warning/MI_AttackWarning.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Warning/NS_UnbloackableWarning.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/Niagara/Warning/T_SimpleRing.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Enemy/FrostGiant/AM_ExoGame_FrostGiant_Attck_Melee_Combo.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Enemy/FrostGiant/AM_ExoGame_FrostGiant_Attck_Melee_Combo.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Hero/AM_Hero_Roll.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Hero/AM_Hero_Roll.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Hero/AM_Hero_StandingBlock_Idle.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Animation/Montage/Hero/AM_Hero_StandingBlock_Idle.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/BP_Projectile_HeroSlash.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/BP_Projectile_HeroSlash.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/Glacer/BP_Projectile_Glacer.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Enemy/Glacer/BP_Projectile_Glacer.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Hero/Ability/GA_Hero_Roll.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Hero/Ability/GA_Hero_Roll.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Hero/Ability/GA_Hero_TargetLock.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Hero/Ability/GA_Hero_TargetLock.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Hero/Ability/GA_Hero_WeaponAbility_Axe_Light.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Hero/Ability/GA_Hero_WeaponAbility_Axe_Light.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Hero/BP_WarriorHeroCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Hero/BP_WarriorHeroCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Items/Stones/BP_Stone_HealingStone.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Items/Stones/BP_Stone_HealingStone.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Items/Stones/BP_Stone_RageStone.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Blueprint/Items/Stones/BP_Stone_RageStone.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/GameEffect/GE_Hero_Static.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/GameEffect/GE_Hero_Static.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/GameplayCues/GC_Hero_MagicShield.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/GameplayCues/GC_Hero_MagicShield.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Input/IMC_Hero.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Input/IMC_Hero.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Asset/_MyAsset/Misc/CurveTable/CT_HeroStatus.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/_MyAsset/Misc/CurveTable/CT_HeroStatus.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/Niagara/Shield/NS_Shield_1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Niagara/Shield/NS_Shield_1.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/Niagara/Stones/NS_HealingStone.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Niagara/Stones/NS_HealingStone.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/Niagara/Stones/NS_RageStone.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Niagara/Stones/NS_RageStone.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/GameplayCues/GC_Enemy_AttackWarning.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/GameplayCues/GC_Enemy_AttackWarning.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/GameplayCues/GC_Hero_ActivateRage.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/GameplayCues/GC_Hero_ActivateRage.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/GameplayCues/GC_Hero_MagicShield.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/GameplayCues/GC_Hero_MagicShield.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/GameplayCues/GC_Hero_PerfectBlock.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/GameplayCues/GC_Hero_PerfectBlock.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/GameplayCues/GC_Hero_SuccessfullyBlock.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/GameplayCues/GC_Hero_SuccessfullyBlock.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/CppGOWActionGame/Private/AbilitySystem/Abilities/HeroGameplayAbility_TargetLock.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/CppGOWActionGame/Private/AbilitySystem/Abilities/HeroGameplayAbility_TargetLock.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/CppGOWActionGame/Private/AbilitySystem/GEExecCalc/GEExecCalc_DamageTaken.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/CppGOWActionGame/Private/AbilitySystem/GEExecCalc/GEExecCalc_DamageTaken.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/CppGOWActionGame/Private/Character/WarriorHeroCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/CppGOWActionGame/Private/Character/WarriorHeroCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/CppGOWActionGame/Private/WarriorGameplayTags.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/CppGOWActionGame/Private/WarriorGameplayTags.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/CppGOWActionGame/Public/AbilitySystem/Abilities/HeroGameplayAbility_TargetLock.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/CppGOWActionGame/Public/AbilitySystem/Abilities/HeroGameplayAbility_TargetLock.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/CppGOWActionGame/Public/WarriorGameplayTags.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/CppGOWActionGame/Public/WarriorGameplayTags.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/TsBlueprints/TS_HeroCharacter2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/TsBlueprints/TS_HeroCharacter2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/TsBlueprints/TS_Player.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/TsBlueprints/TS_Player.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Asset/TsBlueprints/TS_Player2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Asset/TsBlueprints/TS_Player2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CppGOWActionGame.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/CppGOWActionGame.uproject" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Typing/ue/ue_bp.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Typing/ue/ue_bp.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ts_file_versions_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/ts_file_versions_info.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,6 +36,9 @@
   </component>
   <component name="DpaMonitoringSettings">
     <option name="firstShow" value="false" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="4218" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -214,57 +55,20 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/DilinDelacrux/CppGOWActionGame.git&quot;,
-    &quot;accountId&quot;: &quot;3cb43bcc-40c6-4eda-9384-c6f8d018fdd8&quot;
+    &quot;url&quot;: &quot;https://github.com/DilinDelacrux/CppGOWActionGame&quot;,
+    &quot;accountId&quot;: &quot;ecd54bcc-1707-422f-8539-802a2d662a1a&quot;
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Plugins/AI/MLAdapter/Source/MLAdapter/Public/Debug/DebugHelpers.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Plugins/Runtime/GameplayAbilities/Source/GameplayAbilities/Private/AttributeSet.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Plugins/Runtime/GameplayAbilities/Source/GameplayAbilities/Public/GameplayCueNotify_Actor.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Plugins/Runtime/GameplayAbilities/Source/GameplayAbilities/Public/GameplayEffectComponents/AbilitiesGameplayEffectComponent.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Developer/FunctionalTesting/Classes/FunctionalTestUtilityLibrary.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Developer/Windows/LiveCodingServer/Private/External/LC_FunctionPatcher.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Editor/BehaviorTreeEditor/Private/BehaviorTreeGraphNode.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Editor/BlueprintGraph/Classes/K2Node_LoadAsset.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Editor/BlueprintGraph/Private/K2Node_LoadAsset.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/AIModule/Classes/AIController.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/AIModule/Classes/BehaviorTree/BTAuxiliaryNode.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/AIModule/Classes/BehaviorTree/BTNode.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/AIModule/Classes/BehaviorTree/BTService.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/AIModule/Classes/BehaviorTree/BehaviorTreeTypes.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/AIModule/Classes/BehaviorTree/Services/BTService_BlackboardBase.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/AIModule/Classes/EnvironmentQuery/EnvQueryDebugHelpers.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/AIModule/Classes/GenericTeamAgentInterface.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/AIModule/Classes/Navigation/CrowdFollowingComponent.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/AIModule/Classes/Perception/AIPerceptionComponent.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/AIModule/Classes/Perception/AISenseConfig_Sight.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/AIModule/Private/AIController.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/AIModule/Private/BehaviorTree/BTService.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/AIModule/Private/EnvironmentQuery/Tests/EnvQueryTest_GameplayTags.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/AIModule/Private/Navigation/CrowdFollowingComponent.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/Core/Public/Containers/Array.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/Core/Public/Containers/ContainerAllocationPolicies.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/Core/Public/Containers/Map.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/Core/Public/Experimental/ConcurrentLinearAllocator.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/Core/Public/Templates/Tuple.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/Core/Public/UObject/NameTypes.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/CoreUObject/Public/Templates/Casts.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/CoreUObject/Public/UObject/ObjectHandle.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/CoreUObject/Public/UObject/ObjectPtr.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/CoreUObject/Public/UObject/UObjectGlobals.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/Engine/Classes/Debug/DebugDrawComponent.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/Engine/Classes/Engine/LatentActionManager.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/Engine/Classes/GameFramework/PlayerController.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/Engine/Classes/Kismet/KismetSystemLibrary.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/Engine/Private/AsyncActionLoadPrimaryAsset.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/Engine/Private/KismetSystemLibrary.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/Engine/Public/LatentActions.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/GameplayTags/Public/NativeGameplayTags.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/GameplayTasks/Classes/GameplayTask.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/GameplayTasks/Classes/GameplayTaskOwnerInterface.h" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.3/Engine/Source/Runtime/GameplayTasks/Private/GameplayTasksComponent.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.5/Engine/Source/Runtime/Core/Public/UObject/WeakObjectPtrTemplates.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/include/atomic" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Source/AdvancedFrontedUI/FrontendDebugHelper.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Source/AdvancedFrontedUI/Private/FrontendGameplayTags.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Source/AdvancedFrontedUI/Private/FrontendPlayerController.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Source/AdvancedFrontedUI/Private/Subsystems/FrontendUISubsystem.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Source/AdvancedFrontedUI/Private/Widget/Widget_PrimaryLayout.cpp" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Source/AdvancedFrontedUI/Public/Subsystems/FrontendUISubsystem.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Source/AdvancedFrontedUI/Public/Widget/Widget_PrimaryLayout.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/CppGOWActionGame/CppGOWActionGame.Build.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/CppGOWActionGame/CppGOWActionGame.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/CppGOWActionGame/CppGOWActionGame.h" root0="FORCE_HIGHLIGHTING" />
@@ -297,6 +101,10 @@
     <setting file="file://$PROJECT_DIR$/Source/CppGOWActionGame/Public/Interfaces/PawnUIInterface.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/CppGOWActionGame/Public/WarriorGameplayTags.h" root0="FORCE_HIGHLIGHTING" />
   </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -309,22 +117,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;Uproject.CppGOWActionGame.executor&quot;: &quot;Debug&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;CppUnrealEngineOptionsId&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "Uproject.CppGOWActionGame.executor": "Run",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "CppUnrealEngineOptionsId",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CidrLocalAttachDebugger.recentlyUsed">
       <recent name="com.jetbrains.rider.cpp.debugger.RiderCppLLDBDriverConfiguration" />
@@ -336,10 +146,10 @@
         <option name="CONFIGURATION" value="Development Editor" />
         <option name="PLATFORM" value="Win64" />
         <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXECUTABLE_PATH" value="C:\Program Files\Epic Games\UE_5.3\Engine\Binaries\Win64\UnrealEditor.exe" />
-        <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;C:\Users\DiLin\Documents\_UnrealProject\CppGOWActionGame\CppGOWActionGame.uproject&quot;" />
+        <option name="EXECUTABLE_PATH" value="$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.5/Engine/Binaries/Win64/UnrealEditor.exe" />
+        <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;C:\Users\admin\Documents\Unreal Projects\CppGOWActionGame\CppGOWActionGame.uproject&quot;" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
-        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.3" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.5" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="1" />
         <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
@@ -349,10 +159,10 @@
         <option name="CONFIGURATION" value="DebugGame Editor" />
         <option name="PLATFORM" value="Win64" />
         <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXECUTABLE_PATH" value="C:\Program Files\Epic Games\UE_5.3\Engine\Binaries\Win64\UnrealEditor-Win64-DebugGame.exe" />
-        <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;C:\Users\DiLin\Documents\_UnrealProject\CppGOWActionGame\CppGOWActionGame.uproject&quot;" />
+        <option name="EXECUTABLE_PATH" value="$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.5/Engine/Binaries/Win64/UnrealEditor-Win64-DebugGame.exe" />
+        <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;C:\Users\admin\Documents\Unreal Projects\CppGOWActionGame\CppGOWActionGame.uproject&quot;" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
-        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.3" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.5" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="1" />
         <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
@@ -362,10 +172,10 @@
         <option name="CONFIGURATION" value="DebugGame" />
         <option name="PLATFORM" value="Win64" />
         <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXECUTABLE_PATH" value="C:\Users\DiLin\Documents\_UnrealProject\CppGOWActionGame\Binaries\Win64\CppGOWActionGame-Win64-DebugGame.exe" />
+        <option name="EXECUTABLE_PATH" value="$PROJECT_DIR$/Binaries/Win64/CppGOWActionGame-Win64-DebugGame.exe" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
-        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.3" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.5" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="1" />
         <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
@@ -375,10 +185,10 @@
         <option name="CONFIGURATION" value="Development" />
         <option name="PLATFORM" value="Win64" />
         <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXECUTABLE_PATH" value="C:\Users\DiLin\Documents\_UnrealProject\CppGOWActionGame\Binaries\Win64\CppGOWActionGame.exe" />
+        <option name="EXECUTABLE_PATH" value="$PROJECT_DIR$/Binaries/Win64/CppGOWActionGame.exe" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
-        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.3" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.5" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="1" />
         <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
@@ -388,15 +198,54 @@
         <option name="CONFIGURATION" value="Shipping" />
         <option name="PLATFORM" value="Win64" />
         <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXECUTABLE_PATH" value="C:\Users\DiLin\Documents\_UnrealProject\CppGOWActionGame\Binaries\Win64\CppGOWActionGame-Win64-Shipping.exe" />
+        <option name="EXECUTABLE_PATH" value="$PROJECT_DIR$/Binaries/Win64/CppGOWActionGame-Win64-Shipping.exe" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
-        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.3" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.5" />
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="1" />
         <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
         <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/CppGOWActionGame.uproject" />
       </configuration_5>
+      <configuration_6 setup="1">
+        <option name="CONFIGURATION" value="DebugGame" />
+        <option name="PLATFORM" value="Android" />
+        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
+        <option name="EXECUTABLE_PATH" value="$PROJECT_DIR$/Binaries/Android/CppGOWActionGame-Android-DebugGame.so" />
+        <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
+        <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.5" />
+        <option name="PASS_PARENT_ENVS" value="1" />
+        <option name="USE_EXTERNAL_CONSOLE" value="1" />
+        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
+        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/CppGOWActionGame.uproject" />
+      </configuration_6>
+      <configuration_7 setup="1">
+        <option name="CONFIGURATION" value="Development" />
+        <option name="PLATFORM" value="Android" />
+        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
+        <option name="EXECUTABLE_PATH" value="$PROJECT_DIR$/Binaries/Android/CppGOWActionGame.so" />
+        <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
+        <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.5" />
+        <option name="PASS_PARENT_ENVS" value="1" />
+        <option name="USE_EXTERNAL_CONSOLE" value="1" />
+        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
+        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/CppGOWActionGame.uproject" />
+      </configuration_7>
+      <configuration_8 setup="1">
+        <option name="CONFIGURATION" value="Shipping" />
+        <option name="PLATFORM" value="Android" />
+        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
+        <option name="EXECUTABLE_PATH" value="$PROJECT_DIR$/Binaries/Android/CppGOWActionGame-Android-Shipping.so" />
+        <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
+        <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
+        <option name="WORKING_DIRECTORY" value="C:\Program Files\Epic Games\UE_5.5" />
+        <option name="PASS_PARENT_ENVS" value="1" />
+        <option name="USE_EXTERNAL_CONSOLE" value="1" />
+        <option name="TERMINAL_INTERACTION_BEHAVIOR" value="FORCE_CONSOLE" />
+        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/CppGOWActionGame.uproject" />
+      </configuration_8>
       <option name="DEFAULT_PROJECT_PATH" value="$PROJECT_DIR$/CppGOWActionGame.uproject" />
       <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/CppGOWActionGame.uproject" />
       <option name="AUTO_SELECT_PRIORITY" value="10010" />
@@ -409,7 +258,7 @@
         <option name="CONFIGURATION" value="Development Editor" />
         <option name="PLATFORM" value="Win64" />
         <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXECUTABLE_PATH" value="D:\UE_5.3\Engine\Binaries\Win64\UnrealEditor.exe" />
+        <option name="EXECUTABLE_PATH" value="D:/UE_5.3/Engine/Binaries/Win64/UnrealEditor.exe" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;D:\_Unreal\CppGOWActionGame\CppGOWActionGame.uproject&quot;" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
         <option name="WORKING_DIRECTORY" value="D:\UE_5.3" />
@@ -422,7 +271,7 @@
         <option name="CONFIGURATION" value="DebugGame Editor" />
         <option name="PLATFORM" value="Win64" />
         <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXECUTABLE_PATH" value="D:\UE_5.3\Engine\Binaries\Win64\UnrealEditor-Win64-DebugGame.exe" />
+        <option name="EXECUTABLE_PATH" value="D:/UE_5.3/Engine/Binaries/Win64/UnrealEditor-Win64-DebugGame.exe" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value=" &quot;D:\_Unreal\CppGOWActionGame\CppGOWActionGame.uproject&quot;" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
         <option name="WORKING_DIRECTORY" value="D:\UE_5.3" />
@@ -435,7 +284,7 @@
         <option name="CONFIGURATION" value="DebugGame" />
         <option name="PLATFORM" value="Win64" />
         <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXECUTABLE_PATH" value="D:\_Unreal\CppGOWActionGame\Binaries\Win64\CppGOWActionGame-Win64-DebugGame.exe" />
+        <option name="EXECUTABLE_PATH" value="D:/_Unreal/CppGOWActionGame/Binaries/Win64/CppGOWActionGame-Win64-DebugGame.exe" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
         <option name="WORKING_DIRECTORY" value="D:\UE_5.3" />
@@ -448,7 +297,7 @@
         <option name="CONFIGURATION" value="Development" />
         <option name="PLATFORM" value="Win64" />
         <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXECUTABLE_PATH" value="D:\_Unreal\CppGOWActionGame\Binaries\Win64\CppGOWActionGame.exe" />
+        <option name="EXECUTABLE_PATH" value="D:/_Unreal/CppGOWActionGame/Binaries/Win64/CppGOWActionGame.exe" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
         <option name="WORKING_DIRECTORY" value="D:\UE_5.3" />
@@ -461,7 +310,7 @@
         <option name="CONFIGURATION" value="Shipping" />
         <option name="PLATFORM" value="Win64" />
         <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
-        <option name="EXECUTABLE_PATH" value="D:\_Unreal\CppGOWActionGame\Binaries\Win64\CppGOWActionGame-Win64-Shipping.exe" />
+        <option name="EXECUTABLE_PATH" value="D:/_Unreal/CppGOWActionGame/Binaries/Win64/CppGOWActionGame-Win64-Shipping.exe" />
         <option name="MANDATORY_PROGRAM_PARAMETERS" value="" />
         <option name="CUSTOM_PROGRAM_PARAMETERS" value="" />
         <option name="WORKING_DIRECTORY" value="D:\UE_5.3" />
@@ -518,6 +367,8 @@
       <workItem from="1760467211716" duration="38361000" />
       <workItem from="1760885609352" duration="956000" />
       <workItem from="1761051825234" duration="1768000" />
+      <workItem from="1780628091497" duration="3061000" />
+      <workItem from="1780885329423" duration="7220000" />
     </task>
     <task id="LOCAL-00001" summary="fix asset&#10;add animation">
       <option name="closed" value="true" />

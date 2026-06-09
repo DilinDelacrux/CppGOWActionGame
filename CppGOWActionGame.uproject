@@ -35,6 +35,10 @@
 		{
 			"Name": "SteamController",
 			"Enabled": true
+		},
+		{
+			"Name": "CommonUI",
+			"Enabled": true
 		}
 	]
 }

@@ -9,8 +9,18 @@
         "processed": true,
         "isBP": true
     },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/TypeScript/TS_HeroCharacter2.ts": {
+        "version": "bfb1e05e8a78c707828716a26ca24e22",
+        "processed": true,
+        "isBP": true
+    },
     "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/TypeScript/TS_Player.ts": {
         "version": "391abea44678e29c51c0387afacc244b",
+        "processed": true,
+        "isBP": true
+    },
+    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/TypeScript/TS_Player2.ts": {
+        "version": "8369cebd1c4503cac4c0c78f26684542",
         "processed": true,
         "isBP": true
     },
@@ -36,17 +46,15 @@
     },
     "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Typing/ue/ue.d.ts": {
         "version": "99593bf80087d639fa0ae4e8004eb716",
-        "processed": true,
-        "isBP": false
+        "processed": false
     },
     "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Typing/ue/puerts_decorators.d.ts": {
         "version": "11c14fe8093e3773ebdc2c6b8a509977",
         "processed": false
     },
     "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Typing/ue/ue_bp.d.ts": {
-        "version": "7537ed10059fac0062627873bd076bbb",
-        "processed": true,
-        "isBP": false
+        "version": "11fa89256f77a39a8fd01bcbb92a8244",
+        "processed": false
     },
     "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/node_modules/@types/mocha/index.d.ts": {
         "version": "0fa3f8c6990e3060b60258914905fe4a",
@@ -507,20 +515,5 @@
     "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/Content/JavaScript/PuertsEditor/node_modules/typescript/lib/lib.dom.iterable.d.ts": {
         "version": "977f6792324dbfc2fcc8eadc6f1b0452",
         "processed": false
-    },
-    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/TypeScript/TS_Player copy.ts": {
-        "version": "391abea44678e29c51c0387afacc244b",
-        "processed": true,
-        "isBP": false
-    },
-    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/TypeScript/TS_Player2.ts": {
-        "version": "8369cebd1c4503cac4c0c78f26684542",
-        "processed": true,
-        "isBP": true
-    },
-    "C:/Users/admin/Documents/Unreal Projects/CppGOWActionGame/TypeScript/TS_HeroCharacter2.ts": {
-        "version": "bfb1e05e8a78c707828716a26ca24e22",
-        "processed": true,
-        "isBP": true
     }
 }

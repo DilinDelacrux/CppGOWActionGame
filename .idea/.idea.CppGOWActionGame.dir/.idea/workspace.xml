@@ -8,17 +8,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="705d53a4-018f-426e-b050-6cfad142ff31" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Source/AdvancedFrontedUI/Private/Widgets/Components/FrontendCommonButtonBase.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Source/AdvancedFrontedUI/Public/Widgets/Components/FrontendCommonButtonBase.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CppGOWActionGame.dir/.idea/MarsCodeWorkspaceAppSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CppGOWActionGame.dir/.idea/MarsCodeWorkspaceAppSettings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Content/Blueprints/WBP_Button_BoundActionButton.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Content/Blueprints/WBP_Text_ButtonDescription.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Content/Misc/DataTable/ControllerData_MouseKeyBoard.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Content/Misc/DataTable/DT_CommonInputKeyMapping.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Content/Misc/DataTable/InputData_Default.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Content/Misc/Styles/Style_Button_Clear_Menu.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Content/Misc/Styles/Style_Text_BoundAction.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Content/Misc/Styles/Style_Text_ButtonDescription.uasset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Content/Misc/Styles/Style_Text_Highlight.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CppGOWActionGame.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CppGOWActionGame.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.CppGOWActionGame/.idea/MarsCodeWorkspaceAppSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CppGOWActionGame/.idea/MarsCodeWorkspaceAppSettings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Config/DefaultGame.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultGame.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Content/Blueprints/BP_FrontendCtrl.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Content/Blueprints/BP_FrontendCtrl.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CppGOWActionGame.uproject.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/CppGOWActionGame.uproject.DotSettings.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Content/Blueprints/WBPCAW_MainMenu.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Content/Blueprints/WBPCAW_MainMenu.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Content/Blueprints/WBPCAW_PressAnyKey.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Content/Blueprints/WBPCAW_PressAnyKey.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Content/Blueprints/WBP_CUW_PrimaryLayout.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Content/Blueprints/WBP_CUW_PrimaryLayout.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Content/Blueprints/WBP_Button_Default.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Content/Blueprints/WBP_Button_Default.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Content/Blueprints/WBP_Template_Layout.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Content/Blueprints/WBP_Template_Layout.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Content/Map/L_FrontedUI.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Content/Map/L_FrontedUI.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Content/Misc/Styles/Style_Button_Clear.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Content/Misc/Styles/Style_Button_Clear.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Content/Misc/Styles/Style_Text_Default.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Content/Misc/Styles/Style_Text_Default.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Source/AdvancedFrontedUI/Private/Widgets/Components/FrontendCommonButtonBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Source/AdvancedFrontedUI/Private/Widgets/Components/FrontendCommonButtonBase.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Source/AdvancedFrontedUI/Public/FrontendFunctionLibrary.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Source/AdvancedFrontedUI/Public/FrontendFunctionLibrary.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Source/AdvancedFrontedUI/Public/Subsystems/FrontendUISubsystem.h" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Source/AdvancedFrontedUI/Public/Subsystems/FrontendUISubsystem.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +41,7 @@
     <option name="firstShow" value="false" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="4218" />
+    <option name="cachedIndexableFilesCount" value="4253" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -51,8 +63,12 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="cidr-memory-view://2" root0="FORCE_HIGHLIGHTING" />
+    <setting file="cidr-memory-view://5" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.5/Engine/Plugins/Runtime/CommonUI/Source/CommonUI/Private/Input/CommonBoundActionBar.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.5/Engine/Plugins/Runtime/CommonUI/Source/CommonUI/Private/Input/CommonBoundActionButton.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.5/Engine/Plugins/Runtime/CommonUI/Source/CommonUI/Public/CommonButtonBase.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.5/Engine/Plugins/Runtime/CommonUI/Source/CommonUI/Public/Input/CommonBoundActionBar.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.5/Engine/Plugins/Runtime/CommonUI/Source/CommonUI/Public/Input/CommonBoundActionButton.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Epic Games/UE_5.5/Engine/Source/Runtime/Core/Public/UObject/WeakObjectPtrTemplates.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/include/atomic" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Plugins/AdvancedFrontedUI/Source/AdvancedFrontedUI/FrontendDebugHelper.h" root0="FORCE_HIGHLIGHTING" />
@@ -108,24 +124,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "Uproject.CppGOWActionGame.executor": "Debug",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "CppUnrealEngineOptionsId",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;Uproject.CppGOWActionGame.executor&quot;: &quot;Debug&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;CppUnrealEngineOptionsId&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CidrLocalAttachDebugger.recentlyUsed">
       <recent name="com.jetbrains.rider.cpp.debugger.RiderCppLLDBDriverConfiguration" />
@@ -360,7 +376,9 @@
       <workItem from="1761051825234" duration="1768000" />
       <workItem from="1780628091497" duration="3061000" />
       <workItem from="1780885329423" duration="7220000" />
-      <workItem from="1781059749633" duration="6492000" />
+      <workItem from="1781059749633" duration="8084000" />
+      <workItem from="1781149759241" duration="1074000" />
+      <workItem from="1781231768417" duration="3851000" />
     </task>
     <task id="LOCAL-00001" summary="fix asset&#10;add animation">
       <option name="closed" value="true" />

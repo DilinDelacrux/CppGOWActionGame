@@ -14,6 +14,8 @@ enum class EAsyncPushWidgetState : uint8
 	AfterPush
 };
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnButtonDescriptionTextUpdatedDelegate,UFrontendCommonButtonBase*,BroadcastingButton,FText,DescriptionText);
+
 
 UCLASS()
 class ADVANCEDFRONTEDUI_API UFrontendUISubsystem : public UGameInstanceSubsystem
@@ -34,7 +36,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void RegisterCreatedPrimaryLayoutWidget(UWidget_PrimaryLayout* InCreatedWidget);
 
-	
+	UPROPERTY(BlueprintAssignable)
+	FOnButtonDescriptionTextUpdatedDelegate OnButtonDescriptionTextUpdated;
 private:
 	UPROPERTY(Transient)
 	UWidget_PrimaryLayout* CreatedPrimaryLayout;

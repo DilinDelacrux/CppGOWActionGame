@@ -44,6 +44,7 @@ public class AdvancedFrontedUI : ModuleRules
 				"UMG",
 				"Slate",
 				"SlateCore",
+				"CommonInput"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

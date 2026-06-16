@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "FrontendType/FrontendEnumType.h"
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "Widgets/Widget_ActivatableBase.h"
 #include "Widgets/Widget_PrimaryLayout.h"
@@ -31,7 +32,9 @@ public:
 		TSoftClassPtr<UWidget_ActivatableBase> InSoftWidgetClass,
 		TFunction<void(EAsyncPushWidgetState,
 		UWidget_ActivatableBase*)> AsyncPushStateCallback);
-
+	
+	void PushConfirmScreenToModalStackAsync(EConfirmScreenType InScreenType,
+		const FText& InScreenTitle,const FText& InScreenMsg,TFunction<void(EConfirmScreenButtonType)> ButtonClickedCallback);
 	
 	UFUNCTION(BlueprintCallable)
 	void RegisterCreatedPrimaryLayoutWidget(UWidget_PrimaryLayout* InCreatedWidget);

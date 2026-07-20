@@ -34,3 +34,15 @@ C:\Users\admin\Documents\Unreal Projects\CppGOWActionGame\Plugins\Puerts\Source\
 C:\Users\admin\Documents\Unreal Projects\CppGOWActionGame\Plugins\Puerts\Source\CSharpParamDefaultValueMetas\obj\Development\CSharpParamDefaultValueMetas.dll
 C:\Users\admin\Documents\Unreal Projects\CppGOWActionGame\Plugins\Puerts\Source\CSharpParamDefaultValueMetas\obj\Development\refint\CSharpParamDefaultValueMetas.dll
 C:\Users\admin\Documents\Unreal Projects\CppGOWActionGame\Plugins\Puerts\Source\CSharpParamDefaultValueMetas\obj\Development\CSharpParamDefaultValueMetas.pdb
+E:\_UE_Ref\CppGOWActionGame\Binaries\DotNET\UnrealBuildTool\Plugins\CSharpParamDefaultValueMetas\CSharpParamDefaultValueMetas.deps.json
+E:\_UE_Ref\CppGOWActionGame\Binaries\DotNET\UnrealBuildTool\Plugins\CSharpParamDefaultValueMetas\CSharpParamDefaultValueMetas.dll
+E:\_UE_Ref\CppGOWActionGame\Binaries\DotNET\UnrealBuildTool\Plugins\CSharpParamDefaultValueMetas\ref\CSharpParamDefaultValueMetas.dll
+E:\_UE_Ref\CppGOWActionGame\Binaries\DotNET\UnrealBuildTool\Plugins\CSharpParamDefaultValueMetas\CSharpParamDefaultValueMetas.pdb
+E:\_UE_Ref\CppGOWActionGame\Plugins\Puerts\Source\CSharpParamDefaultValueMetas\obj\Development\CSharpParamDefaultValueMetas.ubtplugin.csproj.AssemblyReference.cache
+E:\_UE_Ref\CppGOWActionGame\Plugins\Puerts\Source\CSharpParamDefaultValueMetas\obj\Development\CSharpParamDefaultValueMetas.ubtplugin.GeneratedMSBuildEditorConfig.editorconfig
+E:\_UE_Ref\CppGOWActionGame\Plugins\Puerts\Source\CSharpParamDefaultValueMetas\obj\Development\CSharpParamDefaultValueMetas.ubtplugin.csproj.CoreCompileInputs.cache
+E:\_UE_Ref\CppGOWActionGame\Plugins\Puerts\Source\CSharpParamDefaultValueMetas\obj\Development\CSharpParamDefaultValueMetas.ubtplugin.sourcelink.json
+E:\_UE_Ref\CppGOWActionGame\Plugins\Puerts\Source\CSharpParamDefaultValueMetas\obj\Development\CSharpPa.E71C88CE.Up2Date
+E:\_UE_Ref\CppGOWActionGame\Plugins\Puerts\Source\CSharpParamDefaultValueMetas\obj\Development\CSharpParamDefaultValueMetas.dll
+E:\_UE_Ref\CppGOWActionGame\Plugins\Puerts\Source\CSharpParamDefaultValueMetas\obj\Development\refint\CSharpParamDefaultValueMetas.dll
+E:\_UE_Ref\CppGOWActionGame\Plugins\Puerts\Source\CSharpParamDefaultValueMetas\obj\Development\CSharpParamDefaultValueMetas.pdb

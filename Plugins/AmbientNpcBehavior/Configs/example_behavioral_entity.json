@@ -1,0 +1,23 @@
+{
+	"entities": [
+		{
+			"entity_type": "BEHAVIORAL",
+			"entity": {
+				"entity_id": 1,
+				"entity_name": "Villager",
+				"accepted_actions_ids": [0, 1],
+				"initial_state": { "energy": 100, "social": 0 },
+				"is_static": false,
+				"position_update_frequency_ms": 1000,
+				"main_sequence_id": 0,
+				"fallback_sequences": [],
+				"interruption_handlers": {},
+				"memory_limits": {
+					"max_transition_memories": 10,
+					"max_action_memories": 10,
+					"max_interruption_memories": 10
+				}
+			}
+		}
+	]
+}

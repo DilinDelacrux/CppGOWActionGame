@@ -39,6 +39,10 @@
 		{
 			"Name": "CommonUI",
 			"Enabled": true
+		},
+		{
+			"Name": "AmbientNpcBehavior",
+			"Enabled": true
 		}
 	]
 }

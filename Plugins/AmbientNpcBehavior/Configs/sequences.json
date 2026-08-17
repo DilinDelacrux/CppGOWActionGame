@@ -1,0 +1,18 @@
+{
+	"sequences": [
+		{
+			"sequence_id": 0,
+			"sequence_name": "VillagerRoutine",
+			"entry_point_node_id": 0,
+			"nodes": [
+				{ "node_id": 0, "node_type": "ACTION", "target_action_id": 0 },
+				{ "node_id": 1, "node_type": "ACTION", "target_action_id": 1 },
+				{ "node_id": 2, "node_type": "END" }
+			],
+			"transitions": [
+				{ "transition_id": 0, "from_node_id": 0, "to_node_id": 1, "preconditions": [] },
+				{ "transition_id": 1, "from_node_id": 1, "to_node_id": 2, "preconditions": [] }
+			]
+		}
+	]
+}

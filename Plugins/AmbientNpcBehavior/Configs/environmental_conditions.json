@@ -1,0 +1,5 @@
+{
+	"environmental_conditions": [
+		{ "condition_key": 0, "name": "time_of_day", "update_frequency_ms": 1000 }
+	]
+}

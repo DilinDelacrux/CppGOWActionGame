@@ -1,0 +1,33 @@
+{
+	"timeout_check_interval_ms": 1000,
+	"actions": [
+		{
+			"action_id": 0,
+			"action_name": "Idle",
+			"preconditions": [],
+			"immediate_effects": [],
+			"completion_effects": [
+				{ "target_id_name": "SELF", "state_key_name": "energy", "operation_name": "DECREMENT", "value": 5 }
+			],
+			"interruption_effects": [],
+			"action_duration_ms": 3000,
+			"action_timeout_ms": 5000,
+			"interruption_behavior_name": "RESUMABLE"
+		},
+		{
+			"action_id": 1,
+			"action_name": "Chat",
+			"preconditions": [
+				{ "target_id_name": "SELF", "state_key_name": "social", "operation_name": "GREATER_THAN", "value": 0 }
+			],
+			"immediate_effects": [],
+			"completion_effects": [
+				{ "target_id_name": "SELF", "state_key_name": "social", "operation_name": "INCREMENT", "value": 1 }
+			],
+			"interruption_effects": [],
+			"action_duration_ms": 2000,
+			"action_timeout_ms": 4000,
+			"interruption_behavior_name": "NON_RESUMABLE"
+		}
+	]
+}

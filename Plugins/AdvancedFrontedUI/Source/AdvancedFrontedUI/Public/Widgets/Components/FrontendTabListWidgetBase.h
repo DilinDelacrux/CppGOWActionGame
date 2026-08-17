@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "UObject/ReflectedTypeAccessors.h"
 #include "CommonTabListWidgetBase.h"
 #include "FrontendTabListWidgetBase.generated.h"
 
@@ -18,10 +19,10 @@ class ADVANCEDFRONTEDUI_API UFrontendTabListWidgetBase : public UCommonTabListWi
 public:
 	void RequestRegisterTab(const FName& InTabID,const FText& InTabDisplayName);
 
-private:
+protected:
 	//~ Begin UWidget Interface
 #if WITH_EDITOR	
-	virtual void ValidateCompiledDefaults(class IWidgetCompilerLog& CompileLog) const override;
+	virtual void ValidateCompiledDefaults(IWidgetCompilerLog& CompileLog) const override;
 #endif
 	//~ End UWidget Interface
 

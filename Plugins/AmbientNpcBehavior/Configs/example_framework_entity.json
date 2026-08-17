@@ -1,0 +1,15 @@
+{
+	"entities": [
+		{
+			"entity_type": "FRAMEWORK",
+			"entity": {
+				"entity_id": 100,
+				"entity_name": "Campfire",
+				"accepted_actions_ids": [],
+				"initial_state": {},
+				"is_static": true,
+				"position_update_frequency_ms": 60000
+			}
+		}
+	]
+}

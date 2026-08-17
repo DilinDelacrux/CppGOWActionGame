@@ -1,0 +1,20 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0.0",
+	"FriendlyName": "Ambient NPC Behavior",
+	"Description": "Self-contained integration of the Ambient NPC Behavior Framework (memory-driven ambient NPC action selection).",
+	"Category": "AI",
+	"CreatedBy": "EricBL3 / plugin integration",
+	"CreatedByURL": "https://github.com/EricBL3/ambient-npc-behavior-framework",
+	"DocsURL": "https://github.com/EricBL3/ambient-npc-behavior-unreal-sample",
+	"CanContainContent": true,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "AmbientNpcBehavior",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}

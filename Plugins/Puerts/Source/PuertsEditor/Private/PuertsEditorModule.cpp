@@ -24,8 +24,6 @@
 #include "Framework/Notifications/NotificationManager.h"
 #include "Widgets/Notifications/SNotificationList.h"
 
-#define LOCTEXT_NAMESPACE "FPuertsEditorModule"
-
 class FPuertsEditorModule : public IPuertsEditorModule
 {
     /** IModuleInterface implementation */
@@ -136,9 +134,9 @@ void FPuertsEditorModule::RegisterMenus()
         FUIAction(
             FExecuteAction::CreateRaw(this, &FPuertsEditorModule::SyncTypeScriptBlueprints),
             FCanExecuteAction::CreateRaw(this, &FPuertsEditorModule::CanSyncTypeScriptBlueprints)),
-        LOCTEXT("SyncTypeScriptBlueprintsLabel", "Sync TS Blueprints"),
-        LOCTEXT("SyncTypeScriptBlueprintsTooltip", "Compile TypeScript and create or refresh all Puerts TypeScript Blueprints."),
-        FSlateIcon(FAppStyle::GetAppStyleSetName(), "Icons.Refresh"))));
+        NSLOCTEXT("PuertsEditor", "SyncTypeScriptBlueprintsLabel", "Sync TS Blueprints"),
+        NSLOCTEXT("PuertsEditor", "SyncTypeScriptBlueprintsTooltip", "Compile TypeScript and create or refresh all Puerts TypeScript Blueprints."),
+        FSlateIcon(FAppStyle::GetAppStyleSetName(), "Icons.Refresh")));
 }
 
 bool FPuertsEditorModule::CanSyncTypeScriptBlueprints() const
@@ -150,7 +148,7 @@ void FPuertsEditorModule::SyncTypeScriptBlueprints()
 {
     if (!CanSyncTypeScriptBlueprints())
     {
-        FNotificationInfo Info(LOCTEXT("SyncTypeScriptBlueprintsUnavailable", "Stop PIE before syncing TypeScript Blueprints."));
+        FNotificationInfo Info(NSLOCTEXT("PuertsEditor", "SyncTypeScriptBlueprintsUnavailable", "Stop PIE before syncing TypeScript Blueprints."));
         Info.bFireAndForget = true;
         Info.ExpireDuration = 4.0f;
         FSlateNotificationManager::Get().AddNotification(Info);
@@ -159,7 +157,7 @@ void FPuertsEditorModule::SyncTypeScriptBlueprints()
 
     CmdImpl(TEXT("sync"), TEXT(""));
 
-    FNotificationInfo Info(LOCTEXT("SyncTypeScriptBlueprintsStarted", "Puerts TypeScript Blueprint sync requested. Check Output Log for results."));
+    FNotificationInfo Info(NSLOCTEXT("PuertsEditor", "SyncTypeScriptBlueprintsStarted", "Puerts TypeScript Blueprint sync requested. Check Output Log for results."));
     Info.bFireAndForget = true;
     Info.ExpireDuration = 4.0f;
     FSlateNotificationManager::Get().AddNotification(Info);
@@ -235,5 +233,3 @@ void FPuertsEditorModule::PreBeginPIE(bool bIsSimulating)
 void FPuertsEditorModule::EndPIE(bool bIsSimulating)
 {
 }
-
-#undef LOCTEXT_NAMESPACE

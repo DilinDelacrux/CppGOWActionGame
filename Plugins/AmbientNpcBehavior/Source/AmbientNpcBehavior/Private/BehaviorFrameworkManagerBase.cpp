@@ -23,11 +23,13 @@ FString ResolveProjectPath(const FString& Path)
 ABehaviorFrameworkManagerBase::ABehaviorFrameworkManagerBase()
 {
 	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bStartWithTickEnabled = true;
 }
 
 void ABehaviorFrameworkManagerBase::BeginPlay()
 {
 	Super::BeginPlay();
+	SetActorTickEnabled(true);
 
 	InitializeFramework();
 }

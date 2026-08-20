@@ -53,7 +53,7 @@ const MINUTES_PER_DAY = 24 * 60
  * environmental_conditions 声明并通过 QueryEnvironmentalCondition 提供。
  */
 class AmbientNpcDataDrivenScheduleDemo extends UE.BehaviorFrameworkManagerBase {
-    ReceiveBeginPlay(): void {
+    OnAmbientNpcScriptBeginPlay(): void {
         const runtime = this.runtime()
         if (!runtime) return
 
@@ -62,7 +62,7 @@ class AmbientNpcDataDrivenScheduleDemo extends UE.BehaviorFrameworkManagerBase {
         this.update(runtime, 0)
     }
 
-    ReceiveTick(deltaSeconds: number): void {
+    OnAmbientNpcScriptTick(deltaSeconds: number): void {
         const runtime = this.runtime()
         if (!runtime) return
 

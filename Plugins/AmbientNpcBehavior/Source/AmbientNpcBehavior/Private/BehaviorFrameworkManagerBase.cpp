@@ -33,6 +33,9 @@ void ABehaviorFrameworkManagerBase::BeginPlay()
 	SetActorTickEnabled(true);
 
 	InitializeFramework();
+	UE_LOG(LogTemp, Display, TEXT("[AmbientNpcBehavior] BeginPlay: %s | Config=%s | Initialized=%s"),
+		*GetName(), *GetNameSafe(Config), bInitialized ? TEXT("true") : TEXT("false"));
+	OnAmbientNpcScriptBeginPlay();
 }
 
 void ABehaviorFrameworkManagerBase::EndPlay(const EEndPlayReason::Type EndPlayReason)
@@ -47,6 +50,12 @@ void ABehaviorFrameworkManagerBase::Tick(float DeltaSeconds)
 	Super::Tick(DeltaSeconds);
 
 	TickFramework();
+	if (!bLoggedFirstScriptTick)
+	{
+		bLoggedFirstScriptTick = true;
+		UE_LOG(LogTemp, Display, TEXT("[AmbientNpcBehavior] Script tick started: %s"), *GetName());
+	}
+	OnAmbientNpcScriptTick(DeltaSeconds);
 }
 
 void ABehaviorFrameworkManagerBase::InitializeFramework()

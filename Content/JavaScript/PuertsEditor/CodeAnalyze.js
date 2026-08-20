@@ -402,16 +402,16 @@ function watch(configFilePath) {
             }
         });
         fileNames.forEach(fileName => {
-            if (versionsFileExisted && (!(fileName in restoredFileVersions)))
-                return;
-            if (versionsFileExisted && (!restoredFileVersions[fileName].isBP))
-                return;
+            const restored = restoredFileVersions[fileName];
             const { moduleFileName, modulePath } = getClassPathInfo(fileName);
             let BPExisted = false;
             if (moduleFileName) {
                 BPExisted = UE.PEBlueprintAsset.Existed(moduleFileName, modulePath);
             }
-            if (!versionsFileExisted || restoredFileVersions[fileName].version != fileVersions[fileName].version || !restoredFileVersions[fileName].processed || !BPExisted) {
+            const sourceChanged = !restored || restored.version != fileVersions[fileName].version;
+            if (restored && !restored.isBP && !sourceChanged && !BPExisted)
+                return;
+            if (!versionsFileExisted || sourceChanged || !restored.processed || !BPExisted || !restored.isBP) {
                 onSourceFileAddOrChange(fileName, false, program, false);
                 changed = true;
             }

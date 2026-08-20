@@ -36,6 +36,14 @@ public:
 	UFUNCTION(BlueprintPure, Category = "AmbientNpc")
 	bool IsInitialized() const { return bInitialized; }
 
+	/** Explicit script lifecycle hook, called after framework initialization. */
+	UFUNCTION(BlueprintImplementableEvent, Category = "AmbientNpc|Script")
+	void OnAmbientNpcScriptBeginPlay();
+
+	/** Explicit script lifecycle hook, called once per actor tick. */
+	UFUNCTION(BlueprintImplementableEvent, Category = "AmbientNpc|Script")
+	void OnAmbientNpcScriptTick(float DeltaSeconds);
+
 	/** Reads the daily-schedule JSON selected on Config. Returns an empty string if it cannot be read. */
 	UFUNCTION(BlueprintCallable, Category = "AmbientNpc|Schedule")
 	FString LoadDailyScheduleJson() const;
@@ -88,5 +96,6 @@ private:
 
 	void* FrameworkHandle = nullptr;
 	bool bInitialized = false;
+	bool bLoggedFirstScriptTick = false;
 	TSet<AAmbientEntityBase*> RegisteredEntities;
 };

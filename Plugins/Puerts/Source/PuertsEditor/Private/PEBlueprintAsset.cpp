@@ -74,7 +74,7 @@ static bool IsPlaying()
 
 bool UPEBlueprintAsset::Existed(const FString& InName, const FString& InPath)
 {
-    FString BPPath = FString(TEXT(TS_BLUEPRINT_PATH)) / InName + TEXT(".uasset");
+    FString BPPath = FString(TEXT(TS_BLUEPRINT_PATH)) / InPath / InName + TEXT(".uasset");
     if (BPPath[0] == TEXT('/') || BPPath[0] == TEXT('\\'))
     {
         BPPath = BPPath.Mid(1);
@@ -484,6 +484,37 @@ void UPEBlueprintAsset::AddFunction(FName InName, bool IsVoid, FPEGraphPinType I
                 FBlueprintEditorUtils::AddFunctionGraph(Blueprint, NewGraph, /*bIsUserCreated=*/false, OverrideFuncClass);
                 NewGraph->Modify();
                 NeedSave = true;
+            }
+            else
+            {
+                // A graph created before the parent function existed is stored as a local
+                // function. Reusing it unchanged makes Kismet report that its name is
+                // already used by the parent class. Repair the signature during sync.
+                TArray<UK2Node_FunctionTerminator*> Terminators;
+                ExistingGraph->GetNodesOfClass(Terminators);
+                const bool bNeedsOverrideRepair = Terminators.ContainsByPredicate(
+                    [InName, OverrideFuncClass](const UK2Node_FunctionTerminator* Terminator)
+                    {
+                        return Terminator &&
+                            (Terminator->FunctionReference.GetMemberName() != InName ||
+                                Terminator->FunctionReference.GetMemberParentClass() != OverrideFuncClass);
+                    });
+
+                if (bNeedsOverrideRepair)
+                {
+                    CanChangeCheck();
+                    Blueprint->Modify();
+                    ExistingGraph->Modify();
+                    for (UK2Node_FunctionTerminator* Terminator : Terminators)
+                    {
+                        if (Terminator)
+                        {
+                            Terminator->Modify();
+                            Terminator->FunctionReference.SetExternalMember(InName, OverrideFuncClass);
+                        }
+                    }
+                    NeedSave = true;
+                }
             }
             FunctionAdded.Add(InName);
         }

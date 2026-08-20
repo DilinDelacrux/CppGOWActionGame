@@ -1077,6 +1077,20 @@ function watch(configFilePath) {
         refreshBlueprints();
     }
     function syncBlueprints() {
+        // Re-read tsconfig so files added after the editor watcher started are
+        // included even if the directory notification was missed.
+        const cmdLine = readAndParseConfigFile(configFilePath);
+        fileNames = cmdLine.fileNames;
+        options = cmdLine.options;
+        fileNames.forEach(fileName => {
+            const version = UE.FileSystemOperation.FileMD5Hash(fileName);
+            if (!(fileName in fileVersions)) {
+                fileVersions[fileName] = { version, processed: false };
+            }
+            else {
+                fileVersions[fileName].version = version;
+            }
+        });
         program = getProgramFromService();
         const diagnostics = ts.getPreEmitDiagnostics(program);
         if (diagnostics.length > 0) {
@@ -1093,7 +1107,7 @@ function watch(configFilePath) {
         });
         refreshBlueprints();
         UE.FileSystemOperation.WriteFile(versionsFilePath, JSON.stringify(fileVersions, null, 4));
-        console.log(`TypeScript Blueprint sync complete: ${blueprintCount} Blueprint class(es).`);
+        console.log(`TypeScript Blueprint sync complete: ${blueprintCount} Blueprint class(es), output: /Game/Asset/TsBlueprints.`);
     }
     function dispatchCmd(cmd, args) {
         if (cmd == 'ls') {

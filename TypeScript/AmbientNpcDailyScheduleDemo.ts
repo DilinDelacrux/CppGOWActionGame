@@ -33,7 +33,7 @@ class AmbientNpcDailyScheduleDemo extends UE.BehaviorFrameworkManagerBase {
     ]
 
     ReceiveBeginPlay(): void {
-        console.log('[AmbientNpcSchedule] 日程 Demo 启动：120 秒 = 游戏内 24 小时；请确保蓝图已配置 AmbientNpcBehavior Config。')
+        console.warn('[AmbientNpcSchedule] 日程 Demo 启动：120 秒 = 游戏内 24 小时；请确保蓝图已配置 AmbientNpcBehavior Config。')
         this.update(0)
     }
 
@@ -53,7 +53,7 @@ class AmbientNpcDailyScheduleDemo extends UE.BehaviorFrameworkManagerBase {
             const state = this.stateAt(npc, hour)
             if (state !== npc.state) {
                 npc.state = state
-                console.log(`[AmbientNpcSchedule] ${time} | ${npc.name}（${npc.job}）→ ${state}`)
+                console.warn(`[AmbientNpcSchedule] ${time} | ${npc.name}（${npc.job}）→ ${state}`)
             }
             if (state === '放松') relaxing.push(npc)
         }
@@ -64,7 +64,7 @@ class AmbientNpcDailyScheduleDemo extends UE.BehaviorFrameworkManagerBase {
             const b = relaxing[i + 1]
             const pair = `${a.name}（${a.job}）↔ ${b.name}（${b.job}）`
             pairs.add(pair)
-            if (!this.activePairs.has(pair)) console.log(`[AmbientNpcSchedule] ${time} | 对话开始：${pair}`)
+            if (!this.activePairs.has(pair)) console.warn(`[AmbientNpcSchedule] ${time} | 对话开始：${pair}`)
         }
         this.activePairs = pairs
     }

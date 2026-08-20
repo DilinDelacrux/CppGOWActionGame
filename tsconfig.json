@@ -4,6 +4,7 @@
         "module": "commonjs",
         "jsx": "react",
         "sourceMap": true,
+        "skipLibCheck": true,
         "experimentalDecorators": true,
         "typeRoots": [
             "Typing",

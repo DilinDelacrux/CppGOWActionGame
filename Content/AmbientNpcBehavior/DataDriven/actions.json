@@ -1,0 +1,11 @@
+{
+  "timeout_check_interval_ms": 100,
+  "actions": [
+    { "action_id": 0, "action_name": "睡觉", "preconditions": [], "immediate_effects": [], "completion_effects": [], "interruption_effects": [], "action_duration_ms": 500, "action_timeout_ms": 1000, "interruption_behavior_name": "RESUMABLE" },
+    { "action_id": 1, "action_name": "工作", "preconditions": [], "immediate_effects": [], "completion_effects": [{ "target_id_name": "SELF", "state_key_name": "completed_activities", "operation_name": "INCREMENT", "value": 1 }], "interruption_effects": [], "action_duration_ms": 500, "action_timeout_ms": 1000, "interruption_behavior_name": "RESUMABLE" },
+    { "action_id": 2, "action_name": "午饭", "preconditions": [], "immediate_effects": [], "completion_effects": [], "interruption_effects": [], "action_duration_ms": 500, "action_timeout_ms": 1000, "interruption_behavior_name": "NON_RESUMABLE" },
+    { "action_id": 3, "action_name": "晚饭", "preconditions": [], "immediate_effects": [], "completion_effects": [], "interruption_effects": [], "action_duration_ms": 500, "action_timeout_ms": 1000, "interruption_behavior_name": "NON_RESUMABLE" },
+    { "action_id": 4, "action_name": "放松", "preconditions": [], "immediate_effects": [], "completion_effects": [], "interruption_effects": [], "action_duration_ms": 500, "action_timeout_ms": 1000, "interruption_behavior_name": "RESUMABLE" },
+    { "action_id": 5, "action_name": "对话", "preconditions": [{ "target_id_name": "SELF", "state_key_name": "social", "operation_name": "GREATER_THAN", "value": 0 }], "immediate_effects": [], "completion_effects": [{ "target_id_name": "SELF", "state_key_name": "social", "operation_name": "INCREMENT", "value": 1 }], "interruption_effects": [], "action_duration_ms": 500, "action_timeout_ms": 1000, "interruption_behavior_name": "NON_RESUMABLE" }
+  ]
+}

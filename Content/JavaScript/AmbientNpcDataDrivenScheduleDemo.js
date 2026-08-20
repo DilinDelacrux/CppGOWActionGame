@@ -5,17 +5,17 @@ const runtimes = new WeakMap();
 const invalidInstances = new WeakSet();
 const MINUTES_PER_DAY = 24 * 60;
 /**
- * 最基础的数据驱动日程 Demo。
- *
- * 此脚本不包含职业、餐食或睡眠的时间规则；它只解释 JSON 的 events。
- * 想增加状态，只需在 JSON 里增加一个 { at, state } 事件，不需要修改脚本。
+ * 五配置文件数据驱动 Demo。
+ * daily_schedule 只记录时间与 sequence/node 引用；实际行为名称来自
+ * actions，节点关系来自 sequences，状态键由 schema 校验，游戏分钟由
+ * environmental_conditions 声明并通过 QueryEnvironmentalCondition 提供。
  */
 class AmbientNpcDataDrivenScheduleDemo extends UE.BehaviorFrameworkManagerBase {
     ReceiveBeginPlay() {
         const runtime = this.runtime();
         if (!runtime)
             return;
-        console.warn(`[AmbientNpcSchedule] 数据驱动 Demo 启动：${runtime.dayDuration} 秒 = 游戏内 24 小时。`);
+        console.warn(`[AmbientNpcSchedule] 五配置数据驱动 Demo 启动：${runtime.dayDuration} 秒 = 游戏内 24 小时。`);
         this.beginDay(runtime);
         this.update(runtime, 0);
     }
@@ -23,6 +23,10 @@ class AmbientNpcDataDrivenScheduleDemo extends UE.BehaviorFrameworkManagerBase {
         const runtime = this.runtime();
         if (!runtime)
             return;
+        if (!runtime.frameworkStatusLogged) {
+            runtime.frameworkStatusLogged = true;
+            console.warn(`[AmbientNpcSchedule] 5/5 配置已解析；AmbientNpcBehavior 初始化=${this.IsInitialized()}`);
+        }
         runtime.elapsed += deltaSeconds;
         while (runtime.elapsed >= runtime.dayDuration) {
             runtime.elapsed -= runtime.dayDuration;
@@ -37,61 +41,68 @@ class AmbientNpcDataDrivenScheduleDemo extends UE.BehaviorFrameworkManagerBase {
         runtime.lastLoggedSecond = second;
         this.update(runtime, this.gameMinute(runtime));
     }
+    QueryEnvironmentalCondition(conditionKey) {
+        const runtime = this.runtime();
+        if (!runtime)
+            return 0;
+        return runtime.environmentNames.get(conditionKey) === 'game_minute' ? this.gameMinute(runtime) : 0;
+    }
     update(runtime, minute) {
         const now = this.formatTime(minute);
         for (const npc of runtime.npcs) {
-            const state = this.stateAt(npc, minute);
-            if (state !== npc.state) {
-                npc.state = state;
-                console.warn(`[AmbientNpcSchedule] 第 ${runtime.day + 1} 日 ${now} | ${npc.name}（${npc.profession}）→ ${state}`);
+            const event = this.eventAt(npc, minute);
+            if (event.actionId !== npc.currentActionId) {
+                npc.currentActionId = event.actionId;
+                console.warn(`[AmbientNpcSchedule] 第 ${runtime.day + 1} 日 ${now} | ${npc.name}（${npc.profession}）→ ${event.actionName} [Action ${event.actionId}]`);
             }
         }
         this.runInteractionRules(runtime, now);
     }
     beginDay(runtime) {
-        console.warn(`[AmbientNpcSchedule] 第 ${runtime.day + 1} 日：根据 JSON 生成当天事件。`);
-        runtime.npcs = runtime.sourceNpcs.map((sourceNpc, npcIndex) => ({
-            id: sourceNpc.id,
-            name: sourceNpc.name,
-            profession: sourceNpc.profession,
-            events: sourceNpc.events.map((event, eventIndex) => {
+        console.warn(`[AmbientNpcSchedule] 第 ${runtime.day + 1} 日：从 sequence/node 引用生成当天行为。`);
+        runtime.npcs = runtime.sourceNpcs.map((sourceNpc, npcIndex) => {
+            const sequence = runtime.sequences.get(sourceNpc.sequence_id);
+            const nodes = new Map(sequence.nodes.map(node => [node.node_id, node]));
+            const resolvedEvents = sourceNpc.events.map((event, eventIndex) => {
+                const node = nodes.get(event.node_id);
+                const action = runtime.actions.get(node.target_action_id);
                 const baseMinute = this.parseTime(event.at);
                 const offset = event.jitter_minutes
                     ? this.dailyOffset(runtime.day, npcIndex, eventIndex, event.jitter_minutes)
                     : 0;
                 if (offset !== 0) {
-                    console.warn(`[AmbientNpcSchedule] ${sourceNpc.name} | ${event.state} 事件：${this.formatTime(baseMinute + offset)}（${offset > 0 ? '+' : ''}${offset} 分钟）`);
+                    console.warn(`[AmbientNpcSchedule] ${sourceNpc.name} | ${action.action_name}：${this.formatTime(baseMinute + offset)}（${offset > 0 ? '+' : ''}${offset} 分钟）`);
                 }
-                return { minute: baseMinute + offset, state: event.state };
-            }).sort((a, b) => a.minute - b.minute),
-        }));
+                return { minute: baseMinute + offset, actionId: action.action_id, actionName: action.action_name };
+            }).sort((first, second) => first.minute - second.minute);
+            return { ...sourceNpc, resolvedEvents };
+        });
+    }
+    eventAt(npc, minute) {
+        let current = npc.resolvedEvents[0];
+        for (const event of npc.resolvedEvents) {
+            if (event.minute > minute)
+                break;
+            current = event;
+        }
+        return current;
     }
     runInteractionRules(runtime, now) {
         const currentInteractions = new Set();
         runtime.rules.forEach((rule, ruleIndex) => {
-            if (rule.type !== 'pair_conversation')
-                return;
-            const matching = runtime.npcs.filter(npc => npc.state === rule.required_state);
+            const matching = runtime.npcs.filter(npc => npc.currentActionId === rule.when_action_id);
             for (let index = 0; index + 1 < matching.length; index += 2) {
                 const first = matching[index];
                 const second = matching[index + 1];
                 const key = `${ruleIndex}:${first.id}:${second.id}`;
                 currentInteractions.add(key);
                 if (!runtime.activeInteractions.has(key)) {
-                    console.warn(`[AmbientNpcSchedule] 第 ${runtime.day + 1} 日 ${now} | 对话开始：${first.name}（${first.profession}）↔ ${second.name}（${second.profession}）`);
+                    const actionName = runtime.actions.get(rule.conversation_action_id).action_name;
+                    console.warn(`[AmbientNpcSchedule] 第 ${runtime.day + 1} 日 ${now} | ${actionName}开始：${first.name}（${first.profession}）↔ ${second.name}（${second.profession}）`);
                 }
             }
         });
         runtime.activeInteractions = currentInteractions;
-    }
-    stateAt(npc, minute) {
-        let current = npc.events[0]?.state ?? '未定义';
-        for (const event of npc.events) {
-            if (event.minute > minute)
-                break;
-            current = event.state;
-        }
-        return current;
     }
     dailyOffset(day, npcIndex, eventIndex, jitter) {
         if (jitter.min < 0 || jitter.max < jitter.min)
@@ -123,29 +134,78 @@ class AmbientNpcDataDrivenScheduleDemo extends UE.BehaviorFrameworkManagerBase {
             return existing;
         if (invalidInstances.has(this))
             return undefined;
-        const loader = this;
-        const rawJson = loader.LoadDailyScheduleJson();
-        if (!rawJson)
-            return this.fail('无法读取日程 JSON；请检查 Config Data Asset 的 Daily Schedule File Path。');
         try {
-            const data = JSON.parse(rawJson);
-            if (!Array.isArray(data.npcs) || data.npcs.length === 0)
-                throw new Error('npcs 必须是非空数组');
-            if (data.day_duration_seconds <= 0)
-                throw new Error('day_duration_seconds 必须大于 0');
-            for (const npc of data.npcs) {
-                if (!npc.id || !npc.name || !npc.profession || !Array.isArray(npc.events) || npc.events.length === 0) {
-                    throw new Error('每个 NPC 必须包含 id、name、profession 和非空 events');
+            const loader = this;
+            const raw = {
+                schema: loader.LoadSchemaJson(),
+                sequences: loader.LoadSequencesJson(),
+                actions: loader.LoadActionsJson(),
+                environment: loader.LoadEnvironmentalConditionsJson(),
+                daily: loader.LoadDailyScheduleJson(),
+            };
+            const missing = Object.entries(raw).filter(([, value]) => !value).map(([name]) => name);
+            if (missing.length > 0)
+                throw new Error(`无法读取配置：${missing.join(', ')}`);
+            const schema = JSON.parse(raw.schema);
+            const actionConfig = JSON.parse(raw.actions);
+            const sequenceConfig = JSON.parse(raw.sequences);
+            const environmentConfig = JSON.parse(raw.environment);
+            const daily = JSON.parse(raw.daily);
+            const stateNames = new Set(schema.entity_states.map(state => state.name));
+            const actions = new Map(actionConfig.actions.map(action => [action.action_id, action]));
+            const sequences = new Map(sequenceConfig.sequences.map(sequence => [sequence.sequence_id, sequence]));
+            const environmentNames = new Map(environmentConfig.environmental_conditions.map(condition => [condition.condition_key, condition.name]));
+            if (!environmentConfig.environmental_conditions.some(condition => condition.name === 'game_minute')) {
+                throw new Error('environmental_conditions 缺少 game_minute');
+            }
+            for (const action of actions.values()) {
+                const effects = [...action.preconditions, ...action.immediate_effects, ...action.completion_effects, ...action.interruption_effects];
+                for (const effect of effects) {
+                    if (effect.target_id_name !== 'ENVIRONMENT' && effect.target_id_name !== 'DISTANCE_TO_ENTITY' && !stateNames.has(effect.state_key_name)) {
+                        throw new Error(`Action ${action.action_id} 引用了 schema 中不存在的状态 ${effect.state_key_name}`);
+                    }
                 }
-                npc.events.forEach(event => this.parseTime(event.at));
+            }
+            for (const sequence of sequences.values()) {
+                for (const node of sequence.nodes) {
+                    if (node.node_type === 'ACTION' && !actions.has(node.target_action_id)) {
+                        throw new Error(`Sequence ${sequence.sequence_id}/Node ${node.node_id} 引用了不存在的 Action ${node.target_action_id}`);
+                    }
+                }
+            }
+            if (!Array.isArray(daily.npcs) || daily.npcs.length === 0 || daily.day_duration_seconds <= 0) {
+                throw new Error('daily_schedule 的 npcs 或 day_duration_seconds 无效');
+            }
+            for (const npc of daily.npcs) {
+                const sequence = sequences.get(npc.sequence_id);
+                if (!sequence)
+                    throw new Error(`${npc.name} 引用了不存在的 Sequence ${npc.sequence_id}`);
+                const nodes = new Map(sequence.nodes.map(node => [node.node_id, node]));
+                if (!npc.events.length)
+                    throw new Error(`${npc.name} 没有 events`);
+                for (const event of npc.events) {
+                    this.parseTime(event.at);
+                    const node = nodes.get(event.node_id);
+                    if (!node || node.node_type !== 'ACTION')
+                        throw new Error(`${npc.name} 引用了无效的 Node ${event.node_id}`);
+                }
+            }
+            for (const rule of daily.interaction_rules ?? []) {
+                if (!actions.has(rule.when_action_id) || !actions.has(rule.conversation_action_id)) {
+                    throw new Error('interaction_rules 引用了不存在的 Action');
+                }
             }
             const runtime = {
                 elapsed: 0,
                 day: 0,
-                dayDuration: data.day_duration_seconds,
+                dayDuration: daily.day_duration_seconds,
                 lastLoggedSecond: -1,
-                sourceNpcs: data.npcs,
-                rules: data.interaction_rules ?? [],
+                frameworkStatusLogged: false,
+                actions,
+                sequences,
+                environmentNames,
+                sourceNpcs: daily.npcs,
+                rules: daily.interaction_rules ?? [],
                 npcs: [],
                 activeInteractions: new Set(),
             };
@@ -153,13 +213,10 @@ class AmbientNpcDataDrivenScheduleDemo extends UE.BehaviorFrameworkManagerBase {
             return runtime;
         }
         catch (error) {
-            return this.fail(`日程 JSON 解析失败：${String(error)}`);
+            invalidInstances.add(this);
+            console.error(`[AmbientNpcSchedule] 五配置初始化失败：${String(error)}`);
+            return undefined;
         }
-    }
-    fail(message) {
-        invalidInstances.add(this);
-        console.error(`[AmbientNpcSchedule] ${message}`);
-        return undefined;
     }
 }
 exports.default = AmbientNpcDataDrivenScheduleDemo;

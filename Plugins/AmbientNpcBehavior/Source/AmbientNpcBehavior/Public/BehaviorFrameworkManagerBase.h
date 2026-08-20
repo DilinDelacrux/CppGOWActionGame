@@ -40,6 +40,18 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "AmbientNpc|Schedule")
 	FString LoadDailyScheduleJson() const;
 
+	UFUNCTION(BlueprintCallable, Category = "AmbientNpc|Configuration")
+	FString LoadSchemaJson() const;
+
+	UFUNCTION(BlueprintCallable, Category = "AmbientNpc|Configuration")
+	FString LoadSequencesJson() const;
+
+	UFUNCTION(BlueprintCallable, Category = "AmbientNpc|Configuration")
+	FString LoadActionsJson() const;
+
+	UFUNCTION(BlueprintCallable, Category = "AmbientNpc|Configuration")
+	FString LoadEnvironmentalConditionsJson() const;
+
 	/** Signals that an entity finished executing an action. */
 	UFUNCTION(BlueprintCallable, Category = "AmbientNpc")
 	void CompleteCharacterAction(AAmbientEntityBase* Entity, int32 ActionId, int64 ActionToken);
@@ -68,6 +80,7 @@ protected:
 
 private:
 	void TickFramework();
+	FString LoadConfigJson(const FString& FilePath, const TCHAR* ConfigName) const;
 
 	static int32 StaticQueryEnvironmentalCondition(int32 ConditionKey);
 	static void StaticStartCharacterAction(void* EntityHandle, int32 ActionId, int64 ActionToken, int64 ActionDurationMs, void* TargetEntityHandle);

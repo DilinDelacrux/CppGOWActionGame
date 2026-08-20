@@ -1,0 +1,10 @@
+{
+  "entity_states": [
+    { "name": "energy", "key": 0 },
+    { "name": "social", "key": 1 },
+    { "name": "completed_activities", "key": 2 }
+  ],
+  "interruption_handlers": [
+    { "name": "greeting", "key": 0 }
+  ]
+}

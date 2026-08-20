@@ -127,11 +127,36 @@ FString ABehaviorFrameworkManagerBase::LoadDailyScheduleJson() const
 		return FString();
 	}
 
-	const FString ScheduleFilePath = ResolveProjectPath(Config->DailyScheduleFilePath);
+	return LoadConfigJson(Config->DailyScheduleFilePath, TEXT("daily schedule"));
+}
+
+FString ABehaviorFrameworkManagerBase::LoadSchemaJson() const
+{
+	return Config ? LoadConfigJson(Config->SchemaFilePath, TEXT("schema")) : FString();
+}
+
+FString ABehaviorFrameworkManagerBase::LoadSequencesJson() const
+{
+	return Config ? LoadConfigJson(Config->SequencesFilePath, TEXT("sequences")) : FString();
+}
+
+FString ABehaviorFrameworkManagerBase::LoadActionsJson() const
+{
+	return Config ? LoadConfigJson(Config->ActionsFilePath, TEXT("actions")) : FString();
+}
+
+FString ABehaviorFrameworkManagerBase::LoadEnvironmentalConditionsJson() const
+{
+	return Config ? LoadConfigJson(Config->EnvironmentalConditionsFilePath, TEXT("environmental conditions")) : FString();
+}
+
+FString ABehaviorFrameworkManagerBase::LoadConfigJson(const FString& FilePath, const TCHAR* ConfigName) const
+{
+	const FString ResolvedPath = ResolveProjectPath(FilePath);
 	FString Json;
-	if (ScheduleFilePath.IsEmpty() || !FFileHelper::LoadFileToString(Json, *ScheduleFilePath))
+	if (ResolvedPath.IsEmpty() || !FFileHelper::LoadFileToString(Json, *ResolvedPath))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("ABehaviorFrameworkManagerBase: cannot load daily schedule JSON: %s"), *ScheduleFilePath);
+		UE_LOG(LogTemp, Warning, TEXT("ABehaviorFrameworkManagerBase: cannot load %s JSON: %s"), ConfigName, *ResolvedPath);
 		return FString();
 	}
 

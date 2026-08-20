@@ -1,0 +1,5 @@
+{
+  "environmental_conditions": [
+    { "condition_key": 0, "name": "game_minute", "update_frequency_ms": 100 }
+  ]
+}

@@ -12,44 +12,40 @@ type Npc = {
     state?: State
 }
 
+type ScheduleState = {
+    elapsed: number
+    lastLoggedSecond: number
+    activePairs: Set<string>
+    npcs: Npc[]
+}
+
+// Puerts 的 TypeScript Blueprint 不保证执行类字段初始化；运行时状态放在
+// WeakMap，避免它被 Unreal 的对象/属性系统覆盖为 undefined。
+const scheduleStates = new WeakMap<object, ScheduleState>()
+const DAY_SECONDS = 120
+
 // 绑定到 BehaviorFrameworkManagerBase 的蓝图子类：底层仍由 AmbientNpcBehavior
 // 初始化和 Tick；这里仅演示其上层的日程状态与对话决策。
 class AmbientNpcDailyScheduleDemo extends UE.BehaviorFrameworkManagerBase {
-    private readonly daySeconds = 120
-    private elapsed = 0
-    private lastLoggedSecond = -1
-    private activePairs = new Set<string>()
-    private readonly npcs: Npc[] = [
-        { name: '阿诺', job: '铁匠', workStart: 6, workEnd: 12, relaxStart: 17, relaxEnd: 22 },
-        { name: '贝拉', job: '裁缝', workStart: 7, workEnd: 12, relaxStart: 16, relaxEnd: 21 },
-        { name: '科尔', job: '面包师', workStart: 4, workEnd: 11, relaxStart: 15, relaxEnd: 20 },
-        { name: '黛西', job: '药剂师', workStart: 8, workEnd: 12, relaxStart: 18, relaxEnd: 22 },
-        { name: '埃德', job: '木匠', workStart: 6, workEnd: 12, relaxStart: 17, relaxEnd: 21 },
-        { name: '菲奥娜', job: '陶工', workStart: 8, workEnd: 12, relaxStart: 16, relaxEnd: 22 },
-        { name: '加文', job: '猎人', workStart: 5, workEnd: 11, relaxStart: 17, relaxEnd: 20 },
-        { name: '海伦', job: '旅店老板', workStart: 9, workEnd: 12, relaxStart: 15, relaxEnd: 21 },
-        { name: '伊万', job: '农夫', workStart: 5, workEnd: 12, relaxStart: 16, relaxEnd: 20 },
-        { name: '朱恩', job: '书记员', workStart: 8, workEnd: 12, relaxStart: 18, relaxEnd: 22 },
-    ]
-
     ReceiveBeginPlay(): void {
         console.warn('[AmbientNpcSchedule] 日程 Demo 启动：120 秒 = 游戏内 24 小时；请确保蓝图已配置 AmbientNpcBehavior Config。')
-        this.update(0)
+        this.update(0, this.schedule())
     }
 
     ReceiveTick(deltaSeconds: number): void {
-        this.elapsed = (this.elapsed + deltaSeconds) % this.daySeconds
-        const second = Math.floor(this.elapsed)
-        if (second === this.lastLoggedSecond) return
-        this.lastLoggedSecond = second // 每秒输出一次，即每次推进 12 个游戏分钟
-        this.update(this.gameHour())
+        const state = this.schedule()
+        state.elapsed = (state.elapsed + deltaSeconds) % DAY_SECONDS
+        const second = Math.floor(state.elapsed)
+        if (second === state.lastLoggedSecond) return
+        state.lastLoggedSecond = second // 每秒输出一次，即每次推进 12 个游戏分钟
+        this.update(this.gameHour(state), state)
     }
 
-    private update(hour: number): void {
+    private update(hour: number, schedule: ScheduleState): void {
         const time = this.formatTime(hour)
         const relaxing: Npc[] = []
 
-        for (const npc of this.npcs) {
+        for (const npc of schedule.npcs) {
             const state = this.stateAt(npc, hour)
             if (state !== npc.state) {
                 npc.state = state
@@ -64,9 +60,9 @@ class AmbientNpcDailyScheduleDemo extends UE.BehaviorFrameworkManagerBase {
             const b = relaxing[i + 1]
             const pair = `${a.name}（${a.job}）↔ ${b.name}（${b.job}）`
             pairs.add(pair)
-            if (!this.activePairs.has(pair)) console.warn(`[AmbientNpcSchedule] ${time} | 对话开始：${pair}`)
+            if (!schedule.activePairs.has(pair)) console.warn(`[AmbientNpcSchedule] ${time} | 对话开始：${pair}`)
         }
-        this.activePairs = pairs
+        schedule.activePairs = pairs
     }
 
     private stateAt(npc: Npc, hour: number): State {
@@ -77,13 +73,38 @@ class AmbientNpcDailyScheduleDemo extends UE.BehaviorFrameworkManagerBase {
         return '睡觉'
     }
 
-    private gameHour(): number {
-        return this.elapsed / this.daySeconds * 24
+    private gameHour(schedule: ScheduleState): number {
+        return schedule.elapsed / DAY_SECONDS * 24
     }
 
     private formatTime(hour: number): string {
         const minutes = Math.floor(hour * 60)
         return `${String(Math.floor(minutes / 60)).padStart(2, '0')}:${String(minutes % 60).padStart(2, '0')}`
+    }
+
+    private schedule(): ScheduleState {
+        let state = scheduleStates.get(this)
+        if (!state) {
+            state = {
+                elapsed: 0,
+                lastLoggedSecond: -1,
+                activePairs: new Set<string>(),
+                npcs: [
+                    { name: '阿诺', job: '铁匠', workStart: 6, workEnd: 12, relaxStart: 17, relaxEnd: 22 },
+                    { name: '贝拉', job: '裁缝', workStart: 7, workEnd: 12, relaxStart: 16, relaxEnd: 21 },
+                    { name: '科尔', job: '面包师', workStart: 4, workEnd: 11, relaxStart: 15, relaxEnd: 20 },
+                    { name: '黛西', job: '药剂师', workStart: 8, workEnd: 12, relaxStart: 18, relaxEnd: 22 },
+                    { name: '埃德', job: '木匠', workStart: 6, workEnd: 12, relaxStart: 17, relaxEnd: 21 },
+                    { name: '菲奥娜', job: '陶工', workStart: 8, workEnd: 12, relaxStart: 16, relaxEnd: 22 },
+                    { name: '加文', job: '猎人', workStart: 5, workEnd: 11, relaxStart: 17, relaxEnd: 20 },
+                    { name: '海伦', job: '旅店老板', workStart: 9, workEnd: 12, relaxStart: 15, relaxEnd: 21 },
+                    { name: '伊万', job: '农夫', workStart: 5, workEnd: 12, relaxStart: 16, relaxEnd: 20 },
+                    { name: '朱恩', job: '书记员', workStart: 8, workEnd: 12, relaxStart: 18, relaxEnd: 22 },
+                ],
+            }
+            scheduleStates.set(this, state)
+        }
+        return state
     }
 }
 

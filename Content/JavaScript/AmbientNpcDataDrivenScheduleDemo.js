@@ -47,6 +47,7 @@ class AmbientNpcDataDrivenScheduleDemo extends UE.BehaviorFrameworkManagerBase {
             return 0;
         return runtime.environmentNames.get(conditionKey) === 'game_minute' ? this.gameMinute(runtime) : 0;
     }
+    // @no-blueprint
     update(runtime, minute) {
         const now = this.formatTime(minute);
         for (const npc of runtime.npcs) {
@@ -58,6 +59,7 @@ class AmbientNpcDataDrivenScheduleDemo extends UE.BehaviorFrameworkManagerBase {
         }
         this.runInteractionRules(runtime, now);
     }
+    // @no-blueprint
     beginDay(runtime) {
         console.warn(`[AmbientNpcSchedule] 第 ${runtime.day + 1} 日：从 sequence/node 引用生成当天行为。`);
         runtime.npcs = runtime.sourceNpcs.map((sourceNpc, npcIndex) => {
@@ -78,6 +80,7 @@ class AmbientNpcDataDrivenScheduleDemo extends UE.BehaviorFrameworkManagerBase {
             return { ...sourceNpc, resolvedEvents };
         });
     }
+    // @no-blueprint
     eventAt(npc, minute) {
         let current = npc.resolvedEvents[0];
         for (const event of npc.resolvedEvents) {
@@ -87,6 +90,7 @@ class AmbientNpcDataDrivenScheduleDemo extends UE.BehaviorFrameworkManagerBase {
         }
         return current;
     }
+    // @no-blueprint
     runInteractionRules(runtime, now) {
         const currentInteractions = new Set();
         runtime.rules.forEach((rule, ruleIndex) => {
@@ -104,6 +108,7 @@ class AmbientNpcDataDrivenScheduleDemo extends UE.BehaviorFrameworkManagerBase {
         });
         runtime.activeInteractions = currentInteractions;
     }
+    // @no-blueprint
     dailyOffset(day, npcIndex, eventIndex, jitter) {
         if (jitter.min < 0 || jitter.max < jitter.min)
             throw new Error('jitter_minutes 配置无效');
@@ -111,9 +116,11 @@ class AmbientNpcDataDrivenScheduleDemo extends UE.BehaviorFrameworkManagerBase {
         const magnitude = jitter.min + hash % (jitter.max - jitter.min + 1);
         return (hash & 1) === 0 ? -magnitude : magnitude;
     }
+    // @no-blueprint
     gameMinute(runtime) {
         return Math.floor(runtime.elapsed / runtime.dayDuration * MINUTES_PER_DAY);
     }
+    // @no-blueprint
     parseTime(value) {
         const match = /^(\d{1,2}):(\d{2})$/.exec(value);
         if (!match)
@@ -124,10 +131,12 @@ class AmbientNpcDataDrivenScheduleDemo extends UE.BehaviorFrameworkManagerBase {
             throw new Error(`无效时间：${value}`);
         return hour * 60 + minute;
     }
+    // @no-blueprint
     formatTime(minute) {
         const normalized = (minute + MINUTES_PER_DAY) % MINUTES_PER_DAY;
         return `${String(Math.floor(normalized / 60)).padStart(2, '0')}:${String(normalized % 60).padStart(2, '0')}`;
     }
+    // @no-blueprint
     runtime() {
         const existing = runtimes.get(this);
         if (existing)

@@ -81,6 +81,7 @@ class AmbientNpcDailyScheduleDemo extends UE.BehaviorFrameworkManagerBase {
         this.update(this.gameMinute(schedule), schedule)
     }
 
+    // @no-blueprint
     private update(minute: number, schedule: ScheduleState): void {
         const time = this.formatTime(minute)
         const relaxing: Npc[] = []
@@ -105,6 +106,7 @@ class AmbientNpcDailyScheduleDemo extends UE.BehaviorFrameworkManagerBase {
         schedule.activePairs = pairs
     }
 
+    // @no-blueprint
     private stateAt(npc: Npc, minute: number): State {
         if (minute >= npc.lunchStart && minute < npc.lunchEnd) return '午饭'
         if (minute >= npc.dinnerStart && minute < npc.dinnerEnd) return '晚饭'
@@ -113,6 +115,7 @@ class AmbientNpcDailyScheduleDemo extends UE.BehaviorFrameworkManagerBase {
         return '睡觉'
     }
 
+    // @no-blueprint
     private applyDailyWakeOffsets(schedule: ScheduleState): void {
         console.warn(`[AmbientNpcSchedule] 第 ${schedule.dayIndex + 1} 日：重新生成起床时间（±${schedule.wakeJitterMin}–${schedule.wakeJitterMax} 分钟）`)
         schedule.npcs.forEach((npc, index) => {
@@ -123,15 +126,18 @@ class AmbientNpcDailyScheduleDemo extends UE.BehaviorFrameworkManagerBase {
         })
     }
 
+    // @no-blueprint
     private gameMinute(schedule: ScheduleState): number {
         return Math.floor(schedule.elapsed / schedule.dayDurationSeconds * MINUTES_PER_DAY)
     }
 
+    // @no-blueprint
     private formatTime(minute: number): string {
         const normalized = (minute + MINUTES_PER_DAY) % MINUTES_PER_DAY
         return `${String(Math.floor(normalized / 60)).padStart(2, '0')}:${String(normalized % 60).padStart(2, '0')}`
     }
 
+    // @no-blueprint
     private parseTime(value: string): number {
         const match = /^(\d{1,2}):(\d{2})$/.exec(value)
         if (!match) throw new Error(`无效的时间格式：${value}（应为 HH:MM）`)
@@ -141,6 +147,7 @@ class AmbientNpcDailyScheduleDemo extends UE.BehaviorFrameworkManagerBase {
         return hour * 60 + minute
     }
 
+    // @no-blueprint
     private schedule(): ScheduleState | undefined {
         const existing = scheduleStates.get(this)
         if (existing) return existing

@@ -35,6 +35,7 @@ class AmbientNpcDailyScheduleDemo extends UE.BehaviorFrameworkManagerBase {
         schedule.lastLoggedSecond = second;
         this.update(this.gameMinute(schedule), schedule);
     }
+    // @no-blueprint
     update(minute, schedule) {
         const time = this.formatTime(minute);
         const relaxing = [];
@@ -58,6 +59,7 @@ class AmbientNpcDailyScheduleDemo extends UE.BehaviorFrameworkManagerBase {
         }
         schedule.activePairs = pairs;
     }
+    // @no-blueprint
     stateAt(npc, minute) {
         if (minute >= npc.lunchStart && minute < npc.lunchEnd)
             return '午饭';
@@ -69,6 +71,7 @@ class AmbientNpcDailyScheduleDemo extends UE.BehaviorFrameworkManagerBase {
             return '放松';
         return '睡觉';
     }
+    // @no-blueprint
     applyDailyWakeOffsets(schedule) {
         console.warn(`[AmbientNpcSchedule] 第 ${schedule.dayIndex + 1} 日：重新生成起床时间（±${schedule.wakeJitterMin}–${schedule.wakeJitterMax} 分钟）`);
         schedule.npcs.forEach((npc, index) => {
@@ -78,13 +81,16 @@ class AmbientNpcDailyScheduleDemo extends UE.BehaviorFrameworkManagerBase {
             console.warn(`[AmbientNpcSchedule] ${npc.name}（${npc.job}）起床：${this.formatTime(npc.wakeTime + npc.wakeOffset)}（${npc.wakeOffset >= 0 ? '+' : ''}${npc.wakeOffset} 分钟）`);
         });
     }
+    // @no-blueprint
     gameMinute(schedule) {
         return Math.floor(schedule.elapsed / schedule.dayDurationSeconds * MINUTES_PER_DAY);
     }
+    // @no-blueprint
     formatTime(minute) {
         const normalized = (minute + MINUTES_PER_DAY) % MINUTES_PER_DAY;
         return `${String(Math.floor(normalized / 60)).padStart(2, '0')}:${String(normalized % 60).padStart(2, '0')}`;
     }
+    // @no-blueprint
     parseTime(value) {
         const match = /^(\d{1,2}):(\d{2})$/.exec(value);
         if (!match)
@@ -95,6 +101,7 @@ class AmbientNpcDailyScheduleDemo extends UE.BehaviorFrameworkManagerBase {
             throw new Error(`无效的时间：${value}`);
         return hour * 60 + minute;
     }
+    // @no-blueprint
     schedule() {
         const existing = scheduleStates.get(this);
         if (existing)

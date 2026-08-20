@@ -511,6 +511,7 @@ void UPEBlueprintAsset::AddFunction(FName InName, bool IsVoid, FPEGraphPinType I
                         {
                             Terminator->Modify();
                             Terminator->FunctionReference.SetExternalMember(InName, OverrideFuncClass);
+                            Terminator->ReconstructNode();
                         }
                     }
                     NeedSave = true;

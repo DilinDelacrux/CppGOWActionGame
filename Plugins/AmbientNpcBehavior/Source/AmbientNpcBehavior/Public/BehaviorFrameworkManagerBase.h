@@ -36,6 +36,10 @@ public:
 	UFUNCTION(BlueprintPure, Category = "AmbientNpc")
 	bool IsInitialized() const { return bInitialized; }
 
+	/** Reads the daily-schedule JSON selected on Config. Returns an empty string if it cannot be read. */
+	UFUNCTION(BlueprintCallable, Category = "AmbientNpc|Schedule")
+	FString LoadDailyScheduleJson() const;
+
 	/** Signals that an entity finished executing an action. */
 	UFUNCTION(BlueprintCallable, Category = "AmbientNpc")
 	void CompleteCharacterAction(AAmbientEntityBase* Entity, int32 ActionId, int64 ActionToken);

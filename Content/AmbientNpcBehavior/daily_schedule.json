@@ -1,0 +1,16 @@
+{
+  "day_duration_seconds": 120,
+  "wake_jitter_minutes": { "min": 10, "max": 15 },
+  "npcs": [
+    { "name": "阿诺", "job": "铁匠", "wake_time": "06:00", "lunch_start": "11:50", "lunch_end": "12:50", "work_end": "17:00", "dinner_start": "18:00", "dinner_end": "19:00", "sleep_start": "22:00" },
+    { "name": "贝拉", "job": "裁缝", "wake_time": "07:00", "lunch_start": "12:00", "lunch_end": "13:00", "work_end": "16:45", "dinner_start": "18:00", "dinner_end": "19:00", "sleep_start": "21:30" },
+    { "name": "科尔", "job": "面包师", "wake_time": "05:00", "lunch_start": "11:35", "lunch_end": "12:35", "work_end": "15:50", "dinner_start": "17:45", "dinner_end": "18:45", "sleep_start": "20:30" },
+    { "name": "黛西", "job": "药剂师", "wake_time": "07:45", "lunch_start": "12:10", "lunch_end": "13:10", "work_end": "17:15", "dinner_start": "18:20", "dinner_end": "19:20", "sleep_start": "22:00" },
+    { "name": "埃德", "job": "木匠", "wake_time": "06:15", "lunch_start": "11:55", "lunch_end": "12:55", "work_end": "17:00", "dinner_start": "18:05", "dinner_end": "19:05", "sleep_start": "21:30" },
+    { "name": "菲奥娜", "job": "陶工", "wake_time": "08:00", "lunch_start": "12:05", "lunch_end": "13:05", "work_end": "16:35", "dinner_start": "18:15", "dinner_end": "19:15", "sleep_start": "22:00" },
+    { "name": "加文", "job": "猎人", "wake_time": "05:10", "lunch_start": "11:40", "lunch_end": "12:40", "work_end": "16:50", "dinner_start": "17:50", "dinner_end": "18:50", "sleep_start": "20:15" },
+    { "name": "海伦", "job": "旅店老板", "wake_time": "08:45", "lunch_start": "12:20", "lunch_end": "13:20", "work_end": "16:15", "dinner_start": "18:00", "dinner_end": "19:00", "sleep_start": "21:15" },
+    { "name": "伊万", "job": "农夫", "wake_time": "05:00", "lunch_start": "11:55", "lunch_end": "12:55", "work_end": "16:30", "dinner_start": "18:10", "dinner_end": "19:10", "sleep_start": "20:00" },
+    { "name": "朱恩", "job": "书记员", "wake_time": "08:00", "lunch_start": "12:15", "lunch_end": "13:15", "work_end": "17:05", "dinner_start": "18:20", "dinner_end": "19:20", "sleep_start": "22:00" }
+  ]
+}

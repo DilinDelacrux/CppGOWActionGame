@@ -34,6 +34,14 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Files")
 	FString EnvironmentalConditionsFilePath;
 
+	/**
+	 * Path to the daily NPC schedule JSON consumed by the schedule demo. Relative
+	 * paths are resolved from the project directory. This stays on the same data
+	 * asset as the framework files so a level has one authoritative config.
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Files")
+	FString DailyScheduleFilePath = TEXT("Content/AmbientNpcBehavior/daily_schedule.json");
+
 	/** Path where the framework writes its log file. Relative paths are resolved from the project directory. */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Logging")
 	FString LogFilePath;

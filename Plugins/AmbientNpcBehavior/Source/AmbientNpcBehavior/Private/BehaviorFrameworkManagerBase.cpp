@@ -4,6 +4,7 @@
 #include "Engine/World.h"
 #include "EngineUtils.h"
 #include "HAL/FileManager.h"
+#include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
 
 // The environmental-condition callback does not receive a framework or manager
@@ -116,6 +117,25 @@ void ABehaviorFrameworkManagerBase::ShutdownFramework()
 
 	bInitialized = false;
 	RegisteredEntities.Reset();
+}
+
+FString ABehaviorFrameworkManagerBase::LoadDailyScheduleJson() const
+{
+	if (!Config)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("ABehaviorFrameworkManagerBase: cannot load daily schedule; no UBehaviorFrameworkConfig assigned."));
+		return FString();
+	}
+
+	const FString ScheduleFilePath = ResolveProjectPath(Config->DailyScheduleFilePath);
+	FString Json;
+	if (ScheduleFilePath.IsEmpty() || !FFileHelper::LoadFileToString(Json, *ScheduleFilePath))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("ABehaviorFrameworkManagerBase: cannot load daily schedule JSON: %s"), *ScheduleFilePath);
+		return FString();
+	}
+
+	return Json;
 }
 
 void ABehaviorFrameworkManagerBase::TickFramework()

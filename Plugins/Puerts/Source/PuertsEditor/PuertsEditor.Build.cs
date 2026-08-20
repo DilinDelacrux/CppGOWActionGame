@@ -33,7 +33,8 @@ public class PuertsEditor : ModuleRules
                 "AssetRegistry",
                 "KismetCompiler",
                 "BlueprintGraph",
-                "AssetTools"
+                "AssetTools",
+                "ToolMenus"
             }
         );
         

@@ -1076,12 +1076,34 @@ function watch(configFilePath) {
         }
         refreshBlueprints();
     }
+    function syncBlueprints() {
+        program = getProgramFromService();
+        const diagnostics = ts.getPreEmitDiagnostics(program);
+        if (diagnostics.length > 0) {
+            logErrors(diagnostics);
+            console.error(`TypeScript Blueprint sync aborted: ${diagnostics.length} TypeScript error(s).`);
+            return;
+        }
+        let blueprintCount = 0;
+        fileNames.forEach(fileName => {
+            onSourceFileAddOrChange(fileName, false, program, true, true);
+            if (fileVersions[fileName].isBP) {
+                blueprintCount++;
+            }
+        });
+        refreshBlueprints();
+        UE.FileSystemOperation.WriteFile(versionsFilePath, JSON.stringify(fileVersions, null, 4));
+        console.log(`TypeScript Blueprint sync complete: ${blueprintCount} Blueprint class(es).`);
+    }
     function dispatchCmd(cmd, args) {
         if (cmd == 'ls') {
             list(args);
         }
         else if (cmd == 'compile') {
             compile(args);
+        }
+        else if (cmd == 'sync') {
+            syncBlueprints();
         }
         else {
             console.error(`unknow command for Puerts ${cmd}`);

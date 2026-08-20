@@ -19,6 +19,12 @@
 #include "Binding.hpp"
 #include "UEDataBinding.hpp"
 #include "Object.hpp"
+#include "ToolMenus.h"
+#include "Styling/AppStyle.h"
+#include "Framework/Notifications/NotificationManager.h"
+#include "Widgets/Notifications/SNotificationList.h"
+
+#define LOCTEXT_NAMESPACE "FPuertsEditorModule"
 
 class FPuertsEditorModule : public IPuertsEditorModule
 {
@@ -38,12 +44,17 @@ public:
     }
 
 private:
-    //
     void PreBeginPIE(bool bIsSimulating);
 
     void EndPIE(bool bIsSimulating);
 
     void OnPostEngineInit();
+
+    void RegisterMenus();
+
+    void SyncTypeScriptBlueprints();
+
+    bool CanSyncTypeScriptBlueprints() const;
 
     TSharedPtr<PUERTS_NAMESPACE::FJsEnv> JsEnv;
 
@@ -103,7 +114,55 @@ void FPuertsEditorModule::StartupModule()
                     UE_LOG(Puerts, Error, TEXT("Puerts command not initialized"));
                 }
             }));
+
+    UToolMenus::RegisterStartupCallback(
+        FSimpleMulticastDelegate::FDelegate::CreateRaw(this, &FPuertsEditorModule::RegisterMenus));
+
     this->OnPostEngineInit();
+}
+
+void FPuertsEditorModule::RegisterMenus()
+{
+    FToolMenuOwnerScoped OwnerScoped(this);
+    UToolMenu* ToolbarMenu = UToolMenus::Get()->ExtendMenu("LevelEditor.LevelEditorToolBar.User");
+    if (!ToolbarMenu)
+    {
+        ToolbarMenu = UToolMenus::Get()->ExtendMenu("LevelEditor.LevelEditorToolBar.PlayToolBar");
+    }
+
+    FToolMenuSection& Section = ToolbarMenu->FindOrAddSection("PluginTools");
+    Section.AddEntry(FToolMenuEntry::InitToolBarButton(
+        TEXT("Puerts.SyncTypeScriptBlueprints"),
+        FUIAction(
+            FExecuteAction::CreateRaw(this, &FPuertsEditorModule::SyncTypeScriptBlueprints),
+            FCanExecuteAction::CreateRaw(this, &FPuertsEditorModule::CanSyncTypeScriptBlueprints)),
+        LOCTEXT("SyncTypeScriptBlueprintsLabel", "Sync TS Blueprints"),
+        LOCTEXT("SyncTypeScriptBlueprintsTooltip", "Compile TypeScript and create or refresh all Puerts TypeScript Blueprints."),
+        FSlateIcon(FAppStyle::GetAppStyleSetName(), "Icons.Refresh"))));
+}
+
+bool FPuertsEditorModule::CanSyncTypeScriptBlueprints() const
+{
+    return Enabled && CmdImpl && (!GEditor || !GEditor->PlayWorld);
+}
+
+void FPuertsEditorModule::SyncTypeScriptBlueprints()
+{
+    if (!CanSyncTypeScriptBlueprints())
+    {
+        FNotificationInfo Info(LOCTEXT("SyncTypeScriptBlueprintsUnavailable", "Stop PIE before syncing TypeScript Blueprints."));
+        Info.bFireAndForget = true;
+        Info.ExpireDuration = 4.0f;
+        FSlateNotificationManager::Get().AddNotification(Info);
+        return;
+    }
+
+    CmdImpl(TEXT("sync"), TEXT(""));
+
+    FNotificationInfo Info(LOCTEXT("SyncTypeScriptBlueprintsStarted", "Puerts TypeScript Blueprint sync requested. Check Output Log for results."));
+    Info.bFireAndForget = true;
+    Info.ExpireDuration = 4.0f;
+    FSlateNotificationManager::Get().AddNotification(Info);
 }
 
 TSharedPtr<FKismetCompilerContext> MakeCompiler(
@@ -152,6 +211,9 @@ void FPuertsEditorModule::OnPostEngineInit()
 
 void FPuertsEditorModule::ShutdownModule()
 {
+    UToolMenus::UnRegisterStartupCallback(this);
+    UToolMenus::UnregisterOwner(this);
+
     CmdImpl = nullptr;
     if (JsEnv.IsValid())
     {
@@ -173,3 +235,5 @@ void FPuertsEditorModule::PreBeginPIE(bool bIsSimulating)
 void FPuertsEditorModule::EndPIE(bool bIsSimulating)
 {
 }
+
+#undef LOCTEXT_NAMESPACE

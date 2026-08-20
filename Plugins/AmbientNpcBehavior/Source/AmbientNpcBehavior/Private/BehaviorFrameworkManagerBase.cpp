@@ -3,10 +3,22 @@
 #include "BehaviorFrameworkInterface.h"
 #include "Engine/World.h"
 #include "EngineUtils.h"
+#include "HAL/FileManager.h"
+#include "Misc/Paths.h"
 
 // The environmental-condition callback does not receive a framework or manager
 // handle, so the active manager is tracked here during the synchronous Update call.
 static ABehaviorFrameworkManagerBase* GActiveAmbientNpcManager = nullptr;
+
+namespace
+{
+FString ResolveProjectPath(const FString& Path)
+{
+	return Path.IsEmpty() || !FPaths::IsRelative(Path)
+		? Path
+		: FPaths::ConvertRelativePathToFull(FPaths::ProjectDir(), Path);
+}
+}
 
 ABehaviorFrameworkManagerBase::ABehaviorFrameworkManagerBase()
 {
@@ -58,11 +70,22 @@ void ABehaviorFrameworkManagerBase::InitializeFramework()
 		return;
 	}
 
-	FTCHARToUTF8 SchemaPath(*Config->SchemaFilePath);
-	FTCHARToUTF8 SequencesPath(*Config->SequencesFilePath);
-	FTCHARToUTF8 ActionsPath(*Config->ActionsFilePath);
-	FTCHARToUTF8 ConditionsPath(*Config->EnvironmentalConditionsFilePath);
-	FTCHARToUTF8 LogFileUtf8(*Config->LogFilePath);
+	const FString SchemaFilePath = ResolveProjectPath(Config->SchemaFilePath);
+	const FString SequencesFilePath = ResolveProjectPath(Config->SequencesFilePath);
+	const FString ActionsFilePath = ResolveProjectPath(Config->ActionsFilePath);
+	const FString ConditionsFilePath = ResolveProjectPath(Config->EnvironmentalConditionsFilePath);
+	const FString LogFilePath = ResolveProjectPath(Config->LogFilePath);
+
+	if (!LogFilePath.IsEmpty())
+	{
+		IFileManager::Get().MakeDirectory(*FPaths::GetPath(LogFilePath), true);
+	}
+
+	FTCHARToUTF8 SchemaPath(*SchemaFilePath);
+	FTCHARToUTF8 SequencesPath(*SequencesFilePath);
+	FTCHARToUTF8 ActionsPath(*ActionsFilePath);
+	FTCHARToUTF8 ConditionsPath(*ConditionsFilePath);
+	FTCHARToUTF8 LogFileUtf8(*LogFilePath);
 
 	bInitialized = ::InitializeAmbientBehaviorFramework(
 		FrameworkHandle,
@@ -127,7 +150,8 @@ void ABehaviorFrameworkManagerBase::RegisterEntity(AAmbientEntityBase* Entity)
 	Entity->SetManager(this);
 
 	const FVector Location = Entity->GetActorLocation();
-	FTCHARToUTF8 ConfigPath(*Entity->EntityConfigFilePath);
+	const FString EntityConfigFilePath = ResolveProjectPath(Entity->EntityConfigFilePath);
+	FTCHARToUTF8 ConfigPath(*EntityConfigFilePath);
 
 	::RegisterEntity(
 		FrameworkHandle,

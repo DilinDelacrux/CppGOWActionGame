@@ -21,7 +21,7 @@ class AMBIENTNPCBEHAVIOR_API AAmbientEntityBase : public AActor
 public:
 	AAmbientEntityBase();
 
-	/** Path to the per-entity JSON configuration file. */
+	/** Path to the per-entity JSON configuration file. Relative paths are resolved from the project directory. */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "AmbientNpc")
 	FString EntityConfigFilePath;
 

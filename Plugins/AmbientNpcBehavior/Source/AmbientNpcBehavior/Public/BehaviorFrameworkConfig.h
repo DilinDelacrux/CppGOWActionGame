@@ -18,23 +18,23 @@ class AMBIENTNPCBEHAVIOR_API UBehaviorFrameworkConfig : public UDataAsset
 	GENERATED_BODY()
 
 public:
-	/** Path to the entity schema configuration file (entity_states / interruption_handlers). */
+	/** Path to the entity schema configuration file (entity_states / interruption_handlers). Relative paths are resolved from the project directory. */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Files")
 	FString SchemaFilePath;
 
-	/** Path to the action sequences configuration file. */
+	/** Path to the action sequences configuration file. Relative paths are resolved from the project directory. */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Files")
 	FString SequencesFilePath;
 
-	/** Path to the actions configuration file. */
+	/** Path to the actions configuration file. Relative paths are resolved from the project directory. */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Files")
 	FString ActionsFilePath;
 
-	/** Path to the environmental conditions configuration file. */
+	/** Path to the environmental conditions configuration file. Relative paths are resolved from the project directory. */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Files")
 	FString EnvironmentalConditionsFilePath;
 
-	/** Path where the framework writes its log file. */
+	/** Path where the framework writes its log file. Relative paths are resolved from the project directory. */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Logging")
 	FString LogFilePath;
 

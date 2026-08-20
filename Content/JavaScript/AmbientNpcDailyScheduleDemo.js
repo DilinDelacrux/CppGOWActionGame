@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const UE = require("ue");
 const scheduleStates = new WeakMap();
+const invalidScheduleInstances = new WeakSet();
 const MINUTES_PER_DAY = 24 * 60;
 // 绑定到 BehaviorFrameworkManagerBase 的蓝图子类：底层仍由 AmbientNpcBehavior
 // 初始化和 Tick；日程数据由其 Config Data Asset 指定的 JSON 文件提供。
@@ -98,11 +99,14 @@ class AmbientNpcDailyScheduleDemo extends UE.BehaviorFrameworkManagerBase {
         const existing = scheduleStates.get(this);
         if (existing)
             return existing;
+        if (invalidScheduleInstances.has(this))
+            return undefined;
         // 新增 UFUNCTION 会在下次生成 Puerts typings 后出现在 UE 类型中；此处
         // 的局部类型让当前脚本也能直接编译。
         const loader = this;
         const rawJson = loader.LoadDailyScheduleJson();
         if (!rawJson) {
+            invalidScheduleInstances.add(this);
             console.error('[AmbientNpcSchedule] 无法读取日程 JSON。请检查 Data Asset 的 Daily Schedule File Path。');
             return undefined;
         }
@@ -110,6 +114,9 @@ class AmbientNpcDailyScheduleDemo extends UE.BehaviorFrameworkManagerBase {
             const data = JSON.parse(rawJson);
             if (!Array.isArray(data.npcs) || data.npcs.length === 0)
                 throw new Error('npcs 必须是非空数组');
+            if (Array.isArray(data.npcs[0].events)) {
+                throw new Error('当前蓝图仍绑定旧脚本 AmbientNpcDailyScheduleDemo，但配置文件是五配置数据驱动格式；请改用 AmbientNpcDataDrivenScheduleDemo');
+            }
             const min = data.wake_jitter_minutes?.min ?? 10;
             const max = data.wake_jitter_minutes?.max ?? 15;
             if (min < 0 || max < min)
@@ -141,6 +148,7 @@ class AmbientNpcDailyScheduleDemo extends UE.BehaviorFrameworkManagerBase {
             return schedule;
         }
         catch (error) {
+            invalidScheduleInstances.add(this);
             console.error(`[AmbientNpcSchedule] 日程 JSON 解析失败：${String(error)}`);
             return undefined;
         }

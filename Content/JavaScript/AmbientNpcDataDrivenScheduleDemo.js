@@ -6,9 +6,10 @@ const invalidInstances = new WeakSet();
 const MINUTES_PER_DAY = 24 * 60;
 /**
  * 五配置文件数据驱动 Demo。
- * daily_schedule 只记录时间与 sequence/node 引用；实际行为名称来自
- * actions，节点关系来自 sequences，状态键由 schema 校验，游戏分钟由
- * environmental_conditions 声明并通过 QueryEnvironmentalCondition 提供。
+ * daily_schedule 记录 NPC 属性、时间与 sequence/node 引用；实际行为名称和
+ * 每分钟精力消耗来自 actions，节点关系来自 sequences，状态键由 schema
+ * 校验，游戏分钟由 environmental_conditions 声明并通过
+ * QueryEnvironmentalCondition 提供。
  */
 class AmbientNpcDataDrivenScheduleDemo extends UE.BehaviorFrameworkManagerBase {
     OnAmbientNpcScriptBeginPlay() {
@@ -49,12 +50,17 @@ class AmbientNpcDataDrivenScheduleDemo extends UE.BehaviorFrameworkManagerBase {
     }
     // @no-blueprint
     update(runtime, minute) {
+        this.consumeEnergy(runtime, minute);
         const now = this.formatTime(minute);
         for (const npc of runtime.npcs) {
-            const event = this.eventAt(npc, minute);
+            const scheduledEvent = this.eventAt(npc, minute);
+            const scheduledAction = runtime.actions.get(scheduledEvent.actionId);
+            const event = npc.energyDepleted && (scheduledAction.energy_cost_per_game_minute ?? 0) > 0
+                ? this.fatigueRelaxEvent(runtime, scheduledEvent.minute)
+                : scheduledEvent;
             if (event.actionId !== npc.currentActionId) {
                 npc.currentActionId = event.actionId;
-                console.warn(`[AmbientNpcSchedule] 第 ${runtime.day + 1} 日 ${now} | ${npc.name}（${npc.profession}）→ ${event.actionName} [Action ${event.actionId}]`);
+                console.warn(`[AmbientNpcSchedule] 第 ${runtime.day + 1} 日 ${now} | ${npc.name}（${npc.profession}）→ ${event.actionName} [Action ${event.actionId}] | 精力 ${this.formatEnergy(npc.currentEnergy)}/${this.formatEnergy(npc.maxEnergy)}`);
             }
         }
         this.runInteractionRules(runtime, now);
@@ -62,6 +68,7 @@ class AmbientNpcDataDrivenScheduleDemo extends UE.BehaviorFrameworkManagerBase {
     // @no-blueprint
     beginDay(runtime) {
         console.warn(`[AmbientNpcSchedule] 第 ${runtime.day + 1} 日：从 sequence/node 引用生成当天行为。`);
+        runtime.lastProcessedMinute = 0;
         runtime.npcs = runtime.sourceNpcs.map((sourceNpc, npcIndex) => {
             const sequence = runtime.sequences.get(sourceNpc.sequence_id);
             const nodes = new Map(sequence.nodes.map(node => [node.node_id, node]));
@@ -77,8 +84,41 @@ class AmbientNpcDataDrivenScheduleDemo extends UE.BehaviorFrameworkManagerBase {
                 }
                 return { minute: baseMinute + offset, actionId: action.action_id, actionName: action.action_name };
             }).sort((first, second) => first.minute - second.minute);
-            return { ...sourceNpc, resolvedEvents };
+            const maxEnergy = sourceNpc.energy.max;
+            const currentEnergy = sourceNpc.energy.initial ?? maxEnergy;
+            return { ...sourceNpc, resolvedEvents, maxEnergy, currentEnergy, energyDepleted: currentEnergy <= 0 };
         });
+    }
+    // @no-blueprint
+    consumeEnergy(runtime, minute) {
+        if (minute <= runtime.lastProcessedMinute) {
+            runtime.lastProcessedMinute = minute;
+            return;
+        }
+        const relaxAction = runtime.actions.get(runtime.fatigueRelaxActionId);
+        for (let currentMinute = runtime.lastProcessedMinute + 1; currentMinute <= minute; currentMinute++) {
+            for (const npc of runtime.npcs) {
+                if (npc.energyDepleted)
+                    continue;
+                const scheduledEvent = this.eventAt(npc, currentMinute);
+                const action = runtime.actions.get(scheduledEvent.actionId);
+                const cost = action.energy_cost_per_game_minute ?? 0;
+                if (cost <= 0)
+                    continue;
+                npc.currentEnergy = Math.max(0, npc.currentEnergy - cost);
+                if (npc.currentEnergy <= 0) {
+                    npc.energyDepleted = true;
+                    npc.currentActionId = relaxAction.action_id;
+                    console.warn(`[AmbientNpcSchedule] 第 ${runtime.day + 1} 日 ${this.formatTime(currentMinute)} | ${npc.name}（${npc.profession}）精力耗尽 → ${relaxAction.action_name} [Action ${relaxAction.action_id}] | 精力 0/${this.formatEnergy(npc.maxEnergy)}`);
+                }
+            }
+        }
+        runtime.lastProcessedMinute = minute;
+    }
+    // @no-blueprint
+    fatigueRelaxEvent(runtime, minute) {
+        const action = runtime.actions.get(runtime.fatigueRelaxActionId);
+        return { minute, actionId: action.action_id, actionName: action.action_name };
     }
     // @no-blueprint
     eventAt(npc, minute) {
@@ -137,6 +177,10 @@ class AmbientNpcDataDrivenScheduleDemo extends UE.BehaviorFrameworkManagerBase {
         return `${String(Math.floor(normalized / 60)).padStart(2, '0')}:${String(normalized % 60).padStart(2, '0')}`;
     }
     // @no-blueprint
+    formatEnergy(energy) {
+        return energy.toFixed(2).replace(/\.00$/, '').replace(/(\.\d)0$/, '$1');
+    }
+    // @no-blueprint
     runtime() {
         const existing = runtimes.get(this);
         if (existing)
@@ -167,7 +211,13 @@ class AmbientNpcDataDrivenScheduleDemo extends UE.BehaviorFrameworkManagerBase {
             if (!environmentConfig.environmental_conditions.some(condition => condition.name === 'game_minute')) {
                 throw new Error('environmental_conditions 缺少 game_minute');
             }
+            if (!stateNames.has('energy'))
+                throw new Error('schema 缺少 energy 状态');
             for (const action of actions.values()) {
+                const energyCost = action.energy_cost_per_game_minute ?? 0;
+                if (!Number.isFinite(energyCost) || energyCost < 0) {
+                    throw new Error(`Action ${action.action_id} 的 energy_cost_per_game_minute 无效`);
+                }
                 const effects = [...action.preconditions, ...action.immediate_effects, ...action.completion_effects, ...action.interruption_effects];
                 for (const effect of effects) {
                     if (effect.target_id_name !== 'ENVIRONMENT' && effect.target_id_name !== 'DISTANCE_TO_ENTITY' && !stateNames.has(effect.state_key_name)) {
@@ -185,6 +235,17 @@ class AmbientNpcDataDrivenScheduleDemo extends UE.BehaviorFrameworkManagerBase {
             if (!Array.isArray(daily.npcs) || daily.npcs.length === 0 || daily.day_duration_seconds <= 0) {
                 throw new Error('daily_schedule 的 npcs 或 day_duration_seconds 无效');
             }
+            const fatigueRelaxActionId = daily.energy_settings?.fatigue_relax_action_id;
+            const fatigueRelaxAction = actions.get(fatigueRelaxActionId);
+            if (!Number.isInteger(fatigueRelaxActionId) || !fatigueRelaxAction) {
+                throw new Error('energy_settings.fatigue_relax_action_id 无效');
+            }
+            if ((fatigueRelaxAction.energy_cost_per_game_minute ?? 0) > 0) {
+                throw new Error('疲劳后的放松动作不能消耗精力');
+            }
+            if (![...actions.values()].some(action => (action.energy_cost_per_game_minute ?? 0) > 0)) {
+                throw new Error('actions 中没有配置精力消耗动作');
+            }
             for (const npc of daily.npcs) {
                 const sequence = sequences.get(npc.sequence_id);
                 if (!sequence)
@@ -192,6 +253,11 @@ class AmbientNpcDataDrivenScheduleDemo extends UE.BehaviorFrameworkManagerBase {
                 const nodes = new Map(sequence.nodes.map(node => [node.node_id, node]));
                 if (!npc.events.length)
                     throw new Error(`${npc.name} 没有 events`);
+                const initialEnergy = npc.energy?.initial ?? npc.energy?.max;
+                if (!npc.energy || !Number.isFinite(npc.energy.max) || npc.energy.max <= 0 ||
+                    !Number.isFinite(initialEnergy) || initialEnergy < 0 || initialEnergy > npc.energy.max) {
+                    throw new Error(`${npc.name} 的 energy 配置无效`);
+                }
                 for (const event of npc.events) {
                     this.parseTime(event.at);
                     const node = nodes.get(event.node_id);
@@ -209,7 +275,9 @@ class AmbientNpcDataDrivenScheduleDemo extends UE.BehaviorFrameworkManagerBase {
                 day: 0,
                 dayDuration: daily.day_duration_seconds,
                 lastLoggedSecond: -1,
+                lastProcessedMinute: 0,
                 frameworkStatusLogged: false,
+                fatigueRelaxActionId,
                 actions,
                 sequences,
                 environmentNames,

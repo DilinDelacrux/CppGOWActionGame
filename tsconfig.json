@@ -8,6 +8,7 @@
         "experimentalDecorators": true,
         "typeRoots": [
             "Typing",
+            "Content/JavaScript/node_modules/@types",
             "./node_modules/@types"
         ],
         "outDir": "Content/JavaScript"

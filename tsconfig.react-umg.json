@@ -1,0 +1,10 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "rootDir": "./Plugins/ReactUMG-master/TypeScript/react-umg",
+        "outDir": "./Content/JavaScript/react-umg"
+    },
+    "include": [
+        "Plugins/ReactUMG-master/TypeScript/react-umg/react-umg.ts"
+    ]
+}

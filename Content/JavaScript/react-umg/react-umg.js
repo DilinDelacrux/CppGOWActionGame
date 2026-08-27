@@ -1,71 +1,70 @@
+"use strict";
 /*
 * Tencent is pleased to support the open source community by making Puerts available.
 * Copyright (C) 2020 THL A29 Limited, a Tencent company.  All rights reserved.
 * Puerts is licensed under the BSD 3-Clause License, except for the third-party components listed in the file 'LICENSE' which may be subject to their corresponding license terms.
 * This file is subject to the terms and conditions defined in file 'LICENSE', which is part of this source code package.
 */
-
-import Reconciler = require('react-reconciler')
-import * as puerts from 'puerts'
-import * as UE from 'ue'
-
-let world: UE.World;
-
-function deepEquals(x: any, y: any) {
-    if ( x === y ) return true;
-
-    if (  typeof x !== 'object' || x === null  ||  typeof y !== 'object' || y === null  ) return false;
-
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ReactUMG = void 0;
+const Reconciler = require("react-reconciler");
+const puerts = require("puerts");
+const UE = require("ue");
+let world;
+function deepEquals(x, y) {
+    if (x === y)
+        return true;
+    if (typeof x !== 'object' || x === null || typeof y !== 'object' || y === null)
+        return false;
     for (var p in x) { // all x[p] in y
-        if (p == 'children' || p == 'Slot') continue;
-        if (!deepEquals(x[p], y[p])) return false;
+        if (p == 'children' || p == 'Slot')
+            continue;
+        if (!deepEquals(x[p], y[p]))
+            return false;
     }
-
     for (var p in y) {
-        if (p == 'children' || p == 'Slot') continue;
-        if (!x.hasOwnProperty(p)) return false;
+        if (p == 'children' || p == 'Slot')
+            continue;
+        if (!x.hasOwnProperty(p))
+            return false;
     }
-
     return true;
 }
-
-declare const exports: {lazyloadComponents:{}}
-
 class UEWidget {
-    type: string;
-    callbackRemovers: {[key: string] : () => void};
-    nativePtr: UE.Widget;
-    slot: any;
-    nativeSlotPtr: UE.PanelSlot;
-
-    constructor (type: string, props: any) {
+    type;
+    callbackRemovers;
+    nativePtr;
+    slot;
+    nativeSlotPtr;
+    constructor(type, props) {
         this.type = type;
         this.callbackRemovers = {};
-        
         try {
             this.init(type, props);
-        } catch(e) {
+        }
+        catch (e) {
             console.error("create " + type + " throw " + e);
         }
     }
-
-    init(type: string, props: any) {
+    init(type, props) {
         let classPath = exports.lazyloadComponents[type];
         if (classPath) {
             //this.nativePtr = asyncUIManager.CreateComponentByClassPathName(classPath);
-            this.nativePtr = UE.NewObject(UE.Class.Load(classPath)) as UE.Widget;
-        } else {
+            this.nativePtr = UE.NewObject(UE.Class.Load(classPath));
+        }
+        else {
             this.nativePtr = new UE[type]();
         }
-
         let myProps = {};
         for (const key in props) {
             let val = props[key];
             if (key == 'Slot') {
                 this.slot = val;
-            } else if (typeof val === 'function') {
+            }
+            else if (typeof val === 'function') {
                 this.bind(key, val);
-            } else if(key !== 'children') {
+            }
+            else if (key !== 'children') {
                 myProps[key] = val;
             }
         }
@@ -73,29 +72,29 @@ class UEWidget {
         puerts.merge(this.nativePtr, myProps);
         //console.log(type + ' inited')
     }
-  
-    bind(name: string, callback: Function) {
-        let nativePtr = this.nativePtr
+    bind(name, callback) {
+        let nativePtr = this.nativePtr;
         let prop = nativePtr[name];
         if (typeof prop.Add === 'function') {
             prop.Add(callback);
             this.callbackRemovers[name] = () => {
                 prop.Remove(callback);
-            }
-        } else if (typeof prop.Bind == 'function') {
+            };
+        }
+        else if (typeof prop.Bind == 'function') {
             prop.Bind(callback);
             this.callbackRemovers[name] = () => {
                 prop.Unbind();
-            }
-        } else {
+            };
+        }
+        else {
             console.warn("unsupport callback " + name);
         }
     }
-  
-    update(oldProps: any, newProps: any) {
+    update(oldProps, newProps) {
         let myProps = {};
         let propChange = false;
-        for(var key in newProps) {
+        for (var key in newProps) {
             let oldProp = oldProps[key];
             let newProp = newProps[key];
             if (key != 'children' && oldProp != newProp) {
@@ -103,11 +102,13 @@ class UEWidget {
                     this.slot = newProp;
                     //console.log("update slot..", this.toJSON());
                     puerts.merge(this.nativeSlotPtr, newProp);
-                    UE.UMGManager.SynchronizeSlotProperties(this.nativeSlotPtr)
-                } else if (typeof newProp === 'function') {
+                    UE.UMGManager.SynchronizeSlotProperties(this.nativeSlotPtr);
+                }
+                else if (typeof newProp === 'function') {
                     this.unbind(key);
                     this.bind(key, newProp);
-                } else {
+                }
+                else {
                     myProps[key] = newProp;
                     propChange = true;
                 }
@@ -116,38 +117,33 @@ class UEWidget {
         if (propChange) {
             //console.log("update props", this.toJSON(), JSON.stringify(myProps));
             puerts.merge(this.nativePtr, myProps);
-            UE.UMGManager.SynchronizeWidgetProperties(this.nativePtr)
+            UE.UMGManager.SynchronizeWidgetProperties(this.nativePtr);
         }
     }
-  
-    unbind(name: string) {
+    unbind(name) {
         let remover = this.callbackRemovers[name];
         this.callbackRemovers[name] = undefined;
         if (remover) {
             remover();
         }
     }
-    
     unbindAll() {
-        for(var key in this.callbackRemovers) {
+        for (var key in this.callbackRemovers) {
             this.callbackRemovers[key]();
         }
         this.callbackRemovers = {};
     }
-  
-    appendChild(child: UEWidget) {
-        let nativeSlot = (this.nativePtr as UE.PanelWidget).AddChild(child.nativePtr);
+    appendChild(child) {
+        let nativeSlot = this.nativePtr.AddChild(child.nativePtr);
         //console.log("appendChild", (await this.nativePtr).toJSON(), (await child.nativePtr).toJSON());
         child.nativeSlot = nativeSlot;
     }
-    
-    removeChild(child: UEWidget) {
+    removeChild(child) {
         child.unbindAll();
-        (this.nativePtr as UE.PanelWidget).RemoveChild(child.nativePtr);
+        this.nativePtr.RemoveChild(child.nativePtr);
         //console.log("removeChild", (await this.nativePtr).toJSON(), (await child.nativePtr).toJSON())
     }
-  
-    set nativeSlot(value: UE.PanelSlot) {
+    set nativeSlot(value) {
         this.nativeSlotPtr = value;
         //console.log('setting nativeSlot', value.toJSON());
         if (this.slot) {
@@ -156,135 +152,123 @@ class UEWidget {
         }
     }
 }
-
 class UEWidgetRoot {
-    nativePtr: UE.ReactWidget;
-    Added: boolean;
-
-    constructor(nativePtr: UE.ReactWidget) {
+    nativePtr;
+    Added;
+    constructor(nativePtr) {
         this.nativePtr = nativePtr;
     }
-  
-    appendChild(child: UEWidget) {
+    appendChild(child) {
         let nativeSlot = this.nativePtr.AddChild(child.nativePtr);
         child.nativeSlot = nativeSlot;
     }
-
-    removeChild(child: UEWidget) {
+    removeChild(child) {
         child.unbindAll();
         this.nativePtr.RemoveChild(child.nativePtr);
     }
-  
-    addToViewport(z : number) {
+    addToViewport(z) {
         if (!this.Added) {
             this.nativePtr.AddToViewport(z);
             this.Added = true;
         }
     }
-    
     removeFromViewport() {
         this.nativePtr.RemoveFromViewport();
     }
-    
     getWidget() {
         return this.nativePtr;
     }
 }
-
-const hostConfig : Reconciler.HostConfig<string, any, UEWidgetRoot, UEWidget, UEWidget, any, any, {}, any, any, any, any> = {
-    getRootHostContext () {
+const hostConfig = {
+    getRootHostContext() {
         return {};
     },
     //CanvasPanel()的parentHostContext是getRootHostContext返回的值
-    getChildHostContext (parentHostContext: {}) {
-        return parentHostContext;//no use, share one
+    getChildHostContext(parentHostContext) {
+        return parentHostContext; //no use, share one
     },
-    appendInitialChild (parent: UEWidget, child: UEWidget) {
+    appendInitialChild(parent, child) {
         parent.appendChild(child);
     },
-    appendChildToContainer (container: UEWidgetRoot, child: UEWidget) {
+    appendChildToContainer(container, child) {
         container.appendChild(child);
     },
-    appendChild (parent: UEWidget, child: UEWidget) {
+    appendChild(parent, child) {
         parent.appendChild(child);
     },
-    createInstance (type: string, props: any) {
+    createInstance(type, props) {
         return new UEWidget(type, props);
     },
-    createTextInstance (text: string) {
-        return new UEWidget("TextBlock", {Text: text});
+    createTextInstance(text) {
+        return new UEWidget("TextBlock", { Text: text });
     },
-    finalizeInitialChildren () {
-        return false
+    finalizeInitialChildren() {
+        return false;
     },
-    getPublicInstance (instance: UEWidget) {
+    getPublicInstance(instance) {
         console.warn('getPublicInstance');
-        return instance
+        return instance;
     },
     now: Date.now,
-    prepareForCommit () {
+    prepareForCommit() {
         //log('prepareForCommit');
     },
-    resetAfterCommit (container: UEWidgetRoot) {
+    resetAfterCommit(container) {
         container.addToViewport(0);
     },
-    resetTextContent () {
+    resetTextContent() {
         console.error('resetTextContent not implemented!');
     },
-    shouldSetTextContent (type, props) {
-        return false
+    shouldSetTextContent(type, props) {
+        return false;
     },
-  
-    commitTextUpdate (textInstance: UEWidget, oldText: string, newText: string) {
+    commitTextUpdate(textInstance, oldText, newText) {
         if (oldText != newText) {
-            textInstance.update({}, {Text: newText})
+            textInstance.update({}, { Text: newText });
         }
     },
-  
     //return false表示不更新，真值将会出现到commitUpdate的updatePayload里头
-    prepareUpdate (instance: UEWidget, type: string, oldProps: any, newProps: any) {
-        try{
+    prepareUpdate(instance, type, oldProps, newProps) {
+        try {
             return !deepEquals(oldProps, newProps);
-        } catch(e) {
+        }
+        catch (e) {
             console.error(e.message);
             return true;
         }
     },
-    commitUpdate (instance: UEWidget, updatePayload: any, type : string, oldProps : any, newProps: any) {
-        try{
+    commitUpdate(instance, updatePayload, type, oldProps, newProps) {
+        try {
             instance.update(oldProps, newProps);
-        } catch(e) {
+        }
+        catch (e) {
             console.error("commitUpdate fail!, " + e);
         }
     },
-    removeChildFromContainer (container: UEWidgetRoot, child: UEWidget) {
+    removeChildFromContainer(container, child) {
         console.error('removeChildFromContainer');
         //container.removeChild(child).catch(e => {
         //    console.error('removeChildFromContainer , e:' + e.message);
         //});
     },
-    removeChild(parent: UEWidget, child: UEWidget) {
+    removeChild(parent, child) {
         parent.removeChild(child);
     },
-
     //useSyncScheduling: true,
     supportsMutation: true,
     isPrimaryRenderer: true,
     supportsPersistence: false,
     supportsHydration: false,
-
     shouldDeprioritizeSubtree: undefined,
     setTimeout: undefined,
     clearTimeout: undefined,
     cancelDeferredCallback: undefined,
     noTimeout: undefined,
     scheduleDeferredCallback: undefined,
-}
-
-const reconciler = Reconciler(hostConfig)
-
-export const ReactUMG = {
-    render: function(reactElement: React.ReactNode) {
+};
+const reconciler = Reconciler(hostConfig);
+exports.ReactUMG = {
+    render: function (reactElement) {
         if (world == undefined) {
             throw new Error("init with World first!");
         }
@@ -293,8 +277,8 @@ export const ReactUMG = {
         reconciler.updateContainer(reactElement, container, null, null);
         return root;
     },
-    init: function(inWorld: UE.World) {
+    init: function (inWorld) {
         world = inWorld;
     }
-}
-
+};
+//# sourceMappingURL=react-umg.js.map

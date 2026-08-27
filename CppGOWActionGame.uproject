@@ -43,6 +43,10 @@
 		{
 			"Name": "AmbientNpcBehavior",
 			"Enabled": true
+		},
+		{
+			"Name": "ReactUMG",
+			"Enabled": true
 		}
 	]
 }

@@ -88,3 +88,20 @@ Content/__ExternalObjects__/Map/FeatureDeathMap/
 Content/__ExternalActors__/ThirdPerson/Maps/ThirdPersonMap/
 Content/__ExternalActors__/Map/FeatureDevMap/
 Content/__ExternalActors__/Map/FeatureDeathMap/
+
+# ====================================================================
+# 5. 外部大体积依赖（通过百度网盘依赖包恢复，不进入 Git）
+# ====================================================================
+# Qwen3-TTS 模型及其配置
+/Content/AudioCpp/Models/
+
+# AudioCpp / CUDA Win64 运行时
+/Plugins/AudioCpp/ThirdParty/audio.cpp/Win64/
+
+# Puerts / V8 多平台预编译 SDK
+/Plugins/Puerts/ThirdParty/
+
+# AudioCpp 下载、解压和依赖归档产物
+/audiocpp-windows-cuda-portable-*/
+/audiocpp-windows-cuda-portable-*.zip
+/CppGOW_ExternalDependencies_*.zip

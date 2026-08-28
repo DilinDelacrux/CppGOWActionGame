@@ -1,0 +1,59 @@
+[1/44] Resource Default.rc2
+[2/44] Compile [x64] ListDataObject_Collection.cpp
+E:\_UE_Ref\CppGOWActionGame\Plugins\AdvancedFrontedUI\Source\AdvancedFrontedUI\Private\Widgets\OptionData\ListDataObject_Collection.cpp(9): error C2039: "InitDataObject": 不是 "UListDataObject_Base" 的成员
+E:\_UE_Ref\CppGOWActionGame\Plugins\AdvancedFrontedUI\Source\AdvancedFrontedUI\Public\Widgets\OptionData\ListDataObject_Base.h(15): note: 参见“UListDataObject_Base”的声明
+[3/44] Compile [x64] ListDataObject_Base.cpp
+[4/44] Compile [x64] FrontendTabListWidgetBase.cpp
+C:\Program Files\Epic Games\UE_5.5\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\UHT\WidgetChild.generated.h(22): error C2143: 语法错误: 缺少“;”(在“<L_GRAMMAR_template_head_l>”的前面)
+C:\Program Files\Epic Games\UE_5.5\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\UHT\WidgetChild.generated.h(22): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+C:\Program Files\Epic Games\UE_5.5\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\UHT\WidgetChild.generated.h(22): error C2768: “StaticStruct”: 非法使用显式模板参数
+C:\Program Files\Epic Games\UE_5.5\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\UHT\WidgetChild.generated.h(22): error C2910: “StaticStruct”: 无法显式专用化
+[5/44] Compile [x64] Module.AdvancedFrontedUI.cpp
+C:\Program Files\Epic Games\UE_5.5\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\UHT\WidgetTree.generated.h(51): error C2143: 语法错误: 缺少“;”(在“<L_GRAMMAR_template_head_l>”的前面)
+C:\Program Files\Epic Games\UE_5.5\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\UHT\WidgetTree.generated.h(51): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+C:\Program Files\Epic Games\UE_5.5\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\UHT\WidgetTree.generated.h(51): error C2768: “StaticClass”: 非法使用显式模板参数
+C:\Program Files\Epic Games\UE_5.5\Engine\Intermediate\Build\Win64\UnrealEditor\Inc\UMG\UHT\WidgetTree.generated.h(51): error C2910: “StaticClass”: 无法显式专用化
+[6/44] Compile [x64] PCH.AmbientNpcBehavior.cpp
+[7/44] Compile [x64] ActionMemory.cpp
+C:\Program Files\Epic Games\UE_5.5\Engine\Source\Runtime\CoreUObject\Public\Templates\Casts.h(496): error C4541: “dynamic_cast”用在了带 /GR- 的多态类型“AmbientCharacterBehavior::BaseMemory”上；可能导致不可预知的行为
+C:\Program Files\Epic Games\UE_5.5\Engine\Source\Runtime\CoreUObject\Public\Templates\Casts.h(496): note: 模板实例化上下文(最早的实例化上下文)为
+E:\_UE_Ref\CppGOWActionGame\Plugins\AmbientNpcBehavior\Source\AmbientNpcBehavior\Private\Framework\src\memory\memory_types\ActionMemory.cpp(25): note: 查看对正在编译的函数 模板 实例化“To *UE::CoreUObject::Private::DynamicCast<const AmbientCharacterBehavior::ActionMemory*,const AmbientCharacterBehavior::BaseMemory>(From *)”的引用
+        with
+        [
+            To=const AmbientCharacterBehavior::ActionMemory *,
+            From=const AmbientCharacterBehavior::BaseMemory
+        ]
+[8/44] Compile [x64] BehaviorFrameworkConfig.cpp
+[9/44] Compile [x64] AmbientEntityBase.cpp
+[10/44] Compile [x64] AmbientNpcBehaviorModule.cpp
+[11/44] Compile [x64] Action.cpp
+[12/44] Compile [x64] BehavioralEntityBase.cpp
+[13/44] Compile [x64] AmbientNpcBehavior.init.gen.cpp
+[14/44] Compile [x64] AmbientEntityBase.gen.cpp
+[15/44] Compile [x64] BehaviorFrameworkConfig.gen.cpp
+[16/44] Compile [x64] EnvironmentalCondition.cpp
+[17/44] Compile [x64] BehaviorFrameworkManagerBase.gen.cpp
+[18/44] Compile [x64] FrameworkEntity.cpp
+[19/44] Compile [x64] BehavioralEntityBase.gen.cpp
+[20/44] Compile [x64] InterruptionMemory.cpp
+C:\Program Files\Epic Games\UE_5.5\Engine\Source\Runtime\CoreUObject\Public\Templates\Casts.h(496): error C4541: “dynamic_cast”用在了带 /GR- 的多态类型“AmbientCharacterBehavior::BaseMemory”上；可能导致不可预知的行为
+C:\Program Files\Epic Games\UE_5.5\Engine\Source\Runtime\CoreUObject\Public\Templates\Casts.h(496): note: 模板实例化上下文(最早的实例化上下文)为
+E:\_UE_Ref\CppGOWActionGame\Plugins\AmbientNpcBehavior\Source\AmbientNpcBehavior\Private\Framework\src\memory\memory_types\InterruptionMemory.cpp(48): note: 查看对正在编译的函数 模板 实例化“To *UE::CoreUObject::Private::DynamicCast<const AmbientCharacterBehavior::InterruptionMemory*,const AmbientCharacterBehavior::BaseMemory>(From *)”的引用
+        with
+        [
+            To=const AmbientCharacterBehavior::InterruptionMemory *,
+            From=const AmbientCharacterBehavior::BaseMemory
+        ]
+[21/44] Compile [x64] BehaviorFrameworkManagerBase.cpp
+E:\_UE_Ref\CppGOWActionGame\Plugins\AmbientNpcBehavior\Source\AmbientNpcBehavior\Private\BehaviorFrameworkManagerBase.cpp(65): error C4459: “LogPath”的声明隐藏了全局声明
+C:\Program Files\Epic Games\UE_5.5\Engine\Source\Runtime\Engine\Public\EngineLogs.h(11): note: 参见“LogPath”的声明
+[22/44] Compile [x64] ActionTimeoutManager.cpp
+[23/44] Compile [x64] PerModuleInline.gen.cpp
+[24/44] Compile [x64] BehaviorFrameworkInterface.cpp
+[25/44] Compile [x64] BehaviorFramework.cpp
+[26/44] Compile [x64] BehavioralEntity.cpp
+E:\_UE_Ref\CppGOWActionGame\Plugins\AmbientNpcBehavior\Source\AmbientNpcBehavior\Private\Framework\src\entity\BehavioralEntity.cpp(33): warning C5038: 数据成员“AmbientCharacterBehavior::BehavioralEntity::is_processing”将在 数据成员“AmbientCharacterBehavior::BehavioralEntity::current_action_token”后初始化
+E:\_UE_Ref\CppGOWActionGame\Plugins\AmbientNpcBehavior\Source\AmbientNpcBehavior\Private\Framework\src\entity\BehavioralEntity.cpp(34): warning C5038: 数据成员“AmbientCharacterBehavior::BehavioralEntity::current_action_token”将在 数据成员“AmbientCharacterBehavior::BehavioralEntity::current_action_id”后初始化
+E:\_UE_Ref\CppGOWActionGame\Plugins\AmbientNpcBehavior\Source\AmbientNpcBehavior\Private\Framework\src\entity\BehavioralEntity.cpp(36): warning C5038: 数据成员“AmbientCharacterBehavior::BehavioralEntity::fallback_attempt_count”将在 数据成员“AmbientCharacterBehavior::BehavioralEntity::is_halted”后初始化
+C:\Program Files\Epic Games\UE_5.5\Engine\Source\Runtime\CoreUObject\Public\Templates\Casts.h(496): error C4541: “dynamic_cast”用在了带 /GR- 的多态类型“AmbientCharacterBehavior::SequenceNode”上；可能导致不可预知的行为
+C:\Program Files\Epic Games\UE_5.5\Engine\Source\Runtime\CoreUObject\Public

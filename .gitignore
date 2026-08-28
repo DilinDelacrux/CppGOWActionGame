@@ -74,6 +74,10 @@ Plugins/Puerts/Content/JavaScript/node_modules/
 
 # 过滤 TypeScript 编译器生成的本地缓存文件
 *.tsbuildinfo
+/ts_file_versions_info.json
+
+# PuerTS 插件 JavaScript 运行时按本地/外部依赖管理，不跟踪生成或同步副本
+/Plugins/Puerts/Content/JavaScript/
 
 # 允许提交你在 Content/JavaScript/ 下编写的业务代码 (.ts / .js)
 !Content/JavaScript/**/puerts/*.js

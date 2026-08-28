@@ -54,7 +54,7 @@ function MainMenu(props) {
                     Padding: new UE.Margin(0, 12, 0, 0),
                     HorizontalAlignment: UE.EHorizontalAlignment.HAlign_Center,
                 } }, showCredits ? (React.createElement(UBorder, { Padding: new UE.Margin(18, 12, 18, 12), BrushColor: color(0.05, 0.065, 0.095, 0.96) },
-                React.createElement(UTextBlock, { Text: "\u611F\u8C22 Unreal Engine\u3001Puerts \u4E0E ReactUMG \u793E\u533A\u3002\\n\u8FD9\u4E2A\u83DC\u5355\u6CA1\u6709\u624B\u5199\u84DD\u56FE\u6216 WBP\u3002", Font: { Size: 16 }, ColorAndOpacity: textColor(0.72, 0.78, 0.88), Justification: UE.ETextJustify.Center, AutoWrapText: true }))) : (React.createElement(USpacer, { Size: new UE.Vector2D(1, 1) }))))));
+                React.createElement(UTextBlock, { Text: '感谢 Unreal Engine、Puerts 与 ReactUMG 社区。\n这个菜单没有手写蓝图或 WBP。', Font: { Size: 16 }, ColorAndOpacity: textColor(0.72, 0.78, 0.88), Justification: UE.ETextJustify.Center, AutoWrapText: true }))) : (React.createElement(USpacer, { Size: new UE.Vector2D(1, 1) }))))));
 }
 function setGameInput(actor) {
     const controller = UE.GameplayStatics.GetPlayerController(actor, 0);

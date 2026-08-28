@@ -30026,1146 +30026,6 @@ declare module "ue" {
         __tid_AbilityTaskDebugMessage_0__: boolean;
     }
     
-    class WarriorBaseAnimInstance extends UE.AnimInstance {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        DoesOwnerHaveTag(TagToCheck: UE.GameplayTag) : boolean;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): WarriorBaseAnimInstance;
-        static Load(InName: string): WarriorBaseAnimInstance;
-    
-        __tid_WarriorBaseAnimInstance_0__: boolean;
-    }
-    
-    class WarriorCharacterAnimInstance extends UE.WarriorBaseAnimInstance {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        OwningCharacter: UE.WarriorBaseCharacter;
-        OwningMovementComponent: UE.CharacterMovementComponent;
-        GroundSpeed: number;
-        bHasAcceleration: boolean;
-        LocomotionDirection: number;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): WarriorCharacterAnimInstance;
-        static Load(InName: string): WarriorCharacterAnimInstance;
-    
-        __tid_WarriorCharacterAnimInstance_0__: boolean;
-    }
-    
-    class SpringArmComponent extends UE.SceneComponent {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        TargetArmLength: number;
-        SocketOffset: UE.Vector;
-        TargetOffset: UE.Vector;
-        ProbeSize: number;
-        ProbeChannel: UE.ECollisionChannel;
-        bDoCollisionTest: boolean;
-        bUsePawnControlRotation: boolean;
-        bInheritPitch: boolean;
-        bInheritYaw: boolean;
-        bInheritRoll: boolean;
-        bEnableCameraLag: boolean;
-        bEnableCameraRotationLag: boolean;
-        bUseCameraLagSubstepping: boolean;
-        bDrawDebugLagMarkers: boolean;
-        CameraLagSpeed: number;
-        CameraRotationLagSpeed: number;
-        CameraLagMaxTimeStep: number;
-        CameraLagMaxDistance: number;
-        bClampToMaxPhysicsDeltaTime: boolean;
-        /*
-         *Get the target rotation we inherit, used as the base target for the boom rotation.
-         *This is derived from attachment to our parent and considering the UsePawnControlRotation and absolute rotation flags.
-         */
-        GetTargetRotation() : UE.Rotator;
-        /*
-         *Get the position where the camera should be without applying the Collision Test displacement
-         */
-        GetUnfixedCameraPosition() : UE.Vector;
-        /*
-         *Is the Collision Test displacement being applied?
-         */
-        IsCollisionFixApplied() : boolean;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SpringArmComponent;
-        static Load(InName: string): SpringArmComponent;
-    
-        __tid_SpringArmComponent_0__: boolean;
-    }
-    
-    class PlayerMappableKeyOptions {
-        constructor();
-        constructor(Metadata: UE.Object, Name: string, DisplayName: string, DisplayCategory: string);
-        Metadata: UE.Object;
-        Name: string;
-        DisplayName: string;
-        DisplayCategory: string;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_PlayerMappableKeyOptions_0__: boolean;
-    }
-    
-    class InputActionValue {
-        constructor();
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_InputActionValue_0__: boolean;
-    }
-    
-    enum EInputActionValueType { Boolean, Axis1D, Axis2D, Axis3D, EInputActionValueType_MAX, __typeKeyDoNoAccess}
-    enum EInputActionAccumulationBehavior { TakeHighestAbsoluteValue, Cumulative, EInputActionAccumulationBehavior_MAX, __typeKeyDoNoAccess}
-    class InputModifier extends UE.Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        /*
-         *Helper to allow debug visualization of the modifier.
-         *@param SampleValue - The base input action value pre-modification (ranging -1 -> 1 across all applicable axes).
-         *@param FinalValue - The post-modification input action value for the provided SampleValue.
-         */
-        GetVisualizationColor(SampleValue: UE.InputActionValue, FinalValue: UE.InputActionValue) : UE.LinearColor;
-        /*
-         *ModifyRaw
-         *Will be called by each modifier in the modifier chain
-         *@param CurrentValue - The modified value returned by the previous modifier in the chain, or the base raw value if this is the first modifier in the chain.
-         */
-        ModifyRaw(PlayerInput: $Nullable<UE.EnhancedPlayerInput>, CurrentValue: UE.InputActionValue, DeltaTime: number) : UE.InputActionValue;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): InputModifier;
-        static Load(InName: string): InputModifier;
-    
-        __tid_InputModifier_0__: boolean;
-    }
-    
-    class PlayerMappableKeySettings extends UE.Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Metadata: UE.Object;
-        Name: string;
-        DisplayName: string;
-        DisplayCategory: string;
-        SupportedKeyProfiles: UE.GameplayTagContainer;
-        /*
-         *Get the known mapping names that are current in use. This is a helper function if you want to use a "GetOptions" metadata on a UPROPERTY.
-         *For example, the following will display a little drop down menu to select from all current mapping names:
-         *
-         * UPROPERTY(EditAnywhere, BlueprintReadOnly, meta=(GetOptions="EnhancedInput.PlayerMappableKeySettings.GetKnownMappingNames"))
-         * FName MappingName;
-         */
-        static GetKnownMappingNames_EditorOnly() : TArray<string>;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): PlayerMappableKeySettings;
-        static Load(InName: string): PlayerMappableKeySettings;
-    
-        __tid_PlayerMappableKeySettings_0__: boolean;
-    }
-    
-    class InputAction extends UE.DataAsset {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ActionDescription: string;
-        bTriggerWhenPaused: boolean;
-        bConsumeInput: boolean;
-        bConsumesActionAndAxisMappings: boolean;
-        bReserveAllMappings: boolean;
-        TriggerEventsThatConsumeLegacyKeys: number;
-        ValueType: UE.EInputActionValueType;
-        AccumulationBehavior: UE.EInputActionAccumulationBehavior;
-        Triggers: TArray<UE.InputTrigger>;
-        Modifiers: TArray<UE.InputModifier>;
-        PlayerMappableKeySettings: UE.PlayerMappableKeySettings;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): InputAction;
-        static Load(InName: string): InputAction;
-    
-        __tid_InputAction_0__: boolean;
-    }
-    
-    class KeyConsumptionOptions {
-        constructor();
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_KeyConsumptionOptions_0__: boolean;
-    }
-    
-    enum ETriggerEvent { None, Triggered, Started, Ongoing, Canceled, Completed, ETriggerEvent_MAX, __typeKeyDoNoAccess}
-    class InputActionInstance {
-        constructor();
-        constructor(SourceAction: UE.InputAction, TriggerEvent: UE.ETriggerEvent, LastTriggeredWorldTime: number, Triggers: TArray<UE.InputTrigger>, Modifiers: TArray<UE.InputModifier>, ElapsedProcessedTime: number, ElapsedTriggeredTime: number);
-        SourceAction: UE.InputAction;
-        TriggerEvent: UE.ETriggerEvent;
-        LastTriggeredWorldTime: number;
-        Triggers: TArray<UE.InputTrigger>;
-        Modifiers: TArray<UE.InputModifier>;
-        ElapsedProcessedTime: number;
-        ElapsedTriggeredTime: number;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_InputActionInstance_0__: boolean;
-    }
-    
-    class InjectedInput {
-        constructor();
-        constructor(Triggers: TArray<UE.InputTrigger>, Modifiers: TArray<UE.InputModifier>);
-        Triggers: TArray<UE.InputTrigger>;
-        Modifiers: TArray<UE.InputModifier>;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_InjectedInput_0__: boolean;
-    }
-    
-    class InjectedInputArray {
-        constructor();
-        constructor(Injected: TArray<UE.InjectedInput>);
-        Injected: TArray<UE.InjectedInput>;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_InjectedInputArray_0__: boolean;
-    }
-    
-    class EnhancedPlayerInput extends UE.PlayerInput {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        KeyConsumptionData: TMap<UE.InputAction, UE.KeyConsumptionOptions>;
-        AppliedInputContexts: TMap<UE.InputMappingContext, number>;
-        EnhancedActionMappings: TArray<UE.EnhancedActionKeyMapping>;
-        ActionInstanceData: TMap<UE.InputAction, UE.InputActionInstance>;
-        KeysPressedThisTick: TMap<UE.Key, UE.Vector>;
-        InputsInjectedThisTick: TMap<UE.InputAction, UE.InjectedInputArray>;
-        LastInjectedActions: TSet<UE.InputAction>;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): EnhancedPlayerInput;
-        static Load(InName: string): EnhancedPlayerInput;
-    
-        __tid_EnhancedPlayerInput_0__: boolean;
-    }
-    
-    enum ETriggerState { None, Ongoing, Triggered, ETriggerState_MAX, __typeKeyDoNoAccess}
-    enum ETriggerType { Explicit, Implicit, Blocker, ETriggerType_MAX, __typeKeyDoNoAccess}
-    class InputTrigger extends UE.Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ActuationThreshold: number;
-        bShouldAlwaysTick: boolean;
-        LastValue: UE.InputActionValue;
-        /*
-         *Changes the way this trigger affects an action with multiple triggers:
-         *        All implicit triggers must be triggering to trigger the action.
-         *        If there are any explicit triggers at least one must be triggering to trigger the action.
-         */
-        GetTriggerType() : UE.ETriggerType;
-        /*
-         ** Is the value passed in sufficiently large to be of interest to the trigger.
-         ** This is a helper function that implements the most obvious (>=) interpretation of the actuation threshold.
-         */
-        IsActuated(ForValue: UE.InputActionValue) : boolean;
-        /*
-         *This function checks if the requisite conditions have been met for the trigger to fire.
-         * Returns Trigger State None              - No trigger conditions have been met. Trigger is inactive.
-         *                 Trigger State Ongoing   - Some trigger conditions have been met. Trigger is processing but not yet active.
-         *                 Trigger State Triggered - All trigger conditions have been met to fire. Trigger is active.
-         */
-        UpdateState(PlayerInput: $Nullable<UE.EnhancedPlayerInput>, ModifiedValue: UE.InputActionValue, DeltaTime: number) : UE.ETriggerState;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): InputTrigger;
-        static Load(InName: string): InputTrigger;
-    
-        __tid_InputTrigger_0__: boolean;
-    }
-    
-    enum EPlayerMappableKeySettingBehaviors { InheritSettingsFromAction, OverrideSettings, IgnoreSettings, EPlayerMappableKeySettingBehaviors_MAX, __typeKeyDoNoAccess}
-    class EnhancedActionKeyMapping {
-        constructor();
-        constructor(PlayerMappableOptions: UE.PlayerMappableKeyOptions, Triggers: TArray<UE.InputTrigger>, Modifiers: TArray<UE.InputModifier>, Action: UE.InputAction, Key: UE.Key, bShouldBeIgnored: boolean, bHasAlwaysTickTrigger: boolean, bIsPlayerMappable: boolean, SettingBehavior: UE.EPlayerMappableKeySettingBehaviors, PlayerMappableKeySettings: UE.PlayerMappableKeySettings);
-        PlayerMappableOptions: UE.PlayerMappableKeyOptions;
-        Triggers: TArray<UE.InputTrigger>;
-        Modifiers: TArray<UE.InputModifier>;
-        Action: UE.InputAction;
-        Key: UE.Key;
-        bShouldBeIgnored: boolean;
-        bHasAlwaysTickTrigger: boolean;
-        bIsPlayerMappable: boolean;
-        SettingBehavior: UE.EPlayerMappableKeySettingBehaviors;
-        PlayerMappableKeySettings: UE.PlayerMappableKeySettings;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_EnhancedActionKeyMapping_0__: boolean;
-    }
-    
-    class InputMappingContext extends UE.DataAsset {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Mappings: TArray<UE.EnhancedActionKeyMapping>;
-        ContextDescription: string;
-        /*
-         *Map a key to an action within the mapping context.
-         */
-        MapKey(Action: $Nullable<UE.InputAction>, ToKey: UE.Key) : UE.EnhancedActionKeyMapping;
-        UnmapAction(Action: $Nullable<UE.InputAction>) : void;
-        /*
-         *Unmap everything within the mapping context.
-         */
-        UnmapAll() : void;
-        /*
-         *Unmap all key maps to an action within the mapping context.
-         */
-        UnmapAllKeysFromAction(Action: $Nullable<UE.InputAction>) : void;
-        /*
-         *Unmap a key from an action within the mapping context.
-         */
-        UnmapKey(Action: $Nullable<UE.InputAction>, Key: UE.Key) : void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): InputMappingContext;
-        static Load(InName: string): InputMappingContext;
-    
-        __tid_InputMappingContext_0__: boolean;
-    }
-    
-    class WarriorHeroWeaponData {
-        constructor();
-        constructor(WeaponAnimLayerToLink: UE.Class, DefaultWeaponAbilities: TArray<UE.WarriorHeroAbilitySet>, SpecialWeaponAbilities: TArray<UE.WarriorHeroSpecialAbilitySet>, WeaponInputMappingContext: UE.InputMappingContext, WeaponBaseDamage: UE.ScalableFloat, SoftWeaponIconTexture: TSoftObjectPtr<UE.Texture2D>);
-        WeaponAnimLayerToLink: UE.Class;
-        DefaultWeaponAbilities: TArray<UE.WarriorHeroAbilitySet>;
-        SpecialWeaponAbilities: TArray<UE.WarriorHeroSpecialAbilitySet>;
-        WeaponInputMappingContext: UE.InputMappingContext;
-        WeaponBaseDamage: UE.ScalableFloat;
-        SoftWeaponIconTexture: TSoftObjectPtr<UE.Texture2D>;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_WarriorHeroWeaponData_0__: boolean;
-    }
-    
-    class WarriorHeroWeapon extends UE.WarriorWeaponBase {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        HeroWeaponData: UE.WarriorHeroWeaponData;
-        AssignGrantedAbilitySpecHandles(InSpecHandles: TArray<UE.GameplayAbilitySpecHandle>) : void;
-        GetGrantedAbilitySpecHandles() : TArray<UE.GameplayAbilitySpecHandle>;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): WarriorHeroWeapon;
-        static Load(InName: string): WarriorHeroWeapon;
-    
-        __tid_WarriorHeroWeapon_0__: boolean;
-    }
-    
-    class HeroCombatComponent extends UE.PawnCombatComponent {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        GetHeroCarriedWeaponByTag(InWeaponTag: UE.GameplayTag) : UE.WarriorHeroWeapon;
-        GetHeroCurrentEquipWeapon() : UE.WarriorHeroWeapon;
-        GetHeroCurrentEquipWeaponDamageAtLevel(InLevel: number) : number;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): HeroCombatComponent;
-        static Load(InName: string): HeroCombatComponent;
-    
-        __tid_HeroCombatComponent_0__: boolean;
-    }
-    
-    class CustomMovementComponent extends UE.CharacterMovementComponent {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        OwningPlayerAnimInstance: UE.AnimInstance;
-        OwningPlayerCharacter: UE.WarriorHeroCharacter;
-        ClimbableSurfaceTraceTypes: TArray<UE.EObjectTypeQuery>;
-        ClimbCapsuleTraceRadius: number;
-        ClimbCapsuleTraceHalfHeight: number;
-        MaxbrakingClimbDeceleration: number;
-        MaxClimbSpeed: number;
-        MaxClimbAcceleration: number;
-        ClimbDownWalkableSurfaceTraceOffset: number;
-        ClimbDownLedgeSurfaceTraceOffset: number;
-        IdleToClimbMontage: UE.AnimMontage;
-        ClimbToTopMontage: UE.AnimMontage;
-        ClimbDownLedgeMontage: UE.AnimMontage;
-        VaultMontage: UE.AnimMontage;
-        HopUpMontage: UE.AnimMontage;
-        HopDownMontage: UE.AnimMontage;
-        HopLeftMontage: UE.AnimMontage;
-        HopRightMontage: UE.AnimMontage;
-        OnClimbMontageEnded(Montage: $Nullable<UE.AnimMontage>, bInterrupted: boolean) : void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): CustomMovementComponent;
-        static Load(InName: string): CustomMovementComponent;
-    
-        __tid_CustomMovementComponent_0__: boolean;
-    }
-    
-    class WarriorInputActionConfig {
-        constructor();
-        constructor(InputTag: UE.GameplayTag, InputAction: UE.InputAction);
-        InputTag: UE.GameplayTag;
-        InputAction: UE.InputAction;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_WarriorInputActionConfig_0__: boolean;
-    }
-    
-    class DataAsset_InputConfig extends UE.DataAsset {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        DefaultMappingContext: UE.InputMappingContext;
-        NativeInputActions: TArray<UE.WarriorInputActionConfig>;
-        AbilityInputActions: TArray<UE.WarriorInputActionConfig>;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): DataAsset_InputConfig;
-        static Load(InName: string): DataAsset_InputConfig;
-    
-        __tid_DataAsset_InputConfig_0__: boolean;
-    }
-    
-    class WarriorHeroCharacter extends UE.WarriorBaseCharacter {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        CameraBoom: UE.SpringArmComponent;
-        FollowCamera: UE.CameraComponent;
-        HeroCombatComponent: UE.HeroCombatComponent;
-        HeroUIComponent: UE.HeroUIComponent;
-        CustomMovementComponent: UE.CustomMovementComponent;
-        InputConfigDataAsset: UE.DataAsset_InputConfig;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): WarriorHeroCharacter;
-        static Load(InName: string): WarriorHeroCharacter;
-    
-        __tid_WarriorHeroCharacter_0__: boolean;
-    }
-    
-    class WarriorHeroAnimInstance extends UE.WarriorCharacterAnimInstance {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        OwningHeroCharacter: UE.WarriorHeroCharacter;
-        bShouldEnterRelaxState: boolean;
-        EnterRelaxStateThreshold: number;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): WarriorHeroAnimInstance;
-        static Load(InName: string): WarriorHeroAnimInstance;
-    
-        __tid_WarriorHeroAnimInstance_0__: boolean;
-    }
-    
-    class PointerToUberGraphFrame {
-        constructor();
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_PointerToUberGraphFrame_0__: boolean;
-    }
-    
-    class AnimBlueprintMutableData {
-        constructor();
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_AnimBlueprintMutableData_0__: boolean;
-    }
-    
-    class AnimSubsystemInstance {
-        constructor();
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_AnimSubsystemInstance_0__: boolean;
-    }
-    
-    class AnimNodeFunctionRef {
-        constructor();
-        constructor(ClassName: string, FunctionName: string, Class: UE.Class, Function: UE.Function);
-        ClassName: string;
-        FunctionName: string;
-        Class: UE.Class;
-        Function: UE.Function;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_AnimNodeFunctionRef_0__: boolean;
-    }
-    
-    class AnimNode_Base {
-        constructor();
-        constructor(InitialUpdateFunction: UE.AnimNodeFunctionRef, BecomeRelevantFunction: UE.AnimNodeFunctionRef, UpdateFunction: UE.AnimNodeFunctionRef);
-        InitialUpdateFunction: UE.AnimNodeFunctionRef;
-        BecomeRelevantFunction: UE.AnimNodeFunctionRef;
-        UpdateFunction: UE.AnimNodeFunctionRef;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_AnimNode_Base_0__: boolean;
-    }
-    
-    class PoseLinkBase {
-        constructor();
-        constructor(LinkID: number, SourceLinkID: number);
-        LinkID: number;
-        SourceLinkID: number;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_PoseLinkBase_0__: boolean;
-    }
-    
-    class PoseLink extends UE.PoseLinkBase {
-        constructor();
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_PoseLink_0__: boolean;
-    }
-    
-    class AnimNode_Root extends UE.AnimNode_Base {
-        constructor();
-        constructor(Result: UE.PoseLink, Name: string, LayerGroup: string, Group: string);
-        Result: UE.PoseLink;
-        Name: string;
-        LayerGroup: string;
-        Group: string;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_AnimNode_Root_0__: boolean;
-    }
-    
-    class AnimNode_TransitionResult extends UE.AnimNode_Base {
-        constructor();
-        constructor(bCanEnterTransition: boolean);
-        bCanEnterTransition: boolean;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_AnimNode_TransitionResult_0__: boolean;
-    }
-    
-    class AnimNode_AssetPlayerRelevancyBase extends UE.AnimNode_Base {
-        constructor();
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_AnimNode_AssetPlayerRelevancyBase_0__: boolean;
-    }
-    
-    class RandomPlayerSequenceEntry {
-        constructor();
-        constructor(Sequence: UE.AnimSequenceBase, ChanceToPlay: number, MinLoopCount: number, MaxLoopCount: number, MinPlayRate: number, MaxPlayRate: number, BlendIn: UE.AlphaBlend);
-        Sequence: UE.AnimSequenceBase;
-        ChanceToPlay: number;
-        MinLoopCount: number;
-        MaxLoopCount: number;
-        MinPlayRate: number;
-        MaxPlayRate: number;
-        BlendIn: UE.AlphaBlend;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_RandomPlayerSequenceEntry_0__: boolean;
-    }
-    
-    class AnimNode_RandomPlayer extends UE.AnimNode_AssetPlayerRelevancyBase {
-        constructor();
-        constructor(Entries: TArray<UE.RandomPlayerSequenceEntry>, bIgnoreForRelevancyTest: boolean, BlendWeight: number, bShuffleMode: boolean);
-        Entries: TArray<UE.RandomPlayerSequenceEntry>;
-        bIgnoreForRelevancyTest: boolean;
-        BlendWeight: number;
-        bShuffleMode: boolean;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_AnimNode_RandomPlayer_0__: boolean;
-    }
-    
-    class AnimNode_StateResult extends UE.AnimNode_Root {
-        constructor();
-        constructor(StateIndex: number, StateEntryFunction: UE.AnimNodeFunctionRef, StateFullyBlendedInFunction: UE.AnimNodeFunctionRef, StateExitFunction: UE.AnimNodeFunctionRef, StateFullyBlendedOutFunction: UE.AnimNodeFunctionRef);
-        StateIndex: number;
-        StateEntryFunction: UE.AnimNodeFunctionRef;
-        StateFullyBlendedInFunction: UE.AnimNodeFunctionRef;
-        StateExitFunction: UE.AnimNodeFunctionRef;
-        StateFullyBlendedOutFunction: UE.AnimNodeFunctionRef;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_AnimNode_StateResult_0__: boolean;
-    }
-    
-    enum EAnimSyncGroupScope { Local, Component, EAnimSyncGroupScope_MAX, __typeKeyDoNoAccess}
-    class AnimNode_AssetPlayerBase extends UE.AnimNode_AssetPlayerRelevancyBase {
-        constructor();
-        constructor(GroupIndex: number, GroupScope: UE.EAnimSyncGroupScope, BlendWeight: number, InternalTimeAccumulator: number);
-        GroupIndex: number;
-        GroupScope: UE.EAnimSyncGroupScope;
-        BlendWeight: number;
-        InternalTimeAccumulator: number;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_AnimNode_AssetPlayerBase_0__: boolean;
-    }
-    
-    enum EFilterInterpolationType { BSIT_Average, BSIT_Linear, BSIT_Cubic, BSIT_EaseInOut, BSIT_ExponentialDecay, BSIT_SpringDamper, BSIT_MAX, __typeKeyDoNoAccess}
-    class InterpolationParameter {
-        constructor();
-        constructor(InterpolationTime: number, DampingRatio: number, MaxSpeed: number, InterpolationType: UE.EFilterInterpolationType);
-        InterpolationTime: number;
-        DampingRatio: number;
-        MaxSpeed: number;
-        InterpolationType: UE.EFilterInterpolationType;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_InterpolationParameter_0__: boolean;
-    }
-    
-    class AnalysisProperties extends UE.Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Function: string;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): AnalysisProperties;
-        static Load(InName: string): AnalysisProperties;
-    
-        __tid_AnalysisProperties_0__: boolean;
-    }
-    
-    enum ENotifyTriggerMode { AllAnimations, HighestWeightedAnimation, None, ENotifyTriggerMode_MAX, __typeKeyDoNoAccess}
-    enum EPreferredTriangulationDirection { None, Tangential, Radial, EPreferredTriangulationDirection_MAX, __typeKeyDoNoAccess}
-    enum EBlendSpacePerBoneBlendMode { ManualPerBoneOverride, BlendProfile, EBlendSpacePerBoneBlendMode_MAX, __typeKeyDoNoAccess}
-    class PerBoneInterpolation {
-        constructor();
-        constructor(BoneReference: UE.BoneReference, InterpolationSpeedPerSec: number);
-        BoneReference: UE.BoneReference;
-        InterpolationSpeedPerSec: number;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_PerBoneInterpolation_0__: boolean;
-    }
-    
-    class BlendSpaceBlendProfile {
-        constructor();
-        constructor(BlendProfile: UE.BlendProfile, TargetWeightInterpolationSpeedPerSec: number);
-        BlendProfile: UE.BlendProfile;
-        TargetWeightInterpolationSpeedPerSec: number;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_BlendSpaceBlendProfile_0__: boolean;
-    }
-    
-    class BlendSample {
-        constructor();
-        constructor(Animation: UE.AnimSequence, SampleValue: UE.Vector, RateScale: number, bIncludeInAnalyseAll: boolean, bIsValid: boolean);
-        Animation: UE.AnimSequence;
-        SampleValue: UE.Vector;
-        RateScale: number;
-        bIncludeInAnalyseAll: boolean;
-        bIsValid: boolean;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_BlendSample_0__: boolean;
-    }
-    
-    class EditorElement {
-        constructor();
-        constructor(Indices: FixSizeArray<number>, Weights: FixSizeArray<number>);
-        Indices: FixSizeArray<number>;
-        Weights: FixSizeArray<number>;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_EditorElement_0__: boolean;
-    }
-    
-    class BlendSpaceSegment {
-        constructor();
-        constructor(SampleIndices: FixSizeArray<number>, Vertices: FixSizeArray<number>);
-        SampleIndices: FixSizeArray<number>;
-        Vertices: FixSizeArray<number>;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_BlendSpaceSegment_0__: boolean;
-    }
-    
-    class BlendSpaceTriangleEdgeInfo {
-        constructor();
-        constructor(Normal: UE.Vector2D, NeighbourTriangleIndex: number, AdjacentPerimeterTriangleIndices: FixSizeArray<number>, AdjacentPerimeterVertexIndices: FixSizeArray<number>);
-        Normal: UE.Vector2D;
-        NeighbourTriangleIndex: number;
-        AdjacentPerimeterTriangleIndices: FixSizeArray<number>;
-        AdjacentPerimeterVertexIndices: FixSizeArray<number>;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_BlendSpaceTriangleEdgeInfo_0__: boolean;
-    }
-    
-    class BlendSpaceTriangle {
-        constructor();
-        constructor(SampleIndices: FixSizeArray<number>, Vertices: FixSizeArray<UE.Vector2D>, EdgeInfo: FixSizeArray<UE.BlendSpaceTriangleEdgeInfo>);
-        SampleIndices: FixSizeArray<number>;
-        Vertices: FixSizeArray<UE.Vector2D>;
-        EdgeInfo: FixSizeArray<UE.BlendSpaceTriangleEdgeInfo>;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_BlendSpaceTriangle_0__: boolean;
-    }
-    
-    class BlendSpaceData {
-        constructor();
-        constructor(Segments: TArray<UE.BlendSpaceSegment>, Triangles: TArray<UE.BlendSpaceTriangle>);
-        Segments: TArray<UE.BlendSpaceSegment>;
-        Triangles: TArray<UE.BlendSpaceTriangle>;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_BlendSpaceData_0__: boolean;
-    }
-    
-    class BlendParameter {
-        constructor();
-        constructor(DisplayName: string, Min: number, Max: number, GridNum: number, bSnapToGrid: boolean, bWrapInput: boolean);
-        DisplayName: string;
-        Min: number;
-        Max: number;
-        GridNum: number;
-        bSnapToGrid: boolean;
-        bWrapInput: boolean;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_BlendParameter_0__: boolean;
-    }
-    
-    enum EBlendSpaceAxis { BSA_None, BSA_X, BSA_Y, BSA_MAX, __typeKeyDoNoAccess}
-    class BlendSpace extends UE.AnimationAsset {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        bContainsRotationOffsetMeshSpaceSamples: boolean;
-        InterpolationParam: FixSizeArray<UE.InterpolationParameter>;
-        AnalysisProperties_EditorOnly: FixSizeArray<UE.AnalysisProperties>;
-        TargetWeightInterpolationSpeedPerSec: number;
-        bTargetWeightInterpolationEaseInOut: boolean;
-        bAllowMeshSpaceBlending: boolean;
-        bLoop: boolean;
-        bAllowMarkerBasedSync: boolean;
-        PreviewBasePose_EditorOnly: UE.AnimSequence;
-        AnimLength: number;
-        NotifyTriggerMode: UE.ENotifyTriggerMode;
-        bInterpolateUsingGrid: boolean;
-        PreferredTriangulationDirection: UE.EPreferredTriangulationDirection;
-        PerBoneBlendMode: UE.EBlendSpacePerBoneBlendMode;
-        ManualPerBoneOverrides: TArray<UE.PerBoneInterpolation>;
-        PerBoneBlendProfile: UE.BlendSpaceBlendProfile;
-        SampleIndexWithMarkers: number;
-        SampleData: TArray<UE.BlendSample>;
-        GridSamples: TArray<UE.EditorElement>;
-        BlendSpaceData: UE.BlendSpaceData;
-        BlendParameters: FixSizeArray<UE.BlendParameter>;
-        AxisToScaleAnimation: UE.EBlendSpaceAxis;
-        DimensionIndices: TArray<number>;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): BlendSpace;
-        static Load(InName: string): BlendSpace;
-    
-        __tid_BlendSpace_0__: boolean;
-    }
-    
-    class AnimNode_BlendSpacePlayerBase extends UE.AnimNode_AssetPlayerBase {
-        constructor();
-        constructor(PreviousBlendSpace: UE.BlendSpace);
-        PreviousBlendSpace: UE.BlendSpace;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_AnimNode_BlendSpacePlayerBase_0__: boolean;
-    }
-    
-    enum EAnimGroupRole { CanBeLeader, AlwaysFollower, AlwaysLeader, TransitionLeader, TransitionFollower, ExclusiveAlwaysLeader, EAnimGroupRole_MAX, __typeKeyDoNoAccess}
-    enum EAnimSyncMethod { DoNotSync, SyncGroup, Graph, EAnimSyncMethod_MAX, __typeKeyDoNoAccess}
-    class AnimNode_BlendSpacePlayer extends UE.AnimNode_BlendSpacePlayerBase {
-        constructor();
-        constructor(GroupName: string, GroupRole: UE.EAnimGroupRole, Method: UE.EAnimSyncMethod, bIgnoreForRelevancyTest: boolean, X: number, Y: number, PlayRate: number, bLoop: boolean, bResetPlayTimeWhenBlendSpaceChanges: boolean, StartPosition: number, BlendSpace: UE.BlendSpace);
-        GroupName: string;
-        GroupRole: UE.EAnimGroupRole;
-        Method: UE.EAnimSyncMethod;
-        bIgnoreForRelevancyTest: boolean;
-        X: number;
-        Y: number;
-        PlayRate: number;
-        bLoop: boolean;
-        bResetPlayTimeWhenBlendSpaceChanges: boolean;
-        StartPosition: number;
-        BlendSpace: UE.BlendSpace;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_AnimNode_BlendSpacePlayer_0__: boolean;
-    }
-    
-    class InputScaleBiasClampState {
-        constructor();
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_InputScaleBiasClampState_0__: boolean;
-    }
-    
-    class AnimNode_SequencePlayerBase extends UE.AnimNode_AssetPlayerBase {
-        constructor();
-        constructor(PlayRateScaleBiasClampState: UE.InputScaleBiasClampState);
-        PlayRateScaleBiasClampState: UE.InputScaleBiasClampState;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_AnimNode_SequencePlayerBase_0__: boolean;
-    }
-    
-    class InputRange {
-        constructor();
-        constructor(Min: number, Max: number);
-        Min: number;
-        Max: number;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_InputRange_0__: boolean;
-    }
-    
-    class InputScaleBiasClampConstants {
-        constructor();
-        constructor(bMapRange: boolean, bClampResult: boolean, bInterpResult: boolean, InRange: UE.InputRange, OutRange: UE.InputRange, Scale: number, Bias: number, ClampMin: number, ClampMax: number, InterpSpeedIncreasing: number, InterpSpeedDecreasing: number);
-        bMapRange: boolean;
-        bClampResult: boolean;
-        bInterpResult: boolean;
-        InRange: UE.InputRange;
-        OutRange: UE.InputRange;
-        Scale: number;
-        Bias: number;
-        ClampMin: number;
-        ClampMax: number;
-        InterpSpeedIncreasing: number;
-        InterpSpeedDecreasing: number;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_InputScaleBiasClampConstants_0__: boolean;
-    }
-    
-    class InputScaleBiasClamp {
-        constructor();
-        constructor(bMapRange: boolean, bClampResult: boolean, bInterpResult: boolean, InRange: UE.InputRange, OutRange: UE.InputRange, Scale: number, Bias: number, ClampMin: number, ClampMax: number, InterpSpeedIncreasing: number, InterpSpeedDecreasing: number);
-        bMapRange: boolean;
-        bClampResult: boolean;
-        bInterpResult: boolean;
-        InRange: UE.InputRange;
-        OutRange: UE.InputRange;
-        Scale: number;
-        Bias: number;
-        ClampMin: number;
-        ClampMax: number;
-        InterpSpeedIncreasing: number;
-        InterpSpeedDecreasing: number;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_InputScaleBiasClamp_0__: boolean;
-    }
-    
-    class AnimNode_SequencePlayer extends UE.AnimNode_SequencePlayerBase {
-        constructor();
-        constructor(GroupName: string, GroupRole: UE.EAnimGroupRole, Method: UE.EAnimSyncMethod, bIgnoreForRelevancyTest: boolean, Sequence: UE.AnimSequenceBase, PlayRateBasis: number, PlayRate: number, PlayRateScaleBiasClampConstants: UE.InputScaleBiasClampConstants, PlayRateScaleBiasClamp: UE.InputScaleBiasClamp, StartPosition: number, bLoopAnimation: boolean, bStartFromMatchingPose: boolean);
-        GroupName: string;
-        GroupRole: UE.EAnimGroupRole;
-        Method: UE.EAnimSyncMethod;
-        bIgnoreForRelevancyTest: boolean;
-        Sequence: UE.AnimSequenceBase;
-        PlayRateBasis: number;
-        PlayRate: number;
-        PlayRateScaleBiasClampConstants: UE.InputScaleBiasClampConstants;
-        PlayRateScaleBiasClamp: UE.InputScaleBiasClamp;
-        StartPosition: number;
-        bLoopAnimation: boolean;
-        bStartFromMatchingPose: boolean;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_AnimNode_SequencePlayer_0__: boolean;
-    }
-    
-    class AnimNode_StateMachine extends UE.AnimNode_Base {
-        constructor();
-        constructor(StateMachineIndexInClass: number, MaxTransitionsPerFrame: number, MaxTransitionsRequests: number, bSkipFirstUpdateTransition: boolean, bReinitializeOnBecomingRelevant: boolean, bCreateNotifyMetaData: boolean, bAllowConduitEntryStates: boolean);
-        StateMachineIndexInClass: number;
-        MaxTransitionsPerFrame: number;
-        MaxTransitionsRequests: number;
-        bSkipFirstUpdateTransition: boolean;
-        bReinitializeOnBecomingRelevant: boolean;
-        bCreateNotifyMetaData: boolean;
-        bAllowConduitEntryStates: boolean;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_AnimNode_StateMachine_0__: boolean;
-    }
-    
-    class AnimNode_SaveCachedPose extends UE.AnimNode_Base {
-        constructor();
-        constructor(Pose: UE.PoseLink, CachePoseName: string);
-        Pose: UE.PoseLink;
-        CachePoseName: string;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_AnimNode_SaveCachedPose_0__: boolean;
-    }
-    
-    class AnimNode_UseCachedPose extends UE.AnimNode_Base {
-        constructor();
-        constructor(LinkToCachingNode: UE.PoseLink, CachePoseName: string);
-        LinkToCachingNode: UE.PoseLink;
-        CachePoseName: string;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_AnimNode_UseCachedPose_0__: boolean;
-    }
-    
-    enum ELayeredBoneBlendMode { BranchFilter, BlendMask, ELayeredBoneBlendMode_MAX, __typeKeyDoNoAccess}
-    class BranchFilter {
-        constructor();
-        constructor(BoneName: string, BlendDepth: number);
-        BoneName: string;
-        BlendDepth: number;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_BranchFilter_0__: boolean;
-    }
-    
-    class InputBlendPose {
-        constructor();
-        constructor(BranchFilters: TArray<UE.BranchFilter>);
-        BranchFilters: TArray<UE.BranchFilter>;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_InputBlendPose_0__: boolean;
-    }
-    
-    class PerBoneBlendWeight {
-        constructor();
-        constructor(SourceIndex: number, BlendWeight: number);
-        SourceIndex: number;
-        BlendWeight: number;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_PerBoneBlendWeight_0__: boolean;
-    }
-    
-    enum ECurveBlendOption { Override, DoNotOverride, NormalizeByWeight, BlendByWeight, UseBasePose, UseMaxValue, UseMinValue, ECurveBlendOption_MAX, __typeKeyDoNoAccess}
-    class AnimNode_LayeredBoneBlend extends UE.AnimNode_Base {
-        constructor();
-        constructor(BasePose: UE.PoseLink, BlendPoses: TArray<UE.PoseLink>, BlendMode: UE.ELayeredBoneBlendMode, BlendMasks: TArray<UE.BlendProfile>, LayerSetup: TArray<UE.InputBlendPose>, BlendWeights: TArray<number>, PerBoneBlendWeights: TArray<UE.PerBoneBlendWeight>, SkeletonGuid: UE.Guid, VirtualBoneGuid: UE.Guid, LODThreshold: number, bMeshSpaceRotationBlend: boolean, bMeshSpaceScaleBlend: boolean, CurveBlendOption: UE.ECurveBlendOption, bBlendRootMotionBasedOnRootBone: boolean);
-        BasePose: UE.PoseLink;
-        BlendPoses: TArray<UE.PoseLink>;
-        BlendMode: UE.ELayeredBoneBlendMode;
-        BlendMasks: TArray<UE.BlendProfile>;
-        LayerSetup: TArray<UE.InputBlendPose>;
-        BlendWeights: TArray<number>;
-        PerBoneBlendWeights: TArray<UE.PerBoneBlendWeight>;
-        SkeletonGuid: UE.Guid;
-        VirtualBoneGuid: UE.Guid;
-        LODThreshold: number;
-        bMeshSpaceRotationBlend: boolean;
-        bMeshSpaceScaleBlend: boolean;
-        CurveBlendOption: UE.ECurveBlendOption;
-        bBlendRootMotionBasedOnRootBone: boolean;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_AnimNode_LayeredBoneBlend_0__: boolean;
-    }
-    
-    class AnimNode_Slot extends UE.AnimNode_Base {
-        constructor();
-        constructor(Source: UE.PoseLink, SlotName: string, bAlwaysUpdateSourcePose: boolean);
-        Source: UE.PoseLink;
-        SlotName: string;
-        bAlwaysUpdateSourcePose: boolean;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_AnimNode_Slot_0__: boolean;
-    }
-    
-    enum EBlendListTransitionType { StandardBlend, Inertialization, EBlendListTransitionType_MAX, __typeKeyDoNoAccess}
-    class AnimNode_BlendListBase extends UE.AnimNode_Base {
-        constructor();
-        constructor(BlendPose: TArray<UE.PoseLink>, BlendTime: TArray<number>, TransitionType: UE.EBlendListTransitionType, BlendType: UE.EAlphaBlendOption, bResetChildOnActivation: boolean, CustomBlendCurve: UE.CurveFloat, BlendProfile: UE.BlendProfile);
-        BlendPose: TArray<UE.PoseLink>;
-        BlendTime: TArray<number>;
-        TransitionType: UE.EBlendListTransitionType;
-        BlendType: UE.EAlphaBlendOption;
-        bResetChildOnActivation: boolean;
-        CustomBlendCurve: UE.CurveFloat;
-        BlendProfile: UE.BlendProfile;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_AnimNode_BlendListBase_0__: boolean;
-    }
-    
-    class AnimNode_BlendListByBool extends UE.AnimNode_BlendListBase {
-        constructor();
-        constructor(bActiveValue: boolean);
-        bActiveValue: boolean;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_AnimNode_BlendListByBool_0__: boolean;
-    }
-    
-    class AnimNode_CustomProperty extends UE.AnimNode_Base {
-        constructor();
-        constructor(SourcePropertyNames: TArray<string>, DestPropertyNames: TArray<string>, TargetInstance: UE.Object, SourceInstance: UE.Object);
-        SourcePropertyNames: TArray<string>;
-        DestPropertyNames: TArray<string>;
-        TargetInstance: UE.Object;
-        SourceInstance: UE.Object;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_AnimNode_CustomProperty_0__: boolean;
-    }
-    
-    class AnimNode_LinkedAnimGraph extends UE.AnimNode_CustomProperty {
-        constructor();
-        constructor(InputPoses: TArray<UE.PoseLink>, InputPoseNames: TArray<string>, InstanceClass: UE.Class, Tag: string, PendingBlendOutProfile: UE.BlendProfile, PendingBlendInProfile: UE.BlendProfile, bReceiveNotifiesFromLinkedInstances: boolean, bPropagateNotifiesToLinkedInstances: boolean);
-        InputPoses: TArray<UE.PoseLink>;
-        InputPoseNames: TArray<string>;
-        InstanceClass: UE.Class;
-        Tag: string;
-        PendingBlendOutProfile: UE.BlendProfile;
-        PendingBlendInProfile: UE.BlendProfile;
-        bReceiveNotifiesFromLinkedInstances: boolean;
-        bPropagateNotifiesToLinkedInstances: boolean;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_AnimNode_LinkedAnimGraph_0__: boolean;
-    }
-    
-    class AnimNode_LinkedAnimLayer extends UE.AnimNode_LinkedAnimGraph {
-        constructor();
-        constructor(Interface: UE.Class, Layer: string);
-        Interface: UE.Class;
-        Layer: string;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_AnimNode_LinkedAnimLayer_0__: boolean;
-    }
-    
     class DataflowNode {
         constructor();
         constructor(bActive: boolean);
@@ -31429,6 +30289,18 @@ declare module "ue" {
         __tid_ActionableMessageSubsystem_0__: boolean;
     }
     
+    namespace Engine.PythonTypes {
+        class ActionBarUpdated__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): ActionBarUpdated__PythonCallable;
+            static Load(InName: string): ActionBarUpdated__PythonCallable;
+        
+            __tid_ActionBarUpdated__PythonCallable_0__: boolean;
+        }
+        
+    }
+
     class SlateWidgetStyle {
         constructor();
         /**
@@ -39891,6 +38763,195 @@ declare module "ue" {
         __tid_AimConstraintDescription_0__: boolean;
     }
     
+    enum EFilterInterpolationType { BSIT_Average, BSIT_Linear, BSIT_Cubic, BSIT_EaseInOut, BSIT_ExponentialDecay, BSIT_SpringDamper, BSIT_MAX, __typeKeyDoNoAccess}
+    class InterpolationParameter {
+        constructor();
+        constructor(InterpolationTime: number, DampingRatio: number, MaxSpeed: number, InterpolationType: UE.EFilterInterpolationType);
+        InterpolationTime: number;
+        DampingRatio: number;
+        MaxSpeed: number;
+        InterpolationType: UE.EFilterInterpolationType;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_InterpolationParameter_0__: boolean;
+    }
+    
+    class AnalysisProperties extends UE.Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Function: string;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): AnalysisProperties;
+        static Load(InName: string): AnalysisProperties;
+    
+        __tid_AnalysisProperties_0__: boolean;
+    }
+    
+    enum ENotifyTriggerMode { AllAnimations, HighestWeightedAnimation, None, ENotifyTriggerMode_MAX, __typeKeyDoNoAccess}
+    enum EPreferredTriangulationDirection { None, Tangential, Radial, EPreferredTriangulationDirection_MAX, __typeKeyDoNoAccess}
+    enum EBlendSpacePerBoneBlendMode { ManualPerBoneOverride, BlendProfile, EBlendSpacePerBoneBlendMode_MAX, __typeKeyDoNoAccess}
+    class PerBoneInterpolation {
+        constructor();
+        constructor(BoneReference: UE.BoneReference, InterpolationSpeedPerSec: number);
+        BoneReference: UE.BoneReference;
+        InterpolationSpeedPerSec: number;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_PerBoneInterpolation_0__: boolean;
+    }
+    
+    class BlendSpaceBlendProfile {
+        constructor();
+        constructor(BlendProfile: UE.BlendProfile, TargetWeightInterpolationSpeedPerSec: number);
+        BlendProfile: UE.BlendProfile;
+        TargetWeightInterpolationSpeedPerSec: number;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_BlendSpaceBlendProfile_0__: boolean;
+    }
+    
+    class BlendSample {
+        constructor();
+        constructor(Animation: UE.AnimSequence, SampleValue: UE.Vector, RateScale: number, bIncludeInAnalyseAll: boolean, bIsValid: boolean);
+        Animation: UE.AnimSequence;
+        SampleValue: UE.Vector;
+        RateScale: number;
+        bIncludeInAnalyseAll: boolean;
+        bIsValid: boolean;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_BlendSample_0__: boolean;
+    }
+    
+    class EditorElement {
+        constructor();
+        constructor(Indices: FixSizeArray<number>, Weights: FixSizeArray<number>);
+        Indices: FixSizeArray<number>;
+        Weights: FixSizeArray<number>;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_EditorElement_0__: boolean;
+    }
+    
+    class BlendSpaceSegment {
+        constructor();
+        constructor(SampleIndices: FixSizeArray<number>, Vertices: FixSizeArray<number>);
+        SampleIndices: FixSizeArray<number>;
+        Vertices: FixSizeArray<number>;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_BlendSpaceSegment_0__: boolean;
+    }
+    
+    class BlendSpaceTriangleEdgeInfo {
+        constructor();
+        constructor(Normal: UE.Vector2D, NeighbourTriangleIndex: number, AdjacentPerimeterTriangleIndices: FixSizeArray<number>, AdjacentPerimeterVertexIndices: FixSizeArray<number>);
+        Normal: UE.Vector2D;
+        NeighbourTriangleIndex: number;
+        AdjacentPerimeterTriangleIndices: FixSizeArray<number>;
+        AdjacentPerimeterVertexIndices: FixSizeArray<number>;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_BlendSpaceTriangleEdgeInfo_0__: boolean;
+    }
+    
+    class BlendSpaceTriangle {
+        constructor();
+        constructor(SampleIndices: FixSizeArray<number>, Vertices: FixSizeArray<UE.Vector2D>, EdgeInfo: FixSizeArray<UE.BlendSpaceTriangleEdgeInfo>);
+        SampleIndices: FixSizeArray<number>;
+        Vertices: FixSizeArray<UE.Vector2D>;
+        EdgeInfo: FixSizeArray<UE.BlendSpaceTriangleEdgeInfo>;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_BlendSpaceTriangle_0__: boolean;
+    }
+    
+    class BlendSpaceData {
+        constructor();
+        constructor(Segments: TArray<UE.BlendSpaceSegment>, Triangles: TArray<UE.BlendSpaceTriangle>);
+        Segments: TArray<UE.BlendSpaceSegment>;
+        Triangles: TArray<UE.BlendSpaceTriangle>;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_BlendSpaceData_0__: boolean;
+    }
+    
+    class BlendParameter {
+        constructor();
+        constructor(DisplayName: string, Min: number, Max: number, GridNum: number, bSnapToGrid: boolean, bWrapInput: boolean);
+        DisplayName: string;
+        Min: number;
+        Max: number;
+        GridNum: number;
+        bSnapToGrid: boolean;
+        bWrapInput: boolean;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_BlendParameter_0__: boolean;
+    }
+    
+    enum EBlendSpaceAxis { BSA_None, BSA_X, BSA_Y, BSA_MAX, __typeKeyDoNoAccess}
+    class BlendSpace extends UE.AnimationAsset {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        bContainsRotationOffsetMeshSpaceSamples: boolean;
+        InterpolationParam: FixSizeArray<UE.InterpolationParameter>;
+        AnalysisProperties_EditorOnly: FixSizeArray<UE.AnalysisProperties>;
+        TargetWeightInterpolationSpeedPerSec: number;
+        bTargetWeightInterpolationEaseInOut: boolean;
+        bAllowMeshSpaceBlending: boolean;
+        bLoop: boolean;
+        bAllowMarkerBasedSync: boolean;
+        PreviewBasePose_EditorOnly: UE.AnimSequence;
+        AnimLength: number;
+        NotifyTriggerMode: UE.ENotifyTriggerMode;
+        bInterpolateUsingGrid: boolean;
+        PreferredTriangulationDirection: UE.EPreferredTriangulationDirection;
+        PerBoneBlendMode: UE.EBlendSpacePerBoneBlendMode;
+        ManualPerBoneOverrides: TArray<UE.PerBoneInterpolation>;
+        PerBoneBlendProfile: UE.BlendSpaceBlendProfile;
+        SampleIndexWithMarkers: number;
+        SampleData: TArray<UE.BlendSample>;
+        GridSamples: TArray<UE.EditorElement>;
+        BlendSpaceData: UE.BlendSpaceData;
+        BlendParameters: FixSizeArray<UE.BlendParameter>;
+        AxisToScaleAnimation: UE.EBlendSpaceAxis;
+        DimensionIndices: TArray<number>;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): BlendSpace;
+        static Load(InName: string): BlendSpace;
+    
+        __tid_BlendSpace_0__: boolean;
+    }
+    
     class AimOffsetBlendSpace extends UE.BlendSpace {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -41021,15 +40082,6 @@ declare module "ue" {
         __tid_AlembicTestCommandlet_0__: boolean;
     }
     
-    class AnimLayerInterface extends UE.Interface {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): AnimLayerInterface;
-        static Load(InName: string): AnimLayerInterface;
-    
-        __tid_AnimLayerInterface_0__: boolean;
-    }
-    
     namespace ControlRig.Python.RigHierarchy.align_items_PY {
         class align_rotation extends UE.ToolMenuEntryScript {
             constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
@@ -41149,6 +40201,76 @@ declare module "ue" {
         static Load(InName: string): AlignObjectsToolBuilder;
     
         __tid_AlignObjectsToolBuilder_0__: boolean;
+    }
+    
+    class AmbientEntityBase extends UE.Actor {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        EntityConfigFilePath: string;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): AmbientEntityBase;
+        static Load(InName: string): AmbientEntityBase;
+    
+        __tid_AmbientEntityBase_0__: boolean;
+    }
+    
+    class BehaviorFrameworkConfig extends UE.DataAsset {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        SchemaFilePath: string;
+        SequencesFilePath: string;
+        ActionsFilePath: string;
+        EnvironmentalConditionsFilePath: string;
+        LogFilePath: string;
+        LogLevel: number;
+        SelectionAlgorithmOption: number;
+        Seed: bigint;
+        UpdateBatchSize: number;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): BehaviorFrameworkConfig;
+        static Load(InName: string): BehaviorFrameworkConfig;
+    
+        __tid_BehaviorFrameworkConfig_0__: boolean;
+    }
+    
+    class BehaviorFrameworkManagerBase extends UE.Actor {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Config: UE.BehaviorFrameworkConfig;
+        /*
+         *Signals that an entity finished executing an action.
+         */
+        CompleteCharacterAction(Entity: $Nullable<UE.AmbientEntityBase>, ActionId: number, ActionToken: bigint) : void;
+        /*
+         *Creates and initializes the framework. Called automatically on BeginPlay.
+         */
+        InitializeFramework() : void;
+        IsInitialized() : boolean;
+        /*
+         *Triggers an interruption on a set of entities.
+         */
+        ProcessInterruption(InterruptionId: number, Entities: TArray<UE.AmbientEntityBase>) : void;
+        /*
+         *Queries the current value of an environmental condition.
+         *Override in Blueprint to return values for your condition keys.
+         */
+        QueryEnvironmentalCondition(ConditionKey: number) : number;
+        /*
+         *Shuts down and releases the framework. Called automatically on EndPlay.
+         */
+        ShutdownFramework() : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): BehaviorFrameworkManagerBase;
+        static Load(InName: string): BehaviorFrameworkManagerBase;
+    
+        __tid_BehaviorFrameworkManagerBase_0__: boolean;
+    }
+    
+    class PointerToUberGraphFrame {
+        constructor();
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_PointerToUberGraphFrame_0__: boolean;
     }
     
     enum EAudioComponentPlayState { Playing, Stopped, Paused, FadingIn, FadingOut, Count, EAudioComponentPlayState_MAX, __typeKeyDoNoAccess}
@@ -41661,6 +40783,103 @@ declare module "ue" {
         static Load(InName: string): AmbisonicsEncodingSettings;
     
         __tid_AmbisonicsEncodingSettings_0__: boolean;
+    }
+    
+    class SliderStyle extends UE.SlateWidgetStyle {
+        constructor();
+        constructor(NormalBarImage: UE.SlateBrush, HoveredBarImage: UE.SlateBrush, DisabledBarImage: UE.SlateBrush, NormalThumbImage: UE.SlateBrush, HoveredThumbImage: UE.SlateBrush, DisabledThumbImage: UE.SlateBrush, BarThickness: number);
+        NormalBarImage: UE.SlateBrush;
+        HoveredBarImage: UE.SlateBrush;
+        DisabledBarImage: UE.SlateBrush;
+        NormalThumbImage: UE.SlateBrush;
+        HoveredThumbImage: UE.SlateBrush;
+        DisabledThumbImage: UE.SlateBrush;
+        BarThickness: number;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_SliderStyle_0__: boolean;
+    }
+    
+    enum EOrientation { Orient_Horizontal, Orient_Vertical, Orient_MAX, __typeKeyDoNoAccess}
+    class Slider extends UE.Widget {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Value: number;
+        ValueDelegate: $Delegate<() => number>;
+        MinValue: number;
+        MaxValue: number;
+        WidgetStyle: UE.SliderStyle;
+        Orientation: UE.EOrientation;
+        SliderBarColor: UE.LinearColor;
+        SliderHandleColor: UE.LinearColor;
+        IndentHandle: boolean;
+        Locked: boolean;
+        MouseUsesStep: boolean;
+        RequiresControllerLock: boolean;
+        StepSize: number;
+        IsFocusable: boolean;
+        OnMouseCaptureBegin: $MulticastDelegate<() => void>;
+        OnMouseCaptureEnd: $MulticastDelegate<() => void>;
+        OnControllerCaptureBegin: $MulticastDelegate<() => void>;
+        OnControllerCaptureEnd: $MulticastDelegate<() => void>;
+        OnValueChanged: $MulticastDelegate<(Value: number) => void>;
+        /*
+         *Get the current value scaled from 0 to 1
+         */
+        GetNormalizedValue() : number;
+        /*
+         *Gets the current value of the slider.
+         */
+        GetValue() : number;
+        /*
+         *Sets if the slidable area should be indented to fit the handle.
+         */
+        SetIndentHandle(InValue: boolean) : void;
+        /*
+         *Sets the handle to be interactive or fixed.
+         */
+        SetLocked(InValue: boolean) : void;
+        /*
+         *Sets the maximum value of the slider.
+         */
+        SetMaxValue(InValue: number) : void;
+        /*
+         *Sets the minimum value of the slider.
+         */
+        SetMinValue(InValue: number) : void;
+        /*
+         *Sets the color of the slider bar.
+         */
+        SetSliderBarColor(InValue: UE.LinearColor) : void;
+        /*
+         *Sets the color of the handle bar
+         */
+        SetSliderHandleColor(InValue: UE.LinearColor) : void;
+        /*
+         *Sets the amount to adjust the value by, when using a controller or keyboard.
+         */
+        SetStepSize(InValue: number) : void;
+        /*
+         *Sets the current value of the slider.
+         */
+        SetValue(InValue: number) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): Slider;
+        static Load(InName: string): Slider;
+    
+        __tid_Slider_0__: boolean;
+    }
+    
+    class AnalogSlider extends UE.Slider {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        OnAnalogCapture: $MulticastDelegate<(Value: number) => void>;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): AnalogSlider;
+        static Load(InName: string): AnalogSlider;
+    
+        __tid_AnalogSlider_0__: boolean;
     }
     
     class AnalyticsPrivacySettings extends UE.Object {
@@ -42350,6 +41569,73 @@ declare module "ue" {
         __tid_AnimationGraph_0__: boolean;
     }
     
+    class AnimNodeFunctionRef {
+        constructor();
+        constructor(ClassName: string, FunctionName: string, Class: UE.Class, Function: UE.Function);
+        ClassName: string;
+        FunctionName: string;
+        Class: UE.Class;
+        Function: UE.Function;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_AnimNodeFunctionRef_0__: boolean;
+    }
+    
+    class AnimNode_Base {
+        constructor();
+        constructor(InitialUpdateFunction: UE.AnimNodeFunctionRef, BecomeRelevantFunction: UE.AnimNodeFunctionRef, UpdateFunction: UE.AnimNodeFunctionRef);
+        InitialUpdateFunction: UE.AnimNodeFunctionRef;
+        BecomeRelevantFunction: UE.AnimNodeFunctionRef;
+        UpdateFunction: UE.AnimNodeFunctionRef;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_AnimNode_Base_0__: boolean;
+    }
+    
+    class PoseLinkBase {
+        constructor();
+        constructor(LinkID: number, SourceLinkID: number);
+        LinkID: number;
+        SourceLinkID: number;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_PoseLinkBase_0__: boolean;
+    }
+    
+    class PoseLink extends UE.PoseLinkBase {
+        constructor();
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_PoseLink_0__: boolean;
+    }
+    
+    class AnimNode_Root extends UE.AnimNode_Base {
+        constructor();
+        constructor(Result: UE.PoseLink, Name: string, LayerGroup: string, Group: string);
+        Result: UE.PoseLink;
+        Name: string;
+        LayerGroup: string;
+        Group: string;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_AnimNode_Root_0__: boolean;
+    }
+    
     class AnimNode_BlendSpaceSampleResult extends UE.AnimNode_Root {
         constructor();
         /**
@@ -42996,6 +42282,22 @@ declare module "ue" {
         __tid_AnimationCurveMetaData_0__: boolean;
     }
     
+    class AnimNode_StateResult extends UE.AnimNode_Root {
+        constructor();
+        constructor(StateIndex: number, StateEntryFunction: UE.AnimNodeFunctionRef, StateFullyBlendedInFunction: UE.AnimNodeFunctionRef, StateExitFunction: UE.AnimNodeFunctionRef, StateFullyBlendedOutFunction: UE.AnimNodeFunctionRef);
+        StateIndex: number;
+        StateEntryFunction: UE.AnimNodeFunctionRef;
+        StateFullyBlendedInFunction: UE.AnimNodeFunctionRef;
+        StateExitFunction: UE.AnimNodeFunctionRef;
+        StateFullyBlendedOutFunction: UE.AnimNodeFunctionRef;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_AnimNode_StateResult_0__: boolean;
+    }
+    
     class AnimGraphNode_StateResult extends UE.AnimGraphNode_Base {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Node: UE.AnimNode_StateResult;
@@ -43123,6 +42425,8 @@ declare module "ue" {
         __tid_AnimationFrameSnapshot_0__: boolean;
     }
     
+    enum EAnimSyncMethod { DoNotSync, SyncGroup, Graph, EAnimSyncMethod_MAX, __typeKeyDoNoAccess}
+    enum EAnimGroupRole { CanBeLeader, AlwaysFollower, AlwaysLeader, TransitionLeader, TransitionFollower, ExclusiveAlwaysLeader, EAnimGroupRole_MAX, __typeKeyDoNoAccess}
     class AnimationGroupReference {
         constructor();
         constructor(Method: UE.EAnimSyncMethod, GroupName: string, GroupRole: UE.EAnimGroupRole);
@@ -43904,6 +43208,18 @@ declare module "ue" {
         __tid_AnimationTrackAddedPayload_0__: boolean;
     }
     
+    class AnimNode_TransitionResult extends UE.AnimNode_Base {
+        constructor();
+        constructor(bCanEnterTransition: boolean);
+        bCanEnterTransition: boolean;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_AnimNode_TransitionResult_0__: boolean;
+    }
+    
     class AnimGraphNode_TransitionResult extends UE.AnimGraphNode_Base {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Node: UE.AnimNode_TransitionResult;
@@ -44067,6 +43383,16 @@ declare module "ue" {
         static Load(InName: string): AnimBlueprintExtension_LinkedInputPose;
     
         __tid_AnimBlueprintExtension_LinkedInputPose_0__: boolean;
+    }
+    
+    class AnimSubsystemInstance {
+        constructor();
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_AnimSubsystemInstance_0__: boolean;
     }
     
     class AnimSubsystemInstance_NodeRelevancy extends UE.AnimSubsystemInstance {
@@ -44308,56 +43634,6 @@ declare module "ue" {
         __tid_AnimBlueprintFunctionPinInfo_0__: boolean;
     }
     
-    class AnimNodeExposedValueHandler {
-        constructor();
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_AnimNodeExposedValueHandler_0__: boolean;
-    }
-    
-    class AnimNodeExposedValueHandler_Base extends UE.AnimNodeExposedValueHandler {
-        constructor();
-        constructor(Function: UE.Function, BoundFunction: string);
-        Function: UE.Function;
-        BoundFunction: string;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_AnimNodeExposedValueHandler_Base_0__: boolean;
-    }
-    
-    enum EPostCopyOperation { None, LogicalNegateBool, EPostCopyOperation_MAX, __typeKeyDoNoAccess}
-    class ExposedValueCopyRecord {
-        constructor();
-        constructor(CopyIndex: number, PostCopyOperation: UE.EPostCopyOperation, bOnlyUpdateWhenActive: boolean);
-        CopyIndex: number;
-        PostCopyOperation: UE.EPostCopyOperation;
-        bOnlyUpdateWhenActive: boolean;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_ExposedValueCopyRecord_0__: boolean;
-    }
-    
-    class AnimNodeExposedValueHandler_PropertyAccess extends UE.AnimNodeExposedValueHandler_Base {
-        constructor();
-        constructor(CopyRecords: TArray<UE.ExposedValueCopyRecord>);
-        CopyRecords: TArray<UE.ExposedValueCopyRecord>;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_AnimNodeExposedValueHandler_PropertyAccess_0__: boolean;
-    }
-    
     class AnimBlueprintGeneratedStruct extends UE.ScriptStruct {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -44365,6 +43641,16 @@ declare module "ue" {
         static Load(InName: string): AnimBlueprintGeneratedStruct;
     
         __tid_AnimBlueprintGeneratedStruct_0__: boolean;
+    }
+    
+    class AnimBlueprintMutableData {
+        constructor();
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_AnimBlueprintMutableData_0__: boolean;
     }
     
     class AnimBlueprintPostCompileValidation extends UE.Object {
@@ -45477,6 +44763,66 @@ declare module "ue" {
         __tid_AnimGraphNode_BlendSpaceBase_0__: boolean;
     }
     
+    class AnimNode_AssetPlayerRelevancyBase extends UE.AnimNode_Base {
+        constructor();
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_AnimNode_AssetPlayerRelevancyBase_0__: boolean;
+    }
+    
+    enum EAnimSyncGroupScope { Local, Component, EAnimSyncGroupScope_MAX, __typeKeyDoNoAccess}
+    class AnimNode_AssetPlayerBase extends UE.AnimNode_AssetPlayerRelevancyBase {
+        constructor();
+        constructor(GroupIndex: number, GroupScope: UE.EAnimSyncGroupScope, BlendWeight: number, InternalTimeAccumulator: number);
+        GroupIndex: number;
+        GroupScope: UE.EAnimSyncGroupScope;
+        BlendWeight: number;
+        InternalTimeAccumulator: number;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_AnimNode_AssetPlayerBase_0__: boolean;
+    }
+    
+    class AnimNode_BlendSpacePlayerBase extends UE.AnimNode_AssetPlayerBase {
+        constructor();
+        constructor(PreviousBlendSpace: UE.BlendSpace);
+        PreviousBlendSpace: UE.BlendSpace;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_AnimNode_BlendSpacePlayerBase_0__: boolean;
+    }
+    
+    class AnimNode_BlendSpacePlayer extends UE.AnimNode_BlendSpacePlayerBase {
+        constructor();
+        constructor(GroupName: string, GroupRole: UE.EAnimGroupRole, Method: UE.EAnimSyncMethod, bIgnoreForRelevancyTest: boolean, X: number, Y: number, PlayRate: number, bLoop: boolean, bResetPlayTimeWhenBlendSpaceChanges: boolean, StartPosition: number, BlendSpace: UE.BlendSpace);
+        GroupName: string;
+        GroupRole: UE.EAnimGroupRole;
+        Method: UE.EAnimSyncMethod;
+        bIgnoreForRelevancyTest: boolean;
+        X: number;
+        Y: number;
+        PlayRate: number;
+        bLoop: boolean;
+        bResetPlayTimeWhenBlendSpaceChanges: boolean;
+        StartPosition: number;
+        BlendSpace: UE.BlendSpace;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_AnimNode_BlendSpacePlayer_0__: boolean;
+    }
+    
     class AnimNode_AimOffsetLookAt extends UE.AnimNode_BlendSpacePlayer {
         constructor();
         constructor(BasePose: UE.PoseLink, LODThreshold: number, SourceSocketName: string, PivotSocketName: string, LookAtLocation: UE.Vector, SocketAxis: UE.Vector, Alpha: number);
@@ -45553,6 +44899,41 @@ declare module "ue" {
         static StaticClass(): ScriptStruct;
         static StaticStruct(): ScriptStruct;
         __tid_InputAlphaBoolBlend_0__: boolean;
+    }
+    
+    class InputRange {
+        constructor();
+        constructor(Min: number, Max: number);
+        Min: number;
+        Max: number;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_InputRange_0__: boolean;
+    }
+    
+    class InputScaleBiasClamp {
+        constructor();
+        constructor(bMapRange: boolean, bClampResult: boolean, bInterpResult: boolean, InRange: UE.InputRange, OutRange: UE.InputRange, Scale: number, Bias: number, ClampMin: number, ClampMax: number, InterpSpeedIncreasing: number, InterpSpeedDecreasing: number);
+        bMapRange: boolean;
+        bClampResult: boolean;
+        bInterpResult: boolean;
+        InRange: UE.InputRange;
+        OutRange: UE.InputRange;
+        Scale: number;
+        Bias: number;
+        ClampMin: number;
+        ClampMax: number;
+        InterpSpeedIncreasing: number;
+        InterpSpeedDecreasing: number;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_InputScaleBiasClamp_0__: boolean;
     }
     
     class AnimNode_SkeletalControlBase extends UE.AnimNode_Base {
@@ -45885,6 +45266,37 @@ declare module "ue" {
         static Load(InName: string): AnimGraphNode_BlendListBase;
     
         __tid_AnimGraphNode_BlendListBase_0__: boolean;
+    }
+    
+    enum EBlendListTransitionType { StandardBlend, Inertialization, EBlendListTransitionType_MAX, __typeKeyDoNoAccess}
+    class AnimNode_BlendListBase extends UE.AnimNode_Base {
+        constructor();
+        constructor(BlendPose: TArray<UE.PoseLink>, BlendTime: TArray<number>, TransitionType: UE.EBlendListTransitionType, BlendType: UE.EAlphaBlendOption, bResetChildOnActivation: boolean, CustomBlendCurve: UE.CurveFloat, BlendProfile: UE.BlendProfile);
+        BlendPose: TArray<UE.PoseLink>;
+        BlendTime: TArray<number>;
+        TransitionType: UE.EBlendListTransitionType;
+        BlendType: UE.EAlphaBlendOption;
+        bResetChildOnActivation: boolean;
+        CustomBlendCurve: UE.CurveFloat;
+        BlendProfile: UE.BlendProfile;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_AnimNode_BlendListBase_0__: boolean;
+    }
+    
+    class AnimNode_BlendListByBool extends UE.AnimNode_BlendListBase {
+        constructor();
+        constructor(bActiveValue: boolean);
+        bActiveValue: boolean;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_AnimNode_BlendListByBool_0__: boolean;
     }
     
     class AnimGraphNode_BlendListByBool extends UE.AnimGraphNode_BlendListBase {
@@ -46257,6 +45669,21 @@ declare module "ue" {
         static Load(InName: string): AnimGraphNode_CustomProperty;
     
         __tid_AnimGraphNode_CustomProperty_0__: boolean;
+    }
+    
+    class AnimNode_CustomProperty extends UE.AnimNode_Base {
+        constructor();
+        constructor(SourcePropertyNames: TArray<string>, DestPropertyNames: TArray<string>, TargetInstance: UE.Object, SourceInstance: UE.Object);
+        SourcePropertyNames: TArray<string>;
+        DestPropertyNames: TArray<string>;
+        TargetInstance: UE.Object;
+        SourceInstance: UE.Object;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_AnimNode_CustomProperty_0__: boolean;
     }
     
     class ControlRigIOSettings {
@@ -46820,6 +46247,71 @@ declare module "ue" {
         __tid_AnimGraphNode_Inertialization_0__: boolean;
     }
     
+    enum ELayeredBoneBlendMode { BranchFilter, BlendMask, ELayeredBoneBlendMode_MAX, __typeKeyDoNoAccess}
+    class BranchFilter {
+        constructor();
+        constructor(BoneName: string, BlendDepth: number);
+        BoneName: string;
+        BlendDepth: number;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_BranchFilter_0__: boolean;
+    }
+    
+    class InputBlendPose {
+        constructor();
+        constructor(BranchFilters: TArray<UE.BranchFilter>);
+        BranchFilters: TArray<UE.BranchFilter>;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_InputBlendPose_0__: boolean;
+    }
+    
+    class PerBoneBlendWeight {
+        constructor();
+        constructor(SourceIndex: number, BlendWeight: number);
+        SourceIndex: number;
+        BlendWeight: number;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_PerBoneBlendWeight_0__: boolean;
+    }
+    
+    enum ECurveBlendOption { Override, DoNotOverride, NormalizeByWeight, BlendByWeight, UseBasePose, UseMaxValue, UseMinValue, ECurveBlendOption_MAX, __typeKeyDoNoAccess}
+    class AnimNode_LayeredBoneBlend extends UE.AnimNode_Base {
+        constructor();
+        constructor(BasePose: UE.PoseLink, BlendPoses: TArray<UE.PoseLink>, BlendMode: UE.ELayeredBoneBlendMode, BlendMasks: TArray<UE.BlendProfile>, LayerSetup: TArray<UE.InputBlendPose>, BlendWeights: TArray<number>, PerBoneBlendWeights: TArray<UE.PerBoneBlendWeight>, SkeletonGuid: UE.Guid, VirtualBoneGuid: UE.Guid, LODThreshold: number, bMeshSpaceRotationBlend: boolean, bMeshSpaceScaleBlend: boolean, CurveBlendOption: UE.ECurveBlendOption, bBlendRootMotionBasedOnRootBone: boolean);
+        BasePose: UE.PoseLink;
+        BlendPoses: TArray<UE.PoseLink>;
+        BlendMode: UE.ELayeredBoneBlendMode;
+        BlendMasks: TArray<UE.BlendProfile>;
+        LayerSetup: TArray<UE.InputBlendPose>;
+        BlendWeights: TArray<number>;
+        PerBoneBlendWeights: TArray<UE.PerBoneBlendWeight>;
+        SkeletonGuid: UE.Guid;
+        VirtualBoneGuid: UE.Guid;
+        LODThreshold: number;
+        bMeshSpaceRotationBlend: boolean;
+        bMeshSpaceScaleBlend: boolean;
+        CurveBlendOption: UE.ECurveBlendOption;
+        bBlendRootMotionBasedOnRootBone: boolean;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_AnimNode_LayeredBoneBlend_0__: boolean;
+    }
+    
     class AnimGraphNode_LayeredBoneBlend extends UE.AnimGraphNode_BlendListBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Node: UE.AnimNode_LayeredBoneBlend;
@@ -46886,6 +46378,25 @@ declare module "ue" {
         __tid_AnimGraphNode_LinkedAnimGraphBase_0__: boolean;
     }
     
+    class AnimNode_LinkedAnimGraph extends UE.AnimNode_CustomProperty {
+        constructor();
+        constructor(InputPoses: TArray<UE.PoseLink>, InputPoseNames: TArray<string>, InstanceClass: UE.Class, Tag: string, PendingBlendOutProfile: UE.BlendProfile, PendingBlendInProfile: UE.BlendProfile, bReceiveNotifiesFromLinkedInstances: boolean, bPropagateNotifiesToLinkedInstances: boolean);
+        InputPoses: TArray<UE.PoseLink>;
+        InputPoseNames: TArray<string>;
+        InstanceClass: UE.Class;
+        Tag: string;
+        PendingBlendOutProfile: UE.BlendProfile;
+        PendingBlendInProfile: UE.BlendProfile;
+        bReceiveNotifiesFromLinkedInstances: boolean;
+        bPropagateNotifiesToLinkedInstances: boolean;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_AnimNode_LinkedAnimGraph_0__: boolean;
+    }
+    
     class AnimGraphNode_LinkedAnimGraph extends UE.AnimGraphNode_LinkedAnimGraphBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Node: UE.AnimNode_LinkedAnimGraph;
@@ -46894,6 +46405,19 @@ declare module "ue" {
         static Load(InName: string): AnimGraphNode_LinkedAnimGraph;
     
         __tid_AnimGraphNode_LinkedAnimGraph_0__: boolean;
+    }
+    
+    class AnimNode_LinkedAnimLayer extends UE.AnimNode_LinkedAnimGraph {
+        constructor();
+        constructor(Interface: UE.Class, Layer: string);
+        Interface: UE.Class;
+        Layer: string;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_AnimNode_LinkedAnimLayer_0__: boolean;
     }
     
     class AnimGraphNode_LinkedAnimLayer extends UE.AnimGraphNode_LinkedAnimGraphBase {
@@ -47471,6 +46995,39 @@ declare module "ue" {
         static Load(InName: string): AnimGraphNode_PoseSnapshot;
     
         __tid_AnimGraphNode_PoseSnapshot_0__: boolean;
+    }
+    
+    class RandomPlayerSequenceEntry {
+        constructor();
+        constructor(Sequence: UE.AnimSequenceBase, ChanceToPlay: number, MinLoopCount: number, MaxLoopCount: number, MinPlayRate: number, MaxPlayRate: number, BlendIn: UE.AlphaBlend);
+        Sequence: UE.AnimSequenceBase;
+        ChanceToPlay: number;
+        MinLoopCount: number;
+        MaxLoopCount: number;
+        MinPlayRate: number;
+        MaxPlayRate: number;
+        BlendIn: UE.AlphaBlend;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_RandomPlayerSequenceEntry_0__: boolean;
+    }
+    
+    class AnimNode_RandomPlayer extends UE.AnimNode_AssetPlayerRelevancyBase {
+        constructor();
+        constructor(Entries: TArray<UE.RandomPlayerSequenceEntry>, bIgnoreForRelevancyTest: boolean, BlendWeight: number, bShuffleMode: boolean);
+        Entries: TArray<UE.RandomPlayerSequenceEntry>;
+        bIgnoreForRelevancyTest: boolean;
+        BlendWeight: number;
+        bShuffleMode: boolean;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_AnimNode_RandomPlayer_0__: boolean;
     }
     
     class AnimGraphNode_RandomPlayer extends UE.AnimGraphNode_Base {
@@ -48081,6 +47638,19 @@ declare module "ue" {
         __tid_AnimGraphNode_RotationOffsetBlendSpaceGraph_0__: boolean;
     }
     
+    class AnimNode_SaveCachedPose extends UE.AnimNode_Base {
+        constructor();
+        constructor(Pose: UE.PoseLink, CachePoseName: string);
+        Pose: UE.PoseLink;
+        CachePoseName: string;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_AnimNode_SaveCachedPose_0__: boolean;
+    }
+    
     class AnimGraphNode_SaveCachedPose extends UE.AnimGraphNode_Base {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Node: UE.AnimNode_SaveCachedPose;
@@ -48166,6 +47736,73 @@ declare module "ue" {
         __tid_AnimGraphNode_SequenceEvaluator_0__: boolean;
     }
     
+    class InputScaleBiasClampState {
+        constructor();
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_InputScaleBiasClampState_0__: boolean;
+    }
+    
+    class AnimNode_SequencePlayerBase extends UE.AnimNode_AssetPlayerBase {
+        constructor();
+        constructor(PlayRateScaleBiasClampState: UE.InputScaleBiasClampState);
+        PlayRateScaleBiasClampState: UE.InputScaleBiasClampState;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_AnimNode_SequencePlayerBase_0__: boolean;
+    }
+    
+    class InputScaleBiasClampConstants {
+        constructor();
+        constructor(bMapRange: boolean, bClampResult: boolean, bInterpResult: boolean, InRange: UE.InputRange, OutRange: UE.InputRange, Scale: number, Bias: number, ClampMin: number, ClampMax: number, InterpSpeedIncreasing: number, InterpSpeedDecreasing: number);
+        bMapRange: boolean;
+        bClampResult: boolean;
+        bInterpResult: boolean;
+        InRange: UE.InputRange;
+        OutRange: UE.InputRange;
+        Scale: number;
+        Bias: number;
+        ClampMin: number;
+        ClampMax: number;
+        InterpSpeedIncreasing: number;
+        InterpSpeedDecreasing: number;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_InputScaleBiasClampConstants_0__: boolean;
+    }
+    
+    class AnimNode_SequencePlayer extends UE.AnimNode_SequencePlayerBase {
+        constructor();
+        constructor(GroupName: string, GroupRole: UE.EAnimGroupRole, Method: UE.EAnimSyncMethod, bIgnoreForRelevancyTest: boolean, Sequence: UE.AnimSequenceBase, PlayRateBasis: number, PlayRate: number, PlayRateScaleBiasClampConstants: UE.InputScaleBiasClampConstants, PlayRateScaleBiasClamp: UE.InputScaleBiasClamp, StartPosition: number, bLoopAnimation: boolean, bStartFromMatchingPose: boolean);
+        GroupName: string;
+        GroupRole: UE.EAnimGroupRole;
+        Method: UE.EAnimSyncMethod;
+        bIgnoreForRelevancyTest: boolean;
+        Sequence: UE.AnimSequenceBase;
+        PlayRateBasis: number;
+        PlayRate: number;
+        PlayRateScaleBiasClampConstants: UE.InputScaleBiasClampConstants;
+        PlayRateScaleBiasClamp: UE.InputScaleBiasClamp;
+        StartPosition: number;
+        bLoopAnimation: boolean;
+        bStartFromMatchingPose: boolean;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_AnimNode_SequencePlayer_0__: boolean;
+    }
+    
     class AnimGraphNode_SequencePlayer extends UE.AnimGraphNode_AssetPlayerBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Node: UE.AnimNode_SequencePlayer;
@@ -48174,6 +47811,20 @@ declare module "ue" {
         static Load(InName: string): AnimGraphNode_SequencePlayer;
     
         __tid_AnimGraphNode_SequencePlayer_0__: boolean;
+    }
+    
+    class AnimNode_Slot extends UE.AnimNode_Base {
+        constructor();
+        constructor(Source: UE.PoseLink, SlotName: string, bAlwaysUpdateSourcePose: boolean);
+        Source: UE.PoseLink;
+        SlotName: string;
+        bAlwaysUpdateSourcePose: boolean;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_AnimNode_Slot_0__: boolean;
     }
     
     class AnimGraphNode_Slot extends UE.AnimGraphNode_Base {
@@ -48252,6 +47903,24 @@ declare module "ue" {
         static Load(InName: string): AnimGraphNode_SpringBone;
     
         __tid_AnimGraphNode_SpringBone_0__: boolean;
+    }
+    
+    class AnimNode_StateMachine extends UE.AnimNode_Base {
+        constructor();
+        constructor(StateMachineIndexInClass: number, MaxTransitionsPerFrame: number, MaxTransitionsRequests: number, bSkipFirstUpdateTransition: boolean, bReinitializeOnBecomingRelevant: boolean, bCreateNotifyMetaData: boolean, bAllowConduitEntryStates: boolean);
+        StateMachineIndexInClass: number;
+        MaxTransitionsPerFrame: number;
+        MaxTransitionsRequests: number;
+        bSkipFirstUpdateTransition: boolean;
+        bReinitializeOnBecomingRelevant: boolean;
+        bCreateNotifyMetaData: boolean;
+        bAllowConduitEntryStates: boolean;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_AnimNode_StateMachine_0__: boolean;
     }
     
     class AnimGraphNode_StateMachine extends UE.AnimGraphNode_StateMachineBase {
@@ -48489,6 +48158,19 @@ declare module "ue" {
         __tid_AnimGraphNode_TwoWayBlend_0__: boolean;
     }
     
+    class AnimNode_UseCachedPose extends UE.AnimNode_Base {
+        constructor();
+        constructor(LinkToCachingNode: UE.PoseLink, CachePoseName: string);
+        LinkToCachingNode: UE.PoseLink;
+        CachePoseName: string;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_AnimNode_UseCachedPose_0__: boolean;
+    }
+    
     class AnimGraphNode_UseCachedPose extends UE.AnimGraphNode_Base {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Node: UE.AnimNode_UseCachedPose;
@@ -48680,16 +48362,6 @@ declare module "ue" {
         __tid_AnimLayer_0__: boolean;
     }
     
-    class WarriorHeroLinkedAnimLayer extends UE.WarriorBaseAnimInstance {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        GetHeroAnimInstance() : UE.WarriorHeroAnimInstance;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): WarriorHeroLinkedAnimLayer;
-        static Load(InName: string): WarriorHeroLinkedAnimLayer;
-    
-        __tid_WarriorHeroLinkedAnimLayer_0__: boolean;
-    }
-    
     class AnimLayerControlRigObject {
         constructor();
         constructor(ControlRig: TWeakObjectPtr<UE.ControlRig>, ControlNames: TArray<string>);
@@ -48701,6 +48373,15 @@ declare module "ue" {
         static StaticClass(): ScriptStruct;
         static StaticStruct(): ScriptStruct;
         __tid_AnimLayerControlRigObject_0__: boolean;
+    }
+    
+    class AnimLayerInterface extends UE.Interface {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): AnimLayerInterface;
+        static Load(InName: string): AnimLayerInterface;
+    
+        __tid_AnimLayerInterface_0__: boolean;
     }
     
     class AnimLayerInterfaceFactory extends UE.AnimBlueprintFactory {
@@ -48983,6 +48664,56 @@ declare module "ue" {
         static Load(InName: string): AnimNodeControlRigLibrary;
     
         __tid_AnimNodeControlRigLibrary_0__: boolean;
+    }
+    
+    class AnimNodeExposedValueHandler {
+        constructor();
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_AnimNodeExposedValueHandler_0__: boolean;
+    }
+    
+    class AnimNodeExposedValueHandler_Base extends UE.AnimNodeExposedValueHandler {
+        constructor();
+        constructor(Function: UE.Function, BoundFunction: string);
+        Function: UE.Function;
+        BoundFunction: string;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_AnimNodeExposedValueHandler_Base_0__: boolean;
+    }
+    
+    enum EPostCopyOperation { None, LogicalNegateBool, EPostCopyOperation_MAX, __typeKeyDoNoAccess}
+    class ExposedValueCopyRecord {
+        constructor();
+        constructor(CopyIndex: number, PostCopyOperation: UE.EPostCopyOperation, bOnlyUpdateWhenActive: boolean);
+        CopyIndex: number;
+        PostCopyOperation: UE.EPostCopyOperation;
+        bOnlyUpdateWhenActive: boolean;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_ExposedValueCopyRecord_0__: boolean;
+    }
+    
+    class AnimNodeExposedValueHandler_PropertyAccess extends UE.AnimNodeExposedValueHandler_Base {
+        constructor();
+        constructor(CopyRecords: TArray<UE.ExposedValueCopyRecord>);
+        CopyRecords: TArray<UE.ExposedValueCopyRecord>;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_AnimNodeExposedValueHandler_PropertyAccess_0__: boolean;
     }
     
     class RigidBodyAnimNodeReference extends UE.AnimNodeReference {
@@ -57072,6 +56803,429 @@ declare module "ue" {
         __tid_AssetViewerSettings_0__: boolean;
     }
     
+    enum EConfirmScreenButtonType { Confirmed, Cancelled, Closed, Unknown, EConfirmScreenButtonType_MAX, __typeKeyDoNoAccess}
+    enum EConfirmScreenType { Ok, YesNo, OKCancel, Unknown, EConfirmScreenType_MAX, __typeKeyDoNoAccess}
+    class AsyncAction_PushConfirmScreen extends UE.BlueprintAsyncActionBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        OnButtonClicked: $MulticastDelegate<(ClickedButtonType: UE.EConfirmScreenButtonType) => void>;
+        static PushConfirmScreen(WorldContextObject: $Nullable<UE.Object>, ScreenType: UE.EConfirmScreenType, InScreenTitle: string, InScreenMessage: string) : UE.AsyncAction_PushConfirmScreen;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): AsyncAction_PushConfirmScreen;
+        static Load(InName: string): AsyncAction_PushConfirmScreen;
+    
+        __tid_AsyncAction_PushConfirmScreen_0__: boolean;
+    }
+    
+    class CommonUserWidget extends UE.UserWidget {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        bDisplayInActionBar: boolean;
+        bConsumePointerInput: boolean;
+        /*
+         *Add a widget to the list of widgets to get scroll events for this input root node
+         */
+        RegisterScrollRecipientExternal(AnalogScrollRecipient: $Nullable<UE.Widget>) : void;
+        /*
+         *Sets whether or not this widget will consume ALL pointer input that reaches it
+         */
+        SetConsumePointerInput(bInConsumePointerInput: boolean) : void;
+        /*
+         *Remove a widget from the list of widgets to get scroll events for this input root node
+         */
+        UnregisterScrollRecipientExternal(AnalogScrollRecipient: $Nullable<UE.Widget>) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonUserWidget;
+        static Load(InName: string): CommonUserWidget;
+    
+        __tid_CommonUserWidget_0__: boolean;
+    }
+    
+    class PlayerMappableKeyOptions {
+        constructor();
+        constructor(Metadata: UE.Object, Name: string, DisplayName: string, DisplayCategory: string);
+        Metadata: UE.Object;
+        Name: string;
+        DisplayName: string;
+        DisplayCategory: string;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_PlayerMappableKeyOptions_0__: boolean;
+    }
+    
+    class InputActionValue {
+        constructor();
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_InputActionValue_0__: boolean;
+    }
+    
+    enum EInputActionValueType { Boolean, Axis1D, Axis2D, Axis3D, EInputActionValueType_MAX, __typeKeyDoNoAccess}
+    enum EInputActionAccumulationBehavior { TakeHighestAbsoluteValue, Cumulative, EInputActionAccumulationBehavior_MAX, __typeKeyDoNoAccess}
+    class InputModifier extends UE.Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        /*
+         *Helper to allow debug visualization of the modifier.
+         *@param SampleValue - The base input action value pre-modification (ranging -1 -> 1 across all applicable axes).
+         *@param FinalValue - The post-modification input action value for the provided SampleValue.
+         */
+        GetVisualizationColor(SampleValue: UE.InputActionValue, FinalValue: UE.InputActionValue) : UE.LinearColor;
+        /*
+         *ModifyRaw
+         *Will be called by each modifier in the modifier chain
+         *@param CurrentValue - The modified value returned by the previous modifier in the chain, or the base raw value if this is the first modifier in the chain.
+         */
+        ModifyRaw(PlayerInput: $Nullable<UE.EnhancedPlayerInput>, CurrentValue: UE.InputActionValue, DeltaTime: number) : UE.InputActionValue;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): InputModifier;
+        static Load(InName: string): InputModifier;
+    
+        __tid_InputModifier_0__: boolean;
+    }
+    
+    class PlayerMappableKeySettings extends UE.Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Metadata: UE.Object;
+        Name: string;
+        DisplayName: string;
+        DisplayCategory: string;
+        SupportedKeyProfiles: UE.GameplayTagContainer;
+        /*
+         *Get the known mapping names that are current in use. This is a helper function if you want to use a "GetOptions" metadata on a UPROPERTY.
+         *For example, the following will display a little drop down menu to select from all current mapping names:
+         *
+         * UPROPERTY(EditAnywhere, BlueprintReadOnly, meta=(GetOptions="EnhancedInput.PlayerMappableKeySettings.GetKnownMappingNames"))
+         * FName MappingName;
+         */
+        static GetKnownMappingNames_EditorOnly() : TArray<string>;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): PlayerMappableKeySettings;
+        static Load(InName: string): PlayerMappableKeySettings;
+    
+        __tid_PlayerMappableKeySettings_0__: boolean;
+    }
+    
+    class InputAction extends UE.DataAsset {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ActionDescription: string;
+        bTriggerWhenPaused: boolean;
+        bConsumeInput: boolean;
+        bConsumesActionAndAxisMappings: boolean;
+        bReserveAllMappings: boolean;
+        TriggerEventsThatConsumeLegacyKeys: number;
+        ValueType: UE.EInputActionValueType;
+        AccumulationBehavior: UE.EInputActionAccumulationBehavior;
+        Triggers: TArray<UE.InputTrigger>;
+        Modifiers: TArray<UE.InputModifier>;
+        PlayerMappableKeySettings: UE.PlayerMappableKeySettings;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): InputAction;
+        static Load(InName: string): InputAction;
+    
+        __tid_InputAction_0__: boolean;
+    }
+    
+    class KeyConsumptionOptions {
+        constructor();
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_KeyConsumptionOptions_0__: boolean;
+    }
+    
+    enum ETriggerEvent { None, Triggered, Started, Ongoing, Canceled, Completed, ETriggerEvent_MAX, __typeKeyDoNoAccess}
+    class InputActionInstance {
+        constructor();
+        constructor(SourceAction: UE.InputAction, TriggerEvent: UE.ETriggerEvent, LastTriggeredWorldTime: number, Triggers: TArray<UE.InputTrigger>, Modifiers: TArray<UE.InputModifier>, ElapsedProcessedTime: number, ElapsedTriggeredTime: number);
+        SourceAction: UE.InputAction;
+        TriggerEvent: UE.ETriggerEvent;
+        LastTriggeredWorldTime: number;
+        Triggers: TArray<UE.InputTrigger>;
+        Modifiers: TArray<UE.InputModifier>;
+        ElapsedProcessedTime: number;
+        ElapsedTriggeredTime: number;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_InputActionInstance_0__: boolean;
+    }
+    
+    class InjectedInput {
+        constructor();
+        constructor(Triggers: TArray<UE.InputTrigger>, Modifiers: TArray<UE.InputModifier>);
+        Triggers: TArray<UE.InputTrigger>;
+        Modifiers: TArray<UE.InputModifier>;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_InjectedInput_0__: boolean;
+    }
+    
+    class InjectedInputArray {
+        constructor();
+        constructor(Injected: TArray<UE.InjectedInput>);
+        Injected: TArray<UE.InjectedInput>;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_InjectedInputArray_0__: boolean;
+    }
+    
+    class EnhancedPlayerInput extends UE.PlayerInput {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        KeyConsumptionData: TMap<UE.InputAction, UE.KeyConsumptionOptions>;
+        AppliedInputContexts: TMap<UE.InputMappingContext, number>;
+        EnhancedActionMappings: TArray<UE.EnhancedActionKeyMapping>;
+        ActionInstanceData: TMap<UE.InputAction, UE.InputActionInstance>;
+        KeysPressedThisTick: TMap<UE.Key, UE.Vector>;
+        InputsInjectedThisTick: TMap<UE.InputAction, UE.InjectedInputArray>;
+        LastInjectedActions: TSet<UE.InputAction>;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): EnhancedPlayerInput;
+        static Load(InName: string): EnhancedPlayerInput;
+    
+        __tid_EnhancedPlayerInput_0__: boolean;
+    }
+    
+    enum ETriggerState { None, Ongoing, Triggered, ETriggerState_MAX, __typeKeyDoNoAccess}
+    enum ETriggerType { Explicit, Implicit, Blocker, ETriggerType_MAX, __typeKeyDoNoAccess}
+    class InputTrigger extends UE.Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ActuationThreshold: number;
+        bShouldAlwaysTick: boolean;
+        LastValue: UE.InputActionValue;
+        /*
+         *Changes the way this trigger affects an action with multiple triggers:
+         *        All implicit triggers must be triggering to trigger the action.
+         *        If there are any explicit triggers at least one must be triggering to trigger the action.
+         */
+        GetTriggerType() : UE.ETriggerType;
+        /*
+         ** Is the value passed in sufficiently large to be of interest to the trigger.
+         ** This is a helper function that implements the most obvious (>=) interpretation of the actuation threshold.
+         */
+        IsActuated(ForValue: UE.InputActionValue) : boolean;
+        /*
+         *This function checks if the requisite conditions have been met for the trigger to fire.
+         * Returns Trigger State None              - No trigger conditions have been met. Trigger is inactive.
+         *                 Trigger State Ongoing   - Some trigger conditions have been met. Trigger is processing but not yet active.
+         *                 Trigger State Triggered - All trigger conditions have been met to fire. Trigger is active.
+         */
+        UpdateState(PlayerInput: $Nullable<UE.EnhancedPlayerInput>, ModifiedValue: UE.InputActionValue, DeltaTime: number) : UE.ETriggerState;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): InputTrigger;
+        static Load(InName: string): InputTrigger;
+    
+        __tid_InputTrigger_0__: boolean;
+    }
+    
+    enum EPlayerMappableKeySettingBehaviors { InheritSettingsFromAction, OverrideSettings, IgnoreSettings, EPlayerMappableKeySettingBehaviors_MAX, __typeKeyDoNoAccess}
+    class EnhancedActionKeyMapping {
+        constructor();
+        constructor(PlayerMappableOptions: UE.PlayerMappableKeyOptions, Triggers: TArray<UE.InputTrigger>, Modifiers: TArray<UE.InputModifier>, Action: UE.InputAction, Key: UE.Key, bShouldBeIgnored: boolean, bHasAlwaysTickTrigger: boolean, bIsPlayerMappable: boolean, SettingBehavior: UE.EPlayerMappableKeySettingBehaviors, PlayerMappableKeySettings: UE.PlayerMappableKeySettings);
+        PlayerMappableOptions: UE.PlayerMappableKeyOptions;
+        Triggers: TArray<UE.InputTrigger>;
+        Modifiers: TArray<UE.InputModifier>;
+        Action: UE.InputAction;
+        Key: UE.Key;
+        bShouldBeIgnored: boolean;
+        bHasAlwaysTickTrigger: boolean;
+        bIsPlayerMappable: boolean;
+        SettingBehavior: UE.EPlayerMappableKeySettingBehaviors;
+        PlayerMappableKeySettings: UE.PlayerMappableKeySettings;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_EnhancedActionKeyMapping_0__: boolean;
+    }
+    
+    class InputMappingContext extends UE.DataAsset {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Mappings: TArray<UE.EnhancedActionKeyMapping>;
+        ContextDescription: string;
+        /*
+         *Map a key to an action within the mapping context.
+         */
+        MapKey(Action: $Nullable<UE.InputAction>, ToKey: UE.Key) : UE.EnhancedActionKeyMapping;
+        UnmapAction(Action: $Nullable<UE.InputAction>) : void;
+        /*
+         *Unmap everything within the mapping context.
+         */
+        UnmapAll() : void;
+        /*
+         *Unmap all key maps to an action within the mapping context.
+         */
+        UnmapAllKeysFromAction(Action: $Nullable<UE.InputAction>) : void;
+        /*
+         *Unmap a key from an action within the mapping context.
+         */
+        UnmapKey(Action: $Nullable<UE.InputAction>, Key: UE.Key) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): InputMappingContext;
+        static Load(InName: string): InputMappingContext;
+    
+        __tid_InputMappingContext_0__: boolean;
+    }
+    
+    enum ECommonInputEventFlowBehavior { BlockIfActive, BlockIfHandled, NeverBlock, ECommonInputEventFlowBehavior_MAX, __typeKeyDoNoAccess}
+    enum ECommonInputMode { Menu, Game, All, MAX, __typeKeyDoNoAccess}
+    enum EMouseCaptureMode { NoCapture, CapturePermanently, CapturePermanently_IncludingInitialMouseDown, CaptureDuringMouseDown, CaptureDuringRightMouseDown, EMouseCaptureMode_MAX, __typeKeyDoNoAccess}
+    class CommonInputActionDomain extends UE.DataAsset {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Behavior: UE.ECommonInputEventFlowBehavior;
+        InnerBehavior: UE.ECommonInputEventFlowBehavior;
+        bUseActionDomainDesiredInputConfig: boolean;
+        InputMode: UE.ECommonInputMode;
+        MouseCaptureMode: UE.EMouseCaptureMode;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonInputActionDomain;
+        static Load(InName: string): CommonInputActionDomain;
+    
+        __tid_CommonInputActionDomain_0__: boolean;
+    }
+    
+    enum EMouseLockMode { DoNotLock, LockOnCapture, LockAlways, LockInFullscreen, EMouseLockMode_MAX, __typeKeyDoNoAccess}
+    class UIInputConfig {
+        constructor();
+        constructor(bIgnoreMoveInput: boolean, bIgnoreLookInput: boolean, InputMode: UE.ECommonInputMode, MouseCaptureMode: UE.EMouseCaptureMode, MouseLockMode: UE.EMouseLockMode, bHideCursorDuringViewportCapture: boolean);
+        bIgnoreMoveInput: boolean;
+        bIgnoreLookInput: boolean;
+        InputMode: UE.ECommonInputMode;
+        MouseCaptureMode: UE.EMouseCaptureMode;
+        MouseLockMode: UE.EMouseLockMode;
+        bHideCursorDuringViewportCapture: boolean;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_UIInputConfig_0__: boolean;
+    }
+    
+    class CommonActivatableWidget extends UE.CommonUserWidget {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        bIsBackHandler: boolean;
+        bIsBackActionDisplayedInActionBar: boolean;
+        bAutoActivate: boolean;
+        bSupportsActivationFocus: boolean;
+        bIsModal: boolean;
+        bAutoRestoreFocus: boolean;
+        bOverrideActionDomain: boolean;
+        InputMapping: UE.InputMappingContext;
+        InputMappingPriority: number;
+        ActionDomainOverride: TSoftObjectPtr<UE.CommonInputActionDomain>;
+        BP_OnWidgetActivated: $MulticastDelegate<() => void>;
+        BP_OnWidgetDeactivated: $MulticastDelegate<() => void>;
+        bIsActive: boolean;
+        VisibilityBoundWidgets: TArray<TWeakObjectPtr<UE.CommonActivatableWidget>>;
+        bSetVisibilityOnActivated: boolean;
+        ActivatedVisibility: UE.ESlateVisibility;
+        bSetVisibilityOnDeactivated: boolean;
+        DeactivatedVisibility: UE.ESlateVisibility;
+        ActivateWidget() : void;
+        /*
+         *Bind our visibility to the activation of another widget, useful for making mouse collisions behave similiar to console navigation w.r.t activation
+         *Will immediately update visibility based on the bound widget activation & visibilites set by SetBindVisibilities.
+         *
+         *@param       ActivatableWidget               - The widget whose activation _ deactivation will modify our visibility
+         */
+        BindVisibilityToActivation(ActivatableWidget: $Nullable<UE.CommonActivatableWidget>) : void;
+        /*
+         *Implement to provide the desired widget to focus if_when this activatable becomes the primary active widget.
+         *Note: This is a fallback used only if the native class parentage does not provide a target.
+         */
+        BP_GetDesiredFocusTarget() : UE.Widget;
+        /*
+         *Implement to provide the input config to use when this widget is activated. Keep in mind when all widgets
+         *are deactivated, CommonUI will not attempt to automatically restore the input config to before any widget was active.
+         *Note: This is a fallback used only if the native class parentage does not provide an input config.
+         */
+        BP_GetDesiredInputConfig() : UE.UIInputConfig;
+        BP_OnActivated() : void;
+        BP_OnDeactivated() : void;
+        /*
+         *Override in BP implementations to provide custom behavior when receiving a back action
+         *Note: Only called if native code in the base class hasn't handled it in NativeOnHandleBackAction
+         */
+        BP_OnHandleBackAction() : boolean;
+        /*
+         *Clears the cached focus target that's set when bAutoRestoreFocus is true
+         */
+        ClearFocusRestorationTarget() : void;
+        DeactivateWidget() : void;
+        /*
+         *Returns the desired widget to focus when this Widget Activates.
+         */
+        GetDesiredFocusTarget() : UE.Widget;
+        IsActivated() : boolean;
+        /*
+         *Ask for focus to be re-set to our current DesiredFocusTarget,
+         *but only if our node is currently the leaf-most active node (no stealing!).
+         *This is useful for complex cases like: the buttons animate in from off-screen,
+         *or the buttons are deeply nested in a multi-switcher hierarchy and it would be burdensome
+         *to wrap each element in a CommonActivatableWidget.
+         */
+        RequestRefreshFocus() : void;
+        /*
+         *Visibilities to use for when bound widgets in BindVisibilityToActivation are activated.
+         *
+         *@param       OnActivatedVisibility   - Visibility for when bound widgets are active
+         *@param       OnDeactivatedVisibility - Visibility for when bound widgets are not active, not used if this widget has activation _ deactivation visibilities
+         *@param       bInAllActive                    - True if we should switch to activated visibility only when all bound widgets are active
+         */
+        SetBindVisibilities(OnActivatedVisibility: UE.ESlateVisibility, OnDeactivatedVisibility: UE.ESlateVisibility, bInAllActive: boolean) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonActivatableWidget;
+        static Load(InName: string): CommonActivatableWidget;
+    
+        __tid_CommonActivatableWidget_0__: boolean;
+    }
+    
+    class FrontendPlayerController extends UE.PlayerController {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): FrontendPlayerController;
+        static Load(InName: string): FrontendPlayerController;
+    
+        __tid_FrontendPlayerController_0__: boolean;
+    }
+    
+    class Widget_ActivatableBase extends UE.CommonActivatableWidget {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        GetOwningFrontendPlayerController() : UE.FrontendPlayerController;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): Widget_ActivatableBase;
+        static Load(InName: string): Widget_ActivatableBase;
+    
+        __tid_Widget_ActivatableBase_0__: boolean;
+    }
+    
+    class AsyncAction_PushSoftWidget extends UE.BlueprintAsyncActionBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        OnWidgetCreatedBeforePush: $MulticastDelegate<(PushedWidget: $Nullable<UE.Widget_ActivatableBase>) => void>;
+        AfterPush: $MulticastDelegate<(PushedWidget: $Nullable<UE.Widget_ActivatableBase>) => void>;
+        static PushSoftWidget(WorldContextObject: $Nullable<UE.Object>, OwningPlayerController: $Nullable<UE.PlayerController>, InSoftWidgetClass: TSoftClassPtr<UE.Widget_ActivatableBase>, InWidgetStackTag: UE.GameplayTag, bFocusOnNewlyPushedWidget?: boolean /* = true */) : UE.AsyncAction_PushSoftWidget;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): AsyncAction_PushSoftWidget;
+        static Load(InName: string): AsyncAction_PushSoftWidget;
+    
+        __tid_AsyncAction_PushSoftWidget_0__: boolean;
+    }
+    
     class AsyncActionLoadPrimaryAssetBase extends UE.BlueprintAsyncActionBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -59056,7 +59210,6 @@ declare module "ue" {
         __tid_AudioFrequencyRadialSlider_0__: boolean;
     }
     
-    enum EOrientation { Orient_Horizontal, Orient_Vertical, Orient_MAX, __typeKeyDoNoAccess}
     class AudioSliderBase extends UE.Widget {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Value: number;
@@ -60366,24 +60519,6 @@ declare module "ue" {
         static Load(InName: string): AudioSlider;
     
         __tid_AudioSlider_0__: boolean;
-    }
-    
-    class SliderStyle extends UE.SlateWidgetStyle {
-        constructor();
-        constructor(NormalBarImage: UE.SlateBrush, HoveredBarImage: UE.SlateBrush, DisabledBarImage: UE.SlateBrush, NormalThumbImage: UE.SlateBrush, HoveredThumbImage: UE.SlateBrush, DisabledThumbImage: UE.SlateBrush, BarThickness: number);
-        NormalBarImage: UE.SlateBrush;
-        HoveredBarImage: UE.SlateBrush;
-        DisabledBarImage: UE.SlateBrush;
-        NormalThumbImage: UE.SlateBrush;
-        HoveredThumbImage: UE.SlateBrush;
-        DisabledThumbImage: UE.SlateBrush;
-        BarThickness: number;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_SliderStyle_0__: boolean;
     }
     
     class AudioSliderStyle extends UE.SlateWidgetStyle {
@@ -64405,6 +64540,24 @@ declare module "ue" {
         __tid_BeamTargetData_0__: boolean;
     }
     
+    class BehavioralEntityBase extends UE.AmbientEntityBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        /*
+         *Signals that the current action has completed.
+         */
+        CompleteCurrentAction(ActionId: number, ActionToken: bigint) : void;
+        /*
+         *Called when the framework requests this NPC to start an action.
+         *Store ActionToken and return it later via CompleteCurrentAction.
+         */
+        OnStartCharacterAction(ActionId: number, ActionToken: bigint, ActionDurationMs: bigint, TargetEntity: $Nullable<UE.AmbientEntityBase>) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): BehavioralEntityBase;
+        static Load(InName: string): BehavioralEntityBase;
+    
+        __tid_BehavioralEntityBase_0__: boolean;
+    }
+    
     class BehaviorTreeDecoratorGraph extends UE.EdGraph {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -68354,51 +68507,224 @@ declare module "ue" {
         __tid_BoxToMeshDataflowNode_0__: boolean;
     }
     
-    class WarriorHeroController extends UE.PlayerController {
+    namespace AdvancedFrontedUI.Blueprints.BP_FrontendCtrl {
+        class BP_FrontendCtrl_C extends UE.FrontendPlayerController {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            UberGraphFrame: UE.PointerToUberGraphFrame;
+            AfterPush_BEBED51A45CD049FD90A198AC4AD978C(PushedWidget: $Nullable<UE.Widget_ActivatableBase>) : void;
+            ExecuteUbergraph_BP_FrontendCtrl(EntryPoint: number) : void;
+            OnWidgetCreatedBeforePush_BEBED51A45CD049FD90A198AC4AD978C(PushedWidget: $Nullable<UE.Widget_ActivatableBase>) : void;
+            /*
+             *Blueprint implementable event to react to the controller possessing a pawn
+             */
+            ReceivePossess(PossessedPawn: $Nullable<UE.Pawn>) : void;
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): BP_FrontendCtrl_C;
+            static Load(InName: string): BP_FrontendCtrl_C;
+        
+            __tid_BP_FrontendCtrl_C_0__: boolean;
+        }
+        
+    }
+
+    namespace AdvancedFrontedUI.Blueprints.BP_FrontendGM {
+        class BP_FrontendGM_C extends UE.GameModeBase {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            DefaultSceneRoot: UE.SceneComponent;
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): BP_FrontendGM_C;
+            static Load(InName: string): BP_FrontendGM_C;
+        
+            __tid_BP_FrontendGM_C_0__: boolean;
+        }
+        
+    }
+
+    class PostProcessComponent extends UE.SceneComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Settings: UE.PostProcessSettings;
+        Priority: number;
+        BlendRadius: number;
+        BlendWeight: number;
+        bEnabled: boolean;
+        bUnbound: boolean;
+        /*
+         *Adds an Blendable (implements IBlendableInterface) to the array of Blendables (if it doesn't exist) and update the weight
+         */
+        AddOrUpdateBlendable(InBlendableObject: UE.BlendableInterface, InWeight?: number /* = 1.000000 */) : void;
         static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): WarriorHeroController;
-        static Load(InName: string): WarriorHeroController;
+        static Find(OrigInName: string, Outer?: Object): PostProcessComponent;
+        static Load(InName: string): PostProcessComponent;
     
-        __tid_WarriorHeroController_0__: boolean;
+        __tid_PostProcessComponent_0__: boolean;
     }
     
-    enum EWarriorGameDifficulty { Easy, Normal, Hard, VeryHard, EWarriorGameDifficulty_MAX, __typeKeyDoNoAccess}
-    class GWOGameMode extends UE.GameModeBase {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        CurrentGameDifficulty: UE.EWarriorGameDifficulty;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): GWOGameMode;
-        static Load(InName: string): GWOGameMode;
-    
-        __tid_GWOGameMode_0__: boolean;
+    class ExponentialHeightFogData {
+        constructor();
+        constructor(FogDensity: number, FogHeightFalloff: number, FogHeightOffset: number);
+        FogDensity: number;
+        FogHeightFalloff: number;
+        FogHeightOffset: number;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_ExponentialHeightFogData_0__: boolean;
     }
     
-    enum EWarriorSurvivalGameModeState { WaitSpawnNewWave, SpawningNewWave, InProgress, WaveCompleted, AllWavesDone, PlayerDied, EWarriorSurvivalGameModeState_MAX, __typeKeyDoNoAccess}
-    class WarriorSurvivalGameMode extends UE.GWOGameMode {
+    class ExponentialHeightFogComponent extends UE.SceneComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        OnSurvivalGameModeStateChanged: $MulticastDelegate<(CurrentState: UE.EWarriorSurvivalGameModeState) => void>;
-        EnemyWaveSpawnerDataTable: UE.DataTable;
-        TotalWavesToSpawn: number;
-        CurrentWaveCount: number;
-        SpawnNewWaveWaitTime: number;
-        SpawnEnemiesDelayTime: number;
-        WaveCompletedWaitTime: number;
-        CurrentSurvivalGameModeState: UE.EWarriorSurvivalGameModeState;
-        PreLoadedEnemyClassMap: TMap<TSoftClassPtr<UE.WarriorEnemyCharacter>, UE.Class>;
-        CurrentSpawnedEnemiesCounter: number;
-        TotalSpawnedEnemiesThisWaveCounter: number;
-        TargetPointsArray: TArray<UE.Actor>;
-        TimePassedSinceStart: number;
-        OnEnemyDestroyed(DestroyedActor: $Nullable<UE.Actor>) : void;
-        RegisterSpawnedEnemies(InEnemiesToRegister: TArray<UE.WarriorEnemyCharacter>) : void;
+        FogDensity: number;
+        FogHeightFalloff: number;
+        SecondFogData: UE.ExponentialHeightFogData;
+        FogInscatteringColor: UE.LinearColor;
+        FogInscatteringLuminance: UE.LinearColor;
+        SkyAtmosphereAmbientContributionColorScale: UE.LinearColor;
+        InscatteringColorCubemap: UE.TextureCube;
+        InscatteringColorCubemapAngle: number;
+        InscatteringTextureTint: UE.LinearColor;
+        FullyDirectionalInscatteringColorDistance: number;
+        NonDirectionalInscatteringColorDistance: number;
+        DirectionalInscatteringExponent: number;
+        DirectionalInscatteringStartDistance: number;
+        DirectionalInscatteringColor: UE.LinearColor;
+        DirectionalInscatteringLuminance: UE.LinearColor;
+        FogMaxOpacity: number;
+        StartDistance: number;
+        EndDistance: number;
+        FogCutoffDistance: number;
+        bEnableVolumetricFog: boolean;
+        VolumetricFogScatteringDistribution: number;
+        VolumetricFogAlbedo: UE.Color;
+        VolumetricFogEmissive: UE.LinearColor;
+        VolumetricFogExtinctionScale: number;
+        VolumetricFogDistance: number;
+        VolumetricFogStartDistance: number;
+        VolumetricFogNearFadeInDistance: number;
+        VolumetricFogStaticLightingScatteringIntensity: number;
+        bOverrideLightColorsWithFogInscatteringColors: boolean;
+        bHoldout: boolean;
+        bRenderInMainPass: boolean;
+        SetDirectionalInscatteringColor(Value: UE.LinearColor) : void;
+        SetDirectionalInscatteringExponent(Value: number) : void;
+        SetDirectionalInscatteringStartDistance(Value: number) : void;
+        SetEndDistance(Value: number) : void;
+        SetFogCutoffDistance(Value: number) : void;
+        SetFogDensity(Value: number) : void;
+        SetFogHeightFalloff(Value: number) : void;
+        SetFogInscatteringColor(Value: UE.LinearColor) : void;
+        SetFogMaxOpacity(Value: number) : void;
+        SetFullyDirectionalInscatteringColorDistance(Value: number) : void;
+        SetHoldout(bNewHoldout: boolean) : void;
+        SetInscatteringColorCubemap(Value: $Nullable<UE.TextureCube>) : void;
+        SetInscatteringColorCubemapAngle(Value: number) : void;
+        SetInscatteringTextureTint(Value: UE.LinearColor) : void;
+        SetNonDirectionalInscatteringColorDistance(Value: number) : void;
+        SetRenderInMainPass(bValue: boolean) : void;
+        SetSecondFogData(NewValue: UE.ExponentialHeightFogData) : void;
+        SetSecondFogDensity(Value: number) : void;
+        SetSecondFogHeightFalloff(Value: number) : void;
+        SetSecondFogHeightOffset(Value: number) : void;
+        SetStartDistance(Value: number) : void;
+        SetVolumetricFog(bNewValue: boolean) : void;
+        SetVolumetricFogAlbedo(NewValue: UE.Color) : void;
+        SetVolumetricFogDistance(NewValue: number) : void;
+        SetVolumetricFogEmissive(NewValue: UE.LinearColor) : void;
+        SetVolumetricFogExtinctionScale(NewValue: number) : void;
+        SetVolumetricFogNearFadeInDistance(NewValue: number) : void;
+        SetVolumetricFogScatteringDistribution(NewValue: number) : void;
+        SetVolumetricFogStartDistance(NewValue: number) : void;
         static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): WarriorSurvivalGameMode;
-        static Load(InName: string): WarriorSurvivalGameMode;
+        static Find(OrigInName: string, Outer?: Object): ExponentialHeightFogComponent;
+        static Load(InName: string): ExponentialHeightFogComponent;
     
-        __tid_WarriorSurvivalGameMode_0__: boolean;
+        __tid_ExponentialHeightFogComponent_0__: boolean;
     }
     
+    enum ESkyLightSourceType { SLS_CapturedScene, SLS_SpecifiedCubemap, SLS_MAX, __typeKeyDoNoAccess}
+    enum EOcclusionCombineMode { OCM_Minimum, OCM_Multiply, OCM_MAX, __typeKeyDoNoAccess}
+    class SkyLightComponent extends UE.LightComponentBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        bRealTimeCapture: boolean;
+        SourceType: UE.ESkyLightSourceType;
+        Cubemap: UE.TextureCube;
+        SourceCubemapAngle: number;
+        CubemapResolution: number;
+        SkyDistanceThreshold: number;
+        bCaptureEmissiveOnly: boolean;
+        bLowerHemisphereIsBlack: boolean;
+        LowerHemisphereColor: UE.LinearColor;
+        OcclusionMaxDistance: number;
+        Contrast: number;
+        OcclusionExponent: number;
+        MinOcclusion: number;
+        OcclusionTint: UE.Color;
+        bCloudAmbientOcclusion: boolean;
+        CloudAmbientOcclusionStrength: number;
+        CloudAmbientOcclusionExtent: number;
+        CloudAmbientOcclusionMapResolutionScale: number;
+        CloudAmbientOcclusionApertureScale: number;
+        OcclusionCombineMode: UE.EOcclusionCombineMode;
+        BlendDestinationCubemap: UE.TextureCube;
+        /*
+         *Recaptures the scene for the skylight.
+         *This is useful for making sure the sky light is up to date after changing something in the world that it would capture.
+         *Warning: this is very costly and will definitely cause a hitch.
+         */
+        RecaptureSky() : void;
+        /*
+         *Sets the cubemap used when SourceType is set to SpecifiedCubemap, and causes a skylight update on the next tick.
+         */
+        SetCubemap(NewCubemap: $Nullable<UE.TextureCube>) : void;
+        /*
+         *Creates sky lighting from a blend between two cubemaps, which is only valid when SourceType is set to SpecifiedCubemap.
+         *This can be used to seamlessly transition sky lighting between different times of day.
+         *The caller should continue to update the blend until BlendFraction is 0 or 1 to reduce rendering cost.
+         *The caller is responsible for avoiding pops due to changing the source or destination.
+         */
+        SetCubemapBlend(SourceCubemap: $Nullable<UE.TextureCube>, DestinationCubemap: $Nullable<UE.TextureCube>, InBlendFraction: number) : void;
+        SetIndirectLightingIntensity(NewIntensity: number) : void;
+        SetIntensity(NewIntensity: number) : void;
+        /*
+         *Set color of the light
+         */
+        SetLightColor(NewLightColor: UE.LinearColor) : void;
+        SetLowerHemisphereColor(InLowerHemisphereColor: UE.LinearColor) : void;
+        SetMinOcclusion(InMinOcclusion: number) : void;
+        SetOcclusionContrast(InOcclusionContrast: number) : void;
+        SetOcclusionExponent(InOcclusionExponent: number) : void;
+        SetOcclusionTint(InTint: UE.Color) : void;
+        SetRealTimeCapture(bInRealTimeCapture: boolean) : void;
+        /*
+         *Sets the angle of the cubemap used when SourceType is set to SpecifiedCubemap and it is non static. It will cause the skylight to update on the next tick.
+         */
+        SetSourceCubemapAngle(NewValue: number) : void;
+        SetVolumetricScatteringIntensity(NewIntensity: number) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SkyLightComponent;
+        static Load(InName: string): SkyLightComponent;
+    
+        __tid_SkyLightComponent_0__: boolean;
+    }
+    
+    namespace AdvancedFrontedUI.Assets.LevelVisuals.BP_LevelVisuals {
+        class BP_LevelVisuals_C extends UE.Actor {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            PostProcess: UE.PostProcessComponent;
+            ExponentialHeightFog: UE.ExponentialHeightFogComponent;
+            DirectionalLight: UE.DirectionalLightComponent;
+            SkyLight: UE.SkyLightComponent;
+            DefaultSceneRoot: UE.SceneComponent;
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): BP_LevelVisuals_C;
+            static Load(InName: string): BP_LevelVisuals_C;
+        
+            __tid_BP_LevelVisuals_C_0__: boolean;
+        }
+        
+    }
+
     enum EGraphType { GT_Function, GT_Ubergraph, GT_Macro, GT_Animation, GT_StateMachine, GT_MAX, __typeKeyDoNoAccess}
     class BPGraphClipboardData {
         constructor();
@@ -79643,6 +79969,2116 @@ declare module "ue" {
         __tid_ComboButtonWidgetStyle_0__: boolean;
     }
     
+    namespace Engine.PythonTypes {
+        class CommonActionCommited__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): CommonActionCommited__PythonCallable;
+            static Load(InName: string): CommonActionCommited__PythonCallable;
+        
+            __tid_CommonActionCommited__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    namespace Engine.PythonTypes {
+        class CommonActionComplete__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): CommonActionComplete__PythonCallable;
+            static Load(InName: string): CommonActionComplete__PythonCallable;
+        
+            __tid_CommonActionComplete__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    namespace Engine.PythonTypes {
+        class CommonActionCompleteSingle__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): CommonActionCompleteSingle__PythonCallable;
+            static Load(InName: string): CommonActionCompleteSingle__PythonCallable;
+        
+            __tid_CommonActionCompleteSingle__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    class CommonActionHandlerInterface extends UE.Interface {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonActionHandlerInterface;
+        static Load(InName: string): CommonActionHandlerInterface;
+    
+        __tid_CommonActionHandlerInterface_0__: boolean;
+    }
+    
+    namespace Engine.PythonTypes {
+        class CommonActionProgress__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): CommonActionProgress__PythonCallable;
+            static Load(InName: string): CommonActionProgress__PythonCallable;
+        
+            __tid_CommonActionProgress__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    namespace Engine.PythonTypes {
+        class CommonActionProgressSingle__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): CommonActionProgressSingle__PythonCallable;
+            static Load(InName: string): CommonActionProgressSingle__PythonCallable;
+        
+            __tid_CommonActionProgressSingle__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    class DataTableRowHandle {
+        constructor();
+        constructor(DataTable: UE.DataTable, RowName: string);
+        DataTable: UE.DataTable;
+        RowName: string;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_DataTableRowHandle_0__: boolean;
+    }
+    
+    class UIActionBindingHandle {
+        constructor();
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_UIActionBindingHandle_0__: boolean;
+    }
+    
+    class CommonActionWidget extends UE.Widget {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        OnInputMethodChanged: $MulticastDelegate<(bUsingGamepad: boolean) => void>;
+        OnInputIconUpdated: $MulticastDelegate<() => void>;
+        ProgressMaterialBrush: UE.SlateBrush;
+        ProgressMaterialParam: string;
+        IconRimBrush: UE.SlateBrush;
+        InputActions: TArray<UE.DataTableRowHandle>;
+        EnhancedInputAction: UE.InputAction;
+        InputActionDataRow_EditorOnly: UE.DataTableRowHandle;
+        DesignTimeKey_EditorOnly: UE.Key;
+        ProgressDynamicMaterial: UE.MaterialInstanceDynamic;
+        Icon: UE.SlateBrush;
+        GetDisplayText() : string;
+        /*
+         *End UWidget
+         */
+        GetIcon() : UE.SlateBrush;
+        GetIconDynamicMaterial() : UE.MaterialInstanceDynamic;
+        IsHeldAction() : boolean;
+        OnInputIconUpdated__DelegateSignature() : void;
+        OnInputMethodChanged__DelegateSignature(bUsingGamepad: boolean) : void;
+        SetEnhancedInputAction(InInputAction: $Nullable<UE.InputAction>) : void;
+        SetIconRimBrush(InIconRimBrush: UE.SlateBrush) : void;
+        SetInputAction(InputActionRow: UE.DataTableRowHandle) : void;
+        SetInputActionBinding(BindingHandle: UE.UIActionBindingHandle) : void;
+        SetInputActions(NewInputActions: TArray<UE.DataTableRowHandle>) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonActionWidget;
+        static Load(InName: string): CommonActionWidget;
+    
+        __tid_CommonActionWidget_0__: boolean;
+    }
+    
+    namespace Engine.PythonTypes {
+        class CommonActionWidget_OnInputIconUpdated__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): CommonActionWidget_OnInputIconUpdated__PythonCallable;
+            static Load(InName: string): CommonActionWidget_OnInputIconUpdated__PythonCallable;
+        
+            __tid_CommonActionWidget_OnInputIconUpdated__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    namespace Engine.PythonTypes {
+        class CommonActionWidget_OnInputMethodChanged__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): CommonActionWidget_OnInputMethodChanged__PythonCallable;
+            static Load(InName: string): CommonActionWidget_OnInputMethodChanged__PythonCallable;
+        
+            __tid_CommonActionWidget_OnInputMethodChanged__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    enum ECommonSwitcherTransition { FadeOnly, Horizontal, Vertical, Zoom, ECommonSwitcherTransition_MAX, __typeKeyDoNoAccess}
+    enum ETransitionCurve { Linear, QuadIn, QuadOut, QuadInOut, CubicIn, CubicOut, CubicInOut, ETransitionCurve_MAX, __typeKeyDoNoAccess}
+    enum ECommonSwitcherTransitionFallbackStrategy { None, Previous, Next, First, Last, ECommonSwitcherTransitionFallbackStrategy_MAX, __typeKeyDoNoAccess}
+    class UserWidgetPool {
+        constructor();
+        constructor(ActiveWidgets: TArray<UE.UserWidget>, InactiveWidgets: TArray<UE.UserWidget>);
+        ActiveWidgets: TArray<UE.UserWidget>;
+        InactiveWidgets: TArray<UE.UserWidget>;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_UserWidgetPool_0__: boolean;
+    }
+    
+    class CommonActivatableWidgetContainerBase extends UE.Widget {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        TransitionType: UE.ECommonSwitcherTransition;
+        TransitionCurveType: UE.ETransitionCurve;
+        TransitionDuration: number;
+        TransitionFallbackStrategy: UE.ECommonSwitcherTransitionFallbackStrategy;
+        WidgetList: TArray<UE.CommonActivatableWidget>;
+        DisplayedWidget: UE.CommonActivatableWidget;
+        GeneratedWidgetsPool: UE.UserWidgetPool;
+        /*
+         *Adds a widget of the given class to the container.
+         *Note that all widgets added to the container are pooled, so the caller should not try to cache and re-use the created widget.
+         *
+         *It is possible for multiple instances of the same class to be added to the container at once, so any instance created in the past
+         *is not guaranteed to be the one returned this time.
+         *
+         *So in practice, you should not trust that any prior state has been retained on the returned widget, and establish all appropriate properties every time.
+         */
+        BP_AddWidget(ActivatableWidgetClass: $Nullable<UE.Class>) : UE.CommonActivatableWidget;
+        ClearWidgets() : void;
+        GetActiveWidget() : UE.CommonActivatableWidget;
+        GetTransitionDuration() : number;
+        RemoveWidget(WidgetToRemove: $Nullable<UE.CommonActivatableWidget>) : void;
+        SetTransitionDuration(Duration: number) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonActivatableWidgetContainerBase;
+        static Load(InName: string): CommonActivatableWidgetContainerBase;
+    
+        __tid_CommonActivatableWidgetContainerBase_0__: boolean;
+    }
+    
+    class CommonActivatableWidgetQueue extends UE.CommonActivatableWidgetContainerBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonActivatableWidgetQueue;
+        static Load(InName: string): CommonActivatableWidgetQueue;
+    
+        __tid_CommonActivatableWidgetQueue_0__: boolean;
+    }
+    
+    class CommonActivatableWidgetStack extends UE.CommonActivatableWidgetContainerBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        RootContentWidgetClass: UE.Class;
+        RootContentWidget: UE.CommonActivatableWidget;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonActivatableWidgetStack;
+        static Load(InName: string): CommonActivatableWidgetStack;
+    
+        __tid_CommonActivatableWidgetStack_0__: boolean;
+    }
+    
+    class WidgetSwitcher extends UE.PanelWidget {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ActiveWidgetIndex: number;
+        /*
+         *Get the reference of the currently active widget
+         */
+        GetActiveWidget() : UE.Widget;
+        /*
+         *Gets the slot index of the currently active widget
+         */
+        GetActiveWidgetIndex() : number;
+        /*
+         *Gets the number of widgets that this switcher manages.
+         */
+        GetNumWidgets() : number;
+        /*
+         *Get a widget at the provided index
+         */
+        GetWidgetAtIndex(Index: number) : UE.Widget;
+        /*
+         *Activates the widget and makes it the active index.
+         */
+        SetActiveWidget(Widget: $Nullable<UE.Widget>) : void;
+        /*
+         *Activates the widget at the specified index.
+         */
+        SetActiveWidgetIndex(Index: number) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): WidgetSwitcher;
+        static Load(InName: string): WidgetSwitcher;
+    
+        __tid_WidgetSwitcher_0__: boolean;
+    }
+    
+    class CommonAnimatedSwitcher extends UE.WidgetSwitcher {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        OnActiveWidgetIndexChangedBP: $MulticastDelegate<(ActiveWidget: $Nullable<UE.Widget>, ActiveIndex: number) => void>;
+        TransitionType: UE.ECommonSwitcherTransition;
+        TransitionCurveType: UE.ETransitionCurve;
+        TransitionDuration: number;
+        TransitionFallbackStrategy: UE.ECommonSwitcherTransitionFallbackStrategy;
+        ActivateNextWidget(bCanWrap: boolean) : void;
+        ActivatePreviousWidget(bCanWrap: boolean) : void;
+        HasWidgets() : boolean;
+        IsCurrentlySwitching() : boolean;
+        /*
+         *Is the switcher playing a transition animation?
+         */
+        IsTransitionPlaying() : boolean;
+        SetDisableTransitionAnimation(bDisableAnimation: boolean) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonAnimatedSwitcher;
+        static Load(InName: string): CommonAnimatedSwitcher;
+    
+        __tid_CommonAnimatedSwitcher_0__: boolean;
+    }
+    
+    class CommonActivatableWidgetSwitcher extends UE.CommonAnimatedSwitcher {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        bClearFocusRestorationTargetOfDeactivatedWidgets: boolean;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonActivatableWidgetSwitcher;
+        static Load(InName: string): CommonActivatableWidgetSwitcher;
+    
+        __tid_CommonActivatableWidgetSwitcher_0__: boolean;
+    }
+    
+    enum EInputPreProcessorType { Overlay, PreEngine, Engine, PreEditor, Editor, PreGame, Game, Count, EInputPreProcessorType_MAX, __typeKeyDoNoAccess}
+    class InputPreprocessorRegistrationKey {
+        constructor();
+        constructor(Type: UE.EInputPreProcessorType, Priority: number);
+        Type: UE.EInputPreProcessorType;
+        Priority: number;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_InputPreprocessorRegistrationKey_0__: boolean;
+    }
+    
+    class CommonAnalogCursorSettings {
+        constructor();
+        constructor(PreprocessorPriority: number, PreprocessorRegistrationInfo: UE.InputPreprocessorRegistrationKey, bEnableCursorAcceleration: boolean, CursorAcceleration: number, CursorMaxSpeed: number, CursorDeadZone: number, HoverSlowdownFactor: number, ScrollDeadZone: number, ScrollUpdatePeriod: number, ScrollMultiplier: number);
+        PreprocessorPriority: number;
+        PreprocessorRegistrationInfo: UE.InputPreprocessorRegistrationKey;
+        bEnableCursorAcceleration: boolean;
+        CursorAcceleration: number;
+        CursorMaxSpeed: number;
+        CursorDeadZone: number;
+        HoverSlowdownFactor: number;
+        ScrollDeadZone: number;
+        ScrollUpdatePeriod: number;
+        ScrollMultiplier: number;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_CommonAnalogCursorSettings_0__: boolean;
+    }
+    
+    class CommonBorder extends UE.Border {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Style: UE.Class;
+        bReducePaddingBySafezone: boolean;
+        MinimumPadding: UE.Margin;
+        bStyleNoLongerNeedsConversion_EditorOnly: boolean;
+        SetStyle(InStyle: $Nullable<UE.Class>) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonBorder;
+        static Load(InName: string): CommonBorder;
+    
+        __tid_CommonBorder_0__: boolean;
+    }
+    
+    class CommonBorderStyle extends UE.Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Background: UE.SlateBrush;
+        GetBackgroundBrush(Brush: $Ref<UE.SlateBrush>) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonBorderStyle;
+        static Load(InName: string): CommonBorderStyle;
+    
+        __tid_CommonBorderStyle_0__: boolean;
+    }
+    
+    enum EDynamicBoxType { Horizontal, Vertical, Wrap, VerticalWrap, Radial, Overlay, EDynamicBoxType_MAX, __typeKeyDoNoAccess}
+    enum ESlateSizeRule { Automatic, Fill, ESlateSizeRule_MAX, __typeKeyDoNoAccess}
+    class SlateChildSize {
+        constructor();
+        constructor(Value: number, SizeRule: UE.ESlateSizeRule);
+        Value: number;
+        SizeRule: UE.ESlateSizeRule;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_SlateChildSize_0__: boolean;
+    }
+    
+    class RadialBoxSettings {
+        constructor();
+        constructor(StartingAngle: number, bDistributeItemsEvenly: boolean, AngleBetweenItems: number, SectorCentralAngle: number);
+        StartingAngle: number;
+        bDistributeItemsEvenly: boolean;
+        AngleBetweenItems: number;
+        SectorCentralAngle: number;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_RadialBoxSettings_0__: boolean;
+    }
+    
+    class DynamicEntryBoxBase extends UE.Widget {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        EntrySpacing: UE.Vector2D;
+        SpacingPattern: TArray<UE.Vector2D>;
+        EntryBoxType: UE.EDynamicBoxType;
+        EntrySizeRule: UE.SlateChildSize;
+        EntryHorizontalAlignment: UE.EHorizontalAlignment;
+        EntryVerticalAlignment: UE.EVerticalAlignment;
+        MaxElementSize: number;
+        RadialBoxSettings: UE.RadialBoxSettings;
+        EntryWidgetPool: UE.UserWidgetPool;
+        GetAllEntries() : TArray<UE.UserWidget>;
+        GetNumEntries() : number;
+        SetEntrySpacing(InEntrySpacing: UE.Vector2D) : void;
+        SetRadialSettings(InSettings: UE.RadialBoxSettings) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): DynamicEntryBoxBase;
+        static Load(InName: string): DynamicEntryBoxBase;
+    
+        __tid_DynamicEntryBoxBase_0__: boolean;
+    }
+    
+    class CommonBoundActionBar extends UE.DynamicEntryBoxBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ActionButtonClass: UE.Class;
+        bDisplayOwningPlayerActionsOnly: boolean;
+        bIgnoreDuplicateActions: boolean;
+        OnActionBarUpdated: $MulticastDelegate<() => void>;
+        SetDisplayOwningPlayerActionsOnly(bShouldOnlyDisplayOwningPlayerActions: boolean) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonBoundActionBar;
+        static Load(InName: string): CommonBoundActionBar;
+    
+        __tid_CommonBoundActionBar_0__: boolean;
+    }
+    
+    class WidgetEventField {
+        constructor();
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_WidgetEventField_0__: boolean;
+    }
+    
+    enum ECommonInputType { MouseAndKeyboard, Gamepad, Touch, Count, ECommonInputType_MAX, __typeKeyDoNoAccess}
+    class CommonButtonStyleOptionalSlateSound {
+        constructor();
+        constructor(bHasSound: boolean, Sound: UE.SlateSound);
+        bHasSound: boolean;
+        Sound: UE.SlateSound;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_CommonButtonStyleOptionalSlateSound_0__: boolean;
+    }
+    
+    class CommonTextStyle extends UE.Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Font: UE.SlateFontInfo;
+        Color: UE.LinearColor;
+        bUsesDropShadow: boolean;
+        ShadowOffset: UE.Vector2D;
+        ShadowColor: UE.LinearColor;
+        Margin: UE.Margin;
+        StrikeBrush: UE.SlateBrush;
+        LineHeightPercentage: number;
+        ApplyLineHeightToBottomLine: boolean;
+        GetApplyLineHeightToBottomLine() : boolean;
+        GetColor(OutColor: $Ref<UE.LinearColor>) : void;
+        GetFont(OutFont: $Ref<UE.SlateFontInfo>) : void;
+        GetLineHeightPercentage() : number;
+        GetMargin(OutMargin: $Ref<UE.Margin>) : void;
+        GetShadowColor(OutColor: $Ref<UE.LinearColor>) : void;
+        GetShadowOffset(OutShadowOffset: $Ref<UE.Vector2D>) : void;
+        GetStrikeBrush(OutStrikeBrush: $Ref<UE.SlateBrush>) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonTextStyle;
+        static Load(InName: string): CommonTextStyle;
+    
+        __tid_CommonTextStyle_0__: boolean;
+    }
+    
+    class CommonButtonStyle extends UE.Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        bSingleMaterial: boolean;
+        SingleMaterialBrush: UE.SlateBrush;
+        NormalBase: UE.SlateBrush;
+        NormalHovered: UE.SlateBrush;
+        NormalPressed: UE.SlateBrush;
+        SelectedBase: UE.SlateBrush;
+        SelectedHovered: UE.SlateBrush;
+        SelectedPressed: UE.SlateBrush;
+        Disabled: UE.SlateBrush;
+        ButtonPadding: UE.Margin;
+        CustomPadding: UE.Margin;
+        MinWidth: number;
+        MinHeight: number;
+        NormalTextStyle: UE.Class;
+        NormalHoveredTextStyle: UE.Class;
+        SelectedTextStyle: UE.Class;
+        SelectedHoveredTextStyle: UE.Class;
+        DisabledTextStyle: UE.Class;
+        PressedSlateSound: UE.SlateSound;
+        SelectedPressedSlateSound: UE.CommonButtonStyleOptionalSlateSound;
+        LockedPressedSlateSound: UE.CommonButtonStyleOptionalSlateSound;
+        HoveredSlateSound: UE.SlateSound;
+        SelectedHoveredSlateSound: UE.CommonButtonStyleOptionalSlateSound;
+        LockedHoveredSlateSound: UE.CommonButtonStyleOptionalSlateSound;
+        GetButtonPadding(OutButtonPadding: $Ref<UE.Margin>) : void;
+        GetCustomPadding(OutCustomPadding: $Ref<UE.Margin>) : void;
+        GetDisabledBrush(Brush: $Ref<UE.SlateBrush>) : void;
+        GetDisabledTextStyle() : UE.CommonTextStyle;
+        GetMaterialBrush(Brush: $Ref<UE.SlateBrush>) : void;
+        GetNormalBaseBrush(Brush: $Ref<UE.SlateBrush>) : void;
+        GetNormalHoveredBrush(Brush: $Ref<UE.SlateBrush>) : void;
+        GetNormalHoveredTextStyle() : UE.CommonTextStyle;
+        GetNormalPressedBrush(Brush: $Ref<UE.SlateBrush>) : void;
+        GetNormalTextStyle() : UE.CommonTextStyle;
+        GetSelectedBaseBrush(Brush: $Ref<UE.SlateBrush>) : void;
+        GetSelectedHoveredBrush(Brush: $Ref<UE.SlateBrush>) : void;
+        GetSelectedHoveredTextStyle() : UE.CommonTextStyle;
+        GetSelectedPressedBrush(Brush: $Ref<UE.SlateBrush>) : void;
+        GetSelectedTextStyle() : UE.CommonTextStyle;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonButtonStyle;
+        static Load(InName: string): CommonButtonStyle;
+    
+        __tid_CommonButtonStyle_0__: boolean;
+    }
+    
+    class CommonButtonBase extends UE.CommonUserWidget {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ClickEvent: UE.WidgetEventField;
+        MinWidth: number;
+        MinHeight: number;
+        Style: UE.Class;
+        bHideInputAction: boolean;
+        PressedSlateSoundOverride: UE.SlateSound;
+        HoveredSlateSoundOverride: UE.SlateSound;
+        SelectedPressedSlateSoundOverride: UE.SlateSound;
+        SelectedHoveredSlateSoundOverride: UE.SlateSound;
+        LockedPressedSlateSoundOverride: UE.SlateSound;
+        LockedHoveredSlateSoundOverride: UE.SlateSound;
+        bApplyAlphaOnDisable: boolean;
+        bLocked: boolean;
+        bSelectable: boolean;
+        bShouldSelectUponReceivingFocus: boolean;
+        bInteractableWhenSelected: boolean;
+        bToggleable: boolean;
+        bTriggerClickedAfterSelection: boolean;
+        bDisplayInputActionWhenNotInteractable: boolean;
+        bHideInputActionWithKeyboard: boolean;
+        bShouldUseFallbackDefaultInputAction: boolean;
+        bRequiresHold: boolean;
+        HoldData: UE.Class;
+        bSimulateHoverOnTouchInput: boolean;
+        ClickMethod: UE.EButtonClickMethod;
+        TouchMethod: UE.EButtonTouchMethod;
+        PressMethod: UE.EButtonPressMethod;
+        InputPriority: number;
+        TriggeringInputAction: UE.DataTableRowHandle;
+        TriggeringEnhancedInputAction: UE.InputAction;
+        bStyleNoLongerNeedsConversion_EditorOnly: boolean;
+        OnSelectedChangedBase: $MulticastDelegate<(Button: $Nullable<UE.CommonButtonBase>, Selected: boolean) => void>;
+        OnButtonBaseClicked: $MulticastDelegate<(Button: $Nullable<UE.CommonButtonBase>) => void>;
+        OnButtonBaseDoubleClicked: $MulticastDelegate<(Button: $Nullable<UE.CommonButtonBase>) => void>;
+        OnButtonBaseHovered: $MulticastDelegate<(Button: $Nullable<UE.CommonButtonBase>) => void>;
+        OnButtonBaseUnhovered: $MulticastDelegate<(Button: $Nullable<UE.CommonButtonBase>) => void>;
+        OnButtonBaseLockClicked: $MulticastDelegate<(Button: $Nullable<UE.CommonButtonBase>) => void>;
+        OnButtonBaseLockDoubleClicked: $MulticastDelegate<(Button: $Nullable<UE.CommonButtonBase>) => void>;
+        bIsPersistentBinding: boolean;
+        InputModeOverride: UE.ECommonInputMode;
+        SingleMaterialStyleMID: UE.MaterialInstanceDynamic;
+        NormalStyle: UE.ButtonStyle;
+        SelectedStyle: UE.ButtonStyle;
+        DisabledStyle: UE.ButtonStyle;
+        LockedStyle: UE.ButtonStyle;
+        bStopDoubleClickPropagation: boolean;
+        InputActionWidget: UE.CommonActionWidget;
+        BP_OnClicked() : void;
+        BP_OnDeselected() : void;
+        BP_OnDisabled() : void;
+        BP_OnDoubleClicked() : void;
+        BP_OnEnabled() : void;
+        BP_OnFocusLost() : void;
+        BP_OnFocusReceived() : void;
+        BP_OnHovered() : void;
+        BP_OnInputActionTriggered() : void;
+        BP_OnInputMethodChanged(CurrentInputType: UE.ECommonInputType) : void;
+        BP_OnLockClicked() : void;
+        BP_OnLockDoubleClicked() : void;
+        BP_OnLockedChanged(bIsLocked: boolean) : void;
+        BP_OnPressed() : void;
+        BP_OnReleased() : void;
+        BP_OnSelected() : void;
+        BP_OnUnhovered() : void;
+        ClearSelection() : void;
+        /*
+         *Disables this button with a reason (use instead of SetIsEnabled)
+         */
+        DisableButtonWithReason(DisabledReason: string) : void;
+        /*
+         *By default, if bRequiresHold is true, the bound Input Action will be forced to require hold as well.
+         *The Bound Input action will use the row's hold values regardless of the row's bRequiresHold state.
+         */
+        GetConvertInputActionToHold() : boolean;
+        /*
+         *@return The current button padding that corresponds to the current size and selection state
+         */
+        GetCurrentButtonPadding(OutButtonPadding: $Ref<UE.Margin>) : void;
+        /*
+         *@return The custom padding that corresponds to the current size and selection state
+         */
+        GetCurrentCustomPadding(OutCustomPadding: $Ref<UE.Margin>) : void;
+        /*
+         *@return The text style that corresponds to the current size and selection state
+         */
+        GetCurrentTextStyle() : UE.CommonTextStyle;
+        /*
+         *@return The class of the text style that corresponds to the current size and selection state
+         */
+        GetCurrentTextStyleClass() : UE.Class;
+        /*
+         *Gets the appropriate enhanced input action that is set
+         */
+        GetEnhancedInputAction() : UE.InputAction;
+        /*
+         *Gets the appropriate input action that is set
+         */
+        GetInputAction(InputActionRow: $Ref<UE.DataTableRowHandle>) : boolean;
+        /*
+         *Gets the bIsFocusable flag
+         */
+        GetIsFocusable() : boolean;
+        /*
+         *@returns True if the button is currently locked, False otherwise
+         */
+        GetLocked() : boolean;
+        /*
+         *Returns required hold time for performing a triggering action.
+         */
+        GetRequiredHoldTime() : number;
+        /*
+         *Returns true if this button has a hold behavior, even if the triggering action is not holdable.
+         */
+        GetRequiresHold() : boolean;
+        /*
+         *@returns True if the button is currently in a selected state, False otherwise
+         */
+        GetSelected() : boolean;
+        /*
+         *Get whether the button should become selected upon receiving focus or not
+         */
+        GetShouldSelectUponReceivingFocus() : boolean;
+        /*
+         *Returns the dynamic instance of the material being used for this button, if it is using a single material style.
+         */
+        GetSingleMaterialStyleMID() : UE.MaterialInstanceDynamic;
+        /*
+         *@Returns Current button style
+         */
+        GetStyle() : UE.CommonButtonStyle;
+        /*
+         *Handler function registered to the underlying button's click.
+         */
+        HandleButtonClicked() : void;
+        /*
+         *Helper function registered to the underlying button when pressed
+         */
+        HandleButtonPressed() : void;
+        /*
+         *Helper function registered to the underlying button when released
+         */
+        HandleButtonReleased() : void;
+        /*
+         *Helper function registered to the underlying button losing focus
+         */
+        HandleFocusLost() : void;
+        /*
+         *Helper function registered to the underlying button receiving focus
+         */
+        HandleFocusReceived() : void;
+        HandleTriggeringActionCommited(bPassthrough: $Ref<boolean>) : void;
+        HoldReset() : void;
+        /*
+         *Is this button currently interactable? (use instead of GetIsEnabled)
+         */
+        IsInteractionEnabled() : boolean;
+        /*
+         *Is this button currently pressed?
+         */
+        IsPressed() : boolean;
+        NativeOnActionComplete() : void;
+        /*
+         *Bound to the hold progress of the bound key from the input action
+         */
+        NativeOnActionProgress(HeldPercent: number) : void;
+        /*
+         *Bound to the hold progress not related to the bound key
+         */
+        NativeOnHoldProgress(DeltaTime: number) : boolean;
+        /*
+         *Bound to the hold progress rollback not related to the bound key
+         */
+        NativeOnHoldProgressRollback(DeltaTime: number) : boolean;
+        /*
+         *Callback fired when hold events complete
+         */
+        OnActionComplete() : void;
+        /*
+         *Callback fired continously during hold interactions
+         */
+        OnActionProgress(HeldPercent: number) : void;
+        /*
+         *Allows derived classes to take action when the current text style has changed
+         */
+        OnCurrentTextStyleChanged() : void;
+        /*
+         *Called via delegate when the input method changes
+         */
+        OnInputMethodChanged(CurrentInputType: UE.ECommonInputType) : void;
+        /*
+         *Callback fired when input action datatable row changes
+         */
+        OnTriggeredInputActionChanged(NewTriggeredAction: UE.DataTableRowHandle) : void;
+        /*
+         *Callback fired when enhanced input action changes
+         */
+        OnTriggeringEnhancedInputActionChanged(InInputAction: $Nullable<UE.InputAction>) : void;
+        /*
+         *Callback fired when triggered input action datatable row changes
+         */
+        OnTriggeringInputActionChanged(NewTriggeredAction: UE.DataTableRowHandle) : void;
+        /*
+         *Set the click method for mouse interaction
+         */
+        SetClickMethod(InClickMethod: UE.EButtonClickMethod) : void;
+        SetHideInputAction(bInHideInputAction: boolean) : void;
+        SetHoveredSoundOverride(Sound: $Nullable<UE.SoundBase>) : void;
+        SetInputActionProgressMaterial(InProgressMaterialBrush: UE.SlateBrush, InProgressMaterialParam: string) : void;
+        /*
+         *Updates the bIsFocusable flag
+         */
+        SetIsFocusable(bInIsFocusable: boolean) : void;
+        /*
+         *Change whether this widget is selectable at all. If false and currently selected, will deselect.
+         */
+        SetIsInteractableWhenSelected(bInInteractableWhenSelected: boolean) : void;
+        /*
+         *Change whether this widget is selectable at all. If false and currently selected, will deselect.
+         */
+        SetIsInteractionEnabled(bInIsInteractionEnabled: boolean) : void;
+        /*
+         *Change whether this widget is locked. If locked, the button can be focusable and responsive to mouse input but will not broadcast OnClicked events.
+         */
+        SetIsLocked(bInIsLocked: boolean) : void;
+        /*
+         *Change whether this widget is selectable at all. If false and currently selected, will deselect.
+         */
+        SetIsSelectable(bInIsSelectable: boolean) : void;
+        /*
+         *Change the selected state manually.
+         *@param bGiveClickFeedback    If true, the button may give user feedback as if it were clicked. IE: Play a click sound, trigger animations as if it were clicked.
+         */
+        SetIsSelected(InSelected: boolean, bGiveClickFeedback?: boolean /* = true */) : void;
+        /*
+         *Change whether this widget is toggleable. If toggleable, clicking when selected will deselect.
+         */
+        SetIsToggleable(bInIsToggleable: boolean) : void;
+        SetLockedHoveredSoundOverride(Sound: $Nullable<UE.SoundBase>) : void;
+        SetLockedPressedSoundOverride(Sound: $Nullable<UE.SoundBase>) : void;
+        /*
+         *Sets the minimum dimensions of this button
+         */
+        SetMinDimensions(InMinWidth: number, InMinHeight: number) : void;
+        SetPressedSoundOverride(Sound: $Nullable<UE.SoundBase>) : void;
+        /*
+         *Set the click method for keyboard_gamepad button press interaction
+         */
+        SetPressMethod(InPressMethod: UE.EButtonPressMethod) : void;
+        /*
+         *Change whether this button should have a hold behavior even if the triggering action is not holdable.
+         */
+        SetRequiresHold(bInRequiresHold: boolean) : void;
+        SetSelectedHoveredSoundOverride(Sound: $Nullable<UE.SoundBase>) : void;
+        /*
+         *Internal method to allow the selected state to be set regardless of selectability or toggleability
+         */
+        SetSelectedInternal(bInSelected: boolean, bAllowSound?: boolean /* = true */, bBroadcast?: boolean /* = true */) : void;
+        SetSelectedPressedSoundOverride(Sound: $Nullable<UE.SoundBase>) : void;
+        /*
+         *Set whether the button should become selected upon receiving focus or not; Only settable for buttons that are selectable
+         */
+        SetShouldSelectUponReceivingFocus(bInShouldSelectUponReceivingFocus: boolean) : void;
+        /*
+         *Change whether this widget should use the fallback default input action.
+         */
+        SetShouldUseFallbackDefaultInputAction(bInShouldUseFallbackDefaultInputAction: boolean) : void;
+        /*
+         *Sets the style of this button, rebuilds the internal styling
+         */
+        SetStyle(InStyle?: UE.Class /* = None */) : void;
+        /*
+         *Set the click method for touch interaction
+         */
+        SetTouchMethod(InTouchMethod: UE.EButtonTouchMethod) : void;
+        /*
+         *Updates the current triggered action
+         */
+        SetTriggeredInputAction(InputActionRow: UE.DataTableRowHandle) : void;
+        /*
+         *Updates the current triggering enhanced input action, requires enhanced input enabled in CommonUI settings
+         */
+        SetTriggeringEnhancedInputAction(InInputAction: $Nullable<UE.InputAction>) : void;
+        /*
+         *Updates the current triggering action
+         */
+        SetTriggeringInputAction(InputActionRow: UE.DataTableRowHandle) : void;
+        /*
+         *Unless this is called, we will assume the double click should be converted into a normal click.
+         */
+        StopDoubleClickPropagation() : void;
+        /*
+         *If HoldData is valid, assigns its values to Keyboard and Mouse, Gamepad and Touch, based off the Current Input Type.
+         */
+        UpdateHoldData(CurrentInputType: UE.ECommonInputType) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonButtonBase;
+        static Load(InName: string): CommonButtonBase;
+    
+        __tid_CommonButtonBase_0__: boolean;
+    }
+    
+    enum ETextShapingMethod { Auto, KerningOnly, FullShaping, ETextShapingMethod_MAX, __typeKeyDoNoAccess}
+    enum ETextFlowDirection { Auto, LeftToRight, RightToLeft, Culture, ETextFlowDirection_MAX, __typeKeyDoNoAccess}
+    class ShapedTextOptions {
+        constructor();
+        constructor(bOverride_TextShapingMethod: boolean, bOverride_TextFlowDirection: boolean, TextShapingMethod: UE.ETextShapingMethod, TextFlowDirection: UE.ETextFlowDirection);
+        bOverride_TextShapingMethod: boolean;
+        bOverride_TextFlowDirection: boolean;
+        TextShapingMethod: UE.ETextShapingMethod;
+        TextFlowDirection: UE.ETextFlowDirection;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_ShapedTextOptions_0__: boolean;
+    }
+    
+    enum ETextJustify { Left, Center, Right, InvariantLeft, InvariantRight, ETextJustify_MAX, __typeKeyDoNoAccess}
+    enum ETextWrappingPolicy { DefaultWrapping, AllowPerCharacterWrapping, ETextWrappingPolicy_MAX, __typeKeyDoNoAccess}
+    class TextLayoutWidget extends UE.Widget {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ShapedTextOptions: UE.ShapedTextOptions;
+        Justification: UE.ETextJustify;
+        WrappingPolicy: UE.ETextWrappingPolicy;
+        AutoWrapText: boolean;
+        ApplyLineHeightToBottomLine: boolean;
+        WrapTextAt: number;
+        Margin: UE.Margin;
+        LineHeightPercentage: number;
+        SetJustification(InJustification: UE.ETextJustify) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): TextLayoutWidget;
+        static Load(InName: string): TextLayoutWidget;
+    
+        __tid_TextLayoutWidget_0__: boolean;
+    }
+    
+    class TextBlock extends UE.TextLayoutWidget {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Text: string;
+        TextDelegate: $Delegate<() => string>;
+        ColorAndOpacity: UE.SlateColor;
+        ColorAndOpacityDelegate: $Delegate<() => UE.SlateColor>;
+        MinDesiredWidth: number;
+        Font: UE.SlateFontInfo;
+        StrikeBrush: UE.SlateBrush;
+        ShadowOffset: UE.Vector2D;
+        ShadowColorAndOpacity: UE.LinearColor;
+        ShadowColorAndOpacityDelegate: $Delegate<() => UE.LinearColor>;
+        bWrapWithInvalidationPanel: boolean;
+        TextTransformPolicy: UE.ETextTransformPolicy;
+        TextOverflowPolicy: UE.ETextOverflowPolicy;
+        bSimpleTextMode: boolean;
+        GetDynamicFontMaterial() : UE.MaterialInstanceDynamic;
+        GetDynamicOutlineMaterial() : UE.MaterialInstanceDynamic;
+        /*
+         *Gets the widget text
+         *@return The widget text
+         */
+        GetText() : string;
+        /*
+         *Set the auto wrap for this text block.
+         *
+         *@param InAutoTextWrap to turn wrap on or off.
+         */
+        SetAutoWrapText(InAutoTextWrap: boolean) : void;
+        /*
+         *Sets the color and opacity of the text in this text block
+         *
+         *@param InColorAndOpacity             The new text color and opacity
+         */
+        SetColorAndOpacity(InColorAndOpacity: UE.SlateColor) : void;
+        /*
+         *Dynamically set the font info for this text block
+         *
+         *@param InFontInfo The new font info
+         */
+        SetFont(InFontInfo: UE.SlateFontInfo) : void;
+        SetFontMaterial(InMaterial: $Nullable<UE.MaterialInterface>) : void;
+        SetFontOutlineMaterial(InMaterial: $Nullable<UE.MaterialInterface>) : void;
+        /*
+         *Set the minimum desired width for this text block
+         *
+         *@param InMinDesiredWidth new minimum desired width
+         */
+        SetMinDesiredWidth(InMinDesiredWidth: number) : void;
+        /*
+         *Sets the opacity of the text in this text block
+         *
+         *@param InOpacity              The new text opacity
+         */
+        SetOpacity(InOpacity: number) : void;
+        /*
+         *Sets the color and opacity of the text drop shadow
+         *Note: if opacity is zero no shadow will be drawn
+         *
+         *@param InShadowColorAndOpacity               The new drop shadow color and opacity
+         */
+        SetShadowColorAndOpacity(InShadowColorAndOpacity: UE.LinearColor) : void;
+        /*
+         *Sets the offset that the text drop shadow should be drawn at
+         *
+         *@param InShadowOffset                The new offset
+         */
+        SetShadowOffset(InShadowOffset: UE.Vector2D) : void;
+        /*
+         *Dynamically set the strike brush for this text block
+         *
+         *@param InStrikeBrush The new brush to use to strike through text
+         */
+        SetStrikeBrush(InStrikeBrush: UE.SlateBrush) : void;
+        /*
+         *Directly sets the widget text.
+         *Warning: This will wipe any binding created for the Text property!
+         *@param InText The text to assign to the widget
+         */
+        SetText(InText: string) : void;
+        /*
+         *Set the text overflow policy for this text block.
+         *
+         *@param InOverflowPolicy the new text overflow policy.
+         */
+        SetTextOverflowPolicy(InOverflowPolicy: UE.ETextOverflowPolicy) : void;
+        /*
+         *Set the text transformation policy for this text block.
+         *
+         *@param InTransformPolicy the new text transformation policy.
+         */
+        SetTextTransformPolicy(InTransformPolicy: UE.ETextTransformPolicy) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): TextBlock;
+        static Load(InName: string): TextBlock;
+    
+        __tid_TextBlock_0__: boolean;
+    }
+    
+    class CommonTextBlock extends UE.TextBlock {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        MobileFontSizeMultiplier: number;
+        bIsScrollingEnabled: boolean;
+        bDisplayAllCaps: boolean;
+        bAutoCollapseWithEmptyText: boolean;
+        Style: UE.Class;
+        ScrollStyle: UE.Class;
+        bStyleNoLongerNeedsConversion_EditorOnly: boolean;
+        GetMargin() : UE.Margin;
+        GetMobileFontSizeMultiplier() : number;
+        ResetScrollState() : void;
+        SetApplyLineHeightToBottomLine(InApplyLineHeightToBottomLine: boolean) : void;
+        SetLineHeightPercentage(InLineHeightPercentage: number) : void;
+        SetMargin(InMargin: UE.Margin) : void;
+        /*
+         *Sets the new value and then applies the FontSizeMultiplier
+         */
+        SetMobileFontSizeMultiplier(InMobileFontSizeMultiplier: number) : void;
+        SetScrollingEnabled(bInIsScrollingEnabled: boolean) : void;
+        SetStyle(InStyle: $Nullable<UE.Class>) : void;
+        SetTextCase(bUseAllCaps: boolean) : void;
+        SetWrapTextWidth(InWrapTextAt: number) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonTextBlock;
+        static Load(InName: string): CommonTextBlock;
+    
+        __tid_CommonTextBlock_0__: boolean;
+    }
+    
+    class CommonBoundActionButton extends UE.CommonButtonBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Text_ActionName: UE.CommonTextBlock;
+        OnUpdateInputAction() : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonBoundActionButton;
+        static Load(InName: string): CommonBoundActionButton;
+    
+        __tid_CommonBoundActionButton_0__: boolean;
+    }
+    
+    class CommonBoundActionButtonInterface extends UE.Interface {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonBoundActionButtonInterface;
+        static Load(InName: string): CommonBoundActionButtonInterface;
+    
+        __tid_CommonBoundActionButtonInterface_0__: boolean;
+    }
+    
+    namespace Engine.PythonTypes {
+        class CommonButtonBaseClicked__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): CommonButtonBaseClicked__PythonCallable;
+            static Load(InName: string): CommonButtonBaseClicked__PythonCallable;
+        
+            __tid_CommonButtonBaseClicked__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    class CommonWidgetGroupBase extends UE.Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        AddWidget(InWidget: $Nullable<UE.Widget>) : void;
+        AddWidgets(Widgets: TArray<UE.Widget>) : void;
+        RemoveAll() : void;
+        RemoveWidget(InWidget: $Nullable<UE.Widget>) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonWidgetGroupBase;
+        static Load(InName: string): CommonWidgetGroupBase;
+    
+        __tid_CommonWidgetGroupBase_0__: boolean;
+    }
+    
+    class CommonButtonGroupBase extends UE.CommonWidgetGroupBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        OnSelectedButtonBaseChanged: $MulticastDelegate<(AssociatedButton: $Nullable<UE.CommonButtonBase>, ButtonIndex: number) => void>;
+        OnHoveredButtonBaseChanged: $MulticastDelegate<(AssociatedButton: $Nullable<UE.CommonButtonBase>, ButtonIndex: number) => void>;
+        OnButtonBaseClicked: $MulticastDelegate<(AssociatedButton: $Nullable<UE.CommonButtonBase>, ButtonIndex: number) => void>;
+        OnButtonBaseDoubleClicked: $MulticastDelegate<(AssociatedButton: $Nullable<UE.CommonButtonBase>, ButtonIndex: number) => void>;
+        OnSelectionCleared: $MulticastDelegate<() => void>;
+        OnButtonBaseLockClicked: $MulticastDelegate<(AssociatedButton: $Nullable<UE.CommonButtonBase>, ButtonIndex: number) => void>;
+        OnButtonBaseLockDoubleClicked: $MulticastDelegate<(AssociatedButton: $Nullable<UE.CommonButtonBase>, ButtonIndex: number) => void>;
+        bSelectionRequired: boolean;
+        /*
+         *Deselects all buttons in the group.
+         */
+        DeselectAll() : void;
+        /*
+         *Find the button index of the specified button, if possible
+         *@param ButtonToFind  Button to find the index of
+         *@return Index of the button in the group. INDEX_NONE if not found
+         */
+        FindButtonIndex(ButtonToFind: $Nullable<UE.CommonButtonBase>) : number;
+        GetButtonBaseAtIndex(Index: number) : UE.CommonButtonBase;
+        GetButtonCount() : number;
+        /*
+         *Get the index of the currently hovered button, if any.
+         *@param The index of the currently hovered button in the group, or -1 if there is no hovered button.
+         */
+        GetHoveredButtonIndex() : number;
+        GetSelectedButtonBase() : UE.CommonButtonBase;
+        /*
+         *Get the index of the currently selected button, if any.
+         *@param The index of the currently selected button in the group, or -1 if there is no selected button.
+         */
+        GetSelectedButtonIndex() : number;
+        HasAnyButtons() : boolean;
+        OnButtonBaseHovered(BaseButton: $Nullable<UE.CommonButtonBase>) : void;
+        OnButtonBaseUnhovered(BaseButton: $Nullable<UE.CommonButtonBase>) : void;
+        OnHandleButtonBaseClicked(BaseButton: $Nullable<UE.CommonButtonBase>) : void;
+        OnHandleButtonBaseDoubleClicked(BaseButton: $Nullable<UE.CommonButtonBase>) : void;
+        OnHandleButtonBaseLockClicked(BaseButton: $Nullable<UE.CommonButtonBase>) : void;
+        OnHandleButtonBaseLockDoubleClicked(BaseButton: $Nullable<UE.CommonButtonBase>) : void;
+        OnSelectionStateChangedBase(BaseButton: $Nullable<UE.CommonButtonBase>, bIsSelected: boolean) : void;
+        /*
+         *Selects a button at a specific index in the group. Clears all selection if given an invalid index.
+         *@param ButtonIndex The index of the button in the group to select
+         *@param bAllowSound Whether the selected button should play its click sound
+         */
+        SelectButtonAtIndex(ButtonIndex: number, bAllowSound?: boolean /* = true */) : void;
+        /*
+         *Selects the next button in the group
+         *@param bAllowWrap Whether to wrap to the first button if the last one is currently selected
+         */
+        SelectNextButton(bAllowWrap?: boolean /* = true */) : void;
+        /*
+         *Selects the previous button in the group
+         *@param bAllowWrap Whether to wrap to the first button if the last one is currently selected
+         */
+        SelectPreviousButton(bAllowWrap?: boolean /* = true */) : void;
+        /*
+         *Sets whether the group should always have a button selected.
+         *@param bRequireSelection True to force the group to always have a button selected.
+         *If true and nothing is selected, will select the first entry. If empty, will select the first button added.
+         */
+        SetSelectionRequired(bRequireSelection: boolean) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonButtonGroupBase;
+        static Load(InName: string): CommonButtonGroupBase;
+    
+        __tid_CommonButtonGroupBase_0__: boolean;
+    }
+    
+    class CommonButtonInternalBase extends UE.Button {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        OnDoubleClicked: $MulticastDelegate<() => void>;
+        MinWidth: number;
+        MinHeight: number;
+        bButtonEnabled: boolean;
+        bInteractionEnabled: boolean;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonButtonInternalBase;
+        static Load(InName: string): CommonButtonInternalBase;
+    
+        __tid_CommonButtonInternalBase_0__: boolean;
+    }
+    
+    class CommonCustomNavigation extends UE.Border {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        OnNavigationEvent: $Delegate<(NavigationType: UE.EUINavigation) => boolean>;
+        OnCustomNavigationEvent__DelegateSignature(NavigationType: UE.EUINavigation) : boolean;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonCustomNavigation;
+        static Load(InName: string): CommonCustomNavigation;
+    
+        __tid_CommonCustomNavigation_0__: boolean;
+    }
+    
+    namespace Engine.PythonTypes {
+        class CommonCustomNavigation_OnCustomNavigationEvent__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): CommonCustomNavigation_OnCustomNavigationEvent__PythonCallable;
+            static Load(InName: string): CommonCustomNavigation_OnCustomNavigationEvent__PythonCallable;
+        
+            __tid_CommonCustomNavigation_OnCustomNavigationEvent__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    class CommonDateTimeTextBlock extends UE.CommonTextBlock {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        CustomTimespanFormat: string;
+        bCustomTimespanLeadingZeros: boolean;
+        GetDateTime() : UE.DateTime;
+        SetCountDownCompletionText(InCompletionText: string) : void;
+        SetDateTimeValue(InDateTime: UE.DateTime, bShowAsCountdown: boolean, InRefreshDelay?: number /* = 1.000000 */) : void;
+        SetTimespanValue(InTimespan: UE.Timespan) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonDateTimeTextBlock;
+        static Load(InName: string): CommonDateTimeTextBlock;
+    
+        __tid_CommonDateTimeTextBlock_0__: boolean;
+    }
+    
+    class CommonGameViewportClient extends UE.GameViewportClient {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonGameViewportClient;
+        static Load(InName: string): CommonGameViewportClient;
+    
+        __tid_CommonGameViewportClient_0__: boolean;
+    }
+    
+    class CommonGenericInputActionDataTable extends UE.DataTable {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonGenericInputActionDataTable;
+        static Load(InName: string): CommonGenericInputActionDataTable;
+    
+        __tid_CommonGenericInputActionDataTable_0__: boolean;
+    }
+    
+    class CommonGenericInputActionDataTableFactory extends UE.Factory {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonGenericInputActionDataTableFactory;
+        static Load(InName: string): CommonGenericInputActionDataTableFactory;
+    
+        __tid_CommonGenericInputActionDataTableFactory_0__: boolean;
+    }
+    
+    class CommonHardwareVisibilityBorder extends UE.CommonBorder {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        VisibilityQuery: UE.GameplayTagQuery;
+        VisibleType: UE.ESlateVisibility;
+        HiddenType: UE.ESlateVisibility;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonHardwareVisibilityBorder;
+        static Load(InName: string): CommonHardwareVisibilityBorder;
+    
+        __tid_CommonHardwareVisibilityBorder_0__: boolean;
+    }
+    
+    class ScrollBoxStyle extends UE.SlateWidgetStyle {
+        constructor();
+        constructor(BarThickness: number, TopShadowBrush: UE.SlateBrush, BottomShadowBrush: UE.SlateBrush, LeftShadowBrush: UE.SlateBrush, RightShadowBrush: UE.SlateBrush, HorizontalScrolledContentPadding: UE.Margin, VerticalScrolledContentPadding: UE.Margin);
+        BarThickness: number;
+        TopShadowBrush: UE.SlateBrush;
+        BottomShadowBrush: UE.SlateBrush;
+        LeftShadowBrush: UE.SlateBrush;
+        RightShadowBrush: UE.SlateBrush;
+        HorizontalScrolledContentPadding: UE.Margin;
+        VerticalScrolledContentPadding: UE.Margin;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_ScrollBoxStyle_0__: boolean;
+    }
+    
+    enum EConsumeMouseWheel { WhenScrollingPossible, Always, Never, EConsumeMouseWheel_MAX, __typeKeyDoNoAccess}
+    enum EDescendantScrollDestination { IntoView, TopOrLeft, Center, BottomOrRight, EDescendantScrollDestination_MAX, __typeKeyDoNoAccess}
+    enum EScrollWhenFocusChanges { NoScroll, InstantScroll, AnimatedScroll, EScrollWhenFocusChanges_MAX, __typeKeyDoNoAccess}
+    class ScrollBox extends UE.PanelWidget {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ScrollAnimationInterpolationSpeed: number;
+        bEnableTouchScrolling: boolean;
+        WidgetStyle: UE.ScrollBoxStyle;
+        WidgetBarStyle: UE.ScrollBarStyle;
+        Orientation: UE.EOrientation;
+        ScrollBarVisibility: UE.ESlateVisibility;
+        ConsumeMouseWheel: UE.EConsumeMouseWheel;
+        ScrollbarThickness: UE.Vector2D;
+        ScrollbarPadding: UE.Margin;
+        AlwaysShowScrollbar: boolean;
+        AlwaysShowScrollbarTrack: boolean;
+        AllowOverscroll: boolean;
+        BackPadScrolling: boolean;
+        FrontPadScrolling: boolean;
+        bAnimateWheelScrolling: boolean;
+        NavigationDestination: UE.EDescendantScrollDestination;
+        NavigationScrollPadding: number;
+        ScrollWhenFocusChanges: UE.EScrollWhenFocusChanges;
+        bAllowRightClickDragScrolling: boolean;
+        WheelScrollMultiplier: number;
+        OnUserScrolled: $MulticastDelegate<(CurrentOffset: number) => void>;
+        OnScrollBarVisibilityChanged: $MulticastDelegate<(NewVisibility: UE.ESlateVisibility) => void>;
+        /*
+         *Instantly stops any inertial scrolling that is currently in progress
+         */
+        EndInertialScrolling() : void;
+        /*
+         *Gets the scroll offset of the scrollbox in Slate Units.
+         */
+        GetScrollOffset() : number;
+        /*
+         *Gets the scroll offset of the bottom of the ScrollBox in Slate Units.
+         */
+        GetScrollOffsetOfEnd() : number;
+        /*
+         *Gets the fraction currently visible in the scrollbox
+         */
+        GetViewFraction() : number;
+        GetViewOffsetFraction() : number;
+        /*
+         *Scrolls the ScrollBox to the bottom instantly during the next layout pass.
+         */
+        ScrollToEnd() : void;
+        /*
+         *Scrolls the ScrollBox to the top instantly
+         */
+        ScrollToStart() : void;
+        /*
+         *Scrolls the ScrollBox to the widget during the next layout pass.
+         */
+        ScrollWidgetIntoView(WidgetToFind: $Nullable<UE.Widget>, AnimateScroll?: boolean /* = true */, ScrollDestination?: UE.EDescendantScrollDestination /* = IntoView */, Padding?: number /* = 0.000000 */) : void;
+        SetAllowOverscroll(NewAllowOverscroll: boolean) : void;
+        SetAlwaysShowScrollbar(NewAlwaysShowScrollbar: boolean) : void;
+        SetAnimateWheelScrolling(bShouldAnimateWheelScrolling: boolean) : void;
+        SetConsumeMouseWheel(NewConsumeMouseWheel: UE.EConsumeMouseWheel) : void;
+        SetIsTouchScrollingEnabled(bInEnableTouchScrolling: boolean) : void;
+        SetNavigationDestination(NewNavigationDestination: UE.EDescendantScrollDestination) : void;
+        SetOrientation(NewOrientation: UE.EOrientation) : void;
+        SetScrollAnimationInterpolationSpeed(NewScrollAnimationInterpolationSpeed: number) : void;
+        SetScrollbarPadding(NewScrollbarPadding: UE.Margin) : void;
+        SetScrollbarThickness(NewScrollbarThickness: UE.Vector2D) : void;
+        SetScrollBarVisibility(NewScrollBarVisibility: UE.ESlateVisibility) : void;
+        /*
+         *Updates the scroll offset of the scrollbox.
+         *@param NewScrollOffset is in Slate Units.
+         */
+        SetScrollOffset(NewScrollOffset: number) : void;
+        SetScrollWhenFocusChanges(NewScrollWhenFocusChanges: UE.EScrollWhenFocusChanges) : void;
+        SetWheelScrollMultiplier(NewWheelScrollMultiplier: number) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ScrollBox;
+        static Load(InName: string): ScrollBox;
+    
+        __tid_ScrollBox_0__: boolean;
+    }
+    
+    class CommonHierarchicalScrollBox extends UE.ScrollBox {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonHierarchicalScrollBox;
+        static Load(InName: string): CommonHierarchicalScrollBox;
+    
+        __tid_CommonHierarchicalScrollBox_0__: boolean;
+    }
+    
+    enum EInputActionState { Enabled, Disabled, Hidden, HiddenAndDisabled, EInputActionState_MAX, __typeKeyDoNoAccess}
+    class CommonInputTypeInfo {
+        constructor();
+        constructor(Key: UE.Key, OverrrideState: UE.EInputActionState, bActionRequiresHold: boolean, HoldTime: number, HoldRollbackTime: number, OverrideBrush: UE.SlateBrush);
+        Key: UE.Key;
+        OverrrideState: UE.EInputActionState;
+        bActionRequiresHold: boolean;
+        HoldTime: number;
+        HoldRollbackTime: number;
+        OverrideBrush: UE.SlateBrush;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_CommonInputTypeInfo_0__: boolean;
+    }
+    
+    class CommonInputActionDataBase extends UE.TableRowBase {
+        constructor();
+        constructor(DisplayName: string, HoldDisplayName: string, NavBarPriority: number, KeyboardInputTypeInfo: UE.CommonInputTypeInfo, DefaultGamepadInputTypeInfo: UE.CommonInputTypeInfo, GamepadInputOverrides: TMap<string, UE.CommonInputTypeInfo>, TouchInputTypeInfo: UE.CommonInputTypeInfo);
+        DisplayName: string;
+        HoldDisplayName: string;
+        NavBarPriority: number;
+        KeyboardInputTypeInfo: UE.CommonInputTypeInfo;
+        DefaultGamepadInputTypeInfo: UE.CommonInputTypeInfo;
+        GamepadInputOverrides: TMap<string, UE.CommonInputTypeInfo>;
+        TouchInputTypeInfo: UE.CommonInputTypeInfo;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_CommonInputActionDataBase_0__: boolean;
+    }
+    
+    class CommonInputActionDataProcessor extends UE.Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonInputActionDataProcessor;
+        static Load(InName: string): CommonInputActionDataProcessor;
+    
+        __tid_CommonInputActionDataProcessor_0__: boolean;
+    }
+    
+    class CommonInputActionDomainTable extends UE.DataAsset {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ActionDomains: TArray<UE.CommonInputActionDomain>;
+        InputMode: UE.ECommonInputMode;
+        MouseCaptureMode: UE.EMouseCaptureMode;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonInputActionDomainTable;
+        static Load(InName: string): CommonInputActionDomainTable;
+    
+        __tid_CommonInputActionDomainTable_0__: boolean;
+    }
+    
+    class CommonInputActionHandlerData {
+        constructor();
+        constructor(InputActionRow: UE.DataTableRowHandle, State: UE.EInputActionState);
+        InputActionRow: UE.DataTableRowHandle;
+        State: UE.EInputActionState;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_CommonInputActionHandlerData_0__: boolean;
+    }
+    
+    class InputDeviceIdentifierPair {
+        constructor();
+        constructor(InputDeviceName: string, HardwareDeviceIdentifier: string);
+        InputDeviceName: string;
+        HardwareDeviceIdentifier: string;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_InputDeviceIdentifierPair_0__: boolean;
+    }
+    
+    class CommonInputKeyBrushConfiguration {
+        constructor();
+        constructor(Key: UE.Key, KeyBrush: UE.SlateBrush);
+        Key: UE.Key;
+        KeyBrush: UE.SlateBrush;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_CommonInputKeyBrushConfiguration_0__: boolean;
+    }
+    
+    class CommonInputKeySetBrushConfiguration {
+        constructor();
+        constructor(Keys: TArray<UE.Key>, KeyBrush: UE.SlateBrush);
+        Keys: TArray<UE.Key>;
+        KeyBrush: UE.SlateBrush;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_CommonInputKeySetBrushConfiguration_0__: boolean;
+    }
+    
+    class CommonInputBaseControllerData extends UE.Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        SetButtonImageHeightTo_EditorOnly: number;
+        InputType: UE.ECommonInputType;
+        GamepadName: string;
+        GamepadDisplayName: string;
+        GamepadCategory: string;
+        GamepadPlatformName: string;
+        GamepadHardwareIdMapping: TArray<UE.InputDeviceIdentifierPair>;
+        ControllerTexture: TSoftObjectPtr<UE.Texture2D>;
+        ControllerButtonMaskTexture: TSoftObjectPtr<UE.Texture2D>;
+        InputBrushDataMap: TArray<UE.CommonInputKeyBrushConfiguration>;
+        InputBrushKeySets: TArray<UE.CommonInputKeySetBrushConfiguration>;
+        static GetRegisteredGamepads() : TArray<string>;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonInputBaseControllerData;
+        static Load(InName: string): CommonInputBaseControllerData;
+    
+        __tid_CommonInputBaseControllerData_0__: boolean;
+    }
+    
+    class CommonInputMetadata extends UE.Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        NavBarPriority: number;
+        bIsGenericInputAction: boolean;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonInputMetadata;
+        static Load(InName: string): CommonInputMetadata;
+    
+        __tid_CommonInputMetadata_0__: boolean;
+    }
+    
+    class CommonInputPlatformBaseData {
+        constructor();
+        constructor(DefaultInputType: UE.ECommonInputType, bSupportsMouseAndKeyboard: boolean, bSupportsGamepad: boolean, DefaultGamepadName: string, bCanChangeGamepadType: boolean, bSupportsTouch: boolean, ControllerData: TArray<TSoftClassPtr<UE.CommonInputBaseControllerData>>, ControllerDataClasses: TArray<UE.Class>);
+        DefaultInputType: UE.ECommonInputType;
+        bSupportsMouseAndKeyboard: boolean;
+        bSupportsGamepad: boolean;
+        DefaultGamepadName: string;
+        bCanChangeGamepadType: boolean;
+        bSupportsTouch: boolean;
+        ControllerData: TArray<TSoftClassPtr<UE.CommonInputBaseControllerData>>;
+        ControllerDataClasses: TArray<UE.Class>;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_CommonInputPlatformBaseData_0__: boolean;
+    }
+    
+    class PlatformSettings extends UE.Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): PlatformSettings;
+        static Load(InName: string): PlatformSettings;
+    
+        __tid_PlatformSettings_0__: boolean;
+    }
+    
+    class CommonInputPlatformSettings extends UE.PlatformSettings {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        DefaultInputType: UE.ECommonInputType;
+        bSupportsMouseAndKeyboard: boolean;
+        bSupportsTouch: boolean;
+        bSupportsGamepad: boolean;
+        DefaultGamepadName: string;
+        bCanChangeGamepadType: boolean;
+        ControllerData: TArray<TSoftClassPtr<UE.CommonInputBaseControllerData>>;
+        ControllerDataClasses: TArray<UE.Class>;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonInputPlatformSettings;
+        static Load(InName: string): CommonInputPlatformSettings;
+    
+        __tid_CommonInputPlatformSettings_0__: boolean;
+    }
+    
+    class PerPlatformSettings {
+        constructor();
+        constructor(Settings: TArray<UE.PlatformSettings>);
+        Settings: TArray<UE.PlatformSettings>;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_PerPlatformSettings_0__: boolean;
+    }
+    
+    class CommonInputSettings extends UE.DeveloperSettings {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        InputData: TSoftClassPtr<UE.CommonUIInputData>;
+        PlatformInput: UE.PerPlatformSettings;
+        CommonInputPlatformData: TMap<string, UE.CommonInputPlatformBaseData>;
+        bEnableInputMethodThrashingProtection: boolean;
+        InputMethodThrashingLimit: number;
+        InputMethodThrashingWindowInSeconds: number;
+        InputMethodThrashingCooldownInSeconds: number;
+        bAllowOutOfFocusDeviceInput: boolean;
+        bEnableDefaultInputConfig: boolean;
+        bEnableEnhancedInputSupport: boolean;
+        bEnableAutomaticGamepadTypeDetection: boolean;
+        ActionDomainTable: TSoftObjectPtr<UE.CommonInputActionDomainTable>;
+        InputDataClass: UE.Class;
+        ActionDomainTablePtr: UE.CommonInputActionDomainTable;
+        /*
+         *Static version of enhanced input support check, exists to hide based on edit condition
+         */
+        static IsEnhancedInputSupportEnabled() : boolean;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonInputSettings;
+        static Load(InName: string): CommonInputSettings;
+    
+        __tid_CommonInputSettings_0__: boolean;
+    }
+    
+    class LocalPlayerSubsystem extends UE.Subsystem {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): LocalPlayerSubsystem;
+        static Load(InName: string): LocalPlayerSubsystem;
+    
+        __tid_LocalPlayerSubsystem_0__: boolean;
+    }
+    
+    class CommonInputSubsystem extends UE.LocalPlayerSubsystem {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        OnInputMethodChanged: $MulticastDelegate<(bNewInputType: UE.ECommonInputType) => void>;
+        NumberOfInputMethodChangesRecently: number;
+        LastInputMethodChangeTime: number;
+        LastTimeInputMethodThrashingBegan: number;
+        LastInputType: UE.ECommonInputType;
+        CurrentInputType: UE.ECommonInputType;
+        GamepadInputType: string;
+        CurrentInputLocks: TMap<string, UE.ECommonInputType>;
+        ActionDomainTable: UE.CommonInputActionDomainTable;
+        bIsGamepadSimulatedClick: boolean;
+        BroadcastInputMethodChanged() : void;
+        GetCurrentGamepadName() : string;
+        /*
+         *The current input type based on the last input received on the device.
+         */
+        GetCurrentInputType() : UE.ECommonInputType;
+        /*
+         *The default input type for the current platform.
+         */
+        GetDefaultInputType() : UE.ECommonInputType;
+        IsInputMethodActive(InputMethod: UE.ECommonInputType) : boolean;
+        IsUsingPointerInput() : boolean;
+        SetCurrentInputType(NewInputType: UE.ECommonInputType) : void;
+        SetGamepadInputType(InGamepadInputType: string) : void;
+        /*
+         *Should display indicators for the current input device on screen.  This is needed when capturing videos, but we don't want to reveal the capture source device.
+         */
+        ShouldShowInputKeys() : boolean;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonInputSubsystem;
+        static Load(InName: string): CommonInputSubsystem;
+    
+        __tid_CommonInputSubsystem_0__: boolean;
+    }
+    
+    class SlateTextureAtlasInterface extends UE.Interface {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SlateTextureAtlasInterface;
+        static Load(InName: string): SlateTextureAtlasInterface;
+    
+        __tid_SlateTextureAtlasInterface_0__: boolean;
+    }
+    
+    class Image extends UE.Widget {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Brush: UE.SlateBrush;
+        BrushDelegate: $Delegate<() => UE.SlateBrush>;
+        ColorAndOpacity: UE.LinearColor;
+        ColorAndOpacityDelegate: $Delegate<() => UE.LinearColor>;
+        bFlipForRightToLeftFlowDirection: boolean;
+        OnMouseButtonDownEvent: $Delegate<(MyGeometry: UE.Geometry, MouseEvent: UE.PointerEvent) => UE.EventReply>;
+        GetDynamicMaterial() : UE.MaterialInstanceDynamic;
+        SetBrush(InBrush: UE.SlateBrush) : void;
+        SetBrushFromAsset(Asset: $Nullable<UE.SlateBrushAsset>) : void;
+        /*
+         *Sets the Brush to the specified Atlas Region.
+         *
+         *  @param AtlasRegion Region of the Atlas to use to set on Brush.
+         *      @param bMatchSize If true, image will change its size to atlas region size. If false, atlas region will be stretched to image size.
+         */
+        SetBrushFromAtlasInterface(AtlasRegion: UE.SlateTextureAtlasInterface, bMatchSize?: boolean /* = false */) : void;
+        SetBrushFromMaterial(Material: $Nullable<UE.MaterialInterface>) : void;
+        SetBrushFromSoftMaterial(SoftMaterial: TSoftObjectPtr<UE.MaterialInterface>) : void;
+        /*
+         *Sets the Brush to the specified Soft Texture.
+         *
+         *  @param SoftTexture Soft Texture to use to set on Brush.
+         *      @param bMatchSize If true, image will change its size to texture size. If false, texture will be stretched to image size.
+         */
+        SetBrushFromSoftTexture(SoftTexture: TSoftObjectPtr<UE.Texture2D>, bMatchSize?: boolean /* = false */) : void;
+        /*
+         *Sets the Brush to the specified Texture.
+         *
+         *  @param Texture Texture to use to set on Brush.
+         *      @param bMatchSize If true, image will change its size to texture size. If false, texture will be stretched to image size.
+         */
+        SetBrushFromTexture(Texture: $Nullable<UE.Texture2D>, bMatchSize?: boolean /* = false */) : void;
+        /*
+         *Sets the Brush to the specified Dynamic Texture.
+         *
+         *  @param Texture Dynamic Texture to use to set on Brush.
+         *      @param bMatchSize If true, image will change its size to texture size. If false, texture will be stretched to image size.
+         */
+        SetBrushFromTextureDynamic(Texture: $Nullable<UE.Texture2DDynamic>, bMatchSize?: boolean /* = false */) : void;
+        SetBrushResourceObject(ResourceObject: $Nullable<UE.Object>) : void;
+        SetBrushTintColor(TintColor: UE.SlateColor) : void;
+        SetColorAndOpacity(InColorAndOpacity: UE.LinearColor) : void;
+        SetDesiredSizeOverride(DesiredSize: UE.Vector2D) : void;
+        SetOpacity(InOpacity: number) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): Image;
+        static Load(InName: string): Image;
+    
+        __tid_Image_0__: boolean;
+    }
+    
+    class CommonLazyImage extends UE.Image {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        bShowLoading_EditorOnly: boolean;
+        LoadingBackgroundBrush: UE.SlateBrush;
+        MaterialTextureParamName: string;
+        BP_OnLoadingStateChanged: $MulticastDelegate<(bIsLoading: boolean) => void>;
+        IsLoading() : boolean;
+        /*
+         *Set the brush from a string asset ref only - expects the referenced asset to be a texture or material.
+         */
+        SetBrushFromLazyDisplayAsset(LazyObject: TSoftObjectPtr<UE.Object>, bMatchTextureSize?: boolean /* = false */) : void;
+        /*
+         *Set the brush from a lazy material asset pointer - will load the material as needed.
+         */
+        SetBrushFromLazyMaterial(LazyMaterial: TSoftObjectPtr<UE.MaterialInterface>) : void;
+        /*
+         *Set the brush from a lazy texture asset pointer - will load the texture as needed.
+         */
+        SetBrushFromLazyTexture(LazyTexture: TSoftObjectPtr<UE.Texture2D>, bMatchSize?: boolean /* = false */) : void;
+        /*
+         *Establishes the name of the texture parameter on the currently applied brush material to which textures should be applied.
+         *Does nothing if the current brush resource object is not a material.
+         *
+         *Note: that this is cleared out automatically if_when a new material is established on the brush.
+         *You must call this function again after doing so if the new material has a texture param.
+         */
+        SetMaterialTextureParamName(TextureParamName: string) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonLazyImage;
+        static Load(InName: string): CommonLazyImage;
+    
+        __tid_CommonLazyImage_0__: boolean;
+    }
+    
+    class CommonLazyWidget extends UE.Widget {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        LoadingBackgroundBrush: UE.SlateBrush;
+        Content: UE.UserWidget;
+        BP_OnLoadingStateChanged: $MulticastDelegate<(bIsLoading: boolean) => void>;
+        GetContent() : UE.UserWidget;
+        IsLoading() : boolean;
+        SetLazyContent(SoftWidget: TSoftClassPtr<UE.UserWidget>) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonLazyWidget;
+        static Load(InName: string): CommonLazyWidget;
+    
+        __tid_CommonLazyWidget_0__: boolean;
+    }
+    
+    class ListViewBase extends UE.Widget {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        BP_OnEntryGenerated: $MulticastDelegate<(Widget: $Nullable<UE.UserWidget>) => void>;
+        EntryWidgetClass: UE.Class;
+        WheelScrollMultiplier: number;
+        bEnableScrollAnimation: boolean;
+        ScrollingAnimationInterpolationSpeed: number;
+        bInEnableTouchAnimatedScrolling: boolean;
+        AllowOverscroll: boolean;
+        bEnableRightClickScrolling: boolean;
+        bEnableTouchScrolling: boolean;
+        bIsPointerScrollingEnabled: boolean;
+        bIsGamepadScrollingEnabled: boolean;
+        bEnableFixedLineOffset: boolean;
+        FixedLineScrollOffset: number;
+        bAllowDragging: boolean;
+        BP_OnEntryReleased: $MulticastDelegate<(Widget: $Nullable<UE.UserWidget>) => void>;
+        NumDesignerPreviewEntries_EditorOnly: number;
+        EntryWidgetPool: UE.UserWidgetPool;
+        /*
+         *Stops the scroll inertia
+         */
+        EndInertialScrolling() : void;
+        /*
+         *Gets all of the list entry widgets currently being displayed by the list
+         */
+        GetDisplayedEntryWidgets() : TArray<UE.UserWidget>;
+        /*
+         *Get the scroll offset of this view (in items)
+         */
+        GetScrollOffset() : number;
+        /*
+         *Full regeneration of all entries in the list. Note that the entry UWidget instances will not be destroyed, but they will be released and re-generated.
+         *In other words, entry widgets will not receive Destruct_Construct events. They will receive OnEntryReleased and IUserObjectListEntry implementations will receive OnListItemObjectSet.
+         */
+        RegenerateAllEntries() : void;
+        /*
+         *Sets the list to refresh on the next tick.
+         *
+         *Note that refreshing, from a list perspective, is limited to accounting for discrepancies between items and entries.
+         *In other words, it will only release entries that no longer have items and generate entries for new items (or newly visible items).
+         *
+         *It does NOT account for changes within existing items - that is up to the item to announce and an entry to listen to as needed.
+         *This can be onerous to set up for simple cases, so it's also reasonable (though not ideal) to call RegenerateAllEntries when changes within N list items need to be reflected.
+         */
+        RequestRefresh() : void;
+        /*
+         *Scroll the entire list down to the bottom-most item
+         */
+        ScrollToBottom() : void;
+        /*
+         *Scroll the entire list up to the first item
+         */
+        ScrollToTop() : void;
+        /*
+         *Enable_Disable the ability of the list to scroll via gamepad.
+         */
+        SetIsGamepadScrollingEnabled(bInIsGamepadScrollingEnabled: boolean) : void;
+        /*
+         *Enable_Disable the ability of the list to scroll. This should be use as a temporary disable.
+         */
+        SetIsPointerScrollingEnabled(bInIsPointerScrollingEnabled: boolean) : void;
+        SetScrollbarVisibility(InVisibility: UE.ESlateVisibility) : void;
+        /*
+         *Set the scroll offset of this view (in items)
+         */
+        SetScrollOffset(InScrollOffset: number) : void;
+        SetWheelScrollMultiplier(NewWheelScrollMultiplier: number) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ListViewBase;
+        static Load(InName: string): ListViewBase;
+    
+        __tid_ListViewBase_0__: boolean;
+    }
+    
+    class TableViewStyle extends UE.SlateWidgetStyle {
+        constructor();
+        constructor(BackgroundBrush: UE.SlateBrush);
+        BackgroundBrush: UE.SlateBrush;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_TableViewStyle_0__: boolean;
+    }
+    
+    enum ESelectionMode { None, Single, SingleToggle, Multi, ESelectionMode_MAX, __typeKeyDoNoAccess}
+    enum EScrollIntoViewAlignment { IntoView, TopOrLeft, CenterAligned, BottomOrRight, EScrollIntoViewAlignment_MAX, __typeKeyDoNoAccess}
+    class ListView extends UE.ListViewBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        WidgetStyle: UE.TableViewStyle;
+        ScrollBarStyle: UE.ScrollBarStyle;
+        Orientation: UE.EOrientation;
+        SelectionMode: UE.ESelectionMode;
+        ConsumeMouseWheel: UE.EConsumeMouseWheel;
+        bClearSelectionOnClick: boolean;
+        bIsFocusable: boolean;
+        bReturnFocusToSelection: boolean;
+        ScrollIntoViewAlignment: UE.EScrollIntoViewAlignment;
+        ListItems: TArray<UE.Object>;
+        EntrySpacing_EditorOnly: number;
+        HorizontalEntrySpacing: number;
+        VerticalEntrySpacing: number;
+        ScrollBarPadding: UE.Margin;
+        BP_OnEntryInitialized: $MulticastDelegate<(Item: $Nullable<UE.Object>, Widget: $Nullable<UE.UserWidget>) => void>;
+        BP_OnItemClicked: $MulticastDelegate<(Item: $Nullable<UE.Object>) => void>;
+        BP_OnItemDoubleClicked: $MulticastDelegate<(Item: $Nullable<UE.Object>) => void>;
+        BP_OnItemIsHoveredChanged: $MulticastDelegate<(Item: $Nullable<UE.Object>, bIsHovered: boolean) => void>;
+        BP_OnItemSelectionChanged: $MulticastDelegate<(Item: $Nullable<UE.Object>, bIsSelected: boolean) => void>;
+        BP_OnItemScrolledIntoView: $MulticastDelegate<(Item: $Nullable<UE.Object>, Widget: $Nullable<UE.UserWidget>) => void>;
+        BP_OnListViewScrolled: $MulticastDelegate<(ItemOffset: number, DistanceRemaining: number) => void>;
+        /*
+         *Adds an the item to the list
+         */
+        AddItem(Item: $Nullable<UE.Object>) : void;
+        /*
+         *Cancels a previous request to scroll and item into view.
+         */
+        BP_CancelScrollIntoView() : void;
+        /*
+         *Clear selection
+         */
+        BP_ClearSelection() : void;
+        /*
+         *Gets the number of items currently selected in the list
+         */
+        BP_GetNumItemsSelected() : number;
+        /*
+         *Gets the first selected item, if any; recommended that you only use this for single selection lists.
+         */
+        BP_GetSelectedItem() : UE.Object;
+        /*
+         *Gets a list of all the currently selected items
+         */
+        BP_GetSelectedItems(Items: $Ref<TArray<UE.Object>>) : boolean;
+        /*
+         *Gets whether the entry for the given object is currently visible in the list
+         */
+        BP_IsItemVisible(Item: $Nullable<UE.Object>) : boolean;
+        /*
+         *Requests that the given item is navigated to, scrolling it into view if needed.
+         */
+        BP_NavigateToItem(Item: $Nullable<UE.Object>) : void;
+        /*
+         *Requests that the given item is scrolled into view
+         */
+        BP_ScrollItemIntoView(Item: $Nullable<UE.Object>) : void;
+        /*
+         *Sets whether the given item is selected.
+         */
+        BP_SetItemSelection(Item: $Nullable<UE.Object>, bSelected: boolean) : void;
+        /*
+         *Sets the array of objects to display rows for in the list
+         */
+        BP_SetListItems(InListItems: TArray<UE.Object>) : void;
+        /*
+         *Sets the given item as the sole selected item.
+         */
+        BP_SetSelectedItem(Item: $Nullable<UE.Object>) : void;
+        /*
+         *Removes all items from the list
+         */
+        ClearListItems() : void;
+        /*
+         *Get the horizontal spacing between entries.
+         */
+        GetHorizontalEntrySpacing() : number;
+        /*
+         *Returns the index that the specified item is at. Will return the first found, or -1 for not found
+         */
+        GetIndexForItem(Item: $Nullable<UE.Object>) : number;
+        /*
+         *Returns the item at the given index
+         */
+        GetItemAt(Index: number) : UE.Object;
+        /*
+         *Gets the list of all items in the list.
+         *Note that each of these items only has a corresponding entry widget when visible. Use GetDisplayedEntryWidgets to get the currently displayed widgets.
+         */
+        GetListItems() : TArray<UE.Object>;
+        /*
+         *Returns the total number of items
+         */
+        GetNumItems() : number;
+        /*
+         *Gets padding around the scrollbar.
+         */
+        GetScrollBarPadding() : UE.Margin;
+        /*
+         *Get the vertical spacing between entries.
+         */
+        GetVerticalEntrySpacing() : number;
+        /*
+         *Returns true if a refresh is pending and the list will be rebuilt on the next tick
+         */
+        IsRefreshPending() : boolean;
+        /*
+         *Requests that the item at the given index navigated to, scrolling it into view if needed.
+         */
+        NavigateToIndex(Index: number) : void;
+        OnListItemEndPlayed(Item: $Nullable<UE.Actor>, EndPlayReason: UE.EEndPlayReason) : void;
+        OnListItemOuterEndPlayed(ItemOuter: $Nullable<UE.Actor>, EndPlayReason: UE.EEndPlayReason) : void;
+        /*
+         *Removes an the item from the list
+         */
+        RemoveItem(Item: $Nullable<UE.Object>) : void;
+        /*
+         *Requests that the item at the given index is scrolled into view
+         */
+        ScrollIndexIntoView(Index: number) : void;
+        /*
+         *Sets padding around the scrollbar.
+         */
+        SetScrollBarPadding(InScrollBarPadding: UE.Margin) : void;
+        /*
+         *Sets ScrollIntoViewAlignment which allows to stick the selected item to either side or center
+         */
+        SetScrollIntoViewAlignment(NewScrollIntoViewAlignment: UE.EScrollIntoViewAlignment) : void;
+        /*
+         *Sets the item at the given index as the sole selected item.
+         */
+        SetSelectedIndex(Index: number) : void;
+        /*
+         *Sets the new selection mode, preserving the current selection where possible.
+         */
+        SetSelectionMode(SelectionMode: UE.ESelectionMode) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ListView;
+        static Load(InName: string): ListView;
+    
+        __tid_ListView_0__: boolean;
+    }
+    
+    class CommonListView extends UE.ListView {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        SetEntrySpacing(InEntrySpacing: number) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonListView;
+        static Load(InName: string): CommonListView;
+    
+        __tid_CommonListView_0__: boolean;
+    }
+    
+    class CommonLoadGuard extends UE.ContentWidget {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        bShowLoading_EditorOnly: boolean;
+        LoadingBackgroundBrush: UE.SlateBrush;
+        ThrobberAlignment: UE.EHorizontalAlignment;
+        ThrobberPadding: UE.Margin;
+        LoadingText: string;
+        TextStyle: UE.Class;
+        BP_OnLoadingStateChanged: $MulticastDelegate<(bIsLoading: boolean) => void>;
+        SpinnerMaterialPath: UE.SoftObjectPath;
+        bStyleNoLongerNeedsConversion_EditorOnly: boolean;
+        BP_GuardAndLoadAsset(InLazyAsset: TSoftObjectPtr<UE.Object>, OnAssetLoaded: $Delegate<(Object: $Nullable<UE.Object>) => void>) : void;
+        IsLoading() : boolean;
+        OnAssetLoaded__DelegateSignature(Object: $Nullable<UE.Object>) : void;
+        SetIsLoading(bInIsLoading: boolean) : void;
+        SetLoadingText(InLoadingText: string) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonLoadGuard;
+        static Load(InName: string): CommonLoadGuard;
+    
+        __tid_CommonLoadGuard_0__: boolean;
+    }
+    
+    namespace Engine.PythonTypes {
+        class CommonLoadGuard_OnAssetLoaded__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): CommonLoadGuard_OnAssetLoaded__PythonCallable;
+            static Load(InName: string): CommonLoadGuard_OnAssetLoaded__PythonCallable;
+        
+            __tid_CommonLoadGuard_OnAssetLoaded__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    class CommonMappingContextMetadata extends UE.DataAsset {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        EnhancedInputMetadata: UE.CommonInputMetadata;
+        PerActionEnhancedInputMetadata: TMap<UE.InputAction, UE.CommonInputMetadata>;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonMappingContextMetadata;
+        static Load(InName: string): CommonMappingContextMetadata;
+    
+        __tid_CommonMappingContextMetadata_0__: boolean;
+    }
+    
+    class CommonMappingContextMetadataInterface extends UE.Interface {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonMappingContextMetadataInterface;
+        static Load(InName: string): CommonMappingContextMetadataInterface;
+    
+        __tid_CommonMappingContextMetadataInterface_0__: boolean;
+    }
+    
+    enum ERoundingMode { HalfToEven, HalfFromZero, HalfToZero, FromZero, ToZero, ToNegativeInfinity, ToPositiveInfinity, ERoundingMode_MAX, __typeKeyDoNoAccess}
+    class CommonNumberFormattingOptions {
+        constructor();
+        constructor(RoundingMode: UE.ERoundingMode, UseGrouping: boolean, MinimumIntegralDigits: number, MaximumIntegralDigits: number, MinimumFractionalDigits: number, MaximumFractionalDigits: number);
+        RoundingMode: UE.ERoundingMode;
+        UseGrouping: boolean;
+        MinimumIntegralDigits: number;
+        MaximumIntegralDigits: number;
+        MinimumFractionalDigits: number;
+        MaximumFractionalDigits: number;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_CommonNumberFormattingOptions_0__: boolean;
+    }
+    
+    enum ECommonNumericType { Number, Percentage, Seconds, Distance, ECommonNumericType_MAX, __typeKeyDoNoAccess}
+    class CommonNumericTextBlock extends UE.CommonTextBlock {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        OnInterpolationStartedEvent: $MulticastDelegate<(NumericTextBlock: $Nullable<UE.CommonNumericTextBlock>) => void>;
+        OnInterpolationUpdatedEvent: $MulticastDelegate<(NumericTextBlock: $Nullable<UE.CommonNumericTextBlock>, LastValue: number, NewValue: number) => void>;
+        OnOutroEvent: $MulticastDelegate<(NumericTextBlock: $Nullable<UE.CommonNumericTextBlock>) => void>;
+        OnInterpolationEndedEvent: $MulticastDelegate<(NumericTextBlock: $Nullable<UE.CommonNumericTextBlock>, HadCompleted: boolean) => void>;
+        CurrentNumericValue: number;
+        NumericType: UE.ECommonNumericType;
+        FormattingSpecification: UE.CommonNumberFormattingOptions;
+        EaseOutInterpolationExponent: number;
+        InterpolationUpdateInterval: number;
+        PostInterpolationShrinkDuration: number;
+        PerformSizeInterpolation: boolean;
+        IsPercentage: boolean;
+        /*
+         *Returns the value this widget will ultimately show if it is interpolating, or the current value if it is not.
+         */
+        GetTargetValue() : number;
+        /*
+         *Starts an ongoing process of interpolating the current numeric value to the specified target value.
+         *The interpolation process may take the specified maximum duration or complete sooner if the minimum change rate causes the target to be reached prematurely.
+         *Optionally, an outro duration can be specified in order to trigger an outro event before interpolation completes.
+         *
+         *TargetValue                                  The value to be interpolated to.
+         *MaximumInterpolationDuration The duration, in seconds, for the interpolation to take, at most. Must be greater than 0.
+         *MinimumChangeRate                    The minimum change in numeric value per second. Must be greater than or equal to 0.
+         *OutroDuration                                The time offset, in seconds, *before* the end of the InterpolationDuration elapses, at which to trigger an outro event. Must be less than or equal to MaximumInterpolationDuration
+         */
+        InterpolateToValue(TargetValue: number, MaximumInterpolationDuration?: number /* = 3.000000 */, MinimumChangeRate?: number /* = 1.000000 */, OutroOffset?: number /* = 0.000000 */) : void;
+        IsInterpolatingNumericValue() : boolean;
+        OnInterpolationEnded__DelegateSignature(NumericTextBlock: $Nullable<UE.CommonNumericTextBlock>, HadCompleted: boolean) : void;
+        OnInterpolationStarted__DelegateSignature(NumericTextBlock: $Nullable<UE.CommonNumericTextBlock>) : void;
+        OnInterpolationUpdated__DelegateSignature(NumericTextBlock: $Nullable<UE.CommonNumericTextBlock>, LastValue: number, NewValue: number) : void;
+        OnOutro__DelegateSignature(NumericTextBlock: $Nullable<UE.CommonNumericTextBlock>) : void;
+        /*
+         *Sets the current numeric value. NOTE: Cancels any ongoing interpolation!
+         */
+        SetCurrentValue(NewValue: number) : void;
+        SetNumericType(InNumericType: UE.ECommonNumericType) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonNumericTextBlock;
+        static Load(InName: string): CommonNumericTextBlock;
+    
+        __tid_CommonNumericTextBlock_0__: boolean;
+    }
+    
+    namespace Engine.PythonTypes {
+        class CommonNumericTextBlock_OnInterpolationEnded__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): CommonNumericTextBlock_OnInterpolationEnded__PythonCallable;
+            static Load(InName: string): CommonNumericTextBlock_OnInterpolationEnded__PythonCallable;
+        
+            __tid_CommonNumericTextBlock_OnInterpolationEnded__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    namespace Engine.PythonTypes {
+        class CommonNumericTextBlock_OnInterpolationStarted__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): CommonNumericTextBlock_OnInterpolationStarted__PythonCallable;
+            static Load(InName: string): CommonNumericTextBlock_OnInterpolationStarted__PythonCallable;
+        
+            __tid_CommonNumericTextBlock_OnInterpolationStarted__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    namespace Engine.PythonTypes {
+        class CommonNumericTextBlock_OnInterpolationUpdated__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): CommonNumericTextBlock_OnInterpolationUpdated__PythonCallable;
+            static Load(InName: string): CommonNumericTextBlock_OnInterpolationUpdated__PythonCallable;
+        
+            __tid_CommonNumericTextBlock_OnInterpolationUpdated__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    namespace Engine.PythonTypes {
+        class CommonNumericTextBlock_OnOutro__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): CommonNumericTextBlock_OnOutro__PythonCallable;
+            static Load(InName: string): CommonNumericTextBlock_OnOutro__PythonCallable;
+        
+            __tid_CommonNumericTextBlock_OnOutro__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    class CommonPoolableWidgetInterface extends UE.Interface {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        OnAcquireFromPool() : void;
+        OnReleaseToPool() : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonPoolableWidgetInterface;
+        static Load(InName: string): CommonPoolableWidgetInterface;
+    
+        __tid_CommonPoolableWidgetInterface_0__: boolean;
+    }
+    
+    class CommonRegisteredTabInfo {
+        constructor();
+        constructor(TabIndex: number, TabButton: UE.CommonButtonBase, ContentInstance: UE.Widget);
+        TabIndex: number;
+        TabButton: UE.CommonButtonBase;
+        ContentInstance: UE.Widget;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_CommonRegisteredTabInfo_0__: boolean;
+    }
+    
     class ToolMenuContextBase extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -79661,6 +82097,1691 @@ declare module "ue" {
         __tid_CommonResolutionMenuContext_0__: boolean;
     }
     
+    class RichTextBlockDecorator extends UE.Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): RichTextBlockDecorator;
+        static Load(InName: string): RichTextBlockDecorator;
+    
+        __tid_RichTextBlockDecorator_0__: boolean;
+    }
+    
+    class RichTextBlock extends UE.TextLayoutWidget {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Text: string;
+        TextStyleSet: UE.DataTable;
+        DecoratorClasses: TArray<UE.Class>;
+        DefaultTextStyleOverride: UE.TextBlockStyle;
+        MinDesiredWidth: number;
+        bOverrideDefaultStyle: boolean;
+        TextTransformPolicy: UE.ETextTransformPolicy;
+        TextOverflowPolicy: UE.ETextOverflowPolicy;
+        DefaultTextStyle: UE.TextBlockStyle;
+        InstanceDecorators: TArray<UE.RichTextBlockDecorator>;
+        /*
+         *Remove all overrides made to the default text style and return to the style specified in the style set data table
+         */
+        ClearAllDefaultStyleOverrides() : void;
+        GetDecoratorByClass(DecoratorClass: $Nullable<UE.Class>) : UE.RichTextBlockDecorator;
+        /*
+         *Creates a dynamic material for the default font or returns it if it already
+         *exists
+         */
+        GetDefaultDynamicMaterial() : UE.MaterialInstanceDynamic;
+        /*
+         *Returns widgets text.
+         */
+        GetText() : string;
+        GetTextStyleSet() : UE.DataTable;
+        /*
+         *Causes the text to reflow it's layout and re-evaluate any decorators
+         */
+        RefreshTextLayout() : void;
+        /*
+         *Set the auto wrap for this rich text block
+         *@param InAutoTextWrap to turn wrap on or off
+         */
+        SetAutoWrapText(InAutoTextWrap: boolean) : void;
+        /*
+         *Replaces the existing decorators with the list provided
+         */
+        SetDecorators(InDecoratorClasses: TArray<UE.Class>) : void;
+        /*
+         *Sets the color and opacity of the default text in this rich text block
+         *@param InColorAndOpacity             The new text color and opacity
+         */
+        SetDefaultColorAndOpacity(InColorAndOpacity: UE.SlateColor) : void;
+        /*
+         *Dynamically set the default font info for this rich text block
+         *@param InFontInfo The new font info
+         */
+        SetDefaultFont(InFontInfo: UE.SlateFontInfo) : void;
+        SetDefaultMaterial(InMaterial: $Nullable<UE.MaterialInterface>) : void;
+        /*
+         *Sets the color and opacity of the default text drop shadow
+         *Note: if opacity is zero no shadow will be drawn
+         *@param InShadowColorAndOpacity               The new drop shadow color and opacity
+         */
+        SetDefaultShadowColorAndOpacity(InShadowColorAndOpacity: UE.LinearColor) : void;
+        /*
+         *Sets the offset that the default text drop shadow should be drawn at
+         *@param InShadowOffset                The new offset
+         */
+        SetDefaultShadowOffset(InShadowOffset: UE.Vector2D) : void;
+        /*
+         *Dynamically set the default strike brush for this rich text block
+         *@param InStrikeBrush The new brush to use to strike through text
+         */
+        SetDefaultStrikeBrush(InStrikeBrush: UE.SlateBrush) : void;
+        /*
+         *Wholesale override of the currently established default text style
+         *@param InDefaultTextStyle The new text style to apply to all default (i.e. undecorated) text in the block
+         */
+        SetDefaultTextStyle(InDefaultTextStyle: UE.TextBlockStyle) : void;
+        /*
+         *Set the minimum desired width for this rich text block
+         *@param InMinDesiredWidth new minimum desired width
+         */
+        SetMinDesiredWidth(InMinDesiredWidth: number) : void;
+        /*
+         *Directly sets the widget text.
+         *Warning: This will wipe any binding created for the Text property!
+         *@param InText The text to assign to the widget
+         */
+        SetText(InText: string) : void;
+        /*
+         *Set the text overflow policy for this text block.
+         *@param InOverflowPolicy the new text overflow policy.
+         */
+        SetTextOverflowPolicy(InOverflowPolicy: UE.ETextOverflowPolicy) : void;
+        SetTextStyleSet(NewTextStyleSet: $Nullable<UE.DataTable>) : void;
+        /*
+         *Set the text transformation policy for this text block.
+         *@param InTransformPolicy the new text transformation policy.
+         */
+        SetTextTransformPolicy(InTransformPolicy: UE.ETextTransformPolicy) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): RichTextBlock;
+        static Load(InName: string): RichTextBlock;
+    
+        __tid_RichTextBlock_0__: boolean;
+    }
+    
+    enum ERichTextInlineIconDisplayMode { IconOnly, TextOnly, IconAndText, MAX, __typeKeyDoNoAccess}
+    class CommonRichTextBlock extends UE.RichTextBlock {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        InlineIconDisplayMode: UE.ERichTextInlineIconDisplayMode;
+        bTintInlineIcon: boolean;
+        MobileTextBlockScale: number;
+        DefaultTextStyleOverrideClass: UE.Class;
+        ScrollStyle: UE.Class;
+        bIsScrollingEnabled: boolean;
+        bDisplayAllCaps: boolean;
+        bAutoCollapseWithEmptyText: boolean;
+        SetScrollingEnabled(bInIsScrollingEnabled: boolean) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonRichTextBlock;
+        static Load(InName: string): CommonRichTextBlock;
+    
+        __tid_CommonRichTextBlock_0__: boolean;
+    }
+    
+    enum ERotatorDirection { Right, Left, ERotatorDirection_MAX, __typeKeyDoNoAccess}
+    class CommonRotator extends UE.CommonButtonBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        OnRotatedWithDirection: $MulticastDelegate<(Value: number, RotatorDir: UE.ERotatorDirection) => void>;
+        OnRotated: $MulticastDelegate<(Value: number) => void>;
+        MyText: UE.CommonTextBlock;
+        BP_OnOptionSelected(Index: number) : void;
+        BP_OnOptionsPopulated(Count: number) : void;
+        /*
+         *Gets the current selected index
+         */
+        GetSelectedIndex() : number;
+        /*
+         *Gets the current text value of the slider.
+         */
+        GetSelectedText() : string;
+        /*
+         *Set the array of texts available
+         */
+        PopulateTextLabels(Labels: TArray<string>) : void;
+        /*
+         *Sets the current value of the slider.
+         */
+        SetSelectedItem(InValue: number) : void;
+        /*
+         *Shift the current text left.
+         */
+        ShiftTextLeft() : void;
+        /*
+         *Shift the current text right.
+         */
+        ShiftTextRight() : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonRotator;
+        static Load(InName: string): CommonRotator;
+    
+        __tid_CommonRotator_0__: boolean;
+    }
+    
+    namespace Engine.PythonTypes {
+        class CommonSelectedStateChangedBase__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): CommonSelectedStateChangedBase__PythonCallable;
+            static Load(InName: string): CommonSelectedStateChangedBase__PythonCallable;
+        
+            __tid_CommonSelectedStateChangedBase__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    class CommonTabListWidgetBase extends UE.CommonUserWidget {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        OnTabSelected: $MulticastDelegate<(TabId: string) => void>;
+        OnTabButtonCreation: $MulticastDelegate<(TabId: string, TabButton: $Nullable<UE.CommonButtonBase>) => void>;
+        OnTabButtonRemoval: $MulticastDelegate<(TabId: string, TabButton: $Nullable<UE.CommonButtonBase>) => void>;
+        OnTabListRebuilt: $MulticastDelegate<() => void>;
+        NextTabInputActionData: UE.DataTableRowHandle;
+        PreviousTabInputActionData: UE.DataTableRowHandle;
+        NextTabEnhancedInputAction: UE.InputAction;
+        PreviousTabEnhancedInputAction: UE.InputAction;
+        bAutoListenForInput: boolean;
+        bDeferRebuildingTabList: boolean;
+        LinkedSwitcher: TWeakObjectPtr<UE.CommonAnimatedSwitcher>;
+        TabButtonGroup: UE.CommonButtonGroupBase;
+        RegisteredTabsByID: TMap<string, UE.CommonRegisteredTabInfo>;
+        TabButtonWidgetPool: UE.UserWidgetPool;
+        /*
+         *Disables the tab associated with the given ID with a reason
+         */
+        DisableTabWithReason(TabNameID: string, Reason: string) : void;
+        /*
+         *@return The currently active (selected) tab
+         */
+        GetActiveTab() : string;
+        /*
+         *@return The switcher that this tab list is associated with and manipulates
+         */
+        GetLinkedSwitcher() : UE.CommonAnimatedSwitcher;
+        GetSelectedTabId() : string;
+        /*
+         *Returns the tab button matching the ID, if found
+         */
+        GetTabButtonBaseByID(TabNameID: string) : UE.CommonButtonBase;
+        GetTabCount() : number;
+        GetTabIdAtIndex(Index: number) : string;
+        HandleNextTabInputAction(bPassthrough: $Ref<boolean>) : void;
+        HandlePostLinkedSwitcherChanged_BP() : void;
+        HandlePreLinkedSwitcherChanged_BP() : void;
+        HandlePreviousTabInputAction(bPassthrough: $Ref<boolean>) : void;
+        HandleTabButtonSelected(SelectedTabButton: $Nullable<UE.CommonButtonBase>, ButtonIndex: number) : void;
+        HandleTabCreation(TabNameID: string, TabButton: $Nullable<UE.CommonButtonBase>) : void;
+        HandleTabRemoval(TabNameID: string, TabButton: $Nullable<UE.CommonButtonBase>) : void;
+        /*
+         *Delegate broadcast when a new tab is created. Allows hook ups after creation.
+         */
+        OnTabButtonCreation__DelegateSignature(TabId: string, TabButton: $Nullable<UE.CommonButtonBase>) : void;
+        /*
+         *Delegate broadcast when a tab is being removed. Allows clean ups after destruction.
+         */
+        OnTabButtonRemoval__DelegateSignature(TabId: string, TabButton: $Nullable<UE.CommonButtonBase>) : void;
+        /*
+         *Delegate broadcast when the tab list has been rebuilt (after a new tab has been inserted rather than added to the end).
+         */
+        OnTabListRebuilt__DelegateSignature() : void;
+        /*
+         *Delegate broadcast when a new tab is selected.
+         */
+        OnTabSelected__DelegateSignature(TabId: string) : void;
+        /*
+         *INDEX_NONE
+         */
+        RegisterTab(TabNameID: string, ButtonWidgetType: $Nullable<UE.Class>, ContentWidget: $Nullable<UE.Widget>, TabIndex?: number /* = -1 */) : boolean;
+        RemoveAllTabs() : void;
+        RemoveTab(TabNameID: string) : boolean;
+        /*
+         *Selects the tab registered under the provided name ID
+         *@param TabNameID The name ID for the tab given when registered
+         */
+        SelectTabByID(TabNameID: string, bSuppressClickFeedback?: boolean /* = false */) : boolean;
+        /*
+         *Establishes the activatable widget switcher instance that this tab list should interact with
+         *@param CommonSwitcher The switcher that this tab list should be associated with and manipulate
+         */
+        SetLinkedSwitcher(CommonSwitcher: $Nullable<UE.CommonAnimatedSwitcher>) : void;
+        SetListeningForInput(bShouldListen: boolean) : void;
+        /*
+         *Sets whether the tab associated with the given ID is enabled_disabled
+         */
+        SetTabEnabled(TabNameID: string, bEnable: boolean) : void;
+        /*
+         *Sets whether the tab associated with the given ID is interactable
+         */
+        SetTabInteractionEnabled(TabNameID: string, bEnable: boolean) : void;
+        /*
+         *Sets the visibility of the tab associated with the given ID
+         */
+        SetTabVisibility(TabNameID: string, NewVisibility: UE.ESlateVisibility) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonTabListWidgetBase;
+        static Load(InName: string): CommonTabListWidgetBase;
+    
+        __tid_CommonTabListWidgetBase_0__: boolean;
+    }
+    
+    namespace Engine.PythonTypes {
+        class CommonTabListWidgetBase_OnTabButtonCreation__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): CommonTabListWidgetBase_OnTabButtonCreation__PythonCallable;
+            static Load(InName: string): CommonTabListWidgetBase_OnTabButtonCreation__PythonCallable;
+        
+            __tid_CommonTabListWidgetBase_OnTabButtonCreation__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    namespace Engine.PythonTypes {
+        class CommonTabListWidgetBase_OnTabButtonRemoval__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): CommonTabListWidgetBase_OnTabButtonRemoval__PythonCallable;
+            static Load(InName: string): CommonTabListWidgetBase_OnTabButtonRemoval__PythonCallable;
+        
+            __tid_CommonTabListWidgetBase_OnTabButtonRemoval__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    namespace Engine.PythonTypes {
+        class CommonTabListWidgetBase_OnTabListRebuilt__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): CommonTabListWidgetBase_OnTabListRebuilt__PythonCallable;
+            static Load(InName: string): CommonTabListWidgetBase_OnTabListRebuilt__PythonCallable;
+        
+            __tid_CommonTabListWidgetBase_OnTabListRebuilt__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    namespace Engine.PythonTypes {
+        class CommonTabListWidgetBase_OnTabSelected__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): CommonTabListWidgetBase_OnTabSelected__PythonCallable;
+            static Load(InName: string): CommonTabListWidgetBase_OnTabSelected__PythonCallable;
+        
+            __tid_CommonTabListWidgetBase_OnTabSelected__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    class CommonTextScrollStyle extends UE.Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Speed: number;
+        StartDelay: number;
+        EndDelay: number;
+        FadeInDelay: number;
+        FadeOutDelay: number;
+        Clipping: UE.EWidgetClipping;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonTextScrollStyle;
+        static Load(InName: string): CommonTextScrollStyle;
+    
+        __tid_CommonTextScrollStyle_0__: boolean;
+    }
+    
+    enum EListItemAlignment { EvenlyDistributed, EvenlySize, EvenlyWide, LeftAligned, RightAligned, CenterAligned, Fill, EListItemAlignment_MAX, __typeKeyDoNoAccess}
+    class TileView extends UE.ListView {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        EntryHeight: number;
+        EntryWidth: number;
+        TileAlignment: UE.EListItemAlignment;
+        bWrapHorizontalNavigation: boolean;
+        ScrollbarDisabledVisibility: UE.ESlateVisibility;
+        bEntrySizeIncludesEntrySpacing: boolean;
+        /*
+         *Gets the height of tile entries
+         */
+        GetEntryHeight() : number;
+        /*
+         *Gets the width of tile entries
+         */
+        GetEntryWidth() : number;
+        /*
+         *Returns whether the TileView is left, right or center aligned.
+         */
+        IsAligned() : boolean;
+        /*
+         *Sets the height of every tile entry
+         */
+        SetEntryHeight(NewHeight: number) : void;
+        /*
+         *Sets the width of every tile entry
+         */
+        SetEntryWidth(NewWidth: number) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): TileView;
+        static Load(InName: string): TileView;
+    
+        __tid_TileView_0__: boolean;
+    }
+    
+    class CommonTileView extends UE.TileView {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonTileView;
+        static Load(InName: string): CommonTileView;
+    
+        __tid_CommonTileView_0__: boolean;
+    }
+    
+    class TreeView extends UE.ListView {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        BP_OnGetItemChildren: $Delegate<(Item: $Nullable<UE.Object>, Children: $Ref<TArray<UE.Object>>) => void>;
+        BP_OnItemExpansionChanged: $MulticastDelegate<(Item: $Nullable<UE.Object>, bIsExpanded: boolean) => void>;
+        /*
+         *Collapses all currently expanded items
+         */
+        CollapseAll() : void;
+        /*
+         *Expands all items with children
+         */
+        ExpandAll() : void;
+        /*
+         *Attempts to expand_collapse the given item (only relevant if the item has children)
+         */
+        SetItemExpansion(Item: $Nullable<UE.Object>, bExpandItem: boolean) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): TreeView;
+        static Load(InName: string): TreeView;
+    
+        __tid_TreeView_0__: boolean;
+    }
+    
+    class CommonTreeView extends UE.TreeView {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonTreeView;
+        static Load(InName: string): CommonTreeView;
+    
+        __tid_CommonTreeView_0__: boolean;
+    }
+    
+    class CommonUIActionRouterBase extends UE.LocalPlayerSubsystem {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonUIActionRouterBase;
+        static Load(InName: string): CommonUIActionRouterBase;
+    
+        __tid_CommonUIActionRouterBase_0__: boolean;
+    }
+    
+    class CommonUIEditorSettings extends UE.Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        TemplateTextStyle: TSoftClassPtr<UE.CommonTextStyle>;
+        TemplateButtonStyle: TSoftClassPtr<UE.CommonButtonStyle>;
+        TemplateBorderStyle: TSoftClassPtr<UE.CommonBorderStyle>;
+        TemplateTextStyleClass_EditorOnly: UE.Class;
+        TemplateButtonStyleClass_EditorOnly: UE.Class;
+        TemplateBorderStyleClass_EditorOnly: UE.Class;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonUIEditorSettings;
+        static Load(InName: string): CommonUIEditorSettings;
+    
+        __tid_CommonUIEditorSettings_0__: boolean;
+    }
+    
+    class InputHoldData {
+        constructor();
+        constructor(HoldTime: number, HoldRollbackTime: number);
+        HoldTime: number;
+        HoldRollbackTime: number;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_InputHoldData_0__: boolean;
+    }
+    
+    class CommonUIHoldData extends UE.Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        KeyboardAndMouse: UE.InputHoldData;
+        Gamepad: UE.InputHoldData;
+        Touch: UE.InputHoldData;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonUIHoldData;
+        static Load(InName: string): CommonUIHoldData;
+    
+        __tid_CommonUIHoldData_0__: boolean;
+    }
+    
+    class CommonUIInputData extends UE.Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        DefaultClickAction: UE.DataTableRowHandle;
+        DefaultBackAction: UE.DataTableRowHandle;
+        DefaultHoldData: TSoftClassPtr<UE.CommonUIHoldData>;
+        EnhancedInputClickAction: UE.InputAction;
+        EnhancedInputBackAction: UE.InputAction;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonUIInputData;
+        static Load(InName: string): CommonUIInputData;
+    
+        __tid_CommonUIInputData_0__: boolean;
+    }
+    
+    class UITag extends UE.GameplayTag {
+        constructor();
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_UITag_0__: boolean;
+    }
+    
+    class UIActionTag extends UE.UITag {
+        constructor();
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_UIActionTag_0__: boolean;
+    }
+    
+    class UIActionKeyMapping {
+        constructor();
+        constructor(Key: UE.Key, HoldTime: number, HoldRollbackTime: number);
+        Key: UE.Key;
+        HoldTime: number;
+        HoldRollbackTime: number;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_UIActionKeyMapping_0__: boolean;
+    }
+    
+    class UIInputAction {
+        constructor();
+        constructor(ActionTag: UE.UIActionTag, DefaultDisplayName: string, KeyMappings: TArray<UE.UIActionKeyMapping>);
+        ActionTag: UE.UIActionTag;
+        DefaultDisplayName: string;
+        KeyMappings: TArray<UE.UIActionKeyMapping>;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_UIInputAction_0__: boolean;
+    }
+    
+    class CommonUIInputSettings extends UE.Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        bLinkCursorToGamepadFocus: boolean;
+        UIActionProcessingPriority: number;
+        InputActions: TArray<UE.UIInputAction>;
+        ActionOverrides: TArray<UE.UIInputAction>;
+        AnalogCursorSettings: UE.CommonAnalogCursorSettings;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonUIInputSettings;
+        static Load(InName: string): CommonUIInputSettings;
+    
+        __tid_CommonUIInputSettings_0__: boolean;
+    }
+    
+    class CommonUILibrary extends UE.BlueprintFunctionLibrary {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        /*
+         *Finds the first parent widget of the given type and returns it, or null if no parent could be found.
+         */
+        static FindParentWidgetOfType(StartingWidget: $Nullable<UE.Widget>, Type: $Nullable<UE.Class>) : UE.Widget;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonUILibrary;
+        static Load(InName: string): CommonUILibrary;
+    
+        __tid_CommonUILibrary_0__: boolean;
+    }
+    
+    class CommonUIRichTextData extends UE.Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        InlineIconSet: UE.DataTable;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonUIRichTextData;
+        static Load(InName: string): CommonUIRichTextData;
+    
+        __tid_CommonUIRichTextData_0__: boolean;
+    }
+    
+    class CommonUISettings extends UE.Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        bAutoLoadData: boolean;
+        DefaultImageResourceObject: TSoftObjectPtr<UE.Object>;
+        DefaultThrobberMaterial: TSoftObjectPtr<UE.MaterialInterface>;
+        DefaultRichTextDataClass: TSoftClassPtr<UE.CommonUIRichTextData>;
+        PlatformTraits: TArray<UE.GameplayTag>;
+        DefaultImageResourceObjectInstance: UE.Object;
+        DefaultThrobberMaterialInstance: UE.MaterialInterface;
+        DefaultThrobberBrush: UE.SlateBrush;
+        RichTextDataInstance: UE.CommonUIRichTextData;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonUISettings;
+        static Load(InName: string): CommonUISettings;
+    
+        __tid_CommonUISettings_0__: boolean;
+    }
+    
+    class GameInstanceSubsystem extends UE.Subsystem {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): GameInstanceSubsystem;
+        static Load(InName: string): GameInstanceSubsystem;
+    
+        __tid_GameInstanceSubsystem_0__: boolean;
+    }
+    
+    class CommonUISubsystemBase extends UE.GameInstanceSubsystem {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        /*
+         *Gets Action Button Icon for given action and player, enhanced input API currently does not allow input type specification
+         */
+        GetEnhancedInputActionButtonIcon(InputAction: $Nullable<UE.InputAction>, LocalPlayer: $Nullable<UE.LocalPlayer>) : UE.SlateBrush;
+        /*
+         *Gets Action Button Icon for current gamepad
+         */
+        GetInputActionButtonIcon(InputActionRowHandle: UE.DataTableRowHandle, InputType: UE.ECommonInputType, GamepadName: string) : UE.SlateBrush;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonUISubsystemBase;
+        static Load(InName: string): CommonUISubsystemBase;
+    
+        __tid_CommonUISubsystemBase_0__: boolean;
+    }
+    
+    class CommonUIVisibilitySubsystem extends UE.LocalPlayerSubsystem {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonUIVisibilitySubsystem;
+        static Load(InName: string): CommonUIVisibilitySubsystem;
+    
+        __tid_CommonUIVisibilitySubsystem_0__: boolean;
+    }
+    
+    class MediaPlaylist extends UE.Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Items: TArray<UE.MediaSource>;
+        /*
+         *Add a media source to the play list.
+         *
+         *@param MediaSource The media source to append.
+         *@return true if the media source was added, false otherwise.
+         *@see AddFile, AddUrl, Insert, RemoveAll, Remove, Replace
+         */
+        Add(MediaSource: $Nullable<UE.MediaSource>) : boolean;
+        /*
+         *Add a media file path to the play list.
+         *
+         *@param FilePath The file path to add.
+         *@return true if the file was added, false otherwise.
+         *@see Add, AddUrl, Insert, RemoveAll, Remove, Replace
+         */
+        AddFile(FilePath: string) : boolean;
+        /*
+         *Add a media URL to the play list.
+         *
+         *@param Url The URL to add.
+         *@return true if the URL was added, false otherwise.
+         *@see Add, AddFile, Insert, RemoveAll, Remove, Replace
+         */
+        AddUrl(Url: string) : boolean;
+        /*
+         *Get the media source at the specified index.
+         *
+         *@param Index The index of the media source to get.
+         *@return The media source, or nullptr if the index doesn't exist.
+         *@see GetNext, GetRandom
+         */
+        Get(Index: number) : UE.MediaSource;
+        /*
+         *Get the next media source in the play list.
+         *
+         *@param InOutIndex Index of the current media source (will contain the new index).
+         *@return The media source after the current one, or nullptr if the list is empty.
+         *@see , GetPrevious, GetRandom
+         */
+        GetNext(InOutIndex: $Ref<number>) : UE.MediaSource;
+        /*
+         *Get the previous media source in the play list.
+         *
+         *@param InOutIndex Index of the current media source (will contain the new index).
+         *@return The media source before the current one, or nullptr if the list is empty.
+         *@see , GetNext, GetRandom
+         */
+        GetPrevious(InOutIndex: $Ref<number>) : UE.MediaSource;
+        /*
+         *Get a random media source in the play list.
+         *
+         *@param OutIndex Will contain the index of the returned media source.
+         *@return The random media source, or nullptr if the list is empty.
+         *@see Get, GetNext, GetPrevious
+         */
+        GetRandom(OutIndex: $Ref<number>) : UE.MediaSource;
+        /*
+         *Insert a media source into the play list at the given position.
+         *
+         *@param MediaSource The media source to insert.
+         *@param Index The index to insert into.
+         *@see Add, Remove, RemoveAll, Replace
+         */
+        Insert(MediaSource: $Nullable<UE.MediaSource>, Index: number) : void;
+        /*
+         *Get the number of media sources in the play list.
+         *
+         *@return Number of media sources.
+         */
+        Num() : number;
+        /*
+         *Remove all occurrences of the given media source in the play list.
+         *
+         *@param MediaSource The media source to remove.
+         *@return true if the media source was removed, false otherwise.
+         *@see Add, Insert, Remove, Replace
+         */
+        Remove(MediaSource: $Nullable<UE.MediaSource>) : boolean;
+        /*
+         *Remove the media source at the specified position.
+         *
+         *@param Index The index of the media source to remove.
+         *@return true if the media source was removed, false otherwise.
+         *@see Add, Insert, RemoveAll, Replace
+         */
+        RemoveAt(Index: number) : boolean;
+        /*
+         *Replace the media source at the specified position.
+         *
+         *@param Index The index of the media source to replace.
+         *@param Replacement The replacement media source.
+         *@return true if the media source was replaced, false otherwise.
+         *@see Add, Insert, RemoveAll, RemoveAt
+         */
+        Replace(Index: number, Replacement: $Nullable<UE.MediaSource>) : boolean;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): MediaPlaylist;
+        static Load(InName: string): MediaPlaylist;
+    
+        __tid_MediaPlaylist_0__: boolean;
+    }
+    
+    enum EMediaPlayerTrack { Audio, Caption, Metadata, Script, Subtitle, Text, Video, EMediaPlayerTrack_MAX, __typeKeyDoNoAccess}
+    class FloatInterval {
+        constructor();
+        constructor(Min: number, Max: number);
+        Min: number;
+        Max: number;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_FloatInterval_0__: boolean;
+    }
+    
+    class MediaPlayerTrackOptions {
+        constructor();
+        constructor(Audio: number, Caption: number, Metadata: number, Script: number, Subtitle: number, Text: number, Video: number);
+        Audio: number;
+        Caption: number;
+        Metadata: number;
+        Script: number;
+        Subtitle: number;
+        Text: number;
+        Video: number;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_MediaPlayerTrackOptions_0__: boolean;
+    }
+    
+    enum EMediaPlayerOptionTrackSelectMode { UseMediaPlayerDefaults, UseTrackOptionIndices, EMediaPlayerOptionTrackSelectMode_MAX, __typeKeyDoNoAccess}
+    enum EMediaPlayerOptionSeekTimeType { Ignored, RelativeToStartTime, EMediaPlayerOptionSeekTimeType_MAX, __typeKeyDoNoAccess}
+    enum EMediaPlayerOptionBooleanOverride { UseMediaPlayerSetting, Enabled, Disabled, EMediaPlayerOptionBooleanOverride_MAX, __typeKeyDoNoAccess}
+    class MediaPlayerOptions {
+        constructor();
+        constructor(Tracks: UE.MediaPlayerTrackOptions, TrackSelection: UE.EMediaPlayerOptionTrackSelectMode, SeekTime: UE.Timespan, SeekTimeType: UE.EMediaPlayerOptionSeekTimeType, PlayOnOpen: UE.EMediaPlayerOptionBooleanOverride, Loop: UE.EMediaPlayerOptionBooleanOverride);
+        Tracks: UE.MediaPlayerTrackOptions;
+        TrackSelection: UE.EMediaPlayerOptionTrackSelectMode;
+        SeekTime: UE.Timespan;
+        SeekTimeType: UE.EMediaPlayerOptionSeekTimeType;
+        PlayOnOpen: UE.EMediaPlayerOptionBooleanOverride;
+        Loop: UE.EMediaPlayerOptionBooleanOverride;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_MediaPlayerOptions_0__: boolean;
+    }
+    
+    class MediaTimeStampInfo extends UE.Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Time: UE.Timespan;
+        SequenceIndex: bigint;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): MediaTimeStampInfo;
+        static Load(InName: string): MediaTimeStampInfo;
+    
+        __tid_MediaTimeStampInfo_0__: boolean;
+    }
+    
+    enum EMediaTimeRangeBPType { Absolute, Current, EMediaTimeRangeBPType_MAX, __typeKeyDoNoAccess}
+    class MediaMetadataItemBPT {
+        constructor();
+        constructor(LanguageCode: string, MimeType: string, StringData: string, BinaryData: TArray<number>);
+        LanguageCode: string;
+        MimeType: string;
+        StringData: string;
+        BinaryData: TArray<number>;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_MediaMetadataItemBPT_0__: boolean;
+    }
+    
+    class MediaMetadataItemsBPT {
+        constructor();
+        constructor(Items: TArray<UE.MediaMetadataItemBPT>);
+        Items: TArray<UE.MediaMetadataItemBPT>;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_MediaMetadataItemsBPT_0__: boolean;
+    }
+    
+    class MediaPlayer extends UE.Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        OnEndReached: $MulticastDelegate<() => void>;
+        OnMediaClosed: $MulticastDelegate<() => void>;
+        OnMediaOpened: $MulticastDelegate<(OpenedUrl: string) => void>;
+        OnMediaOpenFailed: $MulticastDelegate<(FailedUrl: string) => void>;
+        OnPlaybackResumed: $MulticastDelegate<() => void>;
+        OnPlaybackSuspended: $MulticastDelegate<() => void>;
+        OnSeekCompleted: $MulticastDelegate<() => void>;
+        OnTracksChanged: $MulticastDelegate<() => void>;
+        OnMetadataChanged: $MulticastDelegate<() => void>;
+        CacheAhead: UE.Timespan;
+        CacheBehind: UE.Timespan;
+        CacheBehindGame: UE.Timespan;
+        NativeAudioOut: boolean;
+        PlayOnOpen: boolean;
+        Shuffle: boolean;
+        Loop: boolean;
+        Playlist: UE.MediaPlaylist;
+        PlaylistIndex: number;
+        TimeDelay: UE.Timespan;
+        HorizontalFieldOfView: number;
+        VerticalFieldOfView: number;
+        ViewRotation: UE.Rotator;
+        PlayerGuid: UE.Guid;
+        AffectedByPIEHandling_EditorOnly: boolean;
+        /*
+         *Check whether media playback can be paused right now.
+         *
+         *Playback can be paused if the media supports pausing and if it is currently playing.
+         *
+         *@return true if pausing playback can be paused, false otherwise.
+         *@see CanPlay, Pause
+         */
+        CanPause() : boolean;
+        /*
+         *Check whether the specified media source can be played by this player.
+         *
+         *If a desired player name is set for this player, it will only check
+         *whether that particular player type can play the specified source.
+         *
+         *@param MediaSource The media source to check.
+         *@return true if the media source can be opened, false otherwise.
+         *@see CanPlayUrl, SetDesiredPlayerName
+         */
+        CanPlaySource(MediaSource: $Nullable<UE.MediaSource>) : boolean;
+        /*
+         *Check whether the specified URL can be played by this player.
+         *
+         *If a desired player name is set for this player, it will only check
+         *whether that particular player type can play the specified URL.
+         *
+         *@param Url The URL to check.
+         *@see CanPlaySource, SetDesiredPlayerName
+         */
+        CanPlayUrl(Url: string) : boolean;
+        /*
+         *Close the currently open media, if any.
+         *
+         *@see OnMediaClosed, OpenPlaylist, OpenPlaylistIndex, OpenSource, OpenUrl, Pause, Play
+         */
+        Close() : void;
+        /*
+         *Get the number of channels in the specified audio track.
+         *
+         *@param TrackIndex Index of the audio track, or INDEX_NONE for the selected one.
+         *@param FormatIndex Index of the track format, or INDEX_NONE for the selected one.
+         *@return Number of channels.
+         *@see GetAudioTrackSampleRate, GetAudioTrackType
+         */
+        GetAudioTrackChannels(TrackIndex: number, FormatIndex: number) : number;
+        /*
+         *Get the sample rate of the specified audio track.
+         *
+         *@param TrackIndex Index of the audio track, or INDEX_NONE for the selected one.
+         *@param FormatIndex Index of the track format, or INDEX_NONE for the selected one.
+         *@return Samples per second.
+         *@see GetAudioTrackChannels, GetAudioTrackType
+         */
+        GetAudioTrackSampleRate(TrackIndex: number, FormatIndex: number) : number;
+        /*
+         *Get the type of the specified audio track format.
+         *
+         *@param TrackIndex The index of the track, or INDEX_NONE for the selected one.
+         *@param FormatIndex Index of the track format, or INDEX_NONE for the selected one.
+         *@return Audio format type string.
+         *@see GetAudioTrackSampleRate, GetAudioTrackSampleRate
+         */
+        GetAudioTrackType(TrackIndex: number, FormatIndex: number) : string;
+        /*
+         *Get the name of the current desired native player.
+         *
+         *@return The name of the desired player, or NAME_None if not set.
+         *@see SetDesiredPlayerName
+         */
+        GetDesiredPlayerName() : string;
+        /*
+         *Get the media's current playback time as appropriate for display.
+         *
+         *@return Playback time.
+         *@see GetDuration, Seek
+         */
+        GetDisplayTime() : UE.Timespan;
+        /*
+         *Get the media's current playback timestamp as appropriate for display.
+         *
+         *@return Playback timestamp.
+         *@see GetDuration, Seek
+         */
+        GetDisplayTimeStamp() : UE.MediaTimeStampInfo;
+        /*
+         *Get the media's duration.
+         *
+         *@return A time span representing the duration.
+         *@see GetTime, Seek
+         */
+        GetDuration() : UE.Timespan;
+        /*
+         *Get the current horizontal field of view (only for 360 videos).
+         *
+         *@return Horizontal field of view (in Euler degrees).
+         *@see GetVerticalFieldOfView, GetViewRotation, SetHorizontalFieldOfView
+         */
+        GetHorizontalFieldOfView() : number;
+        /*
+         *This is the blueprint accessible version of the GetMediaMetadata.
+         *@return Map with arrays of FMediaMetaDataItem entries describing any metadata found in the current stream
+         *@note Listen to EMediaEvent::MetadataChanged to catch updates to this data
+         */
+        GetMediaMetadataItems() : TMap<string, UE.MediaMetadataItemsBPT>;
+        /*
+         *Get the human readable name of the currently loaded media source.
+         *
+         *@return Media source name, or empty text if no media is opened
+         *@see GetPlayerName, GetUrl
+         */
+        GetMediaName() : string;
+        /*
+         *Get the number of formats of the specified track.
+         *
+         *@param TrackType The type of media tracks.
+         *@param TrackIndex The index of the track.
+         *@return Number of formats.
+         *@see GetNumTracks, GetSelectedTrack, SelectTrack
+         */
+        GetNumTrackFormats(TrackType: UE.EMediaPlayerTrack, TrackIndex: number) : number;
+        /*
+         *Get the number of tracks of the given type.
+         *
+         *@param TrackType The type of media tracks.
+         *@return Number of tracks.
+         *@see GetNumTrackFormats, GetSelectedTrack, SelectTrack
+         */
+        GetNumTracks(TrackType: UE.EMediaPlayerTrack) : number;
+        /*
+         *Blueprint accessible version of GetPlaybackTimeRange.
+         *This returns the range truncated into a blueprint usable float interval and should not
+         *be used for live streams as 32 bit floats can not store wallclock times with enough precision.
+         */
+        GetPlaybackTimeRange(InRangeToGet: UE.EMediaTimeRangeBPType) : UE.FloatInterval;
+        /*
+         *Get the name of the current native media player.
+         *
+         *@return Player name, or NAME_None if not available.
+         *@see GetMediaName
+         */
+        GetPlayerName() : string;
+        /*
+         *Get the current play list.
+         *
+         *Media players always have a valid play list. In C++ code you can use
+         *the GetPlaylistRef to get a reference instead of a pointer to it.
+         *
+         *@return The play list.
+         *@see GetPlaylistIndex, GetPlaylistRef
+         */
+        GetPlaylist() : UE.MediaPlaylist;
+        /*
+         *Get the current play list index.
+         *
+         *@return Play list index.
+         *@see GetPlaylist
+         */
+        GetPlaylistIndex() : number;
+        /*
+         *Get the media's current playback rate.
+         *
+         *@return The playback rate.
+         *@see SetRate, SupportsRate
+         */
+        GetRate() : number;
+        /*
+         *Get the index of the currently selected track of the given type.
+         *
+         *@param TrackType The type of track to get.
+         *@return The index of the selected track, or INDEX_NONE if no track is active.
+         *@see GetNumTracks, GetTrackFormat, SelectTrack
+         */
+        GetSelectedTrack(TrackType: UE.EMediaPlayerTrack) : number;
+        /*
+         *Get the supported playback rates.
+         *
+         *@param Unthinned Whether the rates are for unthinned playback.
+         *@param Will contain the the ranges of supported rates.
+         *@see SetRate, SupportsRate
+         */
+        GetSupportedRates(OutRates: $Ref<TArray<UE.FloatRange>>, Unthinned: boolean) : void;
+        /*
+         *Get the media's current playback time.
+         *
+         *@return Playback time.
+         *@see GetDuration, Seek
+         */
+        GetTime() : UE.Timespan;
+        /*
+         *Delay of the player's time.
+         *
+         *@return Delay added to the player's time used to manually sync multiple sources.
+         *@see SetTimeDelay
+         */
+        GetTimeDelay() : UE.Timespan;
+        /*
+         *Get the media's current playback timestamp.
+         *
+         *@return Playback timestamp.
+         *@see GetDuration, Seek
+         */
+        GetTimeStamp() : UE.MediaTimeStampInfo;
+        /*
+         *Get the human readable name of the specified track.
+         *
+         *@param TrackType The type of track.
+         *@param TrackIndex The index of the track, or INDEX_NONE for the selected one.
+         *@return Display name.
+         *@see GetNumTracks, GetTrackLanguage
+         */
+        GetTrackDisplayName(TrackType: UE.EMediaPlayerTrack, TrackIndex: number) : string;
+        /*
+         *Get the index of the active format of the specified track type.
+         *
+         *@param TrackType The type of track.
+         *@param TrackIndex The index of the track, or INDEX_NONE for the selected one.
+         *@return The index of the selected format.
+         *@see GetNumTrackFormats, GetSelectedTrack, SetTrackFormat
+         */
+        GetTrackFormat(TrackType: UE.EMediaPlayerTrack, TrackIndex: number) : number;
+        /*
+         *Get the language tag of the specified track.
+         *
+         *@param TrackType The type of track.
+         *@param TrackIndex The index of the track, or INDEX_NONE for the selected one.
+         *@return Language tag, i.e. "en-US" for English, or "und" for undefined.
+         *@see GetNumTracks, GetTrackDisplayName
+         */
+        GetTrackLanguage(TrackType: UE.EMediaPlayerTrack, TrackIndex: number) : string;
+        /*
+         *Get the URL of the currently loaded media, if any.
+         *
+         *@return Media URL, or empty string if no media was loaded.
+         *@see OpenUrl
+         */
+        GetUrl() : string;
+        /*
+         *Get the current vertical field of view (only for 360 videos).
+         *
+         *@return Vertical field of view (in Euler degrees), or 0.0 if not available.
+         *@see GetHorizontalFieldOfView, GetViewRotation, SetVerticalFieldOfView
+         */
+        GetVerticalFieldOfView() : number;
+        /*
+         *Get the aspect ratio of the specified video track.
+         *
+         *@param TrackIndex Index of the video track, or INDEX_NONE for the selected one.
+         *@param FormatIndex Index of the track format, or INDEX_NONE for the selected one.
+         *@return Aspect ratio.
+         *@see GetVideoTrackDimensions, GetVideoTrackFrameRate, GetVideoTrackFrameRates, GetVideoTrackType
+         */
+        GetVideoTrackAspectRatio(TrackIndex: number, FormatIndex: number) : number;
+        /*
+         *Get the current dimensions of the specified video track.
+         *
+         *@param TrackIndex The index of the track, or INDEX_NONE for the selected one.
+         *@param FormatIndex Index of the track format, or INDEX_NONE for the selected one.
+         *@return Video dimensions (in pixels).
+         *@see GetVideoTrackAspectRatio, GetVideoTrackFrameRate, GetVideoTrackFrameRates, GetVideoTrackType
+         */
+        GetVideoTrackDimensions(TrackIndex: number, FormatIndex: number) : UE.IntPoint;
+        /*
+         *Get the frame rate of the specified video track.
+         *
+         *@param TrackIndex The index of the track, or INDEX_NONE for the selected one.
+         *@param FormatIndex Index of the track format, or INDEX_NONE for the selected one.
+         *@return Frame rate (in frames per second).
+         *@see GetVideoTrackAspectRatio, GetVideoTrackDimensions, GetVideoTrackFrameRates, GetVideoTrackType, SetVideoTrackFrameRate
+         */
+        GetVideoTrackFrameRate(TrackIndex: number, FormatIndex: number) : number;
+        /*
+         *Get the supported range of frame rates of the specified video track.
+         *
+         *@param TrackIndex The index of the track, or INDEX_NONE for the selected one.
+         *@param FormatIndex Index of the track format, or INDEX_NONE for the selected one.
+         *@return Frame rate range (in frames per second).
+         *@see GetVideoTrackAspectRatio, GetVideoTrackDimensions, GetVideoTrackFrameRate, GetVideoTrackType
+         */
+        GetVideoTrackFrameRates(TrackIndex: number, FormatIndex: number) : UE.FloatRange;
+        /*
+         *Get the type of the specified video track format.
+         *
+         *@param TrackIndex The index of the track, or INDEX_NONE for the selected one.
+         *@param FormatIndex Index of the track format, or INDEX_NONE for the selected one.
+         *@return Video format type string.
+         *@see GetVideoTrackAspectRatio, GetVideoTrackDimensions, GetVideoTrackFrameRate, GetVideoTrackFrameRates
+         */
+        GetVideoTrackType(TrackIndex: number, FormatIndex: number) : string;
+        /*
+         *Get the current view rotation (only for 360 videos).
+         *
+         *@return View rotation, or zero rotator if not available.
+         *@see GetHorizontalFieldOfView, GetVerticalFieldOfView, SetViewRotation
+         */
+        GetViewRotation() : UE.Rotator;
+        /*
+         *Check whether the player is in an error state.
+         *
+         *When the player is in an error state, no further operations are possible.
+         *The current media must be closed, and a new media source must be opened
+         *before the player can be used again. Errors are usually caused by faulty
+         *media files or interrupted network connections.
+         *
+         *@see IsReady
+         */
+        HasError() : boolean;
+        /*
+         *Check whether playback is buffering data.
+         *
+         *@return true if looping, false otherwise.
+         *@see IsConnecting, IsLooping, IsPaused, IsPlaying, IsPreparing, IsReady
+         */
+        IsBuffering() : boolean;
+        /*
+         *Whether media is currently closed.
+         *
+         *@return true if media is closed, false otherwise.
+         */
+        IsClosed() : boolean;
+        /*
+         *Check whether the player is currently connecting to a media source.
+         *
+         *@return true if connecting, false otherwise.
+         *@see IsBuffering, IsLooping, IsPaused, IsPlaying, IsPreparing, IsReady
+         */
+        IsConnecting() : boolean;
+        /*
+         *Check whether playback is looping.
+         *
+         *@return true if looping, false otherwise.
+         *@see IsBuffering, IsConnecting, IsPaused, IsPlaying, IsPreparing, IsReady, SetLooping
+         */
+        IsLooping() : boolean;
+        /*
+         *Check whether playback is currently paused.
+         *
+         *@return true if playback is paused, false otherwise.
+         *@see CanPause, IsBuffering, IsConnecting, IsLooping, IsPaused, IsPlaying, IsPreparing, IsReady, Pause
+         */
+        IsPaused() : boolean;
+        /*
+         *Check whether playback has started.
+         *
+         *@return true if playback has started, false otherwise.
+         *@see CanPlay, IsBuffering, IsConnecting, IsLooping, IsPaused, IsPlaying, IsPreparing, IsReady, Play
+         */
+        IsPlaying() : boolean;
+        /*
+         *Check whether the media is currently opening or buffering.
+         *
+         *@return true if playback is being prepared, false otherwise.
+         *@see CanPlay, IsBuffering, IsConnecting, IsLooping, IsPaused, IsPlaying, IsReady, Play
+         */
+        IsPreparing() : boolean;
+        /*
+         *Check whether media is ready for playback.
+         *
+         *A player is ready for playback if it has a media source opened that
+         *finished preparing and is not in an error state.
+         *
+         *@return true if media is ready, false otherwise.
+         *@see HasError, IsBuffering, IsConnecting, IsLooping, IsPaused, IsPlaying, IsPreparing
+         */
+        IsReady() : boolean;
+        /*
+         *Open the next item in the current play list.
+         *
+         *The player will start playing the new media source if it was playing
+         *something previously, otherwise it will only open the media source.
+         *
+         *@return true on success, false otherwise.
+         *@see Close, OpenUrl, OpenSource, Play, Previous, SetPlaylist
+         */
+        Next() : boolean;
+        /*
+         *Opens the specified media file path.
+         *
+         *A return value of true indicates that the player will attempt to open
+         *the media, but it may fail to do so later for other reasons, i.e. if
+         *a connection to the media server timed out. Use the OnMediaOpened and
+         *OnMediaOpenFailed delegates to detect if and when the media is ready!
+         *
+         *@param FilePath The file path to open.
+         *@return true if the file path will be opened, false otherwise.
+         *@see GetUrl, Close, OpenPlaylist, OpenPlaylistIndex, OpenSource, OpenUrl, Reopen
+         */
+        OpenFile(FilePath: string) : boolean;
+        /*
+         *Open the first media source in the specified play list.
+         *
+         *@param InPlaylist The play list to open.
+         *@return true if the source will be opened, false otherwise.
+         *@see Close, OpenFile, OpenPlaylistIndex, OpenSource, OpenUrl, Reopen
+         */
+        OpenPlaylist(InPlaylist: $Nullable<UE.MediaPlaylist>) : boolean;
+        /*
+         *Open a particular media source in the specified play list.
+         *
+         *@param InPlaylist The play list to open.
+         *@param Index The index of the source to open.
+         *@return true if the source will be opened, false otherwise.
+         *@see Close, OpenFile, OpenPlaylist, OpenSource, OpenUrl, Reopen
+         */
+        OpenPlaylistIndex(InPlaylist: $Nullable<UE.MediaPlaylist>, Index: number) : boolean;
+        /*
+         *Open the specified media source.
+         *
+         *A return value of true indicates that the player will attempt to open
+         *the media, but it may fail to do so later for other reasons, i.e. if
+         *a connection to the media server timed out. Use the OnMediaOpened and
+         *OnMediaOpenFailed delegates to detect if and when the media is ready!
+         *
+         *@param MediaSource The media source to open.
+         *@return true if the source will be opened, false otherwise.
+         *@see Close, OpenFile, OpenPlaylist, OpenPlaylistIndex, OpenUrl, Reopen
+         */
+        OpenSource(MediaSource: $Nullable<UE.MediaSource>) : boolean;
+        /*
+         *Open the specified media source with options using a latent action.
+         *
+         *A result of true indicates that the player successfully completed all requested operations.
+         *
+         *@param MediaSource The media source to open.
+         *@param Options The media player options to apply.
+         *@param bSuccess  All requested operations have completed successfully.
+         *@see Close, OpenFile, OpenPlaylist, OpenPlaylistIndex, OpenUrl, Reopen
+         */
+        OpenSourceLatent(WorldContextObject: $Nullable<UE.Object>, LatentInfo: UE.LatentActionInfo, MediaSource: $Nullable<UE.MediaSource>, Options: UE.MediaPlayerOptions, bSuccess: $Ref<boolean>) : void;
+        /*
+         *Open the specified media source with supplied options applied.
+         *
+         *A return value of true indicates that the player will attempt to open
+         *the media, but it may fail to do so later for other reasons, i.e. if
+         *a connection to the media server timed out. Use the OnMediaOpened and
+         *OnMediaOpenFailed delegates to detect if and when the media is ready!
+         *
+         *@param MediaSource The media source to open.
+         *@param Options The media player options to apply.
+         *@return true if the source will be opened, false otherwise.
+         *@see Close, OpenFile, OpenPlaylist, OpenPlaylistIndex, OpenUrl, Reopen
+         */
+        OpenSourceWithOptions(MediaSource: $Nullable<UE.MediaSource>, Options: UE.MediaPlayerOptions) : boolean;
+        /*
+         *Opens the specified media URL.
+         *
+         *A return value of true indicates that the player will attempt to open
+         *the media, but it may fail to do so later for other reasons, i.e. if
+         *a connection to the media server timed out. Use the OnMediaOpened and
+         *OnMediaOpenFailed delegates to detect if and when the media is ready!
+         *
+         *@param Url The URL to open.
+         *@return true if the URL will be opened, false otherwise.
+         *@see GetUrl, Close, OpenFile, OpenPlaylist, OpenPlaylistIndex, OpenSource, Reopen
+         */
+        OpenUrl(Url: string) : boolean;
+        /*
+         *Pauses media playback.
+         *
+         *This is the same as setting the playback rate to 0.0.
+         *
+         *@return true if playback is being paused, false otherwise.
+         *@see CanPause, Close, Next, Play, Previous, Rewind, Seek
+         */
+        Pause() : boolean;
+        /*
+         *Starts media playback.
+         *
+         *This is the same as setting the playback rate to 1.0.
+         *
+         *@return true if playback is starting, false otherwise.
+         *@see CanPlay, GetRate, Next, Pause, Previous, SetRate
+         */
+        Play() : boolean;
+        /*
+         *Starts playback from the media opened event, but can be used elsewhere.
+         */
+        PlayAndSeek() : void;
+        /*
+         *Open the previous item in the current play list.
+         *
+         *The player will start playing the new media source if it was playing
+         *something previously, otherwise it will only open the media source.
+         *
+         *@return true on success, false otherwise.
+         *@see Close, Next, OpenUrl, OpenSource, Play, SetPlaylist
+         */
+        Previous() : boolean;
+        /*
+         *Reopens the currently opened media or play list.
+         *
+         *@return true if the media will be opened, false otherwise.
+         *@see Close, Open, OpenFile, OpenPlaylist, OpenPlaylistIndex, OpenSource, OpenUrl
+         */
+        Reopen() : boolean;
+        /*
+         *Rewinds the media to the beginning.
+         *
+         *This is the same as seeking to zero time.
+         *
+         *@return true if rewinding, false otherwise.
+         *@see GetTime, Seek
+         */
+        Rewind() : boolean;
+        /*
+         *Seeks to the specified playback time.
+         *
+         *@param Time The playback time to set.
+         *@return true on success, false otherwise.
+         *@see GetTime, Rewind
+         */
+        Seek(Time: UE.Timespan) : boolean;
+        /*
+         *Select the active track of the given type.
+         *
+         *The selected track will use its currently active format. Active formats will
+         *be remembered on a per track basis. The first available format is active by
+         *default. To switch the track format, use SetTrackFormat instead.
+         *
+         *@param TrackType The type of track to select.
+         *@param TrackIndex The index of the track to select, or INDEX_NONE to deselect.
+         *@return true if the track was selected, false otherwise.
+         *@see GetNumTracks, GetSelectedTrack, SetTrackFormat
+         */
+        SelectTrack(TrackType: UE.EMediaPlayerTrack, TrackIndex: number) : boolean;
+        /*
+         *Set the time on which to block.
+         *
+         *If set, this player will block in TickInput or TickFetch until the video sample
+         *for the specified time are actually available.
+         *
+         *@param Time The time to block on, or FTimespan::MinValue to disable.
+         */
+        SetBlockOnTime(Time: UE.Timespan) : void;
+        /*
+         *Set the name of the desired native player.
+         *
+         *@param PlayerName The name of the player to set.
+         *@see GetDesiredPlayerName
+         */
+        SetDesiredPlayerName(PlayerName: string) : void;
+        /*
+         *Enables or disables playback looping.
+         *
+         *@param Looping Whether playback should be looped.
+         *@return true on success, false otherwise.
+         *@see IsLooping
+         */
+        SetLooping(Looping: boolean) : boolean;
+        /*
+         *Sets the media options used by the player.
+         *
+         *@param Options Options to pass to the player.
+         */
+        SetMediaOptions(Options: $Nullable<UE.MediaSource>) : void;
+        /*
+         *Set the volume on the native player if not mixing with Sound Wave asset.
+         *
+         *The SetNativeVolume can be used to change the audio output volume at runtime. Note that
+         *not all media player plug-ins may support native audio output on all platforms.
+         *
+         *@param Volume The volume to set.
+         *@return true on success, false otherwise.
+         *@see NativeAudioOut
+         */
+        SetNativeVolume(Volume: number) : boolean;
+        /*
+         *Blueprint accessible version of SetPlaybackTimeRange().
+         *The range is set through a blueprint usable float interval which may not have enough
+         *precision to represent the range accurately.
+         */
+        SetPlaybackTimeRange(InTimeRange: UE.FloatInterval) : boolean;
+        /*
+         *Changes the media's playback rate.
+         *
+         *@param Rate The playback rate to set.
+         *@return true on success, false otherwise.
+         *@see GetRate, SupportsRate
+         */
+        SetRate(Rate: number) : boolean;
+        /*
+         *Delay of the player's time.
+         *
+         *This setting can be used to manually sync multiple sources.
+         *Set to 1 seconds, if you would like that Player to play 1 second behind its current time.
+         *If the value is too big, it is possible that the player would not hold that frame for that long.
+         *@return true on success, false otherwise.
+         *@see GetTimeDelay
+         */
+        SetTimeDelay(TimeDelay: UE.Timespan) : void;
+        /*
+         *Set the format on the specified track.
+         *
+         *Selecting the format will not switch to the specified track. To switch
+         *tracks, use SelectTrack instead. If the track is already selected, the
+         *format change will be applied immediately.
+         *
+         *@param TrackType The type of track to update.
+         *@param TrackIndex The index of the track to update.
+         *@param FormatIndex The index of the format to select (must be valid).
+         *@return true if the track was selected, false otherwise.
+         *@see GetNumTrackFormats, GetNumTracks, GetTrackFormat, SelectTrack
+         */
+        SetTrackFormat(TrackType: UE.EMediaPlayerTrack, TrackIndex: number, FormatIndex: number) : boolean;
+        /*
+         *Set the frame rate of the specified video track.
+         *
+         *@param TrackIndex The index of the track, or INDEX_NONE for the selected one.
+         *@param FormatIndex Index of the track format, or INDEX_NONE for the selected one.
+         *@param FrameRate The frame rate to set (must be in range of format's supported frame rates).
+         *@return true on success, false otherwise.
+         *@see GetVideoTrackAspectRatio, GetVideoTrackDimensions, GetVideoTrackFrameRate, GetVideoTrackFrameRates, GetVideoTrackType
+         */
+        SetVideoTrackFrameRate(TrackIndex: number, FormatIndex: number, FrameRate: number) : boolean;
+        /*
+         *Set the field of view (only for 360 videos).
+         *
+         *@param Horizontal Horizontal field of view (in Euler degrees).
+         *@param Vertical Vertical field of view (in Euler degrees).
+         *@param Whether the field of view change should be absolute (true) or relative (false).
+         *@return true on success, false otherwise.
+         *@see GetHorizontalFieldOfView, GetVerticalFieldOfView, SetViewRotation
+         */
+        SetViewField(Horizontal: number, Vertical: number, Absolute: boolean) : boolean;
+        /*
+         *Set the view's rotation (only for 360 videos).
+         *
+         *@param Rotation The desired view rotation.
+         *@param Whether the rotation change should be absolute (true) or relative (false).
+         *@return true on success, false otherwise.
+         *@see GetViewRotation, SetViewField
+         */
+        SetViewRotation(Rotation: UE.Rotator, Absolute: boolean) : boolean;
+        /*
+         *Check whether the player supports playing back of range within the media.
+         *
+         *@return true if playing back a range is supported, false otherwise.
+         *@see GetPlaybackTimeRange, SetPlaybackTimeRange
+         */
+        SupportsPlaybackTimeRange() : boolean;
+        /*
+         *Check whether the specified playback rate is supported.
+         *
+         *@param Rate The playback rate to check.
+         *@param Unthinned Whether no frames should be dropped at the given rate.
+         *@see SupportsScrubbing, SupportsSeeking
+         */
+        SupportsRate(Rate: number, Unthinned: boolean) : boolean;
+        /*
+         *Check whether the currently loaded media supports scrubbing.
+         *
+         *@return true if scrubbing is supported, false otherwise.
+         *@see SupportsRate, SupportsSeeking
+         */
+        SupportsScrubbing() : boolean;
+        /*
+         *Check whether the currently loaded media can jump to a certain position.
+         *
+         *@return true if seeking is supported, false otherwise.
+         *@see SupportsRate, SupportsScrubbing
+         */
+        SupportsSeeking() : boolean;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): MediaPlayer;
+        static Load(InName: string): MediaPlayer;
+    
+        __tid_MediaPlayer_0__: boolean;
+    }
+    
+    enum MediaTextureOutputFormat { MTOF_Default, MTOF_SRGB_LINOUT, MTOF_MAX, __typeKeyDoNoAccess}
+    enum MediaTextureOrientation { MTORI_Original, MTORI_CW90, MTORI_CW180, MTORI_CW270, MTORI_MAX, __typeKeyDoNoAccess}
+    class MediaTexture extends UE.Texture {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        AddressX: UE.TextureAddress;
+        AddressY: UE.TextureAddress;
+        AutoClear: boolean;
+        ClearColor: UE.LinearColor;
+        EnableGenMips: boolean;
+        NumMips: number;
+        NewStyleOutput: boolean;
+        OutputFormat_EditorOnly: UE.MediaTextureOutputFormat;
+        CurrentAspectRatio: number;
+        CurrentOrientation: UE.MediaTextureOrientation;
+        MediaPlayer: UE.MediaPlayer;
+        /*
+         *Gets the current aspect ratio of the texture.
+         *
+         *@return Texture aspect ratio.
+         *@see GetHeight, GetWidth
+         */
+        GetAspectRatio() : number;
+        /*
+         *Gets the current height of the texture.
+         *
+         *@return Texture height (in pixels).
+         *@see GetAspectRatio, GetWidth
+         */
+        GetHeight() : number;
+        /*
+         *Get the media player that provides the video samples.
+         *
+         *@return The texture's media player, or nullptr if not set.
+         *@see SetMediaPlayer
+         */
+        GetMediaPlayer() : UE.MediaPlayer;
+        /*
+         *Gets the current numbe of mips of the texture.
+         *
+         *@return Number of mips.
+         */
+        GetTextureNumMips() : number;
+        /*
+         *Gets the current width of the texture.
+         *
+         *@return Texture width (in pixels).
+         *@see GetAspectRatio, GetHeight
+         */
+        GetWidth() : number;
+        /*
+         *Set the media player that provides the video samples.
+         *
+         *@param NewMediaPlayer The player to set.
+         *@see GetMediaPlayer
+         */
+        SetMediaPlayer(NewMediaPlayer: $Nullable<UE.MediaPlayer>) : void;
+        /*
+         *Creates a new resource for the texture, and updates any cached references to the resource.
+         *This obviously is just an override to expose to blueprints.
+         */
+        UpdateResource() : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): MediaTexture;
+        static Load(InName: string): MediaTexture;
+    
+        __tid_MediaTexture_0__: boolean;
+    }
+    
+    enum EMediaSoundChannels { Mono, Stereo, Surround, EMediaSoundChannels_MAX, __typeKeyDoNoAccess}
+    enum EMediaSoundComponentFFTSize { Min_64, Small_256, Medium_512, Large_1024, EMediaSoundComponentFFTSize_MAX, __typeKeyDoNoAccess}
+    class MediaSoundComponentSpectralData {
+        constructor();
+        constructor(FrequencyHz: number, Magnitude: number);
+        FrequencyHz: number;
+        Magnitude: number;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_MediaSoundComponentSpectralData_0__: boolean;
+    }
+    
+    class MediaSoundComponent extends UE.SynthComponent {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Channels: UE.EMediaSoundChannels;
+        DynamicRateAdjustment: boolean;
+        RateAdjustmentFactor: number;
+        RateAdjustmentRange: UE.FloatRange;
+        MediaPlayer: UE.MediaPlayer;
+        /*
+         *Get the attenuation settings based on the current component settings.
+         *
+         *@param OutAttenuationSettings Will contain the attenuation settings, if available.
+         *@return true if attenuation settings were returned, false if attenuation is disabled.
+         */
+        BP_GetAttenuationSettingsToApply(OutAttenuationSettings: $Ref<UE.SoundAttenuationSettings>) : boolean;
+        /*
+         *Retrieves the current amplitude envelope.
+         */
+        GetEnvelopeValue() : number;
+        /*
+         *Get the media player that provides the audio samples.
+         *
+         *@return The component's media player, or nullptr if not set.
+         *@see SetMediaPlayer
+         */
+        GetMediaPlayer() : UE.MediaPlayer;
+        /*
+         *Retrieves and normalizes the spectral data if spectral analysis is enabled.
+         */
+        GetNormalizedSpectralData() : TArray<UE.MediaSoundComponentSpectralData>;
+        /*
+         *Retrieves the spectral data if spectral analysis is enabled.
+         */
+        GetSpectralData() : TArray<UE.MediaSoundComponentSpectralData>;
+        /*
+         *Turns on amplitude envelope following the audio in the media sound component.
+         */
+        SetEnableEnvelopeFollowing(bInEnvelopeFollowing: boolean) : void;
+        /*
+         *Turns on spectral analysis of the audio generated in the media sound component.
+         */
+        SetEnableSpectralAnalysis(bInSpectralAnalysisEnabled: boolean) : void;
+        /*
+         *Sets the envelope attack and release times (in ms).
+         */
+        SetEnvelopeFollowingsettings(AttackTimeMsec: number, ReleaseTimeMsec: number) : void;
+        /*
+         *Set the media player that provides the audio samples.
+         *
+         *@param NewMediaPlayer The player to set.
+         *@see GetMediaPlayer
+         */
+        SetMediaPlayer(NewMediaPlayer: $Nullable<UE.MediaPlayer>) : void;
+        /*
+         *Sets the settings to use for spectral analysis.
+         */
+        SetSpectralAnalysisSettings(InFrequenciesToAnalyze: TArray<number>, InFFTSize?: UE.EMediaSoundComponentFFTSize /* = Medium_512 */) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): MediaSoundComponent;
+        static Load(InName: string): MediaSoundComponent;
+    
+        __tid_MediaSoundComponent_0__: boolean;
+    }
+    
+    class CommonVideoPlayer extends UE.Widget {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Video: UE.MediaSource;
+        bMatchSize: boolean;
+        MediaPlayer: UE.MediaPlayer;
+        MediaTexture: UE.MediaTexture;
+        VideoMaterial: UE.Material;
+        SoundComponent: UE.MediaSoundComponent;
+        VideoBrush: UE.SlateBrush;
+        Close() : void;
+        GetPlaybackRate() : number;
+        GetPlaybackTime() : number;
+        GetVideoDuration() : number;
+        IsLooping() : boolean;
+        IsMuted() : boolean;
+        IsPaused() : boolean;
+        IsPlaying() : boolean;
+        Pause() : void;
+        Play() : void;
+        PlayFromStart() : void;
+        Reverse() : void;
+        Seek(PlaybackTime: number) : void;
+        SetIsMuted(bInIsMuted: boolean) : void;
+        SetLooping(bShouldLoopPlayback: boolean) : void;
+        SetPlaybackRate(PlaybackRate: number) : void;
+        SetShouldMatchSize(bInMatchSize: boolean) : void;
+        SetVideo(NewVideo: $Nullable<UE.MediaSource>) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonVideoPlayer;
+        static Load(InName: string): CommonVideoPlayer;
+    
+        __tid_CommonVideoPlayer_0__: boolean;
+    }
+    
     class CommonViewportToolbarBaseMenuContext extends UE.Object {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -79668,6 +83789,205 @@ declare module "ue" {
         static Load(InName: string): CommonViewportToolbarBaseMenuContext;
     
         __tid_CommonViewportToolbarBaseMenuContext_0__: boolean;
+    }
+    
+    class OverlaySlot extends UE.PanelSlot {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Padding: UE.Margin;
+        HorizontalAlignment: UE.EHorizontalAlignment;
+        VerticalAlignment: UE.EVerticalAlignment;
+        /*
+         *Set the alignment of the object horizontally.
+         */
+        SetHorizontalAlignment(InHorizontalAlignment: UE.EHorizontalAlignment) : void;
+        /*
+         *Set padding area between the slot and the content it contains.
+         */
+        SetPadding(InPadding: UE.Margin) : void;
+        /*
+         *Set the alignment of the object vertically.
+         */
+        SetVerticalAlignment(InVerticalAlignment: UE.EVerticalAlignment) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): OverlaySlot;
+        static Load(InName: string): OverlaySlot;
+    
+        __tid_OverlaySlot_0__: boolean;
+    }
+    
+    class Overlay extends UE.PanelWidget {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        AddChildToOverlay(Content: $Nullable<UE.Widget>) : UE.OverlaySlot;
+        /*
+         *Replace the widget at the given index it with a different widget.
+         */
+        ReplaceOverlayChildAt(Index: number, Content: $Nullable<UE.Widget>) : boolean;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): Overlay;
+        static Load(InName: string): Overlay;
+    
+        __tid_Overlay_0__: boolean;
+    }
+    
+    class CommonVisibilitySwitcher extends UE.Overlay {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ShownVisibility: UE.ESlateVisibility;
+        ActiveWidgetIndex: number;
+        bAutoActivateSlot: boolean;
+        bActivateFirstSlotOnAdding: boolean;
+        ActivateVisibleSlot() : void;
+        DeactivateVisibleSlot() : void;
+        DecrementActiveWidgetIndex(bAllowWrapping?: boolean /* = true */) : void;
+        GetActiveWidget() : UE.Widget;
+        GetActiveWidgetIndex() : number;
+        IncrementActiveWidgetIndex(bAllowWrapping?: boolean /* = true */) : void;
+        IsCurrentlySwitching() : boolean;
+        SetActiveWidget(Widget: $Nullable<UE.Widget>) : void;
+        SetActiveWidgetIndex(Index: number) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonVisibilitySwitcher;
+        static Load(InName: string): CommonVisibilitySwitcher;
+    
+        __tid_CommonVisibilitySwitcher_0__: boolean;
+    }
+    
+    class CommonVisibilitySwitcherSlot extends UE.OverlaySlot {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonVisibilitySwitcherSlot;
+        static Load(InName: string): CommonVisibilitySwitcherSlot;
+    
+        __tid_CommonVisibilitySwitcherSlot_0__: boolean;
+    }
+    
+    class SizeBox extends UE.ContentWidget {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        WidthOverride: number;
+        HeightOverride: number;
+        MinDesiredWidth: number;
+        MinDesiredHeight: number;
+        MaxDesiredWidth: number;
+        MaxDesiredHeight: number;
+        MinAspectRatio: number;
+        MaxAspectRatio: number;
+        bOverride_WidthOverride: boolean;
+        bOverride_HeightOverride: boolean;
+        bOverride_MinDesiredWidth: boolean;
+        bOverride_MinDesiredHeight: boolean;
+        bOverride_MaxDesiredWidth: boolean;
+        bOverride_MaxDesiredHeight: boolean;
+        bOverride_MinAspectRatio: boolean;
+        bOverride_MaxAspectRatio: boolean;
+        ClearHeightOverride() : void;
+        ClearMaxAspectRatio() : void;
+        ClearMaxDesiredHeight() : void;
+        ClearMaxDesiredWidth() : void;
+        ClearMinAspectRatio() : void;
+        ClearMinDesiredHeight() : void;
+        ClearMinDesiredWidth() : void;
+        ClearWidthOverride() : void;
+        /*
+         *When specified, ignore the content's desired size and report the HeightOverride as the Box's desired height.
+         */
+        SetHeightOverride(InHeightOverride: number) : void;
+        SetMaxAspectRatio(InMaxAspectRatio: number) : void;
+        /*
+         *When specified, will report the MaxDesiredHeight if smaller than the content's desired height.
+         */
+        SetMaxDesiredHeight(InMaxDesiredHeight: number) : void;
+        /*
+         *When specified, will report the MaxDesiredWidth if smaller than the content's desired width.
+         */
+        SetMaxDesiredWidth(InMaxDesiredWidth: number) : void;
+        SetMinAspectRatio(InMinAspectRatio: number) : void;
+        /*
+         *When specified, will report the MinDesiredHeight if larger than the content's desired height.
+         */
+        SetMinDesiredHeight(InMinDesiredHeight: number) : void;
+        /*
+         *When specified, will report the MinDesiredWidth if larger than the content's desired width.
+         */
+        SetMinDesiredWidth(InMinDesiredWidth: number) : void;
+        /*
+         *When specified, ignore the content's desired size and report the WidthOverride as the Box's desired width.
+         */
+        SetWidthOverride(InWidthOverride: number) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SizeBox;
+        static Load(InName: string): SizeBox;
+    
+        __tid_SizeBox_0__: boolean;
+    }
+    
+    class CommonVisualAttachment extends UE.SizeBox {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ContentAnchor: UE.Vector2D;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonVisualAttachment;
+        static Load(InName: string): CommonVisualAttachment;
+    
+        __tid_CommonVisualAttachment_0__: boolean;
+    }
+    
+    class CommonWidgetCarousel extends UE.PanelWidget {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ActiveWidgetIndex: number;
+        MoveSpeed: number;
+        OnCurrentPageIndexChanged: $MulticastDelegate<(CarouselWidget: $Nullable<UE.CommonWidgetCarousel>, CurrentPageIndex: number) => void>;
+        BeginAutoScrolling(ScrollInterval?: number /* = 10.000000 */) : void;
+        EndAutoScrolling() : void;
+        /*
+         *Gets the slot index of the currently active widget
+         */
+        GetActiveWidgetIndex() : number;
+        /*
+         *Gets the Move Speed.
+         */
+        GetMoveSpeed() : number;
+        /*
+         *Get a widget at the provided index
+         */
+        GetWidgetAtIndex(Index: number) : UE.Widget;
+        NextPage() : void;
+        PreviousPage() : void;
+        /*
+         *Activates the widget and makes it the active index.
+         */
+        SetActiveWidget(Widget: $Nullable<UE.Widget>) : void;
+        /*
+         *Activates the widget at the specified index.
+         */
+        SetActiveWidgetIndex(Index: number) : void;
+        /*
+         *Sets the Move Speed.
+         */
+        SetMoveSpeed(InMoveSpeed: number) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonWidgetCarousel;
+        static Load(InName: string): CommonWidgetCarousel;
+    
+        __tid_CommonWidgetCarousel_0__: boolean;
+    }
+    
+    class CommonWidgetCarouselNavBar extends UE.Widget {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ButtonWidgetType: UE.Class;
+        ButtonPadding: UE.Margin;
+        LinkedCarousel: UE.CommonWidgetCarousel;
+        ButtonGroup: UE.CommonButtonGroupBase;
+        Buttons: TArray<UE.CommonButtonBase>;
+        HandleButtonClicked(AssociatedButton: $Nullable<UE.CommonButtonBase>, ButtonIndex: number) : void;
+        HandlePageChanged(CommonCarousel: $Nullable<UE.CommonWidgetCarousel>, PageIndex: number) : void;
+        /*
+         *Establishes the Widget Carousel instance that this Nav Bar should interact with
+         *@param CommonCarousel The carousel that this nav bar should be associated with and manipulate
+         */
+        SetLinkedCarousel(CommonCarousel: $Nullable<UE.CommonWidgetCarousel>) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CommonWidgetCarouselNavBar;
+        static Load(InName: string): CommonWidgetCarouselNavBar;
+    
+        __tid_CommonWidgetCarouselNavBar_0__: boolean;
     }
     
     class CompactEventDesc {
@@ -84012,6 +88332,31 @@ declare module "ue" {
         static Load(InName: string): ConfigHierarchyPropertyView;
     
         __tid_ConfigHierarchyPropertyView_0__: boolean;
+    }
+    
+    class ConfirmScreenButtonInfo {
+        constructor();
+        constructor(ConfirmScreenButtonType: UE.EConfirmScreenButtonType, ButtonTextToDisplay: string);
+        ConfirmScreenButtonType: UE.EConfirmScreenButtonType;
+        ButtonTextToDisplay: string;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_ConfirmScreenButtonInfo_0__: boolean;
+    }
+    
+    class ConfirmScreenInfoObject extends UE.Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ScreenTitle: string;
+        ScreenMessage: string;
+        AvailableScreenButtons: TArray<UE.ConfirmScreenButtonInfo>;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ConfirmScreenInfoObject;
+        static Load(InName: string): ConfirmScreenInfoObject;
+    
+        __tid_ConfirmScreenInfoObject_0__: boolean;
     }
     
     class ConnectionCallbackProxy extends UE.OnlineBlueprintCallProxyBase {
@@ -93266,6 +97611,156 @@ declare module "ue" {
         __tid_CustomMeshComponent_0__: boolean;
     }
     
+    class SpringArmComponent extends UE.SceneComponent {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        TargetArmLength: number;
+        SocketOffset: UE.Vector;
+        TargetOffset: UE.Vector;
+        ProbeSize: number;
+        ProbeChannel: UE.ECollisionChannel;
+        bDoCollisionTest: boolean;
+        bUsePawnControlRotation: boolean;
+        bInheritPitch: boolean;
+        bInheritYaw: boolean;
+        bInheritRoll: boolean;
+        bEnableCameraLag: boolean;
+        bEnableCameraRotationLag: boolean;
+        bUseCameraLagSubstepping: boolean;
+        bDrawDebugLagMarkers: boolean;
+        CameraLagSpeed: number;
+        CameraRotationLagSpeed: number;
+        CameraLagMaxTimeStep: number;
+        CameraLagMaxDistance: number;
+        bClampToMaxPhysicsDeltaTime: boolean;
+        /*
+         *Get the target rotation we inherit, used as the base target for the boom rotation.
+         *This is derived from attachment to our parent and considering the UsePawnControlRotation and absolute rotation flags.
+         */
+        GetTargetRotation() : UE.Rotator;
+        /*
+         *Get the position where the camera should be without applying the Collision Test displacement
+         */
+        GetUnfixedCameraPosition() : UE.Vector;
+        /*
+         *Is the Collision Test displacement being applied?
+         */
+        IsCollisionFixApplied() : boolean;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): SpringArmComponent;
+        static Load(InName: string): SpringArmComponent;
+    
+        __tid_SpringArmComponent_0__: boolean;
+    }
+    
+    class WarriorHeroWeaponData {
+        constructor();
+        constructor(WeaponAnimLayerToLink: UE.Class, DefaultWeaponAbilities: TArray<UE.WarriorHeroAbilitySet>, SpecialWeaponAbilities: TArray<UE.WarriorHeroSpecialAbilitySet>, WeaponInputMappingContext: UE.InputMappingContext, WeaponBaseDamage: UE.ScalableFloat, SoftWeaponIconTexture: TSoftObjectPtr<UE.Texture2D>);
+        WeaponAnimLayerToLink: UE.Class;
+        DefaultWeaponAbilities: TArray<UE.WarriorHeroAbilitySet>;
+        SpecialWeaponAbilities: TArray<UE.WarriorHeroSpecialAbilitySet>;
+        WeaponInputMappingContext: UE.InputMappingContext;
+        WeaponBaseDamage: UE.ScalableFloat;
+        SoftWeaponIconTexture: TSoftObjectPtr<UE.Texture2D>;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_WarriorHeroWeaponData_0__: boolean;
+    }
+    
+    class WarriorHeroWeapon extends UE.WarriorWeaponBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        HeroWeaponData: UE.WarriorHeroWeaponData;
+        AssignGrantedAbilitySpecHandles(InSpecHandles: TArray<UE.GameplayAbilitySpecHandle>) : void;
+        GetGrantedAbilitySpecHandles() : TArray<UE.GameplayAbilitySpecHandle>;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): WarriorHeroWeapon;
+        static Load(InName: string): WarriorHeroWeapon;
+    
+        __tid_WarriorHeroWeapon_0__: boolean;
+    }
+    
+    class HeroCombatComponent extends UE.PawnCombatComponent {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        GetHeroCarriedWeaponByTag(InWeaponTag: UE.GameplayTag) : UE.WarriorHeroWeapon;
+        GetHeroCurrentEquipWeapon() : UE.WarriorHeroWeapon;
+        GetHeroCurrentEquipWeaponDamageAtLevel(InLevel: number) : number;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): HeroCombatComponent;
+        static Load(InName: string): HeroCombatComponent;
+    
+        __tid_HeroCombatComponent_0__: boolean;
+    }
+    
+    class WarriorInputActionConfig {
+        constructor();
+        constructor(InputTag: UE.GameplayTag, InputAction: UE.InputAction);
+        InputTag: UE.GameplayTag;
+        InputAction: UE.InputAction;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_WarriorInputActionConfig_0__: boolean;
+    }
+    
+    class DataAsset_InputConfig extends UE.DataAsset {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        DefaultMappingContext: UE.InputMappingContext;
+        NativeInputActions: TArray<UE.WarriorInputActionConfig>;
+        AbilityInputActions: TArray<UE.WarriorInputActionConfig>;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): DataAsset_InputConfig;
+        static Load(InName: string): DataAsset_InputConfig;
+    
+        __tid_DataAsset_InputConfig_0__: boolean;
+    }
+    
+    class WarriorHeroCharacter extends UE.WarriorBaseCharacter {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        CameraBoom: UE.SpringArmComponent;
+        FollowCamera: UE.CameraComponent;
+        HeroCombatComponent: UE.HeroCombatComponent;
+        HeroUIComponent: UE.HeroUIComponent;
+        CustomMovementComponent: UE.CustomMovementComponent;
+        InputConfigDataAsset: UE.DataAsset_InputConfig;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): WarriorHeroCharacter;
+        static Load(InName: string): WarriorHeroCharacter;
+    
+        __tid_WarriorHeroCharacter_0__: boolean;
+    }
+    
+    class CustomMovementComponent extends UE.CharacterMovementComponent {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        OwningPlayerAnimInstance: UE.AnimInstance;
+        OwningPlayerCharacter: UE.WarriorHeroCharacter;
+        ClimbableSurfaceTraceTypes: TArray<UE.EObjectTypeQuery>;
+        ClimbCapsuleTraceRadius: number;
+        ClimbCapsuleTraceHalfHeight: number;
+        MaxbrakingClimbDeceleration: number;
+        MaxClimbSpeed: number;
+        MaxClimbAcceleration: number;
+        ClimbDownWalkableSurfaceTraceOffset: number;
+        ClimbDownLedgeSurfaceTraceOffset: number;
+        IdleToClimbMontage: UE.AnimMontage;
+        ClimbToTopMontage: UE.AnimMontage;
+        ClimbDownLedgeMontage: UE.AnimMontage;
+        VaultMontage: UE.AnimMontage;
+        HopUpMontage: UE.AnimMontage;
+        HopDownMontage: UE.AnimMontage;
+        HopLeftMontage: UE.AnimMontage;
+        HopRightMontage: UE.AnimMontage;
+        OnClimbMontageEnded(Montage: $Nullable<UE.AnimMontage>, bInterrupted: boolean) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): CustomMovementComponent;
+        static Load(InName: string): CustomMovementComponent;
+    
+        __tid_CustomMovementComponent_0__: boolean;
+    }
+    
     enum ECustomMaterialOutputType { CMOT_Float1, CMOT_Float2, CMOT_Float3, CMOT_Float4, CMOT_MaterialAttributes, CMOT_MAX, __typeKeyDoNoAccess}
     class CustomOutput {
         constructor();
@@ -95749,19 +100244,6 @@ declare module "ue" {
         __tid_DataRegistryLookup_0__: boolean;
     }
     
-    class DataTableRowHandle {
-        constructor();
-        constructor(DataTable: UE.DataTable, RowName: string);
-        DataTable: UE.DataTable;
-        RowName: string;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_DataTableRowHandle_0__: boolean;
-    }
-    
     class DataRegistryOrTableRow {
         constructor();
         constructor(bUseDataRegistryId: boolean, DataTableRow: UE.DataTableRowHandle, DataRegistryId: UE.DataRegistryId);
@@ -96824,7 +101306,6 @@ declare module "ue" {
         __tid_DatasmithSceneComponentTemplate_0__: boolean;
     }
     
-    enum ESkyLightSourceType { SLS_CapturedScene, SLS_SpecifiedCubemap, SLS_MAX, __typeKeyDoNoAccess}
     class DatasmithSkyLightComponentTemplate extends UE.DatasmithObjectTemplate {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         SourceType: UE.ESkyLightSourceType;
@@ -99843,71 +104324,6 @@ declare module "ue" {
         __tid_DynamicDelegateProxy_0__: boolean;
     }
     
-    enum EDynamicBoxType { Horizontal, Vertical, Wrap, VerticalWrap, Radial, Overlay, EDynamicBoxType_MAX, __typeKeyDoNoAccess}
-    enum ESlateSizeRule { Automatic, Fill, ESlateSizeRule_MAX, __typeKeyDoNoAccess}
-    class SlateChildSize {
-        constructor();
-        constructor(Value: number, SizeRule: UE.ESlateSizeRule);
-        Value: number;
-        SizeRule: UE.ESlateSizeRule;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_SlateChildSize_0__: boolean;
-    }
-    
-    class RadialBoxSettings {
-        constructor();
-        constructor(StartingAngle: number, bDistributeItemsEvenly: boolean, AngleBetweenItems: number, SectorCentralAngle: number);
-        StartingAngle: number;
-        bDistributeItemsEvenly: boolean;
-        AngleBetweenItems: number;
-        SectorCentralAngle: number;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_RadialBoxSettings_0__: boolean;
-    }
-    
-    class UserWidgetPool {
-        constructor();
-        constructor(ActiveWidgets: TArray<UE.UserWidget>, InactiveWidgets: TArray<UE.UserWidget>);
-        ActiveWidgets: TArray<UE.UserWidget>;
-        InactiveWidgets: TArray<UE.UserWidget>;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_UserWidgetPool_0__: boolean;
-    }
-    
-    class DynamicEntryBoxBase extends UE.Widget {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        EntrySpacing: UE.Vector2D;
-        SpacingPattern: TArray<UE.Vector2D>;
-        EntryBoxType: UE.EDynamicBoxType;
-        EntrySizeRule: UE.SlateChildSize;
-        EntryHorizontalAlignment: UE.EHorizontalAlignment;
-        EntryVerticalAlignment: UE.EVerticalAlignment;
-        MaxElementSize: number;
-        RadialBoxSettings: UE.RadialBoxSettings;
-        EntryWidgetPool: UE.UserWidgetPool;
-        GetAllEntries() : TArray<UE.UserWidget>;
-        GetNumEntries() : number;
-        SetEntrySpacing(InEntrySpacing: UE.Vector2D) : void;
-        SetRadialSettings(InSettings: UE.RadialBoxSettings) : void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): DynamicEntryBoxBase;
-        static Load(InName: string): DynamicEntryBoxBase;
-    
-        __tid_DynamicEntryBoxBase_0__: boolean;
-    }
-    
     class DynamicEntryBox extends UE.DynamicEntryBoxBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         NumDesignerPreviewEntries_EditorOnly: number;
@@ -100379,7 +104795,6 @@ declare module "ue" {
     enum EConstraintFrame { Frame1, Frame2, EConstraintFrame_MAX, __typeKeyDoNoAccess}
     enum EConstraintInterpType { Average, Shortest, Max, EConstraintInterpType_MAX, __typeKeyDoNoAccess}
     enum EConstraintTransformComponentFlags { None, ChildPosition, ChildRotation, ParentPosition, ParentRotation, AllChild, AllParent, AllPosition, AllRotation, All, EConstraintTransformComponentFlags_MAX, __typeKeyDoNoAccess}
-    enum EConsumeMouseWheel { WhenScrollingPossible, Always, Never, EConsumeMouseWheel_MAX, __typeKeyDoNoAccess}
     enum EContentBundleClientState { Unregistered, Registered, ContentInjectionRequested, ContentRemovalRequested, RegistrationFailed, EContentBundleClientState_MAX, __typeKeyDoNoAccess}
     enum EContentBundleStatus { Registered, ReadyToInject, FailedToInject, ContentInjected, Unknown, EContentBundleStatus_MAX, __typeKeyDoNoAccess}
     enum EContentSourceCategory { BlueprintFeature, CodeFeature, EnterpriseFeature, Content, EnterpriseContent, SharedPack, Unknown, EContentSourceCategory_MAX, __typeKeyDoNoAccess}
@@ -100432,7 +104847,6 @@ declare module "ue" {
     enum EDemoPlayFailure { Generic, DemoNotFound, Corrupt, InvalidVersion, InitBase, GameSpecificHeader, ReplayStreamerInternal, LoadMap, Serialization, EDemoPlayFailure_MAX, __typeKeyDoNoAccess}
     enum EDenoiserRuntimeType { CPU, GPU, RDG, EDenoiserRuntimeType_MAX, __typeKeyDoNoAccess}
     enum EDepthOfFieldFunctionValue { TDOF_NearAndFarMask, TDOF_NearMask, TDOF_FarMask, TDOF_CircleOfConfusionRadius, TDOF_MAX, __typeKeyDoNoAccess}
-    enum EDescendantScrollDestination { IntoView, TopOrLeft, Center, BottomOrRight, EDescendantScrollDestination_MAX, __typeKeyDoNoAccess}
     enum EDesiredImageFormat { PNG, JPG, BMP, EXR, EDesiredImageFormat_MAX, __typeKeyDoNoAccess}
     enum EDestructiveAssetActions { AssetDelete, AssetRename, AssetMove, AssetPrivatize, EDestructiveAssetActions_MAX, __typeKeyDoNoAccess}
     enum EDetectionTechnique { PassThroughReferenceBone, FootBoneReachesGround, FootBoneSpeed, EDetectionTechnique_MAX, __typeKeyDoNoAccess}
@@ -100915,24 +105329,6 @@ declare module "ue" {
     
     enum EVirtualKeyboardTrigger { OnFocusByPointer, OnAllFocusEvents, EVirtualKeyboardTrigger_MAX, __typeKeyDoNoAccess}
     enum EVirtualKeyboardDismissAction { TextChangeOnDismiss, TextCommitOnAccept, TextCommitOnDismiss, EVirtualKeyboardDismissAction_MAX, __typeKeyDoNoAccess}
-    enum ETextJustify { Left, Center, Right, InvariantLeft, InvariantRight, ETextJustify_MAX, __typeKeyDoNoAccess}
-    enum ETextShapingMethod { Auto, KerningOnly, FullShaping, ETextShapingMethod_MAX, __typeKeyDoNoAccess}
-    enum ETextFlowDirection { Auto, LeftToRight, RightToLeft, Culture, ETextFlowDirection_MAX, __typeKeyDoNoAccess}
-    class ShapedTextOptions {
-        constructor();
-        constructor(bOverride_TextShapingMethod: boolean, bOverride_TextFlowDirection: boolean, TextShapingMethod: UE.ETextShapingMethod, TextFlowDirection: UE.ETextFlowDirection);
-        bOverride_TextShapingMethod: boolean;
-        bOverride_TextFlowDirection: boolean;
-        TextShapingMethod: UE.ETextShapingMethod;
-        TextFlowDirection: UE.ETextFlowDirection;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_ShapedTextOptions_0__: boolean;
-    }
-    
     enum ETextCommit { Default, OnEnter, OnUserMovedFocus, OnCleared, ETextCommit_MAX, __typeKeyDoNoAccess}
     class EditableText extends UE.Widget {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
@@ -106068,240 +110464,6 @@ declare module "ue" {
         __tid_EditorUtilityLibrary_0__: boolean;
     }
     
-    class ListViewBase extends UE.Widget {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        BP_OnEntryGenerated: $MulticastDelegate<(Widget: $Nullable<UE.UserWidget>) => void>;
-        EntryWidgetClass: UE.Class;
-        WheelScrollMultiplier: number;
-        bEnableScrollAnimation: boolean;
-        ScrollingAnimationInterpolationSpeed: number;
-        bInEnableTouchAnimatedScrolling: boolean;
-        AllowOverscroll: boolean;
-        bEnableRightClickScrolling: boolean;
-        bEnableTouchScrolling: boolean;
-        bIsPointerScrollingEnabled: boolean;
-        bIsGamepadScrollingEnabled: boolean;
-        bEnableFixedLineOffset: boolean;
-        FixedLineScrollOffset: number;
-        bAllowDragging: boolean;
-        BP_OnEntryReleased: $MulticastDelegate<(Widget: $Nullable<UE.UserWidget>) => void>;
-        NumDesignerPreviewEntries_EditorOnly: number;
-        EntryWidgetPool: UE.UserWidgetPool;
-        /*
-         *Stops the scroll inertia
-         */
-        EndInertialScrolling() : void;
-        /*
-         *Gets all of the list entry widgets currently being displayed by the list
-         */
-        GetDisplayedEntryWidgets() : TArray<UE.UserWidget>;
-        /*
-         *Get the scroll offset of this view (in items)
-         */
-        GetScrollOffset() : number;
-        /*
-         *Full regeneration of all entries in the list. Note that the entry UWidget instances will not be destroyed, but they will be released and re-generated.
-         *In other words, entry widgets will not receive Destruct_Construct events. They will receive OnEntryReleased and IUserObjectListEntry implementations will receive OnListItemObjectSet.
-         */
-        RegenerateAllEntries() : void;
-        /*
-         *Sets the list to refresh on the next tick.
-         *
-         *Note that refreshing, from a list perspective, is limited to accounting for discrepancies between items and entries.
-         *In other words, it will only release entries that no longer have items and generate entries for new items (or newly visible items).
-         *
-         *It does NOT account for changes within existing items - that is up to the item to announce and an entry to listen to as needed.
-         *This can be onerous to set up for simple cases, so it's also reasonable (though not ideal) to call RegenerateAllEntries when changes within N list items need to be reflected.
-         */
-        RequestRefresh() : void;
-        /*
-         *Scroll the entire list down to the bottom-most item
-         */
-        ScrollToBottom() : void;
-        /*
-         *Scroll the entire list up to the first item
-         */
-        ScrollToTop() : void;
-        /*
-         *Enable_Disable the ability of the list to scroll via gamepad.
-         */
-        SetIsGamepadScrollingEnabled(bInIsGamepadScrollingEnabled: boolean) : void;
-        /*
-         *Enable_Disable the ability of the list to scroll. This should be use as a temporary disable.
-         */
-        SetIsPointerScrollingEnabled(bInIsPointerScrollingEnabled: boolean) : void;
-        SetScrollbarVisibility(InVisibility: UE.ESlateVisibility) : void;
-        /*
-         *Set the scroll offset of this view (in items)
-         */
-        SetScrollOffset(InScrollOffset: number) : void;
-        SetWheelScrollMultiplier(NewWheelScrollMultiplier: number) : void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ListViewBase;
-        static Load(InName: string): ListViewBase;
-    
-        __tid_ListViewBase_0__: boolean;
-    }
-    
-    class TableViewStyle extends UE.SlateWidgetStyle {
-        constructor();
-        constructor(BackgroundBrush: UE.SlateBrush);
-        BackgroundBrush: UE.SlateBrush;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_TableViewStyle_0__: boolean;
-    }
-    
-    enum ESelectionMode { None, Single, SingleToggle, Multi, ESelectionMode_MAX, __typeKeyDoNoAccess}
-    enum EScrollIntoViewAlignment { IntoView, TopOrLeft, CenterAligned, BottomOrRight, EScrollIntoViewAlignment_MAX, __typeKeyDoNoAccess}
-    class ListView extends UE.ListViewBase {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        WidgetStyle: UE.TableViewStyle;
-        ScrollBarStyle: UE.ScrollBarStyle;
-        Orientation: UE.EOrientation;
-        SelectionMode: UE.ESelectionMode;
-        ConsumeMouseWheel: UE.EConsumeMouseWheel;
-        bClearSelectionOnClick: boolean;
-        bIsFocusable: boolean;
-        bReturnFocusToSelection: boolean;
-        ScrollIntoViewAlignment: UE.EScrollIntoViewAlignment;
-        ListItems: TArray<UE.Object>;
-        EntrySpacing_EditorOnly: number;
-        HorizontalEntrySpacing: number;
-        VerticalEntrySpacing: number;
-        ScrollBarPadding: UE.Margin;
-        BP_OnEntryInitialized: $MulticastDelegate<(Item: $Nullable<UE.Object>, Widget: $Nullable<UE.UserWidget>) => void>;
-        BP_OnItemClicked: $MulticastDelegate<(Item: $Nullable<UE.Object>) => void>;
-        BP_OnItemDoubleClicked: $MulticastDelegate<(Item: $Nullable<UE.Object>) => void>;
-        BP_OnItemIsHoveredChanged: $MulticastDelegate<(Item: $Nullable<UE.Object>, bIsHovered: boolean) => void>;
-        BP_OnItemSelectionChanged: $MulticastDelegate<(Item: $Nullable<UE.Object>, bIsSelected: boolean) => void>;
-        BP_OnItemScrolledIntoView: $MulticastDelegate<(Item: $Nullable<UE.Object>, Widget: $Nullable<UE.UserWidget>) => void>;
-        BP_OnListViewScrolled: $MulticastDelegate<(ItemOffset: number, DistanceRemaining: number) => void>;
-        /*
-         *Adds an the item to the list
-         */
-        AddItem(Item: $Nullable<UE.Object>) : void;
-        /*
-         *Cancels a previous request to scroll and item into view.
-         */
-        BP_CancelScrollIntoView() : void;
-        /*
-         *Clear selection
-         */
-        BP_ClearSelection() : void;
-        /*
-         *Gets the number of items currently selected in the list
-         */
-        BP_GetNumItemsSelected() : number;
-        /*
-         *Gets the first selected item, if any; recommended that you only use this for single selection lists.
-         */
-        BP_GetSelectedItem() : UE.Object;
-        /*
-         *Gets a list of all the currently selected items
-         */
-        BP_GetSelectedItems(Items: $Ref<TArray<UE.Object>>) : boolean;
-        /*
-         *Gets whether the entry for the given object is currently visible in the list
-         */
-        BP_IsItemVisible(Item: $Nullable<UE.Object>) : boolean;
-        /*
-         *Requests that the given item is navigated to, scrolling it into view if needed.
-         */
-        BP_NavigateToItem(Item: $Nullable<UE.Object>) : void;
-        /*
-         *Requests that the given item is scrolled into view
-         */
-        BP_ScrollItemIntoView(Item: $Nullable<UE.Object>) : void;
-        /*
-         *Sets whether the given item is selected.
-         */
-        BP_SetItemSelection(Item: $Nullable<UE.Object>, bSelected: boolean) : void;
-        /*
-         *Sets the array of objects to display rows for in the list
-         */
-        BP_SetListItems(InListItems: TArray<UE.Object>) : void;
-        /*
-         *Sets the given item as the sole selected item.
-         */
-        BP_SetSelectedItem(Item: $Nullable<UE.Object>) : void;
-        /*
-         *Removes all items from the list
-         */
-        ClearListItems() : void;
-        /*
-         *Get the horizontal spacing between entries.
-         */
-        GetHorizontalEntrySpacing() : number;
-        /*
-         *Returns the index that the specified item is at. Will return the first found, or -1 for not found
-         */
-        GetIndexForItem(Item: $Nullable<UE.Object>) : number;
-        /*
-         *Returns the item at the given index
-         */
-        GetItemAt(Index: number) : UE.Object;
-        /*
-         *Gets the list of all items in the list.
-         *Note that each of these items only has a corresponding entry widget when visible. Use GetDisplayedEntryWidgets to get the currently displayed widgets.
-         */
-        GetListItems() : TArray<UE.Object>;
-        /*
-         *Returns the total number of items
-         */
-        GetNumItems() : number;
-        /*
-         *Gets padding around the scrollbar.
-         */
-        GetScrollBarPadding() : UE.Margin;
-        /*
-         *Get the vertical spacing between entries.
-         */
-        GetVerticalEntrySpacing() : number;
-        /*
-         *Returns true if a refresh is pending and the list will be rebuilt on the next tick
-         */
-        IsRefreshPending() : boolean;
-        /*
-         *Requests that the item at the given index navigated to, scrolling it into view if needed.
-         */
-        NavigateToIndex(Index: number) : void;
-        OnListItemEndPlayed(Item: $Nullable<UE.Actor>, EndPlayReason: UE.EEndPlayReason) : void;
-        OnListItemOuterEndPlayed(ItemOuter: $Nullable<UE.Actor>, EndPlayReason: UE.EEndPlayReason) : void;
-        /*
-         *Removes an the item from the list
-         */
-        RemoveItem(Item: $Nullable<UE.Object>) : void;
-        /*
-         *Requests that the item at the given index is scrolled into view
-         */
-        ScrollIndexIntoView(Index: number) : void;
-        /*
-         *Sets padding around the scrollbar.
-         */
-        SetScrollBarPadding(InScrollBarPadding: UE.Margin) : void;
-        /*
-         *Sets ScrollIntoViewAlignment which allows to stick the selected item to either side or center
-         */
-        SetScrollIntoViewAlignment(NewScrollIntoViewAlignment: UE.EScrollIntoViewAlignment) : void;
-        /*
-         *Sets the item at the given index as the sole selected item.
-         */
-        SetSelectedIndex(Index: number) : void;
-        /*
-         *Sets the new selection mode, preserving the current selection where possible.
-         */
-        SetSelectionMode(SelectionMode: UE.ESelectionMode) : void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ListView;
-        static Load(InName: string): ListView;
-    
-        __tid_ListView_0__: boolean;
-    }
-    
     class EditorUtilityListView extends UE.ListView {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -106309,25 +110471,6 @@ declare module "ue" {
         static Load(InName: string): EditorUtilityListView;
     
         __tid_EditorUtilityListView_0__: boolean;
-    }
-    
-    enum ETextWrappingPolicy { DefaultWrapping, AllowPerCharacterWrapping, ETextWrappingPolicy_MAX, __typeKeyDoNoAccess}
-    class TextLayoutWidget extends UE.Widget {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ShapedTextOptions: UE.ShapedTextOptions;
-        Justification: UE.ETextJustify;
-        WrappingPolicy: UE.ETextWrappingPolicy;
-        AutoWrapText: boolean;
-        ApplyLineHeightToBottomLine: boolean;
-        WrapTextAt: number;
-        Margin: UE.Margin;
-        LineHeightPercentage: number;
-        SetJustification(InJustification: UE.ETextJustify) : void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): TextLayoutWidget;
-        static Load(InName: string): TextLayoutWidget;
-    
-        __tid_TextLayoutWidget_0__: boolean;
     }
     
     class MultiLineEditableText extends UE.TextLayoutWidget {
@@ -106540,103 +110683,6 @@ declare module "ue" {
         __tid_EditorUtilityScrollBar_0__: boolean;
     }
     
-    class ScrollBoxStyle extends UE.SlateWidgetStyle {
-        constructor();
-        constructor(BarThickness: number, TopShadowBrush: UE.SlateBrush, BottomShadowBrush: UE.SlateBrush, LeftShadowBrush: UE.SlateBrush, RightShadowBrush: UE.SlateBrush, HorizontalScrolledContentPadding: UE.Margin, VerticalScrolledContentPadding: UE.Margin);
-        BarThickness: number;
-        TopShadowBrush: UE.SlateBrush;
-        BottomShadowBrush: UE.SlateBrush;
-        LeftShadowBrush: UE.SlateBrush;
-        RightShadowBrush: UE.SlateBrush;
-        HorizontalScrolledContentPadding: UE.Margin;
-        VerticalScrolledContentPadding: UE.Margin;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_ScrollBoxStyle_0__: boolean;
-    }
-    
-    enum EScrollWhenFocusChanges { NoScroll, InstantScroll, AnimatedScroll, EScrollWhenFocusChanges_MAX, __typeKeyDoNoAccess}
-    class ScrollBox extends UE.PanelWidget {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ScrollAnimationInterpolationSpeed: number;
-        bEnableTouchScrolling: boolean;
-        WidgetStyle: UE.ScrollBoxStyle;
-        WidgetBarStyle: UE.ScrollBarStyle;
-        Orientation: UE.EOrientation;
-        ScrollBarVisibility: UE.ESlateVisibility;
-        ConsumeMouseWheel: UE.EConsumeMouseWheel;
-        ScrollbarThickness: UE.Vector2D;
-        ScrollbarPadding: UE.Margin;
-        AlwaysShowScrollbar: boolean;
-        AlwaysShowScrollbarTrack: boolean;
-        AllowOverscroll: boolean;
-        BackPadScrolling: boolean;
-        FrontPadScrolling: boolean;
-        bAnimateWheelScrolling: boolean;
-        NavigationDestination: UE.EDescendantScrollDestination;
-        NavigationScrollPadding: number;
-        ScrollWhenFocusChanges: UE.EScrollWhenFocusChanges;
-        bAllowRightClickDragScrolling: boolean;
-        WheelScrollMultiplier: number;
-        OnUserScrolled: $MulticastDelegate<(CurrentOffset: number) => void>;
-        OnScrollBarVisibilityChanged: $MulticastDelegate<(NewVisibility: UE.ESlateVisibility) => void>;
-        /*
-         *Instantly stops any inertial scrolling that is currently in progress
-         */
-        EndInertialScrolling() : void;
-        /*
-         *Gets the scroll offset of the scrollbox in Slate Units.
-         */
-        GetScrollOffset() : number;
-        /*
-         *Gets the scroll offset of the bottom of the ScrollBox in Slate Units.
-         */
-        GetScrollOffsetOfEnd() : number;
-        /*
-         *Gets the fraction currently visible in the scrollbox
-         */
-        GetViewFraction() : number;
-        GetViewOffsetFraction() : number;
-        /*
-         *Scrolls the ScrollBox to the bottom instantly during the next layout pass.
-         */
-        ScrollToEnd() : void;
-        /*
-         *Scrolls the ScrollBox to the top instantly
-         */
-        ScrollToStart() : void;
-        /*
-         *Scrolls the ScrollBox to the widget during the next layout pass.
-         */
-        ScrollWidgetIntoView(WidgetToFind: $Nullable<UE.Widget>, AnimateScroll?: boolean /* = true */, ScrollDestination?: UE.EDescendantScrollDestination /* = IntoView */, Padding?: number /* = 0.000000 */) : void;
-        SetAllowOverscroll(NewAllowOverscroll: boolean) : void;
-        SetAlwaysShowScrollbar(NewAlwaysShowScrollbar: boolean) : void;
-        SetAnimateWheelScrolling(bShouldAnimateWheelScrolling: boolean) : void;
-        SetConsumeMouseWheel(NewConsumeMouseWheel: UE.EConsumeMouseWheel) : void;
-        SetIsTouchScrollingEnabled(bInEnableTouchScrolling: boolean) : void;
-        SetNavigationDestination(NewNavigationDestination: UE.EDescendantScrollDestination) : void;
-        SetOrientation(NewOrientation: UE.EOrientation) : void;
-        SetScrollAnimationInterpolationSpeed(NewScrollAnimationInterpolationSpeed: number) : void;
-        SetScrollbarPadding(NewScrollbarPadding: UE.Margin) : void;
-        SetScrollbarThickness(NewScrollbarThickness: UE.Vector2D) : void;
-        SetScrollBarVisibility(NewScrollBarVisibility: UE.ESlateVisibility) : void;
-        /*
-         *Updates the scroll offset of the scrollbox.
-         *@param NewScrollOffset is in Slate Units.
-         */
-        SetScrollOffset(NewScrollOffset: number) : void;
-        SetScrollWhenFocusChanges(NewScrollWhenFocusChanges: UE.EScrollWhenFocusChanges) : void;
-        SetWheelScrollMultiplier(NewWheelScrollMultiplier: number) : void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ScrollBox;
-        static Load(InName: string): ScrollBox;
-    
-        __tid_ScrollBox_0__: boolean;
-    }
-    
     class EditorUtilityScrollBox extends UE.ScrollBox {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -106644,74 +110690,6 @@ declare module "ue" {
         static Load(InName: string): EditorUtilityScrollBox;
     
         __tid_EditorUtilityScrollBox_0__: boolean;
-    }
-    
-    class Slider extends UE.Widget {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Value: number;
-        ValueDelegate: $Delegate<() => number>;
-        MinValue: number;
-        MaxValue: number;
-        WidgetStyle: UE.SliderStyle;
-        Orientation: UE.EOrientation;
-        SliderBarColor: UE.LinearColor;
-        SliderHandleColor: UE.LinearColor;
-        IndentHandle: boolean;
-        Locked: boolean;
-        MouseUsesStep: boolean;
-        RequiresControllerLock: boolean;
-        StepSize: number;
-        IsFocusable: boolean;
-        OnMouseCaptureBegin: $MulticastDelegate<() => void>;
-        OnMouseCaptureEnd: $MulticastDelegate<() => void>;
-        OnControllerCaptureBegin: $MulticastDelegate<() => void>;
-        OnControllerCaptureEnd: $MulticastDelegate<() => void>;
-        OnValueChanged: $MulticastDelegate<(Value: number) => void>;
-        /*
-         *Get the current value scaled from 0 to 1
-         */
-        GetNormalizedValue() : number;
-        /*
-         *Gets the current value of the slider.
-         */
-        GetValue() : number;
-        /*
-         *Sets if the slidable area should be indented to fit the handle.
-         */
-        SetIndentHandle(InValue: boolean) : void;
-        /*
-         *Sets the handle to be interactive or fixed.
-         */
-        SetLocked(InValue: boolean) : void;
-        /*
-         *Sets the maximum value of the slider.
-         */
-        SetMaxValue(InValue: number) : void;
-        /*
-         *Sets the minimum value of the slider.
-         */
-        SetMinValue(InValue: number) : void;
-        /*
-         *Sets the color of the slider bar.
-         */
-        SetSliderBarColor(InValue: UE.LinearColor) : void;
-        /*
-         *Sets the color of the handle bar
-         */
-        SetSliderHandleColor(InValue: UE.LinearColor) : void;
-        /*
-         *Sets the amount to adjust the value by, when using a controller or keyboard.
-         */
-        SetStepSize(InValue: number) : void;
-        /*
-         *Sets the current value of the slider.
-         */
-        SetValue(InValue: number) : void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): Slider;
-        static Load(InName: string): Slider;
-    
-        __tid_Slider_0__: boolean;
     }
     
     class EditorUtilitySlider extends UE.Slider {
@@ -106937,29 +110915,6 @@ declare module "ue" {
         static Load(InName: string): EditorUtilityToolMenuSection;
     
         __tid_EditorUtilityToolMenuSection_0__: boolean;
-    }
-    
-    class TreeView extends UE.ListView {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        BP_OnGetItemChildren: $Delegate<(Item: $Nullable<UE.Object>, Children: $Ref<TArray<UE.Object>>) => void>;
-        BP_OnItemExpansionChanged: $MulticastDelegate<(Item: $Nullable<UE.Object>, bIsExpanded: boolean) => void>;
-        /*
-         *Collapses all currently expanded items
-         */
-        CollapseAll() : void;
-        /*
-         *Expands all items with children
-         */
-        ExpandAll() : void;
-        /*
-         *Attempts to expand_collapse the given item (only relevant if the item has children)
-         */
-        SetItemExpansion(Item: $Nullable<UE.Object>, bExpandItem: boolean) : void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): TreeView;
-        static Load(InName: string): TreeView;
-    
-        __tid_TreeView_0__: boolean;
     }
     
     class EditorUtilityTreeView extends UE.TreeView {
@@ -107492,7 +111447,6 @@ declare module "ue" {
     enum EInputDeviceAnalogStickMask { None, Left, Right, EInputDeviceAnalogStickMask_MAX, __typeKeyDoNoAccess}
     enum EInputDevices { None, Keyboard, Mouse, Gamepad, OculusTouch, HTCViveWands, AnySpatialDevice, TabletFingers, EInputDevices_MAX, __typeKeyDoNoAccess}
     enum EInputMappingRebuildType { None, Rebuild, RebuildWithFlush, EInputMappingRebuildType_MAX, __typeKeyDoNoAccess}
-    enum EInputPreProcessorType { Overlay, PreEngine, Engine, PreEditor, Editor, PreGame, Game, Count, EInputPreProcessorType_MAX, __typeKeyDoNoAccess}
     enum EInputResourceName { Color, Albedo, Normal, Output, EInputResourceName_MAX, __typeKeyDoNoAccess}
     enum EInspectedAttributeEnum { Volume, Level, InitialDynamicState, Size, EInspectedAttributeEnum_MAX, __typeKeyDoNoAccess}
     enum EInteractorHand { Right, Left, EInteractorHand_MAX, __typeKeyDoNoAccess}
@@ -107584,7 +111538,6 @@ declare module "ue" {
     enum ELightingBuildInfoObjectSets { LightingBuildInfoObjectSets_Default, LightingBuildInfoObjectSets_MAX, __typeKeyDoNoAccess}
     enum ELightMapPaddingType { LMPT_NormalPadding, LMPT_PrePadding, LMPT_NoPadding, LMPT_MAX, __typeKeyDoNoAccess}
     enum ELinkGenerationDebugFlags { WalkableSurface, WalkableBorders, SelectedEdge, SelectedEdgeTrajectory, SelectedEdgeLandingSamples, SelectedEdgeCollisions, Links, FilteredLinks, ELinkGenerationDebugFlags_MAX, __typeKeyDoNoAccess}
-    enum EListItemAlignment { EvenlyDistributed, EvenlySize, EvenlyWide, LeftAligned, RightAligned, CenterAligned, Fill, EListItemAlignment_MAX, __typeKeyDoNoAccess}
     enum EListViewColumnType { BuiltIn, PropertyGenerated, EListViewColumnType_MAX, __typeKeyDoNoAccess}
     enum ELiveCodingStartupMode { Automatic, AutomaticButHidden, Manual, ELiveCodingStartupMode_MAX, __typeKeyDoNoAccess}
     enum ELiveLinkAxis { X, Y, Z, XNeg, YNeg, ZNeg, ELiveLinkAxis_MAX, __typeKeyDoNoAccess}
@@ -107671,16 +111624,9 @@ declare module "ue" {
     enum EMediaPlateEventState { Play, Open, Close, Pause, Reverse, Forward, Rewind, Next, Previous, MAX, __typeKeyDoNoAccess}
     enum EMediaPlateResourceType { Playlist, External, Asset, EMediaPlateResourceType_MAX, __typeKeyDoNoAccess}
     enum EMediaPlayerEditorScale { Fill, Fit, Original, EMediaPlayerEditorScale_MAX, __typeKeyDoNoAccess}
-    enum EMediaPlayerOptionBooleanOverride { UseMediaPlayerSetting, Enabled, Disabled, EMediaPlayerOptionBooleanOverride_MAX, __typeKeyDoNoAccess}
-    enum EMediaPlayerOptionSeekTimeType { Ignored, RelativeToStartTime, EMediaPlayerOptionSeekTimeType_MAX, __typeKeyDoNoAccess}
-    enum EMediaPlayerOptionTrackSelectMode { UseMediaPlayerDefaults, UseTrackOptionIndices, EMediaPlayerOptionTrackSelectMode_MAX, __typeKeyDoNoAccess}
     enum EMediaPlayerRecordingImageFormat { PNG, JPEG, BMP, EXR, EMediaPlayerRecordingImageFormat_MAX, __typeKeyDoNoAccess}
     enum EMediaPlayerRecordingNumerationStyle { AppendFrameNumber, AppendSampleTime, EMediaPlayerRecordingNumerationStyle_MAX, __typeKeyDoNoAccess}
-    enum EMediaPlayerTrack { Audio, Caption, Metadata, Script, Subtitle, Text, Video, EMediaPlayerTrack_MAX, __typeKeyDoNoAccess}
-    enum EMediaSoundChannels { Mono, Stereo, Surround, EMediaSoundChannels_MAX, __typeKeyDoNoAccess}
-    enum EMediaSoundComponentFFTSize { Min_64, Small_256, Medium_512, Large_1024, EMediaSoundComponentFFTSize_MAX, __typeKeyDoNoAccess}
     enum EMediaTextureVisibleMipsTiles { None, Plane, Sphere, EMediaTextureVisibleMipsTiles_MAX, __typeKeyDoNoAccess}
-    enum EMediaTimeRangeBPType { Absolute, Current, EMediaTimeRangeBPType_MAX, __typeKeyDoNoAccess}
     enum EMediaVideoCaptureDeviceFilter { None, Card, Software, Unknown, Webcam, EMediaVideoCaptureDeviceFilter_MAX, __typeKeyDoNoAccess}
     enum EMediaWebcamCaptureDeviceFilter { None, DepthSensor, Front, Rear, Unknown, EMediaWebcamCaptureDeviceFilter_MAX, __typeKeyDoNoAccess}
     enum EMemoryUnitStandard { IEC, SI, EMemoryUnitStandard_MAX, __typeKeyDoNoAccess}
@@ -107805,8 +111751,6 @@ declare module "ue" {
     enum EMotionExtractor_Space { ComponentSpace, LocalSpace, RelativeToBone, EMotionExtractor_MAX, __typeKeyDoNoAccess}
     enum EMotionWarpRotationMethod { Slerp, SlerpWithClampedRate, ConstantRate, EMotionWarpRotationMethod_MAX, __typeKeyDoNoAccess}
     enum EMotionWarpRotationType { Default, Facing, EMotionWarpRotationType_MAX, __typeKeyDoNoAccess}
-    enum EMouseCaptureMode { NoCapture, CapturePermanently, CapturePermanently_IncludingInitialMouseDown, CaptureDuringMouseDown, CaptureDuringRightMouseDown, EMouseCaptureMode_MAX, __typeKeyDoNoAccess}
-    enum EMouseLockMode { DoNotLock, LockOnCapture, LockAlways, LockInFullscreen, EMouseLockMode_MAX, __typeKeyDoNoAccess}
     enum EMouseSelectionMethod { RectSelect, StandardSelect, EMouseSelectionMethod_MAX, __typeKeyDoNoAccess}
     enum EMoveComponentAction { Move, Stop, Return, EMoveComponentAction_MAX, __typeKeyDoNoAccess}
     enum EMoviePlaybackType { MT_Normal, MT_Looped, MT_LoadingLoop, MT_MAX, __typeKeyDoNoAccess}
@@ -108325,27 +112269,6 @@ declare module "ue" {
         __tid_EnhancedInputComponent_0__: boolean;
     }
     
-    class PlatformSettings extends UE.Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): PlatformSettings;
-        static Load(InName: string): PlatformSettings;
-    
-        __tid_PlatformSettings_0__: boolean;
-    }
-    
-    class PerPlatformSettings {
-        constructor();
-        constructor(Settings: TArray<UE.PlatformSettings>);
-        Settings: TArray<UE.PlatformSettings>;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_PerPlatformSettings_0__: boolean;
-    }
-    
     class EnhancedInputDeveloperSettings extends UE.DeveloperSettingsBackedByCVars {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         DefaultMappingContexts: TArray<UE.DefaultContextSetting>;
@@ -108678,15 +112601,6 @@ declare module "ue" {
         static Load(InName: string): EnhancedInputLibrary;
     
         __tid_EnhancedInputLibrary_0__: boolean;
-    }
-    
-    class LocalPlayerSubsystem extends UE.Subsystem {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): LocalPlayerSubsystem;
-        static Load(InName: string): LocalPlayerSubsystem;
-    
-        __tid_LocalPlayerSubsystem_0__: boolean;
     }
     
     class EnhancedInputLocalPlayerSubsystem extends UE.LocalPlayerSubsystem {
@@ -110085,7 +113999,6 @@ declare module "ue" {
     enum EObjectMixerTreeViewMode { NoFolders, Folders, EObjectMixerTreeViewMode_MAX, __typeKeyDoNoAccess}
     enum EOccludedAction { Remove, SetNewGroup, EOccludedAction_MAX, __typeKeyDoNoAccess}
     enum EOcclusionCalculationUIMode { GeneralizedWindingNumber, RaycastOcclusionSamples, EOcclusionCalculationUIMode_MAX, __typeKeyDoNoAccess}
-    enum EOcclusionCombineMode { OCM_Minimum, OCM_Multiply, OCM_MAX, __typeKeyDoNoAccess}
     enum EOcclusionTriangleSamplingUIMode { Vertices, VerticesAndCentroids, EOcclusionTriangleSamplingUIMode_MAX, __typeKeyDoNoAccess}
     enum EOfflineShaderCompiler { Mali, Adreno, EOfflineShaderCompiler_MAX, __typeKeyDoNoAccess}
     enum EOffsetClosedCurvesMethod { DoNotOffset, OffsetOuterSide, OffsetBothSides, EOffsetClosedCurvesMethod_MAX, __typeKeyDoNoAccess}
@@ -110118,6 +114031,7 @@ declare module "ue" {
     enum EOptimusTerminalType { Unknown, Entry, Return, EOptimusTerminalType_MAX, __typeKeyDoNoAccess}
     enum EOptimusValueType { Invalid, Constant, Variable, EOptimusValueType_MAX, __typeKeyDoNoAccess}
     enum EOptimusValueUsage { None, CPU, GPU, EOptimusValueUsage_MAX, __typeKeyDoNoAccess}
+    enum EOptionsListDataModifyReason { DirectlyModified, DependencyModified, ResetToDefault, EOptionsListDataModifyReason_MAX, __typeKeyDoNoAccess}
     enum EOrientAxis { None, PositiveX, PositiveY, PositiveZ, NegativeX, NegativeY, NegativeZ, EOrientAxis_MAX, __typeKeyDoNoAccess}
     enum EOrientPositionSelector { Orientation, Position, OrientationAndPosition, EOrientPositionSelector_MAX, __typeKeyDoNoAccess}
     enum EOrthoThumbnailDirection { Top, Bottom, Left, Right, Front, Back, EOrthoThumbnailDirection_MAX, __typeKeyDoNoAccess}
@@ -110387,7 +114301,6 @@ declare module "ue" {
     enum ERootSelectionMode { Disabled, Enabled, Self, ERootSelectionMode_MAX, __typeKeyDoNoAccess}
     enum ERotationGridMode { GridMode_DivisionsOf360, GridMode_Common, GridMode_MAX, __typeKeyDoNoAccess}
     enum ERotationOrderEnum { Dataflow_RotationOrder_XYZ, Dataflow_RotationOrder_YZX, Dataflow_RotationOrder_ZXY, Dataflow_RotationOrder_XZY, Dataflow_RotationOrder_YXZ, Dataflow_RotationOrder_ZYX, Dataflow_Max, Dataflow_MAX, __typeKeyDoNoAccess}
-    enum ERoundingMode { HalfToEven, HalfFromZero, HalfToZero, FromZero, ToZero, ToNegativeInfinity, ToPositiveInfinity, ERoundingMode_MAX, __typeKeyDoNoAccess}
     enum ERTDrawingType { RTAtlas, RTAtlasToNonAtlas, RTNonAtlasToAtlas, RTNonAtlas, RTMips, ERTDrawingType_MAX, __typeKeyDoNoAccess}
     enum ERuntimePartitionCellBoundsMethod { UseContent, UseCellBounds, UseMinContentCellBounds, ERuntimePartitionCellBoundsMethod_MAX, __typeKeyDoNoAccess}
     enum ERuntimeVirtualTextureMaterialQuality { Low, Medium, High, Epic, ERuntimeVirtualTextureMaterialQuality_MAX, __typeKeyDoNoAccess}
@@ -110807,8 +114720,10 @@ declare module "ue" {
     enum EWarriorConfirmType { YES, NO, EWarriorConfirmType_MAX, __typeKeyDoNoAccess}
     enum EWarriorCountDownActionInput { Start, Cancel, EWarriorCountDownActionInput_MAX, __typeKeyDoNoAccess}
     enum EWarriorCountDownActionOutput { Updated, Completed, Cancelled, EWarriorCountDownActionOutput_MAX, __typeKeyDoNoAccess}
+    enum EWarriorGameDifficulty { Easy, Normal, Hard, VeryHard, EWarriorGameDifficulty_MAX, __typeKeyDoNoAccess}
     enum EWarriorInputMode { GameOnly, UIOnly, EWarriorInputMode_MAX, __typeKeyDoNoAccess}
     enum EWarriorSuccessType { Successful, Failed, EWarriorSuccessType_MAX, __typeKeyDoNoAccess}
+    enum EWarriorSurvivalGameModeState { WaitSpawnNewWave, SpawningNewWave, InProgress, WaveCompleted, AllWavesDone, PlayerDied, EWarriorSurvivalGameModeState_MAX, __typeKeyDoNoAccess}
     enum EWarriorValidType { Valid, Invalid, EWarriorValidType_MAX, __typeKeyDoNoAccess}
     enum EWASDType { WASD_Always, WASD_RMBOnly, WASD_Never, WASD_MAX, __typeKeyDoNoAccess}
     enum EWaveFunctionType { Field_Wave_Cosine, Field_Wave_Gaussian, Field_Wave_Falloff, Field_Wave_Decay, Field_Wave_Max, Field_Wave_MAX, __typeKeyDoNoAccess}
@@ -110891,89 +114806,6 @@ declare module "ue" {
         static StaticClass(): ScriptStruct;
         static StaticStruct(): ScriptStruct;
         __tid_ExplodedViewDataflowNode_0__: boolean;
-    }
-    
-    class ExponentialHeightFogData {
-        constructor();
-        constructor(FogDensity: number, FogHeightFalloff: number, FogHeightOffset: number);
-        FogDensity: number;
-        FogHeightFalloff: number;
-        FogHeightOffset: number;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_ExponentialHeightFogData_0__: boolean;
-    }
-    
-    class ExponentialHeightFogComponent extends UE.SceneComponent {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        FogDensity: number;
-        FogHeightFalloff: number;
-        SecondFogData: UE.ExponentialHeightFogData;
-        FogInscatteringColor: UE.LinearColor;
-        FogInscatteringLuminance: UE.LinearColor;
-        SkyAtmosphereAmbientContributionColorScale: UE.LinearColor;
-        InscatteringColorCubemap: UE.TextureCube;
-        InscatteringColorCubemapAngle: number;
-        InscatteringTextureTint: UE.LinearColor;
-        FullyDirectionalInscatteringColorDistance: number;
-        NonDirectionalInscatteringColorDistance: number;
-        DirectionalInscatteringExponent: number;
-        DirectionalInscatteringStartDistance: number;
-        DirectionalInscatteringColor: UE.LinearColor;
-        DirectionalInscatteringLuminance: UE.LinearColor;
-        FogMaxOpacity: number;
-        StartDistance: number;
-        EndDistance: number;
-        FogCutoffDistance: number;
-        bEnableVolumetricFog: boolean;
-        VolumetricFogScatteringDistribution: number;
-        VolumetricFogAlbedo: UE.Color;
-        VolumetricFogEmissive: UE.LinearColor;
-        VolumetricFogExtinctionScale: number;
-        VolumetricFogDistance: number;
-        VolumetricFogStartDistance: number;
-        VolumetricFogNearFadeInDistance: number;
-        VolumetricFogStaticLightingScatteringIntensity: number;
-        bOverrideLightColorsWithFogInscatteringColors: boolean;
-        bHoldout: boolean;
-        bRenderInMainPass: boolean;
-        SetDirectionalInscatteringColor(Value: UE.LinearColor) : void;
-        SetDirectionalInscatteringExponent(Value: number) : void;
-        SetDirectionalInscatteringStartDistance(Value: number) : void;
-        SetEndDistance(Value: number) : void;
-        SetFogCutoffDistance(Value: number) : void;
-        SetFogDensity(Value: number) : void;
-        SetFogHeightFalloff(Value: number) : void;
-        SetFogInscatteringColor(Value: UE.LinearColor) : void;
-        SetFogMaxOpacity(Value: number) : void;
-        SetFullyDirectionalInscatteringColorDistance(Value: number) : void;
-        SetHoldout(bNewHoldout: boolean) : void;
-        SetInscatteringColorCubemap(Value: $Nullable<UE.TextureCube>) : void;
-        SetInscatteringColorCubemapAngle(Value: number) : void;
-        SetInscatteringTextureTint(Value: UE.LinearColor) : void;
-        SetNonDirectionalInscatteringColorDistance(Value: number) : void;
-        SetRenderInMainPass(bValue: boolean) : void;
-        SetSecondFogData(NewValue: UE.ExponentialHeightFogData) : void;
-        SetSecondFogDensity(Value: number) : void;
-        SetSecondFogHeightFalloff(Value: number) : void;
-        SetSecondFogHeightOffset(Value: number) : void;
-        SetStartDistance(Value: number) : void;
-        SetVolumetricFog(bNewValue: boolean) : void;
-        SetVolumetricFogAlbedo(NewValue: UE.Color) : void;
-        SetVolumetricFogDistance(NewValue: number) : void;
-        SetVolumetricFogEmissive(NewValue: UE.LinearColor) : void;
-        SetVolumetricFogExtinctionScale(NewValue: number) : void;
-        SetVolumetricFogNearFadeInDistance(NewValue: number) : void;
-        SetVolumetricFogScatteringDistribution(NewValue: number) : void;
-        SetVolumetricFogStartDistance(NewValue: number) : void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): ExponentialHeightFogComponent;
-        static Load(InName: string): ExponentialHeightFogComponent;
-    
-        __tid_ExponentialHeightFogComponent_0__: boolean;
     }
     
     class ExponentialHeightFog extends UE.Info {
@@ -112799,19 +116631,6 @@ declare module "ue" {
         static Load(InName: string): FloatingText;
     
         __tid_FloatingText_0__: boolean;
-    }
-    
-    class FloatInterval {
-        constructor();
-        constructor(Min: number, Max: number);
-        Min: number;
-        Max: number;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_FloatInterval_0__: boolean;
     }
     
     class FloatMathExpressionDataflowNode extends UE.DataflowNode {
@@ -115535,6 +119354,77 @@ declare module "ue" {
         __tid_FreezablePerPlatformInt_0__: boolean;
     }
     
+    class FrontendCommonButtonBase extends UE.CommonButtonBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        CommonTextBlock_ButtonText: UE.CommonTextBlock;
+        CommonLazyImage_ButtonImage: UE.CommonLazyImage;
+        ButtonDisplayText: string;
+        bUserUpperCaseForButtonText: boolean;
+        ButtonDescriptionText: string;
+        GetButtonDisplayText() : string;
+        SetButtonDisplayImage(InBrush: UE.SlateBrush) : void;
+        SetButtonText(InText: string) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): FrontendCommonButtonBase;
+        static Load(InName: string): FrontendCommonButtonBase;
+    
+        __tid_FrontendCommonButtonBase_0__: boolean;
+    }
+    
+    class FrontendDeveloperSettings extends UE.DeveloperSettings {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        FrontendWidgetMap: TMap<UE.GameplayTag, TSoftClassPtr<UE.Widget_ActivatableBase>>;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): FrontendDeveloperSettings;
+        static Load(InName: string): FrontendDeveloperSettings;
+    
+        __tid_FrontendDeveloperSettings_0__: boolean;
+    }
+    
+    class FrontendFunctionLibrary extends UE.BlueprintFunctionLibrary {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static GetFrontendSoftWidgetClassByTag(InWidgetTag: UE.GameplayTag) : TSoftClassPtr<UE.Widget_ActivatableBase>;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): FrontendFunctionLibrary;
+        static Load(InName: string): FrontendFunctionLibrary;
+    
+        __tid_FrontendFunctionLibrary_0__: boolean;
+    }
+    
+    class FrontendTabListWidgetBase extends UE.CommonTabListWidgetBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        DebugEditorPreviewTabCount: number;
+        TabButtonEntryWidgetClass: UE.Class;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): FrontendTabListWidgetBase;
+        static Load(InName: string): FrontendTabListWidgetBase;
+    
+        __tid_FrontendTabListWidgetBase_0__: boolean;
+    }
+    
+    class Widget_PrimaryLayout extends UE.CommonUserWidget {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        RegisteredWidgetStackMap: TMap<UE.GameplayTag, UE.CommonActivatableWidgetContainerBase>;
+        RegisterWidgetStack(InStackTag: UE.GameplayTag, InStack: $Nullable<UE.CommonActivatableWidgetContainerBase>) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): Widget_PrimaryLayout;
+        static Load(InName: string): Widget_PrimaryLayout;
+    
+        __tid_Widget_PrimaryLayout_0__: boolean;
+    }
+    
+    class FrontendUISubsystem extends UE.GameInstanceSubsystem {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        OnButtonDescriptionTextUpdated: $MulticastDelegate<(BroadcastingButton: $Nullable<UE.FrontendCommonButtonBase>, DescriptionText: string) => void>;
+        CreatedPrimaryLayout: UE.Widget_PrimaryLayout;
+        RegisterCreatedPrimaryLayoutWidget(InCreatedWidget: $Nullable<UE.Widget_PrimaryLayout>) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): FrontendUISubsystem;
+        static Load(InName: string): FrontendUISubsystem;
+    
+        __tid_FrontendUISubsystem_0__: boolean;
+    }
+    
     enum FTypedElementAlertColumnType { Error, Warning, MAX, __typeKeyDoNoAccess}
     class FullObjectReplicationData {
         constructor();
@@ -116143,15 +120033,6 @@ declare module "ue" {
         static Load(InName: string): GameEngine;
     
         __tid_GameEngine_0__: boolean;
-    }
-    
-    class GameInstanceSubsystem extends UE.Subsystem {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): GameInstanceSubsystem;
-        static Load(InName: string): GameInstanceSubsystem;
-    
-        __tid_GameInstanceSubsystem_0__: boolean;
     }
     
     class TemplateMapInfoOverride {
@@ -124063,6 +127944,16 @@ declare module "ue" {
         __tid_GuidNetSerializerConfig_0__: boolean;
     }
     
+    class GWOGameMode extends UE.GameModeBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        CurrentGameDifficulty: UE.EWarriorGameDifficulty;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): GWOGameMode;
+        static Load(InName: string): GWOGameMode;
+    
+        __tid_GWOGameMode_0__: boolean;
+    }
+    
     class HairStrandsFactory extends UE.Factory {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -124195,6 +128086,18 @@ declare module "ue" {
         __tid_HardwareTargetingSettings_0__: boolean;
     }
     
+    namespace Engine.PythonTypes {
+        class HardwareVisibilityTagsChangedDynamicEvent__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): HardwareVisibilityTagsChangedDynamicEvent__PythonCallable;
+            static Load(InName: string): HardwareVisibilityTagsChangedDynamicEvent__PythonCallable;
+        
+            __tid_HardwareVisibilityTagsChangedDynamicEvent__PythonCallable_0__: boolean;
+        }
+        
+    }
+
     class HarvestInstancesToolSettings extends UE.InteractiveToolPropertySet {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         bDrawBounds: boolean;
@@ -124386,6 +128289,15 @@ declare module "ue" {
         static Load(InName: string): WarriorGameplayAbility;
     
         __tid_WarriorGameplayAbility_0__: boolean;
+    }
+    
+    class WarriorHeroController extends UE.PlayerController {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): WarriorHeroController;
+        static Load(InName: string): WarriorHeroController;
+    
+        __tid_WarriorHeroController_0__: boolean;
     }
     
     class WarriorHeroGameplayAbility extends UE.WarriorGameplayAbility {
@@ -125926,68 +129838,6 @@ declare module "ue" {
         __tid_ilterState_0__: boolean;
     }
     
-    class SlateTextureAtlasInterface extends UE.Interface {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SlateTextureAtlasInterface;
-        static Load(InName: string): SlateTextureAtlasInterface;
-    
-        __tid_SlateTextureAtlasInterface_0__: boolean;
-    }
-    
-    class Image extends UE.Widget {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Brush: UE.SlateBrush;
-        BrushDelegate: $Delegate<() => UE.SlateBrush>;
-        ColorAndOpacity: UE.LinearColor;
-        ColorAndOpacityDelegate: $Delegate<() => UE.LinearColor>;
-        bFlipForRightToLeftFlowDirection: boolean;
-        OnMouseButtonDownEvent: $Delegate<(MyGeometry: UE.Geometry, MouseEvent: UE.PointerEvent) => UE.EventReply>;
-        GetDynamicMaterial() : UE.MaterialInstanceDynamic;
-        SetBrush(InBrush: UE.SlateBrush) : void;
-        SetBrushFromAsset(Asset: $Nullable<UE.SlateBrushAsset>) : void;
-        /*
-         *Sets the Brush to the specified Atlas Region.
-         *
-         *  @param AtlasRegion Region of the Atlas to use to set on Brush.
-         *      @param bMatchSize If true, image will change its size to atlas region size. If false, atlas region will be stretched to image size.
-         */
-        SetBrushFromAtlasInterface(AtlasRegion: UE.SlateTextureAtlasInterface, bMatchSize?: boolean /* = false */) : void;
-        SetBrushFromMaterial(Material: $Nullable<UE.MaterialInterface>) : void;
-        SetBrushFromSoftMaterial(SoftMaterial: TSoftObjectPtr<UE.MaterialInterface>) : void;
-        /*
-         *Sets the Brush to the specified Soft Texture.
-         *
-         *  @param SoftTexture Soft Texture to use to set on Brush.
-         *      @param bMatchSize If true, image will change its size to texture size. If false, texture will be stretched to image size.
-         */
-        SetBrushFromSoftTexture(SoftTexture: TSoftObjectPtr<UE.Texture2D>, bMatchSize?: boolean /* = false */) : void;
-        /*
-         *Sets the Brush to the specified Texture.
-         *
-         *  @param Texture Texture to use to set on Brush.
-         *      @param bMatchSize If true, image will change its size to texture size. If false, texture will be stretched to image size.
-         */
-        SetBrushFromTexture(Texture: $Nullable<UE.Texture2D>, bMatchSize?: boolean /* = false */) : void;
-        /*
-         *Sets the Brush to the specified Dynamic Texture.
-         *
-         *  @param Texture Dynamic Texture to use to set on Brush.
-         *      @param bMatchSize If true, image will change its size to texture size. If false, texture will be stretched to image size.
-         */
-        SetBrushFromTextureDynamic(Texture: $Nullable<UE.Texture2DDynamic>, bMatchSize?: boolean /* = false */) : void;
-        SetBrushResourceObject(ResourceObject: $Nullable<UE.Object>) : void;
-        SetBrushTintColor(TintColor: UE.SlateColor) : void;
-        SetColorAndOpacity(InColorAndOpacity: UE.LinearColor) : void;
-        SetDesiredSizeOverride(DesiredSize: UE.Vector2D) : void;
-        SetOpacity(InOpacity: number) : void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): Image;
-        static Load(InName: string): Image;
-    
-        __tid_Image_0__: boolean;
-    }
-    
     class ImageSequenceProtocol_BMP extends UE.ImageSequenceProtocol {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -127405,6 +131255,18 @@ declare module "ue" {
         __tid_InputMappingContext_Factory_0__: boolean;
     }
     
+    namespace Engine.PythonTypes {
+        class InputMethodChangedDelegate__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): InputMethodChangedDelegate__PythonCallable;
+            static Load(InName: string): InputMethodChangedDelegate__PythonCallable;
+        
+            __tid_InputMethodChangedDelegate__PythonCallable_0__: boolean;
+        }
+        
+    }
+
     class InputModifierDeadZone extends UE.InputModifier {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         LowerThreshold: number;
@@ -127547,19 +131409,6 @@ declare module "ue" {
         static Load(InName: string): InputPlatformSettings;
     
         __tid_InputPlatformSettings_0__: boolean;
-    }
-    
-    class InputPreprocessorRegistrationKey {
-        constructor();
-        constructor(Type: UE.EInputPreProcessorType, Priority: number);
-        Type: UE.EInputPreProcessorType;
-        Priority: number;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_InputPreprocessorRegistrationKey_0__: boolean;
     }
     
     namespace Engine.PythonTypes {
@@ -147962,946 +151811,6 @@ declare module "ue" {
         __tid_LevelSequenceLegacyObjectReference_0__: boolean;
     }
     
-    enum MediaTextureOutputFormat { MTOF_Default, MTOF_SRGB_LINOUT, MTOF_MAX, __typeKeyDoNoAccess}
-    enum MediaTextureOrientation { MTORI_Original, MTORI_CW90, MTORI_CW180, MTORI_CW270, MTORI_MAX, __typeKeyDoNoAccess}
-    class MediaPlaylist extends UE.Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Items: TArray<UE.MediaSource>;
-        /*
-         *Add a media source to the play list.
-         *
-         *@param MediaSource The media source to append.
-         *@return true if the media source was added, false otherwise.
-         *@see AddFile, AddUrl, Insert, RemoveAll, Remove, Replace
-         */
-        Add(MediaSource: $Nullable<UE.MediaSource>) : boolean;
-        /*
-         *Add a media file path to the play list.
-         *
-         *@param FilePath The file path to add.
-         *@return true if the file was added, false otherwise.
-         *@see Add, AddUrl, Insert, RemoveAll, Remove, Replace
-         */
-        AddFile(FilePath: string) : boolean;
-        /*
-         *Add a media URL to the play list.
-         *
-         *@param Url The URL to add.
-         *@return true if the URL was added, false otherwise.
-         *@see Add, AddFile, Insert, RemoveAll, Remove, Replace
-         */
-        AddUrl(Url: string) : boolean;
-        /*
-         *Get the media source at the specified index.
-         *
-         *@param Index The index of the media source to get.
-         *@return The media source, or nullptr if the index doesn't exist.
-         *@see GetNext, GetRandom
-         */
-        Get(Index: number) : UE.MediaSource;
-        /*
-         *Get the next media source in the play list.
-         *
-         *@param InOutIndex Index of the current media source (will contain the new index).
-         *@return The media source after the current one, or nullptr if the list is empty.
-         *@see , GetPrevious, GetRandom
-         */
-        GetNext(InOutIndex: $Ref<number>) : UE.MediaSource;
-        /*
-         *Get the previous media source in the play list.
-         *
-         *@param InOutIndex Index of the current media source (will contain the new index).
-         *@return The media source before the current one, or nullptr if the list is empty.
-         *@see , GetNext, GetRandom
-         */
-        GetPrevious(InOutIndex: $Ref<number>) : UE.MediaSource;
-        /*
-         *Get a random media source in the play list.
-         *
-         *@param OutIndex Will contain the index of the returned media source.
-         *@return The random media source, or nullptr if the list is empty.
-         *@see Get, GetNext, GetPrevious
-         */
-        GetRandom(OutIndex: $Ref<number>) : UE.MediaSource;
-        /*
-         *Insert a media source into the play list at the given position.
-         *
-         *@param MediaSource The media source to insert.
-         *@param Index The index to insert into.
-         *@see Add, Remove, RemoveAll, Replace
-         */
-        Insert(MediaSource: $Nullable<UE.MediaSource>, Index: number) : void;
-        /*
-         *Get the number of media sources in the play list.
-         *
-         *@return Number of media sources.
-         */
-        Num() : number;
-        /*
-         *Remove all occurrences of the given media source in the play list.
-         *
-         *@param MediaSource The media source to remove.
-         *@return true if the media source was removed, false otherwise.
-         *@see Add, Insert, Remove, Replace
-         */
-        Remove(MediaSource: $Nullable<UE.MediaSource>) : boolean;
-        /*
-         *Remove the media source at the specified position.
-         *
-         *@param Index The index of the media source to remove.
-         *@return true if the media source was removed, false otherwise.
-         *@see Add, Insert, RemoveAll, Replace
-         */
-        RemoveAt(Index: number) : boolean;
-        /*
-         *Replace the media source at the specified position.
-         *
-         *@param Index The index of the media source to replace.
-         *@param Replacement The replacement media source.
-         *@return true if the media source was replaced, false otherwise.
-         *@see Add, Insert, RemoveAll, RemoveAt
-         */
-        Replace(Index: number, Replacement: $Nullable<UE.MediaSource>) : boolean;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): MediaPlaylist;
-        static Load(InName: string): MediaPlaylist;
-    
-        __tid_MediaPlaylist_0__: boolean;
-    }
-    
-    class MediaPlayerTrackOptions {
-        constructor();
-        constructor(Audio: number, Caption: number, Metadata: number, Script: number, Subtitle: number, Text: number, Video: number);
-        Audio: number;
-        Caption: number;
-        Metadata: number;
-        Script: number;
-        Subtitle: number;
-        Text: number;
-        Video: number;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_MediaPlayerTrackOptions_0__: boolean;
-    }
-    
-    class MediaPlayerOptions {
-        constructor();
-        constructor(Tracks: UE.MediaPlayerTrackOptions, TrackSelection: UE.EMediaPlayerOptionTrackSelectMode, SeekTime: UE.Timespan, SeekTimeType: UE.EMediaPlayerOptionSeekTimeType, PlayOnOpen: UE.EMediaPlayerOptionBooleanOverride, Loop: UE.EMediaPlayerOptionBooleanOverride);
-        Tracks: UE.MediaPlayerTrackOptions;
-        TrackSelection: UE.EMediaPlayerOptionTrackSelectMode;
-        SeekTime: UE.Timespan;
-        SeekTimeType: UE.EMediaPlayerOptionSeekTimeType;
-        PlayOnOpen: UE.EMediaPlayerOptionBooleanOverride;
-        Loop: UE.EMediaPlayerOptionBooleanOverride;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_MediaPlayerOptions_0__: boolean;
-    }
-    
-    class MediaTimeStampInfo extends UE.Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Time: UE.Timespan;
-        SequenceIndex: bigint;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): MediaTimeStampInfo;
-        static Load(InName: string): MediaTimeStampInfo;
-    
-        __tid_MediaTimeStampInfo_0__: boolean;
-    }
-    
-    class MediaMetadataItemBPT {
-        constructor();
-        constructor(LanguageCode: string, MimeType: string, StringData: string, BinaryData: TArray<number>);
-        LanguageCode: string;
-        MimeType: string;
-        StringData: string;
-        BinaryData: TArray<number>;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_MediaMetadataItemBPT_0__: boolean;
-    }
-    
-    class MediaMetadataItemsBPT {
-        constructor();
-        constructor(Items: TArray<UE.MediaMetadataItemBPT>);
-        Items: TArray<UE.MediaMetadataItemBPT>;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_MediaMetadataItemsBPT_0__: boolean;
-    }
-    
-    class MediaPlayer extends UE.Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        OnEndReached: $MulticastDelegate<() => void>;
-        OnMediaClosed: $MulticastDelegate<() => void>;
-        OnMediaOpened: $MulticastDelegate<(OpenedUrl: string) => void>;
-        OnMediaOpenFailed: $MulticastDelegate<(FailedUrl: string) => void>;
-        OnPlaybackResumed: $MulticastDelegate<() => void>;
-        OnPlaybackSuspended: $MulticastDelegate<() => void>;
-        OnSeekCompleted: $MulticastDelegate<() => void>;
-        OnTracksChanged: $MulticastDelegate<() => void>;
-        OnMetadataChanged: $MulticastDelegate<() => void>;
-        CacheAhead: UE.Timespan;
-        CacheBehind: UE.Timespan;
-        CacheBehindGame: UE.Timespan;
-        NativeAudioOut: boolean;
-        PlayOnOpen: boolean;
-        Shuffle: boolean;
-        Loop: boolean;
-        Playlist: UE.MediaPlaylist;
-        PlaylistIndex: number;
-        TimeDelay: UE.Timespan;
-        HorizontalFieldOfView: number;
-        VerticalFieldOfView: number;
-        ViewRotation: UE.Rotator;
-        PlayerGuid: UE.Guid;
-        AffectedByPIEHandling_EditorOnly: boolean;
-        /*
-         *Check whether media playback can be paused right now.
-         *
-         *Playback can be paused if the media supports pausing and if it is currently playing.
-         *
-         *@return true if pausing playback can be paused, false otherwise.
-         *@see CanPlay, Pause
-         */
-        CanPause() : boolean;
-        /*
-         *Check whether the specified media source can be played by this player.
-         *
-         *If a desired player name is set for this player, it will only check
-         *whether that particular player type can play the specified source.
-         *
-         *@param MediaSource The media source to check.
-         *@return true if the media source can be opened, false otherwise.
-         *@see CanPlayUrl, SetDesiredPlayerName
-         */
-        CanPlaySource(MediaSource: $Nullable<UE.MediaSource>) : boolean;
-        /*
-         *Check whether the specified URL can be played by this player.
-         *
-         *If a desired player name is set for this player, it will only check
-         *whether that particular player type can play the specified URL.
-         *
-         *@param Url The URL to check.
-         *@see CanPlaySource, SetDesiredPlayerName
-         */
-        CanPlayUrl(Url: string) : boolean;
-        /*
-         *Close the currently open media, if any.
-         *
-         *@see OnMediaClosed, OpenPlaylist, OpenPlaylistIndex, OpenSource, OpenUrl, Pause, Play
-         */
-        Close() : void;
-        /*
-         *Get the number of channels in the specified audio track.
-         *
-         *@param TrackIndex Index of the audio track, or INDEX_NONE for the selected one.
-         *@param FormatIndex Index of the track format, or INDEX_NONE for the selected one.
-         *@return Number of channels.
-         *@see GetAudioTrackSampleRate, GetAudioTrackType
-         */
-        GetAudioTrackChannels(TrackIndex: number, FormatIndex: number) : number;
-        /*
-         *Get the sample rate of the specified audio track.
-         *
-         *@param TrackIndex Index of the audio track, or INDEX_NONE for the selected one.
-         *@param FormatIndex Index of the track format, or INDEX_NONE for the selected one.
-         *@return Samples per second.
-         *@see GetAudioTrackChannels, GetAudioTrackType
-         */
-        GetAudioTrackSampleRate(TrackIndex: number, FormatIndex: number) : number;
-        /*
-         *Get the type of the specified audio track format.
-         *
-         *@param TrackIndex The index of the track, or INDEX_NONE for the selected one.
-         *@param FormatIndex Index of the track format, or INDEX_NONE for the selected one.
-         *@return Audio format type string.
-         *@see GetAudioTrackSampleRate, GetAudioTrackSampleRate
-         */
-        GetAudioTrackType(TrackIndex: number, FormatIndex: number) : string;
-        /*
-         *Get the name of the current desired native player.
-         *
-         *@return The name of the desired player, or NAME_None if not set.
-         *@see SetDesiredPlayerName
-         */
-        GetDesiredPlayerName() : string;
-        /*
-         *Get the media's current playback time as appropriate for display.
-         *
-         *@return Playback time.
-         *@see GetDuration, Seek
-         */
-        GetDisplayTime() : UE.Timespan;
-        /*
-         *Get the media's current playback timestamp as appropriate for display.
-         *
-         *@return Playback timestamp.
-         *@see GetDuration, Seek
-         */
-        GetDisplayTimeStamp() : UE.MediaTimeStampInfo;
-        /*
-         *Get the media's duration.
-         *
-         *@return A time span representing the duration.
-         *@see GetTime, Seek
-         */
-        GetDuration() : UE.Timespan;
-        /*
-         *Get the current horizontal field of view (only for 360 videos).
-         *
-         *@return Horizontal field of view (in Euler degrees).
-         *@see GetVerticalFieldOfView, GetViewRotation, SetHorizontalFieldOfView
-         */
-        GetHorizontalFieldOfView() : number;
-        /*
-         *This is the blueprint accessible version of the GetMediaMetadata.
-         *@return Map with arrays of FMediaMetaDataItem entries describing any metadata found in the current stream
-         *@note Listen to EMediaEvent::MetadataChanged to catch updates to this data
-         */
-        GetMediaMetadataItems() : TMap<string, UE.MediaMetadataItemsBPT>;
-        /*
-         *Get the human readable name of the currently loaded media source.
-         *
-         *@return Media source name, or empty text if no media is opened
-         *@see GetPlayerName, GetUrl
-         */
-        GetMediaName() : string;
-        /*
-         *Get the number of formats of the specified track.
-         *
-         *@param TrackType The type of media tracks.
-         *@param TrackIndex The index of the track.
-         *@return Number of formats.
-         *@see GetNumTracks, GetSelectedTrack, SelectTrack
-         */
-        GetNumTrackFormats(TrackType: UE.EMediaPlayerTrack, TrackIndex: number) : number;
-        /*
-         *Get the number of tracks of the given type.
-         *
-         *@param TrackType The type of media tracks.
-         *@return Number of tracks.
-         *@see GetNumTrackFormats, GetSelectedTrack, SelectTrack
-         */
-        GetNumTracks(TrackType: UE.EMediaPlayerTrack) : number;
-        /*
-         *Blueprint accessible version of GetPlaybackTimeRange.
-         *This returns the range truncated into a blueprint usable float interval and should not
-         *be used for live streams as 32 bit floats can not store wallclock times with enough precision.
-         */
-        GetPlaybackTimeRange(InRangeToGet: UE.EMediaTimeRangeBPType) : UE.FloatInterval;
-        /*
-         *Get the name of the current native media player.
-         *
-         *@return Player name, or NAME_None if not available.
-         *@see GetMediaName
-         */
-        GetPlayerName() : string;
-        /*
-         *Get the current play list.
-         *
-         *Media players always have a valid play list. In C++ code you can use
-         *the GetPlaylistRef to get a reference instead of a pointer to it.
-         *
-         *@return The play list.
-         *@see GetPlaylistIndex, GetPlaylistRef
-         */
-        GetPlaylist() : UE.MediaPlaylist;
-        /*
-         *Get the current play list index.
-         *
-         *@return Play list index.
-         *@see GetPlaylist
-         */
-        GetPlaylistIndex() : number;
-        /*
-         *Get the media's current playback rate.
-         *
-         *@return The playback rate.
-         *@see SetRate, SupportsRate
-         */
-        GetRate() : number;
-        /*
-         *Get the index of the currently selected track of the given type.
-         *
-         *@param TrackType The type of track to get.
-         *@return The index of the selected track, or INDEX_NONE if no track is active.
-         *@see GetNumTracks, GetTrackFormat, SelectTrack
-         */
-        GetSelectedTrack(TrackType: UE.EMediaPlayerTrack) : number;
-        /*
-         *Get the supported playback rates.
-         *
-         *@param Unthinned Whether the rates are for unthinned playback.
-         *@param Will contain the the ranges of supported rates.
-         *@see SetRate, SupportsRate
-         */
-        GetSupportedRates(OutRates: $Ref<TArray<UE.FloatRange>>, Unthinned: boolean) : void;
-        /*
-         *Get the media's current playback time.
-         *
-         *@return Playback time.
-         *@see GetDuration, Seek
-         */
-        GetTime() : UE.Timespan;
-        /*
-         *Delay of the player's time.
-         *
-         *@return Delay added to the player's time used to manually sync multiple sources.
-         *@see SetTimeDelay
-         */
-        GetTimeDelay() : UE.Timespan;
-        /*
-         *Get the media's current playback timestamp.
-         *
-         *@return Playback timestamp.
-         *@see GetDuration, Seek
-         */
-        GetTimeStamp() : UE.MediaTimeStampInfo;
-        /*
-         *Get the human readable name of the specified track.
-         *
-         *@param TrackType The type of track.
-         *@param TrackIndex The index of the track, or INDEX_NONE for the selected one.
-         *@return Display name.
-         *@see GetNumTracks, GetTrackLanguage
-         */
-        GetTrackDisplayName(TrackType: UE.EMediaPlayerTrack, TrackIndex: number) : string;
-        /*
-         *Get the index of the active format of the specified track type.
-         *
-         *@param TrackType The type of track.
-         *@param TrackIndex The index of the track, or INDEX_NONE for the selected one.
-         *@return The index of the selected format.
-         *@see GetNumTrackFormats, GetSelectedTrack, SetTrackFormat
-         */
-        GetTrackFormat(TrackType: UE.EMediaPlayerTrack, TrackIndex: number) : number;
-        /*
-         *Get the language tag of the specified track.
-         *
-         *@param TrackType The type of track.
-         *@param TrackIndex The index of the track, or INDEX_NONE for the selected one.
-         *@return Language tag, i.e. "en-US" for English, or "und" for undefined.
-         *@see GetNumTracks, GetTrackDisplayName
-         */
-        GetTrackLanguage(TrackType: UE.EMediaPlayerTrack, TrackIndex: number) : string;
-        /*
-         *Get the URL of the currently loaded media, if any.
-         *
-         *@return Media URL, or empty string if no media was loaded.
-         *@see OpenUrl
-         */
-        GetUrl() : string;
-        /*
-         *Get the current vertical field of view (only for 360 videos).
-         *
-         *@return Vertical field of view (in Euler degrees), or 0.0 if not available.
-         *@see GetHorizontalFieldOfView, GetViewRotation, SetVerticalFieldOfView
-         */
-        GetVerticalFieldOfView() : number;
-        /*
-         *Get the aspect ratio of the specified video track.
-         *
-         *@param TrackIndex Index of the video track, or INDEX_NONE for the selected one.
-         *@param FormatIndex Index of the track format, or INDEX_NONE for the selected one.
-         *@return Aspect ratio.
-         *@see GetVideoTrackDimensions, GetVideoTrackFrameRate, GetVideoTrackFrameRates, GetVideoTrackType
-         */
-        GetVideoTrackAspectRatio(TrackIndex: number, FormatIndex: number) : number;
-        /*
-         *Get the current dimensions of the specified video track.
-         *
-         *@param TrackIndex The index of the track, or INDEX_NONE for the selected one.
-         *@param FormatIndex Index of the track format, or INDEX_NONE for the selected one.
-         *@return Video dimensions (in pixels).
-         *@see GetVideoTrackAspectRatio, GetVideoTrackFrameRate, GetVideoTrackFrameRates, GetVideoTrackType
-         */
-        GetVideoTrackDimensions(TrackIndex: number, FormatIndex: number) : UE.IntPoint;
-        /*
-         *Get the frame rate of the specified video track.
-         *
-         *@param TrackIndex The index of the track, or INDEX_NONE for the selected one.
-         *@param FormatIndex Index of the track format, or INDEX_NONE for the selected one.
-         *@return Frame rate (in frames per second).
-         *@see GetVideoTrackAspectRatio, GetVideoTrackDimensions, GetVideoTrackFrameRates, GetVideoTrackType, SetVideoTrackFrameRate
-         */
-        GetVideoTrackFrameRate(TrackIndex: number, FormatIndex: number) : number;
-        /*
-         *Get the supported range of frame rates of the specified video track.
-         *
-         *@param TrackIndex The index of the track, or INDEX_NONE for the selected one.
-         *@param FormatIndex Index of the track format, or INDEX_NONE for the selected one.
-         *@return Frame rate range (in frames per second).
-         *@see GetVideoTrackAspectRatio, GetVideoTrackDimensions, GetVideoTrackFrameRate, GetVideoTrackType
-         */
-        GetVideoTrackFrameRates(TrackIndex: number, FormatIndex: number) : UE.FloatRange;
-        /*
-         *Get the type of the specified video track format.
-         *
-         *@param TrackIndex The index of the track, or INDEX_NONE for the selected one.
-         *@param FormatIndex Index of the track format, or INDEX_NONE for the selected one.
-         *@return Video format type string.
-         *@see GetVideoTrackAspectRatio, GetVideoTrackDimensions, GetVideoTrackFrameRate, GetVideoTrackFrameRates
-         */
-        GetVideoTrackType(TrackIndex: number, FormatIndex: number) : string;
-        /*
-         *Get the current view rotation (only for 360 videos).
-         *
-         *@return View rotation, or zero rotator if not available.
-         *@see GetHorizontalFieldOfView, GetVerticalFieldOfView, SetViewRotation
-         */
-        GetViewRotation() : UE.Rotator;
-        /*
-         *Check whether the player is in an error state.
-         *
-         *When the player is in an error state, no further operations are possible.
-         *The current media must be closed, and a new media source must be opened
-         *before the player can be used again. Errors are usually caused by faulty
-         *media files or interrupted network connections.
-         *
-         *@see IsReady
-         */
-        HasError() : boolean;
-        /*
-         *Check whether playback is buffering data.
-         *
-         *@return true if looping, false otherwise.
-         *@see IsConnecting, IsLooping, IsPaused, IsPlaying, IsPreparing, IsReady
-         */
-        IsBuffering() : boolean;
-        /*
-         *Whether media is currently closed.
-         *
-         *@return true if media is closed, false otherwise.
-         */
-        IsClosed() : boolean;
-        /*
-         *Check whether the player is currently connecting to a media source.
-         *
-         *@return true if connecting, false otherwise.
-         *@see IsBuffering, IsLooping, IsPaused, IsPlaying, IsPreparing, IsReady
-         */
-        IsConnecting() : boolean;
-        /*
-         *Check whether playback is looping.
-         *
-         *@return true if looping, false otherwise.
-         *@see IsBuffering, IsConnecting, IsPaused, IsPlaying, IsPreparing, IsReady, SetLooping
-         */
-        IsLooping() : boolean;
-        /*
-         *Check whether playback is currently paused.
-         *
-         *@return true if playback is paused, false otherwise.
-         *@see CanPause, IsBuffering, IsConnecting, IsLooping, IsPaused, IsPlaying, IsPreparing, IsReady, Pause
-         */
-        IsPaused() : boolean;
-        /*
-         *Check whether playback has started.
-         *
-         *@return true if playback has started, false otherwise.
-         *@see CanPlay, IsBuffering, IsConnecting, IsLooping, IsPaused, IsPlaying, IsPreparing, IsReady, Play
-         */
-        IsPlaying() : boolean;
-        /*
-         *Check whether the media is currently opening or buffering.
-         *
-         *@return true if playback is being prepared, false otherwise.
-         *@see CanPlay, IsBuffering, IsConnecting, IsLooping, IsPaused, IsPlaying, IsReady, Play
-         */
-        IsPreparing() : boolean;
-        /*
-         *Check whether media is ready for playback.
-         *
-         *A player is ready for playback if it has a media source opened that
-         *finished preparing and is not in an error state.
-         *
-         *@return true if media is ready, false otherwise.
-         *@see HasError, IsBuffering, IsConnecting, IsLooping, IsPaused, IsPlaying, IsPreparing
-         */
-        IsReady() : boolean;
-        /*
-         *Open the next item in the current play list.
-         *
-         *The player will start playing the new media source if it was playing
-         *something previously, otherwise it will only open the media source.
-         *
-         *@return true on success, false otherwise.
-         *@see Close, OpenUrl, OpenSource, Play, Previous, SetPlaylist
-         */
-        Next() : boolean;
-        /*
-         *Opens the specified media file path.
-         *
-         *A return value of true indicates that the player will attempt to open
-         *the media, but it may fail to do so later for other reasons, i.e. if
-         *a connection to the media server timed out. Use the OnMediaOpened and
-         *OnMediaOpenFailed delegates to detect if and when the media is ready!
-         *
-         *@param FilePath The file path to open.
-         *@return true if the file path will be opened, false otherwise.
-         *@see GetUrl, Close, OpenPlaylist, OpenPlaylistIndex, OpenSource, OpenUrl, Reopen
-         */
-        OpenFile(FilePath: string) : boolean;
-        /*
-         *Open the first media source in the specified play list.
-         *
-         *@param InPlaylist The play list to open.
-         *@return true if the source will be opened, false otherwise.
-         *@see Close, OpenFile, OpenPlaylistIndex, OpenSource, OpenUrl, Reopen
-         */
-        OpenPlaylist(InPlaylist: $Nullable<UE.MediaPlaylist>) : boolean;
-        /*
-         *Open a particular media source in the specified play list.
-         *
-         *@param InPlaylist The play list to open.
-         *@param Index The index of the source to open.
-         *@return true if the source will be opened, false otherwise.
-         *@see Close, OpenFile, OpenPlaylist, OpenSource, OpenUrl, Reopen
-         */
-        OpenPlaylistIndex(InPlaylist: $Nullable<UE.MediaPlaylist>, Index: number) : boolean;
-        /*
-         *Open the specified media source.
-         *
-         *A return value of true indicates that the player will attempt to open
-         *the media, but it may fail to do so later for other reasons, i.e. if
-         *a connection to the media server timed out. Use the OnMediaOpened and
-         *OnMediaOpenFailed delegates to detect if and when the media is ready!
-         *
-         *@param MediaSource The media source to open.
-         *@return true if the source will be opened, false otherwise.
-         *@see Close, OpenFile, OpenPlaylist, OpenPlaylistIndex, OpenUrl, Reopen
-         */
-        OpenSource(MediaSource: $Nullable<UE.MediaSource>) : boolean;
-        /*
-         *Open the specified media source with options using a latent action.
-         *
-         *A result of true indicates that the player successfully completed all requested operations.
-         *
-         *@param MediaSource The media source to open.
-         *@param Options The media player options to apply.
-         *@param bSuccess  All requested operations have completed successfully.
-         *@see Close, OpenFile, OpenPlaylist, OpenPlaylistIndex, OpenUrl, Reopen
-         */
-        OpenSourceLatent(WorldContextObject: $Nullable<UE.Object>, LatentInfo: UE.LatentActionInfo, MediaSource: $Nullable<UE.MediaSource>, Options: UE.MediaPlayerOptions, bSuccess: $Ref<boolean>) : void;
-        /*
-         *Open the specified media source with supplied options applied.
-         *
-         *A return value of true indicates that the player will attempt to open
-         *the media, but it may fail to do so later for other reasons, i.e. if
-         *a connection to the media server timed out. Use the OnMediaOpened and
-         *OnMediaOpenFailed delegates to detect if and when the media is ready!
-         *
-         *@param MediaSource The media source to open.
-         *@param Options The media player options to apply.
-         *@return true if the source will be opened, false otherwise.
-         *@see Close, OpenFile, OpenPlaylist, OpenPlaylistIndex, OpenUrl, Reopen
-         */
-        OpenSourceWithOptions(MediaSource: $Nullable<UE.MediaSource>, Options: UE.MediaPlayerOptions) : boolean;
-        /*
-         *Opens the specified media URL.
-         *
-         *A return value of true indicates that the player will attempt to open
-         *the media, but it may fail to do so later for other reasons, i.e. if
-         *a connection to the media server timed out. Use the OnMediaOpened and
-         *OnMediaOpenFailed delegates to detect if and when the media is ready!
-         *
-         *@param Url The URL to open.
-         *@return true if the URL will be opened, false otherwise.
-         *@see GetUrl, Close, OpenFile, OpenPlaylist, OpenPlaylistIndex, OpenSource, Reopen
-         */
-        OpenUrl(Url: string) : boolean;
-        /*
-         *Pauses media playback.
-         *
-         *This is the same as setting the playback rate to 0.0.
-         *
-         *@return true if playback is being paused, false otherwise.
-         *@see CanPause, Close, Next, Play, Previous, Rewind, Seek
-         */
-        Pause() : boolean;
-        /*
-         *Starts media playback.
-         *
-         *This is the same as setting the playback rate to 1.0.
-         *
-         *@return true if playback is starting, false otherwise.
-         *@see CanPlay, GetRate, Next, Pause, Previous, SetRate
-         */
-        Play() : boolean;
-        /*
-         *Starts playback from the media opened event, but can be used elsewhere.
-         */
-        PlayAndSeek() : void;
-        /*
-         *Open the previous item in the current play list.
-         *
-         *The player will start playing the new media source if it was playing
-         *something previously, otherwise it will only open the media source.
-         *
-         *@return true on success, false otherwise.
-         *@see Close, Next, OpenUrl, OpenSource, Play, SetPlaylist
-         */
-        Previous() : boolean;
-        /*
-         *Reopens the currently opened media or play list.
-         *
-         *@return true if the media will be opened, false otherwise.
-         *@see Close, Open, OpenFile, OpenPlaylist, OpenPlaylistIndex, OpenSource, OpenUrl
-         */
-        Reopen() : boolean;
-        /*
-         *Rewinds the media to the beginning.
-         *
-         *This is the same as seeking to zero time.
-         *
-         *@return true if rewinding, false otherwise.
-         *@see GetTime, Seek
-         */
-        Rewind() : boolean;
-        /*
-         *Seeks to the specified playback time.
-         *
-         *@param Time The playback time to set.
-         *@return true on success, false otherwise.
-         *@see GetTime, Rewind
-         */
-        Seek(Time: UE.Timespan) : boolean;
-        /*
-         *Select the active track of the given type.
-         *
-         *The selected track will use its currently active format. Active formats will
-         *be remembered on a per track basis. The first available format is active by
-         *default. To switch the track format, use SetTrackFormat instead.
-         *
-         *@param TrackType The type of track to select.
-         *@param TrackIndex The index of the track to select, or INDEX_NONE to deselect.
-         *@return true if the track was selected, false otherwise.
-         *@see GetNumTracks, GetSelectedTrack, SetTrackFormat
-         */
-        SelectTrack(TrackType: UE.EMediaPlayerTrack, TrackIndex: number) : boolean;
-        /*
-         *Set the time on which to block.
-         *
-         *If set, this player will block in TickInput or TickFetch until the video sample
-         *for the specified time are actually available.
-         *
-         *@param Time The time to block on, or FTimespan::MinValue to disable.
-         */
-        SetBlockOnTime(Time: UE.Timespan) : void;
-        /*
-         *Set the name of the desired native player.
-         *
-         *@param PlayerName The name of the player to set.
-         *@see GetDesiredPlayerName
-         */
-        SetDesiredPlayerName(PlayerName: string) : void;
-        /*
-         *Enables or disables playback looping.
-         *
-         *@param Looping Whether playback should be looped.
-         *@return true on success, false otherwise.
-         *@see IsLooping
-         */
-        SetLooping(Looping: boolean) : boolean;
-        /*
-         *Sets the media options used by the player.
-         *
-         *@param Options Options to pass to the player.
-         */
-        SetMediaOptions(Options: $Nullable<UE.MediaSource>) : void;
-        /*
-         *Set the volume on the native player if not mixing with Sound Wave asset.
-         *
-         *The SetNativeVolume can be used to change the audio output volume at runtime. Note that
-         *not all media player plug-ins may support native audio output on all platforms.
-         *
-         *@param Volume The volume to set.
-         *@return true on success, false otherwise.
-         *@see NativeAudioOut
-         */
-        SetNativeVolume(Volume: number) : boolean;
-        /*
-         *Blueprint accessible version of SetPlaybackTimeRange().
-         *The range is set through a blueprint usable float interval which may not have enough
-         *precision to represent the range accurately.
-         */
-        SetPlaybackTimeRange(InTimeRange: UE.FloatInterval) : boolean;
-        /*
-         *Changes the media's playback rate.
-         *
-         *@param Rate The playback rate to set.
-         *@return true on success, false otherwise.
-         *@see GetRate, SupportsRate
-         */
-        SetRate(Rate: number) : boolean;
-        /*
-         *Delay of the player's time.
-         *
-         *This setting can be used to manually sync multiple sources.
-         *Set to 1 seconds, if you would like that Player to play 1 second behind its current time.
-         *If the value is too big, it is possible that the player would not hold that frame for that long.
-         *@return true on success, false otherwise.
-         *@see GetTimeDelay
-         */
-        SetTimeDelay(TimeDelay: UE.Timespan) : void;
-        /*
-         *Set the format on the specified track.
-         *
-         *Selecting the format will not switch to the specified track. To switch
-         *tracks, use SelectTrack instead. If the track is already selected, the
-         *format change will be applied immediately.
-         *
-         *@param TrackType The type of track to update.
-         *@param TrackIndex The index of the track to update.
-         *@param FormatIndex The index of the format to select (must be valid).
-         *@return true if the track was selected, false otherwise.
-         *@see GetNumTrackFormats, GetNumTracks, GetTrackFormat, SelectTrack
-         */
-        SetTrackFormat(TrackType: UE.EMediaPlayerTrack, TrackIndex: number, FormatIndex: number) : boolean;
-        /*
-         *Set the frame rate of the specified video track.
-         *
-         *@param TrackIndex The index of the track, or INDEX_NONE for the selected one.
-         *@param FormatIndex Index of the track format, or INDEX_NONE for the selected one.
-         *@param FrameRate The frame rate to set (must be in range of format's supported frame rates).
-         *@return true on success, false otherwise.
-         *@see GetVideoTrackAspectRatio, GetVideoTrackDimensions, GetVideoTrackFrameRate, GetVideoTrackFrameRates, GetVideoTrackType
-         */
-        SetVideoTrackFrameRate(TrackIndex: number, FormatIndex: number, FrameRate: number) : boolean;
-        /*
-         *Set the field of view (only for 360 videos).
-         *
-         *@param Horizontal Horizontal field of view (in Euler degrees).
-         *@param Vertical Vertical field of view (in Euler degrees).
-         *@param Whether the field of view change should be absolute (true) or relative (false).
-         *@return true on success, false otherwise.
-         *@see GetHorizontalFieldOfView, GetVerticalFieldOfView, SetViewRotation
-         */
-        SetViewField(Horizontal: number, Vertical: number, Absolute: boolean) : boolean;
-        /*
-         *Set the view's rotation (only for 360 videos).
-         *
-         *@param Rotation The desired view rotation.
-         *@param Whether the rotation change should be absolute (true) or relative (false).
-         *@return true on success, false otherwise.
-         *@see GetViewRotation, SetViewField
-         */
-        SetViewRotation(Rotation: UE.Rotator, Absolute: boolean) : boolean;
-        /*
-         *Check whether the player supports playing back of range within the media.
-         *
-         *@return true if playing back a range is supported, false otherwise.
-         *@see GetPlaybackTimeRange, SetPlaybackTimeRange
-         */
-        SupportsPlaybackTimeRange() : boolean;
-        /*
-         *Check whether the specified playback rate is supported.
-         *
-         *@param Rate The playback rate to check.
-         *@param Unthinned Whether no frames should be dropped at the given rate.
-         *@see SupportsScrubbing, SupportsSeeking
-         */
-        SupportsRate(Rate: number, Unthinned: boolean) : boolean;
-        /*
-         *Check whether the currently loaded media supports scrubbing.
-         *
-         *@return true if scrubbing is supported, false otherwise.
-         *@see SupportsRate, SupportsSeeking
-         */
-        SupportsScrubbing() : boolean;
-        /*
-         *Check whether the currently loaded media can jump to a certain position.
-         *
-         *@return true if seeking is supported, false otherwise.
-         *@see SupportsRate, SupportsScrubbing
-         */
-        SupportsSeeking() : boolean;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): MediaPlayer;
-        static Load(InName: string): MediaPlayer;
-    
-        __tid_MediaPlayer_0__: boolean;
-    }
-    
-    class MediaTexture extends UE.Texture {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        AddressX: UE.TextureAddress;
-        AddressY: UE.TextureAddress;
-        AutoClear: boolean;
-        ClearColor: UE.LinearColor;
-        EnableGenMips: boolean;
-        NumMips: number;
-        NewStyleOutput: boolean;
-        OutputFormat_EditorOnly: UE.MediaTextureOutputFormat;
-        CurrentAspectRatio: number;
-        CurrentOrientation: UE.MediaTextureOrientation;
-        MediaPlayer: UE.MediaPlayer;
-        /*
-         *Gets the current aspect ratio of the texture.
-         *
-         *@return Texture aspect ratio.
-         *@see GetHeight, GetWidth
-         */
-        GetAspectRatio() : number;
-        /*
-         *Gets the current height of the texture.
-         *
-         *@return Texture height (in pixels).
-         *@see GetAspectRatio, GetWidth
-         */
-        GetHeight() : number;
-        /*
-         *Get the media player that provides the video samples.
-         *
-         *@return The texture's media player, or nullptr if not set.
-         *@see SetMediaPlayer
-         */
-        GetMediaPlayer() : UE.MediaPlayer;
-        /*
-         *Gets the current numbe of mips of the texture.
-         *
-         *@return Number of mips.
-         */
-        GetTextureNumMips() : number;
-        /*
-         *Gets the current width of the texture.
-         *
-         *@return Texture width (in pixels).
-         *@see GetAspectRatio, GetHeight
-         */
-        GetWidth() : number;
-        /*
-         *Set the media player that provides the video samples.
-         *
-         *@param NewMediaPlayer The player to set.
-         *@see GetMediaPlayer
-         */
-        SetMediaPlayer(NewMediaPlayer: $Nullable<UE.MediaPlayer>) : void;
-        /*
-         *Creates a new resource for the texture, and updates any cached references to the resource.
-         *This obviously is just an override to expose to blueprints.
-         */
-        UpdateResource() : void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): MediaTexture;
-        static Load(InName: string): MediaTexture;
-    
-        __tid_MediaTexture_0__: boolean;
-    }
-    
     class MediaComponent extends UE.ActorComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         MediaTexture: UE.MediaTexture;
@@ -149759,6 +152668,26 @@ declare module "ue" {
         static Load(InName: string): LinuxTargetSettings;
     
         __tid_LinuxTargetSettings_0__: boolean;
+    }
+    
+    class ListDataObject_Base extends UE.Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ParentData: UE.ListDataObject_Base;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ListDataObject_Base;
+        static Load(InName: string): ListDataObject_Base;
+    
+        __tid_ListDataObject_Base_0__: boolean;
+    }
+    
+    class ListDataObject_Collection extends UE.ListDataObject_Base {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ChildListDataArray: TArray<UE.ListDataObject_Base>;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ListDataObject_Collection;
+        static Load(InName: string): ListDataObject_Collection;
+    
+        __tid_ListDataObject_Collection_0__: boolean;
     }
     
     class ListMaterialsUsedWithMeshEmittersCommandlet extends UE.Commandlet {
@@ -151558,6 +154487,21 @@ declare module "ue" {
         static StaticClass(): ScriptStruct;
         static StaticStruct(): ScriptStruct;
         __tid_LoadedPackagePathWidgetConstructor_0__: boolean;
+    }
+    
+    class LoadGuardSlot extends UE.PanelSlot {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Padding: UE.Margin;
+        HorizontalAlignment: UE.EHorizontalAlignment;
+        VerticalAlignment: UE.EVerticalAlignment;
+        SetHorizontalAlignment(InHorizontalAlignment: UE.EHorizontalAlignment) : void;
+        SetPadding(InPadding: UE.Margin) : void;
+        SetVerticalAlignment(InVerticalAlignment: UE.EVerticalAlignment) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): LoadGuardSlot;
+        static Load(InName: string): LoadGuardSlot;
+    
+        __tid_LoadGuardSlot_0__: boolean;
     }
     
     class LoadPackageCommandlet extends UE.Commandlet {
@@ -158693,82 +161637,6 @@ declare module "ue" {
         static Load(InName: string): MediaCompositingTrackFilter;
     
         __tid_MediaCompositingTrackFilter_0__: boolean;
-    }
-    
-    class MediaSoundComponentSpectralData {
-        constructor();
-        constructor(FrequencyHz: number, Magnitude: number);
-        FrequencyHz: number;
-        Magnitude: number;
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_MediaSoundComponentSpectralData_0__: boolean;
-    }
-    
-    class MediaSoundComponent extends UE.SynthComponent {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Channels: UE.EMediaSoundChannels;
-        DynamicRateAdjustment: boolean;
-        RateAdjustmentFactor: number;
-        RateAdjustmentRange: UE.FloatRange;
-        MediaPlayer: UE.MediaPlayer;
-        /*
-         *Get the attenuation settings based on the current component settings.
-         *
-         *@param OutAttenuationSettings Will contain the attenuation settings, if available.
-         *@return true if attenuation settings were returned, false if attenuation is disabled.
-         */
-        BP_GetAttenuationSettingsToApply(OutAttenuationSettings: $Ref<UE.SoundAttenuationSettings>) : boolean;
-        /*
-         *Retrieves the current amplitude envelope.
-         */
-        GetEnvelopeValue() : number;
-        /*
-         *Get the media player that provides the audio samples.
-         *
-         *@return The component's media player, or nullptr if not set.
-         *@see SetMediaPlayer
-         */
-        GetMediaPlayer() : UE.MediaPlayer;
-        /*
-         *Retrieves and normalizes the spectral data if spectral analysis is enabled.
-         */
-        GetNormalizedSpectralData() : TArray<UE.MediaSoundComponentSpectralData>;
-        /*
-         *Retrieves the spectral data if spectral analysis is enabled.
-         */
-        GetSpectralData() : TArray<UE.MediaSoundComponentSpectralData>;
-        /*
-         *Turns on amplitude envelope following the audio in the media sound component.
-         */
-        SetEnableEnvelopeFollowing(bInEnvelopeFollowing: boolean) : void;
-        /*
-         *Turns on spectral analysis of the audio generated in the media sound component.
-         */
-        SetEnableSpectralAnalysis(bInSpectralAnalysisEnabled: boolean) : void;
-        /*
-         *Sets the envelope attack and release times (in ms).
-         */
-        SetEnvelopeFollowingsettings(AttackTimeMsec: number, ReleaseTimeMsec: number) : void;
-        /*
-         *Set the media player that provides the audio samples.
-         *
-         *@param NewMediaPlayer The player to set.
-         *@see GetMediaPlayer
-         */
-        SetMediaPlayer(NewMediaPlayer: $Nullable<UE.MediaPlayer>) : void;
-        /*
-         *Sets the settings to use for spectral analysis.
-         */
-        SetSpectralAnalysisSettings(InFrequenciesToAnalyze: TArray<number>, InFFTSize?: UE.EMediaSoundComponentFFTSize /* = Medium_512 */) : void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): MediaSoundComponent;
-        static Load(InName: string): MediaSoundComponent;
-    
-        __tid_MediaSoundComponent_0__: boolean;
     }
     
     class MediaPlateResource {
@@ -183219,6 +186087,18 @@ declare module "ue" {
     }
 
     namespace Engine.PythonTypes {
+        class OnActiveIndexChangedDelegate__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): OnActiveIndexChangedDelegate__PythonCallable;
+            static Load(InName: string): OnActiveIndexChangedDelegate__PythonCallable;
+        
+            __tid_OnActiveIndexChangedDelegate__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    namespace Engine.PythonTypes {
         class OnActorLabelChanged__PythonCallable extends UE.PythonCallableForDelegate {
             constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
             static StaticClass(): Class;
@@ -183471,6 +186351,18 @@ declare module "ue" {
     }
 
     namespace Engine.PythonTypes {
+        class OnButtonDescriptionTextUpdatedDelegate__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): OnButtonDescriptionTextUpdatedDelegate__PythonCallable;
+            static Load(InName: string): OnButtonDescriptionTextUpdatedDelegate__PythonCallable;
+        
+            __tid_OnButtonDescriptionTextUpdatedDelegate__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    namespace Engine.PythonTypes {
         class OnButtonHoverEvent__PythonCallable extends UE.PythonCallableForDelegate {
             constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
             static StaticClass(): Class;
@@ -183699,6 +186591,18 @@ declare module "ue" {
     }
 
     namespace Engine.PythonTypes {
+        class OnConfirmScreenButtonClickedDelegate__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): OnConfirmScreenButtonClickedDelegate__PythonCallable;
+            static Load(InName: string): OnConfirmScreenButtonClickedDelegate__PythonCallable;
+        
+            __tid_OnConfirmScreenButtonClickedDelegate__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    namespace Engine.PythonTypes {
         class OnConstantQResults__PythonCallable extends UE.PythonCallableForDelegate {
             constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
             static StaticClass(): Class;
@@ -183814,6 +186718,18 @@ declare module "ue" {
             static Load(InName: string): OnCreateAuditionGeneratorHandleDelegate__PythonCallable;
         
             __tid_OnCreateAuditionGeneratorHandleDelegate__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    namespace Engine.PythonTypes {
+        class OnCurrentPageIndexChanged__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): OnCurrentPageIndexChanged__PythonCallable;
+            static Load(InName: string): OnCurrentPageIndexChanged__PythonCallable;
+        
+            __tid_OnCurrentPageIndexChanged__PythonCallable_0__: boolean;
         }
         
     }
@@ -184228,6 +187144,18 @@ declare module "ue" {
     }
 
     namespace Engine.PythonTypes {
+        class OnItemClicked__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): OnItemClicked__PythonCallable;
+            static Load(InName: string): OnItemClicked__PythonCallable;
+        
+            __tid_OnItemClicked__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    namespace Engine.PythonTypes {
         class OnItemExpansionChangedDynamic__PythonCallable extends UE.PythonCallableForDelegate {
             constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
             static StaticClass(): Class;
@@ -184247,6 +187175,18 @@ declare module "ue" {
             static Load(InName: string): OnItemIsHoveredChangedDynamic__PythonCallable;
         
             __tid_OnItemIsHoveredChangedDynamic__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    namespace Engine.PythonTypes {
+        class OnItemSelected__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): OnItemSelected__PythonCallable;
+            static Load(InName: string): OnItemSelected__PythonCallable;
+        
+            __tid_OnItemSelected__PythonCallable_0__: boolean;
         }
         
     }
@@ -184733,6 +187673,18 @@ declare module "ue" {
     }
 
     namespace Engine.PythonTypes {
+        class OnLoadGuardStateChangedDynamic__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): OnLoadGuardStateChangedDynamic__PythonCallable;
+            static Load(InName: string): OnLoadGuardStateChangedDynamic__PythonCallable;
+        
+            __tid_OnLoadGuardStateChangedDynamic__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    namespace Engine.PythonTypes {
         class OnLocalPlayerSaveGameLoaded__PythonCallable extends UE.PythonCallableForDelegate {
             constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
             static StaticClass(): Class;
@@ -185201,6 +188153,18 @@ declare module "ue" {
     }
 
     namespace Engine.PythonTypes {
+        class OnPushSoftWidgetDelegate__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): OnPushSoftWidgetDelegate__PythonCallable;
+            static Load(InName: string): OnPushSoftWidgetDelegate__PythonCallable;
+        
+            __tid_OnPushSoftWidgetDelegate__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    namespace Engine.PythonTypes {
         class OnQuartzCommandEvent__PythonCallable extends UE.PythonCallableForDelegate {
             constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
             static StaticClass(): Class;
@@ -185321,6 +188285,30 @@ declare module "ue" {
     }
 
     namespace Engine.PythonTypes {
+        class OnRotated__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): OnRotated__PythonCallable;
+            static Load(InName: string): OnRotated__PythonCallable;
+        
+            __tid_OnRotated__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    namespace Engine.PythonTypes {
+        class OnRotatedWithDirection__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): OnRotatedWithDirection__PythonCallable;
+            static Load(InName: string): OnRotatedWithDirection__PythonCallable;
+        
+            __tid_OnRotatedWithDirection__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    namespace Engine.PythonTypes {
         class OnSampleLoaded__PythonCallable extends UE.PythonCallableForDelegate {
             constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
             static StaticClass(): Class;
@@ -185352,6 +188340,18 @@ declare module "ue" {
             static Load(InName: string): OnScrollBarVisibilityChangedEvent__PythonCallable;
         
             __tid_OnScrollBarVisibilityChangedEvent__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    namespace Engine.PythonTypes {
+        class OnSelectionCleared__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): OnSelectionCleared__PythonCallable;
+            static Load(InName: string): OnSelectionCleared__PythonCallable;
+        
+            __tid_OnSelectionCleared__PythonCallable_0__: boolean;
         }
         
     }
@@ -185744,6 +188744,18 @@ declare module "ue" {
             static Load(InName: string): OnVisibilityChangedEvent__PythonCallable;
         
             __tid_OnVisibilityChangedEvent__PythonCallable_0__: boolean;
+        }
+        
+    }
+
+    namespace Engine.PythonTypes {
+        class OnWidgetActivationChanged__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): OnWidgetActivationChanged__PythonCallable;
+            static Load(InName: string): OnWidgetActivationChanged__PythonCallable;
+        
+            __tid_OnWidgetActivationChanged__PythonCallable_0__: boolean;
         }
         
     }
@@ -188477,6 +191489,16 @@ declare module "ue" {
         __tid_OptionalPropertyTestObject_0__: boolean;
     }
     
+    class OptionsDataEditConditionDescriptor {
+        constructor();
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_OptionsDataEditConditionDescriptor_0__: boolean;
+    }
+    
     class OrbitBlendCameraNode extends UE.BlendCameraNode {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         DrivingBlend: UE.SimpleBlendCameraNode;
@@ -188620,44 +191642,6 @@ declare module "ue" {
         static StaticClass(): ScriptStruct;
         static StaticStruct(): ScriptStruct;
         __tid_OverlapResult_0__: boolean;
-    }
-    
-    class OverlaySlot extends UE.PanelSlot {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Padding: UE.Margin;
-        HorizontalAlignment: UE.EHorizontalAlignment;
-        VerticalAlignment: UE.EVerticalAlignment;
-        /*
-         *Set the alignment of the object horizontally.
-         */
-        SetHorizontalAlignment(InHorizontalAlignment: UE.EHorizontalAlignment) : void;
-        /*
-         *Set padding area between the slot and the content it contains.
-         */
-        SetPadding(InPadding: UE.Margin) : void;
-        /*
-         *Set the alignment of the object vertically.
-         */
-        SetVerticalAlignment(InVerticalAlignment: UE.EVerticalAlignment) : void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): OverlaySlot;
-        static Load(InName: string): OverlaySlot;
-    
-        __tid_OverlaySlot_0__: boolean;
-    }
-    
-    class Overlay extends UE.PanelWidget {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        AddChildToOverlay(Content: $Nullable<UE.Widget>) : UE.OverlaySlot;
-        /*
-         *Replace the widget at the given index it with a different widget.
-         */
-        ReplaceOverlayChildAt(Index: number, Content: $Nullable<UE.Widget>) : boolean;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): Overlay;
-        static Load(InName: string): Overlay;
-    
-        __tid_Overlay_0__: boolean;
     }
     
     class OverriddenPropertyNodeID {
@@ -195499,25 +198483,6 @@ declare module "ue" {
         __tid_PostProcessCameraNode_0__: boolean;
     }
     
-    class PostProcessComponent extends UE.SceneComponent {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Settings: UE.PostProcessSettings;
-        Priority: number;
-        BlendRadius: number;
-        BlendWeight: number;
-        bEnabled: boolean;
-        bUnbound: boolean;
-        /*
-         *Adds an Blendable (implements IBlendableInterface) to the array of Blendables (if it doesn't exist) and update the weight
-         */
-        AddOrUpdateBlendable(InBlendableObject: UE.BlendableInterface, InWeight?: number /* = 1.000000 */) : void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): PostProcessComponent;
-        static Load(InName: string): PostProcessComponent;
-    
-        __tid_PostProcessComponent_0__: boolean;
-    }
-    
     class PostProcessVolume extends UE.Volume {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Settings: UE.PostProcessSettings;
@@ -198182,6 +201147,27 @@ declare module "ue" {
         __tid_RBFTarget_0__: boolean;
     }
     
+    class ReactDeclarationGenerator extends UE.Object {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        Gen_EditorOnly() : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ReactDeclarationGenerator;
+        static Load(InName: string): ReactDeclarationGenerator;
+    
+        __tid_ReactDeclarationGenerator_0__: boolean;
+    }
+    
+    class ReactWidget extends UE.UserWidget {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        AddChild(Content: $Nullable<UE.Widget>) : UE.PanelSlot;
+        RemoveChild(Content: $Nullable<UE.Widget>) : boolean;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): ReactWidget;
+        static Load(InName: string): ReactWidget;
+    
+        __tid_ReactWidget_0__: boolean;
+    }
+    
     class ReAssignMaterialInCollectionDataflowNode extends UE.DataflowNode {
         constructor();
         constructor(Collection: UE.ManagedArrayCollection, FaceSelection: UE.DataflowFaceSelection, Materials: TArray<UE.Material>, OutsideMaterialIdx: number, InsideMaterialIdx: number, bAssignOutsideMaterial: boolean, bAssignInsideMaterial: boolean);
@@ -199815,116 +202801,6 @@ declare module "ue" {
         __tid_RichImageRow_0__: boolean;
     }
     
-    class RichTextBlockDecorator extends UE.Object {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): RichTextBlockDecorator;
-        static Load(InName: string): RichTextBlockDecorator;
-    
-        __tid_RichTextBlockDecorator_0__: boolean;
-    }
-    
-    class RichTextBlock extends UE.TextLayoutWidget {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Text: string;
-        TextStyleSet: UE.DataTable;
-        DecoratorClasses: TArray<UE.Class>;
-        DefaultTextStyleOverride: UE.TextBlockStyle;
-        MinDesiredWidth: number;
-        bOverrideDefaultStyle: boolean;
-        TextTransformPolicy: UE.ETextTransformPolicy;
-        TextOverflowPolicy: UE.ETextOverflowPolicy;
-        DefaultTextStyle: UE.TextBlockStyle;
-        InstanceDecorators: TArray<UE.RichTextBlockDecorator>;
-        /*
-         *Remove all overrides made to the default text style and return to the style specified in the style set data table
-         */
-        ClearAllDefaultStyleOverrides() : void;
-        GetDecoratorByClass(DecoratorClass: $Nullable<UE.Class>) : UE.RichTextBlockDecorator;
-        /*
-         *Creates a dynamic material for the default font or returns it if it already
-         *exists
-         */
-        GetDefaultDynamicMaterial() : UE.MaterialInstanceDynamic;
-        /*
-         *Returns widgets text.
-         */
-        GetText() : string;
-        GetTextStyleSet() : UE.DataTable;
-        /*
-         *Causes the text to reflow it's layout and re-evaluate any decorators
-         */
-        RefreshTextLayout() : void;
-        /*
-         *Set the auto wrap for this rich text block
-         *@param InAutoTextWrap to turn wrap on or off
-         */
-        SetAutoWrapText(InAutoTextWrap: boolean) : void;
-        /*
-         *Replaces the existing decorators with the list provided
-         */
-        SetDecorators(InDecoratorClasses: TArray<UE.Class>) : void;
-        /*
-         *Sets the color and opacity of the default text in this rich text block
-         *@param InColorAndOpacity             The new text color and opacity
-         */
-        SetDefaultColorAndOpacity(InColorAndOpacity: UE.SlateColor) : void;
-        /*
-         *Dynamically set the default font info for this rich text block
-         *@param InFontInfo The new font info
-         */
-        SetDefaultFont(InFontInfo: UE.SlateFontInfo) : void;
-        SetDefaultMaterial(InMaterial: $Nullable<UE.MaterialInterface>) : void;
-        /*
-         *Sets the color and opacity of the default text drop shadow
-         *Note: if opacity is zero no shadow will be drawn
-         *@param InShadowColorAndOpacity               The new drop shadow color and opacity
-         */
-        SetDefaultShadowColorAndOpacity(InShadowColorAndOpacity: UE.LinearColor) : void;
-        /*
-         *Sets the offset that the default text drop shadow should be drawn at
-         *@param InShadowOffset                The new offset
-         */
-        SetDefaultShadowOffset(InShadowOffset: UE.Vector2D) : void;
-        /*
-         *Dynamically set the default strike brush for this rich text block
-         *@param InStrikeBrush The new brush to use to strike through text
-         */
-        SetDefaultStrikeBrush(InStrikeBrush: UE.SlateBrush) : void;
-        /*
-         *Wholesale override of the currently established default text style
-         *@param InDefaultTextStyle The new text style to apply to all default (i.e. undecorated) text in the block
-         */
-        SetDefaultTextStyle(InDefaultTextStyle: UE.TextBlockStyle) : void;
-        /*
-         *Set the minimum desired width for this rich text block
-         *@param InMinDesiredWidth new minimum desired width
-         */
-        SetMinDesiredWidth(InMinDesiredWidth: number) : void;
-        /*
-         *Directly sets the widget text.
-         *Warning: This will wipe any binding created for the Text property!
-         *@param InText The text to assign to the widget
-         */
-        SetText(InText: string) : void;
-        /*
-         *Set the text overflow policy for this text block.
-         *@param InOverflowPolicy the new text overflow policy.
-         */
-        SetTextOverflowPolicy(InOverflowPolicy: UE.ETextOverflowPolicy) : void;
-        SetTextStyleSet(NewTextStyleSet: $Nullable<UE.DataTable>) : void;
-        /*
-         *Set the text transformation policy for this text block.
-         *@param InTransformPolicy the new text transformation policy.
-         */
-        SetTextTransformPolicy(InTransformPolicy: UE.ETextTransformPolicy) : void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): RichTextBlock;
-        static Load(InName: string): RichTextBlock;
-    
-        __tid_RichTextBlock_0__: boolean;
-    }
-    
     class RichTextBlockImageDecorator extends UE.RichTextBlockDecorator {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         ImageSet: UE.DataTable;
@@ -199933,6 +202809,20 @@ declare module "ue" {
         static Load(InName: string): RichTextBlockImageDecorator;
     
         __tid_RichTextBlockImageDecorator_0__: boolean;
+    }
+    
+    class RichTextIconData extends UE.TableRowBase {
+        constructor();
+        constructor(DisplayName: string, ResourceObject: TSoftObjectPtr<UE.Object>, ImageSize: UE.Vector2D);
+        DisplayName: string;
+        ResourceObject: TSoftObjectPtr<UE.Object>;
+        ImageSize: UE.Vector2D;
+        /**
+         * @deprecated use StaticStruct instead.
+         */
+        static StaticClass(): ScriptStruct;
+        static StaticStruct(): ScriptStruct;
+        __tid_RichTextIconData_0__: boolean;
     }
     
     class RichTextStyleRow extends UE.TableRowBase {
@@ -218421,6 +221311,18 @@ declare module "ue" {
         __tid_SignificanceManager_0__: boolean;
     }
     
+    namespace Engine.PythonTypes {
+        class SimpleButtonBaseGroupDelegate__PythonCallable extends UE.PythonCallableForDelegate {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): SimpleButtonBaseGroupDelegate__PythonCallable;
+            static Load(InName: string): SimpleButtonBaseGroupDelegate__PythonCallable;
+        
+            __tid_SimpleButtonBaseGroupDelegate__PythonCallable_0__: boolean;
+        }
+        
+    }
+
     class SimpleCollisionEditorToolActionProperties extends UE.InteractiveToolPropertySet {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         /*
@@ -218642,65 +221544,6 @@ declare module "ue" {
         static Load(InName: string): SinglePropertyView;
     
         __tid_SinglePropertyView_0__: boolean;
-    }
-    
-    class SizeBox extends UE.ContentWidget {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        WidthOverride: number;
-        HeightOverride: number;
-        MinDesiredWidth: number;
-        MinDesiredHeight: number;
-        MaxDesiredWidth: number;
-        MaxDesiredHeight: number;
-        MinAspectRatio: number;
-        MaxAspectRatio: number;
-        bOverride_WidthOverride: boolean;
-        bOverride_HeightOverride: boolean;
-        bOverride_MinDesiredWidth: boolean;
-        bOverride_MinDesiredHeight: boolean;
-        bOverride_MaxDesiredWidth: boolean;
-        bOverride_MaxDesiredHeight: boolean;
-        bOverride_MinAspectRatio: boolean;
-        bOverride_MaxAspectRatio: boolean;
-        ClearHeightOverride() : void;
-        ClearMaxAspectRatio() : void;
-        ClearMaxDesiredHeight() : void;
-        ClearMaxDesiredWidth() : void;
-        ClearMinAspectRatio() : void;
-        ClearMinDesiredHeight() : void;
-        ClearMinDesiredWidth() : void;
-        ClearWidthOverride() : void;
-        /*
-         *When specified, ignore the content's desired size and report the HeightOverride as the Box's desired height.
-         */
-        SetHeightOverride(InHeightOverride: number) : void;
-        SetMaxAspectRatio(InMaxAspectRatio: number) : void;
-        /*
-         *When specified, will report the MaxDesiredHeight if smaller than the content's desired height.
-         */
-        SetMaxDesiredHeight(InMaxDesiredHeight: number) : void;
-        /*
-         *When specified, will report the MaxDesiredWidth if smaller than the content's desired width.
-         */
-        SetMaxDesiredWidth(InMaxDesiredWidth: number) : void;
-        SetMinAspectRatio(InMinAspectRatio: number) : void;
-        /*
-         *When specified, will report the MinDesiredHeight if larger than the content's desired height.
-         */
-        SetMinDesiredHeight(InMinDesiredHeight: number) : void;
-        /*
-         *When specified, will report the MinDesiredWidth if larger than the content's desired width.
-         */
-        SetMinDesiredWidth(InMinDesiredWidth: number) : void;
-        /*
-         *When specified, ignore the content's desired size and report the WidthOverride as the Box's desired width.
-         */
-        SetWidthOverride(InWidthOverride: number) : void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SizeBox;
-        static Load(InName: string): SizeBox;
-    
-        __tid_SizeBox_0__: boolean;
     }
     
     class SizeBoxSlot extends UE.PanelSlot {
@@ -219877,70 +222720,6 @@ declare module "ue" {
         static Load(InName: string): SkyAtmosphere;
     
         __tid_SkyAtmosphere_0__: boolean;
-    }
-    
-    class SkyLightComponent extends UE.LightComponentBase {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        bRealTimeCapture: boolean;
-        SourceType: UE.ESkyLightSourceType;
-        Cubemap: UE.TextureCube;
-        SourceCubemapAngle: number;
-        CubemapResolution: number;
-        SkyDistanceThreshold: number;
-        bCaptureEmissiveOnly: boolean;
-        bLowerHemisphereIsBlack: boolean;
-        LowerHemisphereColor: UE.LinearColor;
-        OcclusionMaxDistance: number;
-        Contrast: number;
-        OcclusionExponent: number;
-        MinOcclusion: number;
-        OcclusionTint: UE.Color;
-        bCloudAmbientOcclusion: boolean;
-        CloudAmbientOcclusionStrength: number;
-        CloudAmbientOcclusionExtent: number;
-        CloudAmbientOcclusionMapResolutionScale: number;
-        CloudAmbientOcclusionApertureScale: number;
-        OcclusionCombineMode: UE.EOcclusionCombineMode;
-        BlendDestinationCubemap: UE.TextureCube;
-        /*
-         *Recaptures the scene for the skylight.
-         *This is useful for making sure the sky light is up to date after changing something in the world that it would capture.
-         *Warning: this is very costly and will definitely cause a hitch.
-         */
-        RecaptureSky() : void;
-        /*
-         *Sets the cubemap used when SourceType is set to SpecifiedCubemap, and causes a skylight update on the next tick.
-         */
-        SetCubemap(NewCubemap: $Nullable<UE.TextureCube>) : void;
-        /*
-         *Creates sky lighting from a blend between two cubemaps, which is only valid when SourceType is set to SpecifiedCubemap.
-         *This can be used to seamlessly transition sky lighting between different times of day.
-         *The caller should continue to update the blend until BlendFraction is 0 or 1 to reduce rendering cost.
-         *The caller is responsible for avoiding pops due to changing the source or destination.
-         */
-        SetCubemapBlend(SourceCubemap: $Nullable<UE.TextureCube>, DestinationCubemap: $Nullable<UE.TextureCube>, InBlendFraction: number) : void;
-        SetIndirectLightingIntensity(NewIntensity: number) : void;
-        SetIntensity(NewIntensity: number) : void;
-        /*
-         *Set color of the light
-         */
-        SetLightColor(NewLightColor: UE.LinearColor) : void;
-        SetLowerHemisphereColor(InLowerHemisphereColor: UE.LinearColor) : void;
-        SetMinOcclusion(InMinOcclusion: number) : void;
-        SetOcclusionContrast(InOcclusionContrast: number) : void;
-        SetOcclusionExponent(InOcclusionExponent: number) : void;
-        SetOcclusionTint(InTint: UE.Color) : void;
-        SetRealTimeCapture(bInRealTimeCapture: boolean) : void;
-        /*
-         *Sets the angle of the cubemap used when SourceType is set to SpecifiedCubemap and it is non static. It will cause the skylight to update on the next tick.
-         */
-        SetSourceCubemapAngle(NewValue: number) : void;
-        SetVolumetricScatteringIntensity(NewIntensity: number) : void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): SkyLightComponent;
-        static Load(InName: string): SkyLightComponent;
-    
-        __tid_SkyLightComponent_0__: boolean;
     }
     
     class SkyLight extends UE.Info {
@@ -223392,18 +226171,6 @@ declare module "ue" {
         __tid_StackBox_0__: boolean;
     }
     
-    namespace Engine.EditorBlueprintResources.StandardMacros {
-        class StandardMacros_C extends UE.Object {
-            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-            static StaticClass(): Class;
-            static Find(OrigInName: string, Outer?: Object): StandardMacros_C;
-            static Load(InName: string): StandardMacros_C;
-        
-            __tid_StandardMacros_C_0__: boolean;
-        }
-        
-    }
-
     class StandardSculptBrushOpProps extends UE.MeshSculptBrushOpProps {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         Strength: number;
@@ -231033,105 +233800,6 @@ declare module "ue" {
         __tid_TextBinding_0__: boolean;
     }
     
-    class TextBlock extends UE.TextLayoutWidget {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        Text: string;
-        TextDelegate: $Delegate<() => string>;
-        ColorAndOpacity: UE.SlateColor;
-        ColorAndOpacityDelegate: $Delegate<() => UE.SlateColor>;
-        MinDesiredWidth: number;
-        Font: UE.SlateFontInfo;
-        StrikeBrush: UE.SlateBrush;
-        ShadowOffset: UE.Vector2D;
-        ShadowColorAndOpacity: UE.LinearColor;
-        ShadowColorAndOpacityDelegate: $Delegate<() => UE.LinearColor>;
-        bWrapWithInvalidationPanel: boolean;
-        TextTransformPolicy: UE.ETextTransformPolicy;
-        TextOverflowPolicy: UE.ETextOverflowPolicy;
-        bSimpleTextMode: boolean;
-        GetDynamicFontMaterial() : UE.MaterialInstanceDynamic;
-        GetDynamicOutlineMaterial() : UE.MaterialInstanceDynamic;
-        /*
-         *Gets the widget text
-         *@return The widget text
-         */
-        GetText() : string;
-        /*
-         *Set the auto wrap for this text block.
-         *
-         *@param InAutoTextWrap to turn wrap on or off.
-         */
-        SetAutoWrapText(InAutoTextWrap: boolean) : void;
-        /*
-         *Sets the color and opacity of the text in this text block
-         *
-         *@param InColorAndOpacity             The new text color and opacity
-         */
-        SetColorAndOpacity(InColorAndOpacity: UE.SlateColor) : void;
-        /*
-         *Dynamically set the font info for this text block
-         *
-         *@param InFontInfo The new font info
-         */
-        SetFont(InFontInfo: UE.SlateFontInfo) : void;
-        SetFontMaterial(InMaterial: $Nullable<UE.MaterialInterface>) : void;
-        SetFontOutlineMaterial(InMaterial: $Nullable<UE.MaterialInterface>) : void;
-        /*
-         *Set the minimum desired width for this text block
-         *
-         *@param InMinDesiredWidth new minimum desired width
-         */
-        SetMinDesiredWidth(InMinDesiredWidth: number) : void;
-        /*
-         *Sets the opacity of the text in this text block
-         *
-         *@param InOpacity              The new text opacity
-         */
-        SetOpacity(InOpacity: number) : void;
-        /*
-         *Sets the color and opacity of the text drop shadow
-         *Note: if opacity is zero no shadow will be drawn
-         *
-         *@param InShadowColorAndOpacity               The new drop shadow color and opacity
-         */
-        SetShadowColorAndOpacity(InShadowColorAndOpacity: UE.LinearColor) : void;
-        /*
-         *Sets the offset that the text drop shadow should be drawn at
-         *
-         *@param InShadowOffset                The new offset
-         */
-        SetShadowOffset(InShadowOffset: UE.Vector2D) : void;
-        /*
-         *Dynamically set the strike brush for this text block
-         *
-         *@param InStrikeBrush The new brush to use to strike through text
-         */
-        SetStrikeBrush(InStrikeBrush: UE.SlateBrush) : void;
-        /*
-         *Directly sets the widget text.
-         *Warning: This will wipe any binding created for the Text property!
-         *@param InText The text to assign to the widget
-         */
-        SetText(InText: string) : void;
-        /*
-         *Set the text overflow policy for this text block.
-         *
-         *@param InOverflowPolicy the new text overflow policy.
-         */
-        SetTextOverflowPolicy(InOverflowPolicy: UE.ETextOverflowPolicy) : void;
-        /*
-         *Set the text transformation policy for this text block.
-         *
-         *@param InTransformPolicy the new text transformation policy.
-         */
-        SetTextTransformPolicy(InTransformPolicy: UE.ETextTransformPolicy) : void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): TextBlock;
-        static Load(InName: string): TextBlock;
-    
-        __tid_TextBlock_0__: boolean;
-    }
-    
     class TextBlockWidgetStyle extends UE.SlateWidgetStyleContainerBase {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         TextBlockStyle: UE.TextBlockStyle;
@@ -231857,41 +234525,6 @@ declare module "ue" {
         static Load(InName: string): TileSheetPaddingFactory;
     
         __tid_TileSheetPaddingFactory_0__: boolean;
-    }
-    
-    class TileView extends UE.ListView {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        EntryHeight: number;
-        EntryWidth: number;
-        TileAlignment: UE.EListItemAlignment;
-        bWrapHorizontalNavigation: boolean;
-        ScrollbarDisabledVisibility: UE.ESlateVisibility;
-        bEntrySizeIncludesEntrySpacing: boolean;
-        /*
-         *Gets the height of tile entries
-         */
-        GetEntryHeight() : number;
-        /*
-         *Gets the width of tile entries
-         */
-        GetEntryWidth() : number;
-        /*
-         *Returns whether the TileView is left, right or center aligned.
-         */
-        IsAligned() : boolean;
-        /*
-         *Sets the height of every tile entry
-         */
-        SetEntryHeight(NewHeight: number) : void;
-        /*
-         *Sets the width of every tile entry
-         */
-        SetEntryWidth(NewWidth: number) : void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): TileView;
-        static Load(InName: string): TileView;
-    
-        __tid_TileView_0__: boolean;
     }
     
     class TimedDataChannelSampleTime {
@@ -234867,6 +237500,22 @@ declare module "ue" {
         __tid_TypeScriptGeneratedClass_0__: boolean;
     }
     
+    class UCommonVisibilityWidgetBase extends UE.CommonBorder {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        VisibilityControls: TMap<string, boolean>;
+        bShowForGamepad: boolean;
+        bShowForMouseAndKeyboard: boolean;
+        bShowForTouch: boolean;
+        VisibleType: UE.ESlateVisibility;
+        HiddenType: UE.ESlateVisibility;
+        static GetRegisteredPlatforms() : TArray<string>;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): UCommonVisibilityWidgetBase;
+        static Load(InName: string): UCommonVisibilityWidgetBase;
+    
+        __tid_UCommonVisibilityWidgetBase_0__: boolean;
+    }
+    
     class UDIMBlock {
         constructor();
         constructor(UDIM: number, TextureResolution: number);
@@ -235292,6 +237941,19 @@ declare module "ue" {
         static Load(InName: string): UMGEditorProjectSettings;
     
         __tid_UMGEditorProjectSettings_0__: boolean;
+    }
+    
+    class UMGManager extends UE.BlueprintFunctionLibrary {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static CreateReactWidget(World: $Nullable<UE.World>) : UE.ReactWidget;
+        static CreateWidget(World: $Nullable<UE.World>, _Class: $Nullable<UE.Class>) : UE.UserWidget;
+        static SynchronizeSlotProperties(Slot: $Nullable<UE.PanelSlot>) : void;
+        static SynchronizeWidgetProperties(Widget: $Nullable<UE.Widget>) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): UMGManager;
+        static Load(InName: string): UMGManager;
+    
+        __tid_UMGManager_0__: boolean;
     }
     
     class UndoableResolveHandler extends UE.Object {
@@ -240285,6 +242947,30 @@ declare module "ue" {
         __tid_WarriorAIController_0__: boolean;
     }
     
+    class WarriorBaseAnimInstance extends UE.AnimInstance {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        DoesOwnerHaveTag(TagToCheck: UE.GameplayTag) : boolean;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): WarriorBaseAnimInstance;
+        static Load(InName: string): WarriorBaseAnimInstance;
+    
+        __tid_WarriorBaseAnimInstance_0__: boolean;
+    }
+    
+    class WarriorCharacterAnimInstance extends UE.WarriorBaseAnimInstance {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        OwningCharacter: UE.WarriorBaseCharacter;
+        OwningMovementComponent: UE.CharacterMovementComponent;
+        GroundSpeed: number;
+        bHasAcceleration: boolean;
+        LocomotionDirection: number;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): WarriorCharacterAnimInstance;
+        static Load(InName: string): WarriorCharacterAnimInstance;
+    
+        __tid_WarriorCharacterAnimInstance_0__: boolean;
+    }
+    
     class WarriorEnemyGameplayAbility extends UE.WarriorGameplayAbility {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         GetEnemyCharacterFromActorInfo() : UE.WarriorEnemyCharacter;
@@ -240385,6 +243071,28 @@ declare module "ue" {
         __tid_WarriorFunctionLibrary_0__: boolean;
     }
     
+    class WarriorHeroAnimInstance extends UE.WarriorCharacterAnimInstance {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        OwningHeroCharacter: UE.WarriorHeroCharacter;
+        bShouldEnterRelaxState: boolean;
+        EnterRelaxStateThreshold: number;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): WarriorHeroAnimInstance;
+        static Load(InName: string): WarriorHeroAnimInstance;
+    
+        __tid_WarriorHeroAnimInstance_0__: boolean;
+    }
+    
+    class WarriorHeroLinkedAnimLayer extends UE.WarriorBaseAnimInstance {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        GetHeroAnimInstance() : UE.WarriorHeroAnimInstance;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): WarriorHeroLinkedAnimLayer;
+        static Load(InName: string): WarriorHeroLinkedAnimLayer;
+    
+        __tid_WarriorHeroLinkedAnimLayer_0__: boolean;
+    }
+    
     class WarriorInputComponent extends UE.EnhancedInputComponent {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -240419,6 +243127,30 @@ declare module "ue" {
         static Load(InName: string): WarriorSaveGame;
     
         __tid_WarriorSaveGame_0__: boolean;
+    }
+    
+    class WarriorSurvivalGameMode extends UE.GWOGameMode {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        OnSurvivalGameModeStateChanged: $MulticastDelegate<(CurrentState: UE.EWarriorSurvivalGameModeState) => void>;
+        EnemyWaveSpawnerDataTable: UE.DataTable;
+        TotalWavesToSpawn: number;
+        CurrentWaveCount: number;
+        SpawnNewWaveWaitTime: number;
+        SpawnEnemiesDelayTime: number;
+        WaveCompletedWaitTime: number;
+        CurrentSurvivalGameModeState: UE.EWarriorSurvivalGameModeState;
+        PreLoadedEnemyClassMap: TMap<TSoftClassPtr<UE.WarriorEnemyCharacter>, UE.Class>;
+        CurrentSpawnedEnemiesCounter: number;
+        TotalSpawnedEnemiesThisWaveCounter: number;
+        TargetPointsArray: TArray<UE.Actor>;
+        TimePassedSinceStart: number;
+        OnEnemyDestroyed(DestroyedActor: $Nullable<UE.Actor>) : void;
+        RegisterSpawnedEnemies(InEnemiesToRegister: TArray<UE.WarriorEnemyCharacter>) : void;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): WarriorSurvivalGameMode;
+        static Load(InName: string): WarriorSurvivalGameMode;
+    
+        __tid_WarriorSurvivalGameMode_0__: boolean;
     }
     
     class WaveformTransformationChain extends UE.Object {
@@ -240606,6 +243338,30 @@ declare module "ue" {
         __tid_WaveTableBankFactory_0__: boolean;
     }
     
+    namespace AdvancedFrontedUI.Blueprints.Widgets.Layout.WBP_CUW_PrimaryLayout {
+        class WBP_CUW_PrimaryLayout_C extends UE.Widget_PrimaryLayout {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            UberGraphFrame: UE.PointerToUberGraphFrame;
+            WidgetStack_Frontend: UE.CommonActivatableWidgetStack;
+            WidgetStack_GameHUD: UE.CommonActivatableWidgetStack;
+            WidgetStack_GameMenu: UE.CommonActivatableWidgetStack;
+            WidgetStack_Modal: UE.CommonActivatableWidgetStack;
+            ExecuteUbergraph_WBP_CUW_PrimaryLayout(EntryPoint: number) : void;
+            /*
+             *Called once only at game time on non-template instances.
+             *While Construct_Destruct pertain to the underlying Slate, this is called only once for the UUserWidget.
+             *If you have one-time things to establish up-front (like binding callbacks to events on BindWidget properties), do so here.
+             */
+            OnInitialized() : void;
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): WBP_CUW_PrimaryLayout_C;
+            static Load(InName: string): WBP_CUW_PrimaryLayout_C;
+        
+            __tid_WBP_CUW_PrimaryLayout_C_0__: boolean;
+        }
+        
+    }
+
     class WeakObjectNetSerializerConfig extends UE.NetSerializerConfig {
         constructor();
         /**
@@ -240697,6 +243453,18 @@ declare module "ue" {
         static Load(InName: string): WeldMeshEdgesToolBuilder;
     
         __tid_WeldMeshEdgesToolBuilder_0__: boolean;
+    }
+    
+    class Widget_ConfirmScreen extends UE.Widget_ActivatableBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        CommonTextBlock_Title: UE.CommonTextBlock;
+        CommonTextBlock_Message: UE.CommonTextBlock;
+        DynamicEntryBox_Buttons: UE.DynamicEntryBox;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): Widget_ConfirmScreen;
+        static Load(InName: string): Widget_ConfirmScreen;
+    
+        __tid_Widget_ConfirmScreen_0__: boolean;
     }
     
     namespace Engine.PythonTypes {
@@ -240879,6 +243647,16 @@ declare module "ue" {
         
     }
 
+    class Widget_OptionScreen extends UE.Widget_ActivatableBase {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        ResetAction: UE.DataTableRowHandle;
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): Widget_OptionScreen;
+        static Load(InName: string): Widget_OptionScreen;
+    
+        __tid_Widget_OptionScreen_0__: boolean;
+    }
+    
     class WidgetAnimationDelegateBinding extends UE.DynamicBlueprintBinding {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         WidgetAnimationDelegateBindings: TArray<UE.BlueprintWidgetAnimationDelegateBinding>;
@@ -241380,16 +244158,6 @@ declare module "ue" {
         __tid_WidgetEditorModeUISubsystem_0__: boolean;
     }
     
-    class WidgetEventField {
-        constructor();
-        /**
-         * @deprecated use StaticStruct instead.
-         */
-        static StaticClass(): ScriptStruct;
-        static StaticStruct(): ScriptStruct;
-        __tid_WidgetEventField_0__: boolean;
-    }
-    
     class WidgetFieldNotificationExtension extends UE.UserWidgetExtension {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -241688,6 +244456,15 @@ declare module "ue" {
         
     }
 
+    class WidgetLockedStateRegistration extends UE.WidgetBinaryStateRegistration {
+        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+        static StaticClass(): Class;
+        static Find(OrigInName: string, Outer?: Object): WidgetLockedStateRegistration;
+        static Load(InName: string): WidgetLockedStateRegistration;
+    
+        __tid_WidgetLockedStateRegistration_0__: boolean;
+    }
+    
     class WidgetPressedStateRegistration extends UE.WidgetBinaryStateRegistration {
         constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
         static StaticClass(): Class;
@@ -241798,40 +244575,6 @@ declare module "ue" {
         static Load(InName: string): WidgetStateSettings;
     
         __tid_WidgetStateSettings_0__: boolean;
-    }
-    
-    class WidgetSwitcher extends UE.PanelWidget {
-        constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
-        ActiveWidgetIndex: number;
-        /*
-         *Get the reference of the currently active widget
-         */
-        GetActiveWidget() : UE.Widget;
-        /*
-         *Gets the slot index of the currently active widget
-         */
-        GetActiveWidgetIndex() : number;
-        /*
-         *Gets the number of widgets that this switcher manages.
-         */
-        GetNumWidgets() : number;
-        /*
-         *Get a widget at the provided index
-         */
-        GetWidgetAtIndex(Index: number) : UE.Widget;
-        /*
-         *Activates the widget and makes it the active index.
-         */
-        SetActiveWidget(Widget: $Nullable<UE.Widget>) : void;
-        /*
-         *Activates the widget at the specified index.
-         */
-        SetActiveWidgetIndex(Index: number) : void;
-        static StaticClass(): Class;
-        static Find(OrigInName: string, Outer?: Object): WidgetSwitcher;
-        static Load(InName: string): WidgetSwitcher;
-    
-        __tid_WidgetSwitcher_0__: boolean;
     }
     
     class WidgetToolsContext extends UE.ModeManagerInteractiveToolsContext {
@@ -244589,6 +247332,18 @@ declare module "ue" {
             static Load(InName: string): ActorMacros_C;
         
             __tid_ActorMacros_C_0__: boolean;
+        }
+        
+    }
+
+    namespace Engine.EditorBlueprintResources.StandardMacros {
+        class StandardMacros_C extends UE.Object {
+            constructor(Outer?: Object, Name?: string, ObjectFlags?: number);
+            static StaticClass(): Class;
+            static Find(OrigInName: string, Outer?: Object): StandardMacros_C;
+            static Load(InName: string): StandardMacros_C;
+        
+            __tid_StandardMacros_C_0__: boolean;
         }
         
     }

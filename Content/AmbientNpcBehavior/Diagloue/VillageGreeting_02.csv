@@ -1,0 +1,7 @@
+RowName,ConversationId,LineIndex,SpeakerSlot,Text,TtsSpeaker,PauseAfterSeconds,EndAction
+VillageGreeting_02_01,VillageGreeting_02,1,A,铁匠：午休时间，裁缝，你来得正好。,dylan,0.25,Continue
+VillageGreeting_02_02,VillageGreeting_02,2,B,裁缝：嘿，铁匠先生，你也在休息？今天天气不错。,vivian,0.25,Continue
+VillageGreeting_02_03,VillageGreeting_02,3,A,铁匠：是啊，正好歇歇。你刚才在那边忙什么？,dylan,0.25,Continue
+VillageGreeting_02_04,VillageGreeting_02,4,B,裁缝：在缝制一批新衣，客户要的款式挺特别的。,vivian,0.25,Continue
+VillageGreeting_02_05,VillageGreeting_02,5,A,铁匠：那得好好干，别太累着了。,dylan,0.25,Continue
+VillageGreeting_02_06,VillageGreeting_02,6,B,裁缝：谢谢关心，我这就去整理一下。,vivian,0,ReturnToWork

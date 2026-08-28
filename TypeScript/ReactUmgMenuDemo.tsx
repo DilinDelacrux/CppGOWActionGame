@@ -150,7 +150,7 @@ function MainMenu(props: MainMenuProps): React.ReactElement {
                             BrushColor={color(0.05, 0.065, 0.095, 0.96)}
                         >
                             <UTextBlock
-                                Text="感谢 Unreal Engine、Puerts 与 ReactUMG 社区。\n这个菜单没有手写蓝图或 WBP。"
+                                Text={'感谢 Unreal Engine、Puerts 与 ReactUMG 社区。\n这个菜单没有手写蓝图或 WBP。'}
                                 Font={{ Size: 16 }}
                                 ColorAndOpacity={textColor(0.72, 0.78, 0.88)}
                                 Justification={UE.ETextJustify.Center}

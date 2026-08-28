@@ -14,6 +14,37 @@ struct FScalableFloat;
 class UPawnCombatComponent;
 class UWarriorAbilitySystemComponent;
 
+/** One runtime-loaded row from an NPC dialogue CSV file. */
+USTRUCT(BlueprintType)
+struct CPPGOWACTIONGAME_API FWarriorNPCDialogueCsvRow
+{
+	GENERATED_BODY()
+
+	UPROPERTY(BlueprintReadOnly, Category = "Warrior|Dialogue")
+	FString RowName;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Warrior|Dialogue")
+	FString ConversationId;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Warrior|Dialogue")
+	int32 LineIndex = 0;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Warrior|Dialogue")
+	FString SpeakerSlot;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Warrior|Dialogue")
+	FString Text;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Warrior|Dialogue")
+	FString TtsSpeaker;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Warrior|Dialogue")
+	float PauseAfterSeconds = 0.0f;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Warrior|Dialogue")
+	FString EndAction;
+};
+
 /**
  * 
  */
@@ -70,6 +101,35 @@ public:
 
 	UFUNCTION(BlueprintCallable,Category = "Warrior|FunctionLibrary")
 	static bool TryLoadSavedGameDifficulty(EWarriorGameDifficulty& OutSavedDifficulty);
+
+	/** Prints the same way as Print String, prefixed with local HH:MM:SS:milliseconds. */
+	UFUNCTION(BlueprintCallable, Category = "Warrior|Debug", meta = (DisplayName = "Print String With Timestamp", WorldContext = "WorldContextObject"))
+	static void PrintStringWithTimestamp(
+		const UObject* WorldContextObject,
+		const FString& InString,
+		bool bPrintToScreen = true,
+		bool bPrintToLog = true,
+		FLinearColor TextColor = FLinearColor::White,
+		float Duration = 2.0f,
+		FName Key = NAME_None
+	);
+
+	/**
+	 * Reads the CSV from disk every time this function is called.
+	 * Relative paths beginning with Content/ are resolved from the project root;
+	 * other relative paths are resolved from the project's Content directory.
+	 * An empty ConversationId returns every valid row.
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Warrior|Dialogue", meta = (
+		DisplayName = "Load NPC Dialogue CSV",
+		CPP_Default_CsvFilePath = "Content/AmbientNpcBehavior/Diagloue/npc_dialogue.csv",
+		CPP_Default_ConversationId = ""))
+	static bool LoadNPCDialogueCsv(
+		const FString& CsvFilePath,
+		const FString& ConversationId,
+		TArray<FWarriorNPCDialogueCsvRow>& OutRows,
+		FString& OutError
+	);
 
 	UFUNCTION(BlueprintCallable,Category = "Warrior|FunctionLibrary")
 	static FVector2D CalculateUIScreenPositionByActor(AActor* Actor, FVector2D WidgetSize);

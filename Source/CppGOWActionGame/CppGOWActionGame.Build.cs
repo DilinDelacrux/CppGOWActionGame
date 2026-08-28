@@ -23,7 +23,10 @@ public class CppGOWActionGame : ModuleRules
 			"MotionWarping",
 			"Niagara",
 			"NavigationSystem",
-			"MoviePlayer"
+			"MoviePlayer",
+			"Json",
+			"LocalLLMRuntime",
+			"AudioCppRuntime"
 		});
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 

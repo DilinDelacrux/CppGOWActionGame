@@ -1,0 +1,9 @@
+RowName,ConversationId,LineIndex,SpeakerSlot,Text,TtsSpeaker,PauseAfterSeconds,EndAction
+VillageGreeting_01_01,VillageGreeting_01,1,A,"上午好，今天铺子里的活还顺利吗？",dylan,0.20,Continue
+VillageGreeting_01_02,VillageGreeting_01,2,B,"还算顺利，就是早晨忙得有些喘不过气。",vivian,0.25,Continue
+VillageGreeting_01_03,VillageGreeting_01,3,A,"我那边也一样，最近村里的订单多了不少。",dylan,0.20,Continue
+VillageGreeting_01_04,VillageGreeting_01,4,B,"忙些总比没有生意好，至少冬天不用发愁。",vivian,0.30,Continue
+VillageGreeting_01_05,VillageGreeting_01,5,A,"说得也是。天越来越凉，你记得多添件衣服。",dylan,0.20,Continue
+VillageGreeting_01_06,VillageGreeting_01,6,B,"多谢提醒，你在炉火旁干活也要当心。",vivian,0.25,Continue
+VillageGreeting_01_07,VillageGreeting_01,7,A,"放心吧。等晚上收工了，我们再去旅店聊。",dylan,0.20,Continue
+VillageGreeting_01_08,VillageGreeting_01,8,B,"好，就这么说定了。我们先回去干活吧。",vivian,0.00,ReturnToWork

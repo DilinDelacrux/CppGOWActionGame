@@ -14,7 +14,55 @@
 #include "Blueprint/WidgetLayoutLibrary.h"
 #include "Components/SizeBox.h"
 #include "Kismet/GameplayStatics.h"
+#include "Kismet/KismetSystemLibrary.h"
+#include "HAL/FileManager.h"
+#include "Misc/DateTime.h"
+#include "Misc/FileHelper.h"
+#include "Misc/Paths.h"
 #include "SaveGame/WarriorSaveGame.h"
+#include "Serialization/Csv/CsvParser.h"
+
+namespace WarriorDialogueCsv
+{
+	FString ResolvePath(const FString& InputPath)
+	{
+		FString NormalizedPath = InputPath;
+		NormalizedPath.TrimStartAndEndInline();
+		FPaths::NormalizeFilename(NormalizedPath);
+
+		if (!FPaths::IsRelative(NormalizedPath))
+		{
+			return FPaths::ConvertRelativePathToFull(NormalizedPath);
+		}
+
+		if (NormalizedPath.StartsWith(TEXT("Content/"), ESearchCase::IgnoreCase))
+		{
+			return FPaths::ConvertRelativePathToFull(FPaths::Combine(FPaths::ProjectDir(), NormalizedPath));
+		}
+
+		return FPaths::ConvertRelativePathToFull(FPaths::Combine(FPaths::ProjectContentDir(), NormalizedPath));
+	}
+
+	FString NormalizeHeader(const TCHAR* Header)
+	{
+		FString Result = Header ? Header : TEXT("");
+		Result.TrimStartAndEndInline();
+		Result.ToLowerInline();
+		return Result;
+	}
+
+	FString GetCell(const TArray<const TCHAR*>& Row, int32 ColumnIndex)
+	{
+		if (!Row.IsValidIndex(ColumnIndex) || Row[ColumnIndex] == nullptr)
+		{
+			return FString();
+		}
+
+		FString Value(Row[ColumnIndex]);
+		Value.TrimStartAndEndInline();
+		return Value;
+	}
+}
 
 
 UWarriorAbilitySystemComponent* UWarriorFunctionLibrary::NativeGetWarriorASCFromActor(AActor* InActor)
@@ -272,6 +320,208 @@ bool UWarriorFunctionLibrary::TryLoadSavedGameDifficulty(EWarriorGameDifficulty&
 	}
 
 	return false;
+}
+
+void UWarriorFunctionLibrary::PrintStringWithTimestamp(
+	const UObject* WorldContextObject,
+	const FString& InString,
+	bool bPrintToScreen,
+	bool bPrintToLog,
+	FLinearColor TextColor,
+	float Duration,
+	FName Key)
+{
+	const FString TimestampedString = FString::Printf(
+		TEXT("%s-%s"),
+		*FDateTime::Now().ToString(TEXT("%H:%M:%S:%s")),
+		*InString);
+
+	UKismetSystemLibrary::PrintString(
+		WorldContextObject,
+		TimestampedString,
+		bPrintToScreen,
+		bPrintToLog,
+		TextColor,
+		Duration,
+		Key);
+}
+
+bool UWarriorFunctionLibrary::LoadNPCDialogueCsv(
+	const FString& CsvFilePath,
+	const FString& ConversationId,
+	TArray<FWarriorNPCDialogueCsvRow>& OutRows,
+	FString& OutError)
+{
+	OutRows.Reset();
+	OutError.Reset();
+
+	if (CsvFilePath.TrimStartAndEnd().IsEmpty())
+	{
+		OutError = TEXT("CSV 路径不能为空。");
+		return false;
+	}
+
+	const FString AbsolutePath = WarriorDialogueCsv::ResolvePath(CsvFilePath);
+	if (!FPaths::FileExists(AbsolutePath))
+	{
+		OutError = FString::Printf(TEXT("找不到 NPC 对话 CSV：%s"), *AbsolutePath);
+		return false;
+	}
+
+	FString CsvContent;
+	// CSV is an authoring file and may still be open in a spreadsheet editor or
+	// touched by Unreal's directory watcher. Allow concurrent writers while we
+	// take a read snapshot so data-driven dialogue can be reloaded during PIE.
+	if (!FFileHelper::LoadFileToString(
+		CsvContent,
+		*AbsolutePath,
+		FFileHelper::EHashOptions::None,
+		FILEREAD_AllowWrite | FILEREAD_Silent))
+	{
+		OutError = FString::Printf(
+			TEXT("无法读取 NPC 对话 CSV（文件可能正被独占占用）：%s"),
+			*AbsolutePath);
+		return false;
+	}
+
+	FCsvParser Parser(MoveTemp(CsvContent));
+	const FCsvParser::FRows& CsvRows = Parser.GetRows();
+	if (CsvRows.Num() < 2)
+	{
+		OutError = TEXT("NPC 对话 CSV 没有数据行。");
+		return false;
+	}
+
+	TMap<FString, int32> Columns;
+	for (int32 ColumnIndex = 0; ColumnIndex < CsvRows[0].Num(); ++ColumnIndex)
+	{
+		Columns.Add(WarriorDialogueCsv::NormalizeHeader(CsvRows[0][ColumnIndex]), ColumnIndex);
+	}
+
+	const TArray<FString> RequiredHeaders = {
+		TEXT("rowname"),
+		TEXT("conversationid"),
+		TEXT("lineindex"),
+		TEXT("speakerslot"),
+		TEXT("text"),
+		TEXT("ttsspeaker"),
+		TEXT("pauseafterseconds"),
+		TEXT("endaction")
+	};
+
+	for (const FString& RequiredHeader : RequiredHeaders)
+	{
+		if (!Columns.Contains(RequiredHeader))
+		{
+			OutError = FString::Printf(TEXT("NPC 对话 CSV 缺少列：%s"), *RequiredHeader);
+			return false;
+		}
+	}
+
+	const FString RequestedConversationId = ConversationId.TrimStartAndEnd();
+	TSet<FString> SeenRowNames;
+	TSet<FString> SeenConversationLines;
+
+	for (int32 CsvRowIndex = 1; CsvRowIndex < CsvRows.Num(); ++CsvRowIndex)
+	{
+		const TArray<const TCHAR*>& CsvRow = CsvRows[CsvRowIndex];
+		bool bHasAnyValue = false;
+		for (const TCHAR* Cell : CsvRow)
+		{
+			if (Cell != nullptr && !FString(Cell).TrimStartAndEnd().IsEmpty())
+			{
+				bHasAnyValue = true;
+				break;
+			}
+		}
+		if (!bHasAnyValue)
+		{
+			continue;
+		}
+
+		FWarriorNPCDialogueCsvRow ParsedRow;
+		ParsedRow.RowName = WarriorDialogueCsv::GetCell(CsvRow, Columns[TEXT("rowname")]);
+		ParsedRow.ConversationId = WarriorDialogueCsv::GetCell(CsvRow, Columns[TEXT("conversationid")]);
+		ParsedRow.SpeakerSlot = WarriorDialogueCsv::GetCell(CsvRow, Columns[TEXT("speakerslot")]);
+		ParsedRow.Text = WarriorDialogueCsv::GetCell(CsvRow, Columns[TEXT("text")]);
+		ParsedRow.TtsSpeaker = WarriorDialogueCsv::GetCell(CsvRow, Columns[TEXT("ttsspeaker")]);
+		ParsedRow.EndAction = WarriorDialogueCsv::GetCell(CsvRow, Columns[TEXT("endaction")]);
+
+		const FString LineIndexText = WarriorDialogueCsv::GetCell(CsvRow, Columns[TEXT("lineindex")]);
+		if (!LexTryParseString(ParsedRow.LineIndex, *LineIndexText) || ParsedRow.LineIndex <= 0)
+		{
+			OutError = FString::Printf(TEXT("CSV 第 %d 行的 LineIndex 无效：%s"), CsvRowIndex + 1, *LineIndexText);
+			OutRows.Reset();
+			return false;
+		}
+
+		const FString PauseText = WarriorDialogueCsv::GetCell(CsvRow, Columns[TEXT("pauseafterseconds")]);
+		if (!PauseText.IsEmpty() && !LexTryParseString(ParsedRow.PauseAfterSeconds, *PauseText))
+		{
+			OutError = FString::Printf(TEXT("CSV 第 %d 行的 PauseAfterSeconds 无效：%s"), CsvRowIndex + 1, *PauseText);
+			OutRows.Reset();
+			return false;
+		}
+		ParsedRow.PauseAfterSeconds = FMath::Max(0.0f, ParsedRow.PauseAfterSeconds);
+
+		if (ParsedRow.RowName.IsEmpty() || ParsedRow.ConversationId.IsEmpty() ||
+			ParsedRow.SpeakerSlot.IsEmpty() || ParsedRow.Text.IsEmpty())
+		{
+			OutError = FString::Printf(
+				TEXT("CSV 第 %d 行缺少必填值：RowName、ConversationId、SpeakerSlot 或 Text。"),
+				CsvRowIndex + 1);
+			OutRows.Reset();
+			return false;
+		}
+
+		const FString NormalizedRowName = ParsedRow.RowName.ToLower();
+		if (SeenRowNames.Contains(NormalizedRowName))
+		{
+			OutError = FString::Printf(TEXT("CSV 第 %d 行存在重复 RowName：%s"), CsvRowIndex + 1, *ParsedRow.RowName);
+			OutRows.Reset();
+			return false;
+		}
+		SeenRowNames.Add(NormalizedRowName);
+
+		const FString ConversationLineKey = FString::Printf(
+			TEXT("%s:%d"),
+			*ParsedRow.ConversationId.ToLower(),
+			ParsedRow.LineIndex);
+		if (SeenConversationLines.Contains(ConversationLineKey))
+		{
+			OutError = FString::Printf(
+				TEXT("CSV 第 %d 行存在重复的 ConversationId + LineIndex：%s"),
+				CsvRowIndex + 1,
+				*ConversationLineKey);
+			OutRows.Reset();
+			return false;
+		}
+		SeenConversationLines.Add(ConversationLineKey);
+
+		if (RequestedConversationId.IsEmpty() ||
+			ParsedRow.ConversationId.Equals(RequestedConversationId, ESearchCase::IgnoreCase))
+		{
+			OutRows.Add(MoveTemp(ParsedRow));
+		}
+	}
+
+	if (OutRows.IsEmpty())
+	{
+		OutError = RequestedConversationId.IsEmpty()
+			? TEXT("NPC 对话 CSV 没有有效数据行。")
+			: FString::Printf(TEXT("CSV 中找不到 ConversationId：%s"), *RequestedConversationId);
+		return false;
+	}
+
+	OutRows.Sort([](const FWarriorNPCDialogueCsvRow& Left, const FWarriorNPCDialogueCsvRow& Right)
+	{
+		const int32 ConversationCompare = Left.ConversationId.Compare(Right.ConversationId, ESearchCase::IgnoreCase);
+		return ConversationCompare == 0
+			? Left.LineIndex < Right.LineIndex
+			: ConversationCompare < 0;
+	});
+
+	return true;
 }
 
 FVector2D UWarriorFunctionLibrary::CalculateUIScreenPositionByActor(AActor* Actor,FVector2D WidgetSize)

@@ -95,6 +95,9 @@ Content/__ExternalActors__/Map/FeatureDeathMap/
 # Qwen3-TTS 模型及其配置
 /Content/AudioCpp/Models/
 
+# Local LLM GGUF 模型
+/Content/LocalLLM/Models/
+
 # AudioCpp / CUDA Win64 运行时
 /Plugins/AudioCpp/ThirdParty/audio.cpp/Win64/
 

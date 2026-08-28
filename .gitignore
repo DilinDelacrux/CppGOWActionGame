@@ -105,8 +105,10 @@ Content/__ExternalActors__/Map/FeatureDeathMap/
 # AudioCpp / CUDA Win64 运行时
 /Plugins/AudioCpp/ThirdParty/audio.cpp/Win64/
 
-# Puerts / V8 多平台预编译 SDK
-/Plugins/Puerts/ThirdParty/
+# Puerts / V8 多平台预编译 SDK；保留编译所需的轻量头文件
+/Plugins/Puerts/ThirdParty/*
+!/Plugins/Puerts/ThirdParty/Include/
+!/Plugins/Puerts/ThirdParty/Include/**
 
 # AudioCpp 下载、解压和依赖归档产物
 /audiocpp-windows-cuda-portable-*/

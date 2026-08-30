@@ -34,6 +34,13 @@ void UJSAnimGeneratedClass::InitPropertiesFromCustomList(uint8* DataPtr, const u
     }
 }
 
+#if WITH_EDITOR && ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 8
+void UJSAnimGeneratedClass::HandleReinitializeObjectAfterCompile(UObject* Object) const
+{
+    UBlueprintGeneratedClass::HandleReinitializeObjectAfterCompile(Object);
+}
+#endif
+
 void UJSAnimGeneratedClass::Release()
 {
     for (TFieldIterator<UFunction> It(this, EFieldIteratorFlags::IncludeSuper, EFieldIteratorFlags::ExcludeDeprecated,

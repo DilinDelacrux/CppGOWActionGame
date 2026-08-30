@@ -34,6 +34,10 @@ class UJSAnimGeneratedClass : public UAnimBlueprintGeneratedClass
 public:
     void InitPropertiesFromCustomList(uint8* DataPtr, const uint8* DefaultDataPtr) override;
 
+#if WITH_EDITOR && ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 8
+    void HandleReinitializeObjectAfterCompile(UObject* Object) const override;
+#endif
+
     void Release();
 
     static void StaticConstructor(const FObjectInitializer& ObjectInitializer);

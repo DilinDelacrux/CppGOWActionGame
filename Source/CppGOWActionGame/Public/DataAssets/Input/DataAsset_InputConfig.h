@@ -21,7 +21,7 @@ public:
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly,meta=(Categories="InputTag"))
 	FGameplayTag InputTag;
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
-	UInputAction* InputAction;
+	UInputAction* InputAction = nullptr;
 
 	bool IsVaild() const
 	{

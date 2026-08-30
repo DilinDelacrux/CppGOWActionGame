@@ -169,7 +169,10 @@ public class JsEnv : ModuleRules
 
         string coreJSPath = Path.GetFullPath(Path.Combine(ModuleDirectory, "..", "..", "Content"));
         string destDirName = Path.GetFullPath(Path.Combine(ModuleDirectory, "..", "..", "..", "..", "Content"));
-        DirectoryCopy(coreJSPath, destDirName, true);
+        if (Directory.Exists(coreJSPath))
+        {
+            DirectoryCopy(coreJSPath, destDirName, true);
+        }
 
         // 每次build时拷贝一些手写的.d.ts到Typing目录以同步更新
         string srcDtsDirName  = Path.GetFullPath(Path.Combine(ModuleDirectory, "..", "..", "Typing"));

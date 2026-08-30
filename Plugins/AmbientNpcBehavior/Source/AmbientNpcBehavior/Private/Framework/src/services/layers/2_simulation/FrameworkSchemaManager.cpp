@@ -1,5 +1,5 @@
-#include <nlohmann/json.hpp>
 #include "FrameworkSchemaManager.h"
+#include <nlohmann/json.hpp>
 
 using json = nlohmann::json;
 using namespace AmbientCharacterBehavior;

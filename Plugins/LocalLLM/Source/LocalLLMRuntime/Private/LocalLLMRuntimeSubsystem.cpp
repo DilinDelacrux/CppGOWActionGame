@@ -45,9 +45,13 @@ bool ULocalLLMRuntimeSubsystem::StartServer()
 
 	const FString ExecutablePath = ResolveServerExecutablePath();
 	const FString ModelPath = ResolveModelPath();
-	if (!FPaths::FileExists(ExecutablePath) || !FPaths::FileExists(ModelPath))
+	const bool bServerExists = FPaths::FileExists(ExecutablePath);
+	const bool bModelExists = FPaths::FileExists(ModelPath);
+	if (!bServerExists || !bModelExists)
 	{
-		UE_LOG(LogTemp, Error, TEXT("Local LLM runtime is missing. Server: %s, Model: %s"), *ExecutablePath, *ModelPath);
+		UE_LOG(LogTemp, Error, TEXT("Local LLM runtime is missing. Server: %s [%s], Model: %s [%s]"),
+			*ExecutablePath, bServerExists ? TEXT("found") : TEXT("missing"),
+			*ModelPath, bModelExists ? TEXT("found") : TEXT("missing"));
 		ServerState = ELocalLLMServerState::Failed;
 		return false;
 	}

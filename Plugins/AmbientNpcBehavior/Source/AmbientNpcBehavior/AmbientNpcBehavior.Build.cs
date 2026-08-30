@@ -4,7 +4,7 @@ public class AmbientNpcBehavior : ModuleRules
 {
 	public AmbientNpcBehavior(ReadOnlyTargetRules Target) : base(Target)
 	{
-		PCHUsage = PCHUsageMode.NoSharedPCHs;
+		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
 		// The vendored framework is plain C++20 and is compiled directly into
 		// this module, so unity builds are disabled to keep translation units

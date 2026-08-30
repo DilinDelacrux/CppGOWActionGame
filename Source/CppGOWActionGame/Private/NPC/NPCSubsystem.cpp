@@ -335,12 +335,8 @@ void UNPCConversationCsvGenerationTask::Start()
 		Fail(TEXT("LocalLLMRuntime Subsystem 不可用。"));
 		return;
 	}
-	if (LLMSubsystem->GetServerState() == ELocalLLMServerState::Failed)
-	{
-		Fail(TEXT("Local LLM 服务处于失败状态，请检查模型与服务路径。"));
-		return;
-	}
-	if (LLMSubsystem->GetServerState() == ELocalLLMServerState::Stopped && !LLMSubsystem->StartServer())
+	const ELocalLLMServerState LLMState = LLMSubsystem->GetServerState();
+	if ((LLMState == ELocalLLMServerState::Stopped || LLMState == ELocalLLMServerState::Failed) && !LLMSubsystem->StartServer())
 	{
 		Fail(TEXT("Local LLM 服务启动失败。"));
 		return;
@@ -678,19 +674,14 @@ void UNPCVoiceDialogueTask::Start()
 		return;
 	}
 
-	if (LLMSubsystem->GetServerState() == ELocalLLMServerState::Failed)
-	{
-		Fail(TEXT("Local LLM 服务处于失败状态，请检查模型与服务路径。"));
-		return;
-	}
-
 	if (TTSSubsystem->GetServerState() == EAudioCppServerState::Failed)
 	{
 		Fail(TEXT("Audio.cpp 服务处于失败状态，请检查模型与服务路径。"));
 		return;
 	}
 
-	if (LLMSubsystem->GetServerState() == ELocalLLMServerState::Stopped && !LLMSubsystem->StartServer())
+	const ELocalLLMServerState LLMState = LLMSubsystem->GetServerState();
+	if ((LLMState == ELocalLLMServerState::Stopped || LLMState == ELocalLLMServerState::Failed) && !LLMSubsystem->StartServer())
 	{
 		Fail(TEXT("Local LLM 服务启动失败。"));
 		return;

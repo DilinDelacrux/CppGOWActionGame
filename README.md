@@ -1,6 +1,6 @@
 # CppGOWActionGame
 
-Unreal Engine 5.5 action-game project with Gameplay Ability System, Puerts/TypeScript, ReactUMG, Ambient NPC behavior, and local AudioCpp-powered speech features.
+Unreal Engine 5.8 action-game project with Gameplay Ability System, Puerts/TypeScript, ReactUMG, Ambient NPC behavior, and local AudioCpp-powered speech features.
 
 ## External dependencies
 
@@ -36,6 +36,22 @@ The Baidu Netdisk share URL is provided separately by the project maintainer.
    tar -xf .\CppGOW_ExternalDependencies_Qwen3TTS_AudioCppCUDA_PuertsV8.zip -C .
    ```
 
-5. Open `CppGOWActionGame.uproject` with Unreal Engine 5.5 and rebuild project modules when prompted.
+5. Open `CppGOWActionGame.uproject` with Unreal Engine 5.8 and rebuild project modules when prompted.
+
+## Build and run
+
+From PowerShell, build the editor target with:
+
+```powershell
+& 'C:\Program Files\Epic Games\UE_5.8\Engine\Build\BatchFiles\Build.bat' CppGOWActionGameEditor Win64 Development '-Project=C:\path\to\CppGOWActionGame\CppGOWActionGame.uproject' -WaitMutex -NoHotReloadFromIDE
+```
+
+On memory-constrained machines, append `-NoXGE -MaxParallelActions=1`.
+
+Launch the project by opening `CppGOWActionGame.uproject`, or run:
+
+```powershell
+& 'C:\Program Files\Epic Games\UE_5.8\Engine\Binaries\Win64\UnrealEditor.exe' 'C:\path\to\CppGOWActionGame\CppGOWActionGame.uproject'
+```
 
 Do not commit the restored model, CUDA runtime, V8 SDK, or dependency ZIP. The repository's `.gitignore` excludes them.

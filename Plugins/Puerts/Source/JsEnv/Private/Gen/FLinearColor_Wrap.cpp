@@ -52,7 +52,7 @@ struct AutoRegisterForFLinearColor
             .Method("LinearRGBToHSV", MakeFunction(&FLinearColor::LinearRGBToHSV))
             .Method("HSVToLinearRGB", MakeFunction(&FLinearColor::HSVToLinearRGB))
             .Function("LerpUsingHSV", MakeFunction(&FLinearColor::LerpUsingHSV))
-            .Method("Quantize", MakeFunction(&FLinearColor::Quantize))
+            .Method("Quantize", MakeFunction(&FLinearColor::QuantizeFloor))
             .Method("QuantizeRound", MakeFunction(&FLinearColor::QuantizeRound))
             .Method("ToFColor", MakeFunction(&FLinearColor::ToFColor))
             .Method("Desaturate", MakeFunction(&FLinearColor::Desaturate))

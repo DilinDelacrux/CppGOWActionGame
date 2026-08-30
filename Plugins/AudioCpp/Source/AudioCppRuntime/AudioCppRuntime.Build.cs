@@ -19,7 +19,7 @@ public class AudioCppRuntime : ModuleRules
 					string Extension = Path.GetExtension(FilePath).ToLowerInvariant();
 					if (Extension == ".exe" || Extension == ".dll")
 					{
-						RuntimeDependencies.Add("$(BinaryOutputDir)/" + Path.GetRelativePath(RuntimeDirectory, FilePath), FilePath, StagedFileType.NonUFS);
+						RuntimeDependencies.Add(FilePath, StagedFileType.NonUFS);
 					}
 				}
 			}

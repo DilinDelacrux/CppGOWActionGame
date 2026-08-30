@@ -50,7 +50,7 @@ struct FWarriorHeroWeaponData
 	TArray<FWarriorHeroSpecialAbilitySet> SpecialWeaponAbilities;
 
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
-	UInputMappingContext* WeaponInputMappingContext;
+	UInputMappingContext* WeaponInputMappingContext = nullptr;
 
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
 	FScalableFloat WeaponBaseDamage;

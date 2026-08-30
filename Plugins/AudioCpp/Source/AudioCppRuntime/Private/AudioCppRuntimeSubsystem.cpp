@@ -173,7 +173,7 @@ bool UAudioCppRuntimeSubsystem::WriteServerConfig(FString& OutConfigPath, FStrin
 		return false;
 	}
 
-	const FString ModelPath = AudioCppRuntime::ToAbsolutePath(Settings->ModelFilePath.FilePath, FPaths::ProjectDir());
+	const FString ModelPath = FPaths::ConvertRelativePathToFull(Settings->ModelFilePath.FilePath);
 	if (!FPaths::FileExists(ModelPath))
 	{
 		OutError = FString::Printf(TEXT("Configured GGUF model file does not exist: %s"), *ModelPath);
@@ -228,13 +228,7 @@ FString UAudioCppRuntimeSubsystem::ResolveServerExecutablePath() const
 	const TSharedPtr<IPlugin> Plugin = IPluginManager::Get().FindPlugin(TEXT("AudioCpp"));
 	const FString PluginPath = Plugin.IsValid() ? Plugin->GetBaseDir() : FPaths::ProjectPluginsDir();
 	const FString ConfiguredPath = Settings->ServerExecutablePath.FilePath.IsEmpty() ? TEXT("ThirdParty/audio.cpp/Win64/audiocpp_server.exe") : Settings->ServerExecutablePath.FilePath;
-	const FString PluginExecutablePath = AudioCppRuntime::ToAbsolutePath(ConfiguredPath, PluginPath);
-	if (FPaths::FileExists(PluginExecutablePath))
-	{
-		return PluginExecutablePath;
-	}
-
-	return FPaths::Combine(FPlatformProcess::BaseDir(), FPaths::GetCleanFilename(ConfiguredPath));
+	return AudioCppRuntime::ToAbsolutePath(ConfiguredPath, PluginPath);
 }
 
 void UAudioCppRuntimeSubsystem::PollHealth()

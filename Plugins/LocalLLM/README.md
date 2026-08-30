@@ -4,7 +4,7 @@
 
 ## Setup
 
-1. Put `llama-server.exe` and its matching CUDA/DLL runtime files under `ThirdParty/llama.cpp/Win64`.
+1. Run `powershell -ExecutionPolicy Bypass -File Plugins/LocalLLM/SetupRuntime.ps1` to install the pinned official Windows Vulkan runtime under `ThirdParty/llama.cpp/Win64`.
 2. Put `Qwen3-4B-Q4_K_M.gguf` under `Content/LocalLLM/Models`.
 3. In **Project Settings > Plugins > Local LLM Runtime**, set the model path if it differs from the project default.
 4. Call `StartServer`, wait until `IsServerReady` is true, then call `GenerateChat`.

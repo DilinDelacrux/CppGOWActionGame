@@ -12,6 +12,7 @@
 #include "Interfaces/IPluginManager.h"
 #include "Misc/Paths.h"
 #include "CoreUObject.h"
+#include "UObject/MetaData.h"
 #include "TypeScriptDeclarationGenerator.h"
 #include "Components/PanelSlot.h"
 #if WITH_EDITOR
@@ -28,7 +29,11 @@
 #include "Widgets/Notifications/SNotificationList.h"
 // #include "Misc/MessageDialog.h"
 #include "Framework/MultiBox/MultiBoxBuilder.h"
+#if ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 8
+#include "StructUtils/UserDefinedStruct.h"
+#else
 #include "Engine/UserDefinedStruct.h"
+#endif
 #include "Engine/UserDefinedEnum.h"
 #include "Engine/Blueprint.h"
 #include "CodeGenerator.h"
@@ -631,10 +636,15 @@ void FTypeScriptDeclarationGenerator::LoadAllWidgetBlueprint(FName InSearchPath,
         const FAssetPackageData* PackageData = AssetRegistry.GetAssetPackageData(AssetData.PackageName);
 #endif
         auto BlueprintTypeDeclInfoPtr = BlueprintTypeDeclInfoCache.Find(AssetData.PackageName);
+#if ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 8
+        const FString PackageVersion = PackageData ? LexToString(PackageData->GetPackageSavedHash()) : FString();
+#else
+        const FString PackageVersion = PackageData ? PackageData->PackageGuid.ToString() : FString();
+#endif
 
         if (PackageData && BlueprintTypeDeclInfoPtr)
         {
-            auto FileVersion = PackageData->PackageGuid.ToString();
+            const FString& FileVersion = PackageVersion;
             BlueprintTypeDeclInfoPtr->IsExist = true;
             BlueprintTypeDeclInfoPtr->Changed = InGenFull || (FileVersion != BlueprintTypeDeclInfoPtr->FileVersionString);
             BlueprintTypeDeclInfoPtr->FileVersionString = FileVersion;
@@ -642,7 +652,7 @@ void FTypeScriptDeclarationGenerator::LoadAllWidgetBlueprint(FName InSearchPath,
         else
         {
             BlueprintTypeDeclInfoCache.Add(AssetData.PackageName,
-                {TMap<FName, FString>(), PackageData ? PackageData->PackageGuid.ToString() : FString(TEXT("")), true, true, false});
+                {TMap<FName, FString>(), PackageVersion, true, true, false});
         }
     }
 }
@@ -951,7 +961,11 @@ bool FTypeScriptDeclarationGenerator::GenFunction(
             else
             {
                 FStringBuffer TmpBuf;
+#if ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 8
+                TMap<FName, FString>* MetaMap = FMetaData::GetMapForObject(Function);
+#else
                 TMap<FName, FString>* MetaMap = UMetaData::GetMapForObject(Function);
+#endif
                 const FName MetadataCppDefaultValueKey(*(FString(TEXT("CPP_Default_")) + Property->GetName()));
                 FString* DefaultValuePtr = nullptr;
                 if (MetaMap)

@@ -18,8 +18,8 @@ struct Converter<std::function<R(Args...)>>
     {
         if (API::IsNullOrUndefined(context, value))
             return nullptr;
-        Function PF(context, value);
-        return [=](Args... cppArgs) -> R { return PF.Func<R>(cppArgs...); };
+        Function ConvertedFunction(context, value);
+        return [=](Args... cppArgs) -> R { return ConvertedFunction.Func<R>(cppArgs...); };
     }
 
     static bool accept(API::ContextType context, const API::ValueType value)
@@ -40,8 +40,8 @@ struct Converter<std::function<void(Args...)>>
     {
         if (API::IsNullOrUndefined(context, value))
             return nullptr;
-        Function PF(context, value);
-        return [=](Args... cppArgs) -> void { PF.Action(cppArgs...); };
+        Function ConvertedFunction(context, value);
+        return [=](Args... cppArgs) -> void { ConvertedFunction.Action(cppArgs...); };
     }
 
     static bool accept(API::ContextType context, const API::ValueType value)

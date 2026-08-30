@@ -169,6 +169,7 @@ IMPLEMENT_MODULE(FJsEnvModule, JsEnv)
 
 void FJsEnvModule::StartupModule()
 {
+#if ENGINE_MAJOR_VERSION < 5 || (ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION < 6)
     int* Dummy = new (std::nothrow) int[0];
     if (!Dummy)
     {
@@ -177,6 +178,7 @@ void FJsEnvModule::StartupModule()
         GMalloc = MallocWrapper;
     }
     delete[] Dummy;
+#endif
 
     // This code will execute after your module is loaded into memory (but after global variables are initialized, of course.)
 #if defined(WITH_NODEJS)
@@ -254,6 +256,7 @@ void FJsEnvModule::ShutdownModule()
     v8::platform::DeletePlatform_Without_Stl(platform_);
 #endif
 
+#if ENGINE_MAJOR_VERSION < 5 || (ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION < 6)
     if (MallocWrapper && MallocWrapper == GMalloc)
     {
         GMalloc = MallocWrapper->InnerMalloc;
@@ -261,6 +264,7 @@ void FJsEnvModule::ShutdownModule()
         MallocWrapper = nullptr;
         UE_LOG(JsEnvModule, Warning, TEXT("GMalloc restored!"));
     }
+#endif
 }
 
 void* FJsEnvModule::GetV8Platform()

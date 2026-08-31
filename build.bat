@@ -2,7 +2,7 @@
 setlocal EnableExtensions
 
 REM ============================================================
-REM  One-click build for CppGOWActionGame (Unreal Engine 5.5)
+REM  One-click build for CppGOWActionGame (Unreal Engine 5.8)
 REM  Builds the project without opening Visual Studio or Rider.
 REM
 REM  Usage:
@@ -22,20 +22,15 @@ if /i "%~1"=="Game" set "TARGET_NAME=CppGOWActionGame"
 if not "%~2"=="" set "CONFIG=%~2"
 
 REM ---- Locate the engine ----
-set "UE_ENGINE_DIR=C:\Program Files\Epic Games\UE_5.5"
-
-REM Fall back to the registry if the default path is missing.
-if not exist "%UE_ENGINE_DIR%\Engine\Build\BatchFiles\Build.bat" (
-    for /f "tokens=2,*" %%A in ('reg query "HKCU\SOFTWARE\Epic Games\Unreal Engine\Builds\5.5" /v InstalledDirectory 2^>nul ^| findstr /i InstalledDirectory') do set "UE_ENGINE_DIR=%%B"
-)
+for /f "delims=" %%E in ('powershell.exe -NoProfile -File "%~dp0Scripts\ResolveEngine.ps1"') do set "UE_ENGINE_DIR=%%E"
 
 set "BUILD_BAT=%UE_ENGINE_DIR%\Engine\Build\BatchFiles\Build.bat"
 
 if not exist "%BUILD_BAT%" (
     echo.
-    echo [ERROR] Could not find Unreal Engine 5.5.
+    echo [ERROR] Could not find Unreal Engine 5.8.
     echo         Looked at: "%UE_ENGINE_DIR%"
-    echo         Set UE_ENGINE_DIR at the top of this script to the correct path.
+    echo         Register the project engine or set UE_ENGINE_DIR relative to the project root.
     echo.
     pause
     exit /b 1

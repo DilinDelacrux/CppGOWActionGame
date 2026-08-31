@@ -1,0 +1,7 @@
+RowName,ConversationId,LineIndex,SpeakerSlot,Text,TtsSpeaker,PauseAfterSeconds,EndAction
+"VillageGreeting_04_01","VillageGreeting_04",1,"A","午休时间，过得怎么样？","dylan",0.25,"Continue"
+"VillageGreeting_04_02","VillageGreeting_04",2,"B","挺好的，刚完成一批订单。","vivian",0.25,"Continue"
+"VillageGreeting_04_03","VillageGreeting_04",3,"A","铁匠铺的活儿也差不多了。","dylan",0.25,"Continue"
+"VillageGreeting_04_04","VillageGreeting_04",4,"B","今天天气不错，适合出来走走。","vivian",0.25,"Continue"
+"VillageGreeting_04_05","VillageGreeting_04",5,"A","我得回去了，还有别的活要干。","dylan",0.25,"Continue"
+"VillageGreeting_04_06","VillageGreeting_04",6,"B","你先走吧，我这边也该收工了。","vivian",0.00,"ReturnToWork"

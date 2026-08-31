@@ -1,4 +1,6 @@
 import * as UE from 'ue'
+import { CampDefinition, CampResident, CampState, createInitialCampState } from './AmbientNpcCampData'
+import type { CampPanelHandle, CampPanelSnapshot } from './AmbientNpcCampPanel'
 
 type Jitter = { min: number, max: number }
 type StateEffect = { target_id_name: string, state_key_name: string }
@@ -15,9 +17,10 @@ type SequenceNode = { node_id: number, node_type: string, target_action_id?: num
 type SequenceDef = { sequence_id: number, sequence_name: string, nodes: SequenceNode[] }
 type ScheduleEvent = { at: string, node_id: number, jitter_minutes?: Jitter }
 type EnergyConfig = { max: number, initial?: number }
-type NpcSchedule = { id: string, name: string, profession: string, sequence_id: number, energy: EnergyConfig, events: ScheduleEvent[] }
+type NpcSchedule = CampResident & { sequence_id: number, energy: EnergyConfig, events: ScheduleEvent[] }
 type InteractionRule = { when_action_id: number, conversation_action_id: number, pairing: 'sequential' }
 type DailyConfig = {
+    camp?: CampDefinition
     day_duration_seconds: number
     energy_settings: { fatigue_relax_action_id: number }
     interaction_rules: InteractionRule[]
@@ -33,6 +36,11 @@ type NpcRuntime = NpcSchedule & {
     energyDepleted: boolean
 }
 type Runtime = {
+    // 与每日重建的 npcs 分开，只在本实例加载配置时复制初始状态。
+    camp?: CampState
+    initialDailyJson: string
+    paused: boolean
+    resetCount: number
     elapsed: number
     day: number
     dayDuration: number
@@ -59,6 +67,7 @@ type ConfigLoader = {
 
 const runtimes = new WeakMap<object, Runtime>()
 const invalidInstances = new WeakSet<object>()
+const panels = new WeakMap<object, CampPanelHandle>()
 const MINUTES_PER_DAY = 24 * 60
 
 /**
@@ -76,6 +85,30 @@ class AmbientNpcDataDrivenScheduleDemo extends UE.BehaviorFrameworkManagerBase {
         console.warn(`[AmbientNpcSchedule] 五配置数据驱动 Demo 启动：${runtime.dayDuration} 秒 = 游戏内 24 小时。`)
         this.beginDay(runtime)
         this.update(runtime, 0)
+        if (runtime.camp && !panels.has(this)) {
+            try {
+                // 旧十人配置及无本地玩家的服务端不加载 ReactUMG。
+                const gameplay = (UE as unknown as { GameplayStatics?: typeof UE.GameplayStatics }).GameplayStatics
+                if (!gameplay?.GetPlayerController(this, 0)) return
+                const { mountCampPanel } = require('./AmbientNpcCampPanel') as typeof import('./AmbientNpcCampPanel')
+                panels.set(this, mountCampPanel(this, {
+                    snapshot: () => this.campSnapshot(),
+                    reset: () => this.resetCamp(),
+                    togglePaused: () => { runtime.paused = !runtime.paused },
+                }))
+                const onEnd = () => {
+                    panels.get(this)?.dispose()
+                    panels.delete(this)
+                    runtimes.delete(this)
+                    invalidInstances.delete(this)
+                    this.OnEndPlay.Remove(onEnd)
+                }
+                this.OnEndPlay.Add(onEnd)
+                console.warn('[AmbientNpcCampPanel] ReactUMG 面板已挂载：居民选择 / 状态查看 / 暂停 / 初始重置')
+            } catch (error) {
+                console.error(`[AmbientNpcCampPanel] 面板创建失败：${String(error)}`)
+            }
+        }
     }
 
     OnAmbientNpcScriptTick(deltaSeconds: number): void {
@@ -86,6 +119,8 @@ class AmbientNpcDataDrivenScheduleDemo extends UE.BehaviorFrameworkManagerBase {
             runtime.frameworkStatusLogged = true
             console.warn(`[AmbientNpcSchedule] 5/5 配置已解析；AmbientNpcBehavior 初始化=${this.IsInitialized()}`)
         }
+
+        if (runtime.paused) return
 
         runtime.elapsed += deltaSeconds
         while (runtime.elapsed >= runtime.dayDuration) {
@@ -100,12 +135,55 @@ class AmbientNpcDataDrivenScheduleDemo extends UE.BehaviorFrameworkManagerBase {
         if (second === runtime.lastLoggedSecond) return
         runtime.lastLoggedSecond = second
         this.update(runtime, this.gameMinute(runtime))
+        panels.get(this)?.refresh()
     }
 
     QueryEnvironmentalCondition(conditionKey: number): number {
         const runtime = this.runtime()
         if (!runtime) return 0
         return runtime.environmentNames.get(conditionKey) === 'game_minute' ? this.gameMinute(runtime) : 0
+    }
+
+    // @no-blueprint
+    private campSnapshot(): CampPanelSnapshot {
+        const runtime = this.runtime()
+        if (!runtime?.camp) throw new Error('当前配置没有营地状态')
+        const camp = runtime.camp
+        return {
+            name: camp.name, day: runtime.day + 1, time: this.formatTime(this.gameMinute(runtime)),
+            paused: runtime.paused, resetCount: runtime.resetCount, frameworkReady: this.IsInitialized(),
+            world: JSON.parse(JSON.stringify(camp.world)),
+            residents: runtime.npcs.map(npc => ({
+                id: npc.id, name: npc.name, profession: npc.profession, energy: npc.currentEnergy, maxEnergy: npc.maxEnergy,
+                action: runtime.actions.get(npc.currentActionId!)?.action_name ?? '待命', ...camp.residents[npc.id],
+            })),
+            relationships: camp.relationships.map(relation => ({ ...relation })),
+        }
+    }
+
+    // @no-blueprint
+    private resetCamp(): void {
+        const runtime = this.runtime()
+        if (!runtime?.camp) throw new Error('当前配置没有营地状态')
+        // 使用本次运行加载时的固定模板，不受中途改名或磁盘文件变化影响。
+        const daily = JSON.parse(runtime.initialDailyJson) as DailyConfig
+        const camp = createInitialCampState(daily)!
+        // 重建框架内部记忆/中断状态；已有场景实体会重新登记，不生成新Actor。
+        this.ShutdownFramework()
+        this.InitializeFramework()
+        runtime.camp = camp
+        runtime.sourceNpcs = daily.npcs
+        runtime.elapsed = 0
+        runtime.day = 0
+        runtime.lastLoggedSecond = -1
+        runtime.activeInteractions.clear()
+        runtime.paused = true
+        runtime.resetCount++
+        this.beginDay(runtime)
+        this.update(runtime, 0)
+        console.warn(`[AmbientNpcCampPanel] 已恢复初始状态 #${runtime.resetCount} | residents=${runtime.npcs.length} | events=${camp.world.active_event_ids.length}`)
+        panels.get(this)?.refresh()
+        if (!this.IsInitialized()) throw new Error('初始数据已恢复，但行为框架重启失败，请检查 Output Log')
     }
 
     // @no-blueprint
@@ -335,6 +413,10 @@ class AmbientNpcDataDrivenScheduleDemo extends UE.BehaviorFrameworkManagerBase {
             }
 
             const runtime: Runtime = {
+                camp: createInitialCampState(daily),
+                initialDailyJson: raw.daily,
+                paused: false,
+                resetCount: 0,
                 elapsed: 0,
                 day: 0,
                 dayDuration: daily.day_duration_seconds,
@@ -351,6 +433,11 @@ class AmbientNpcDataDrivenScheduleDemo extends UE.BehaviorFrameworkManagerBase {
                 activeInteractions: new Set<string>(),
             }
             runtimes.set(this, runtime)
+            if (runtime.camp) {
+                const camp = runtime.camp
+                // 不输出秘密、个人档案或完整状态，后续对话需按知情人选择事实。
+                console.warn(`[AmbientNpcCamp] ${camp.name} | residents=${Object.keys(camp.residents).length} | relationships=${camp.relationships.length} | season=${camp.world.season} | weather=${camp.world.weather} | 初始数据已加载`)
+            }
             return runtime
         } catch (error) {
             invalidInstances.add(this)

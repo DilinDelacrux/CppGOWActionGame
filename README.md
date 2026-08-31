@@ -43,15 +43,26 @@ The Baidu Netdisk share URL is provided separately by the project maintainer.
 From PowerShell, build the editor target with:
 
 ```powershell
-& 'C:\Program Files\Epic Games\UE_5.8\Engine\Build\BatchFiles\Build.bat' CppGOWActionGameEditor Win64 Development '-Project=C:\path\to\CppGOWActionGame\CppGOWActionGame.uproject' -WaitMutex -NoHotReloadFromIDE
+.\build.bat
 ```
 
-On memory-constrained machines, append `-NoXGE -MaxParallelActions=1`.
+The scripts locate the engine through the project's `EngineAssociation` and the Unreal Engine registry. To override it, set `UE_ENGINE_DIR`; relative values are resolved from the project root, independently of the terminal's working directory.
+
+For example, if the engine is two directories above the project:
+
+```powershell
+$env:UE_ENGINE_DIR = '..\..\UE_5.8'
+.\build.bat
+```
 
 Launch the project by opening `CppGOWActionGame.uproject`, or run:
 
 ```powershell
-& 'C:\Program Files\Epic Games\UE_5.8\Engine\Binaries\Win64\UnrealEditor.exe' 'C:\path\to\CppGOWActionGame\CppGOWActionGame.uproject'
+.\BuildAndRestart.bat
 ```
+
+`BuildAndRestart.bat` closes this project's editor gracefully, builds it, and opens it only if the build succeeds. Save any changes when the editor prompts you.
+
+Model paths in `Config/DefaultGame.ini` are project-relative. Scripts anchor project paths to their own location. Absolute paths passed to child processes are calculated at runtime so changing the child process working directory does not break file access.
 
 Do not commit the restored model, CUDA runtime, V8 SDK, or dependency ZIP. The repository's `.gitignore` excludes them.

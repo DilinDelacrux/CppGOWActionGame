@@ -1,3 +1,9 @@
+@echo off
+setlocal EnableExtensions
+cd /d "%~dp0"
+set "PROJECT_FILE=%~dp0CppGOWActionGame.uproject"
+for /f "delims=" %%E in ('powershell.exe -NoProfile -File "%~dp0Scripts\ResolveEngine.ps1"') do set "UE_ENGINE_DIR=%%E"
+if not exist "%UE_ENGINE_DIR%\Engine\Binaries\Win64\UnrealEditor-Cmd.exe" exit /b 1
 @title puerts gen bp and js ......
 
 @taskkill /F /IM UnrealEditor.exe >nul 2>&1
@@ -9,7 +15,7 @@ set max_retry=1
 set retryCount=0
 
 :retry
-start "puerts gen bp and js" /WAIT "C:\Program Files\Epic Games\UE_5.5\Engine\Binaries\Win64\UnrealEditor-Cmd.exe" C:\Users\admin\Documents\Unreal Projects\CppGOWActionGame\CppGOWActionGame.uproject -TestExit="Puerts FINISH" -nullrhi -log -nosplash -nosound -nopauseonsuccess -nocontentbrowser -silent
+start "puerts gen bp and js" /WAIT "%UE_ENGINE_DIR%\Engine\Binaries\Win64\UnrealEditor-Cmd.exe" "%PROJECT_FILE%" -TestExit="Puerts FINISH" -nullrhi -log -nosplash -nosound -nopauseonsuccess -nocontentbrowser -silent
 set /a retryCount+=1
 if not exist ".\ts_file_versions_info.json" (
   if !retryCount! lss %max_retry% (

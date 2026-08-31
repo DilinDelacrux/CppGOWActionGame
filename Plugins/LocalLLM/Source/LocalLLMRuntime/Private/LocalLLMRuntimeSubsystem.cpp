@@ -3,9 +3,12 @@
 #include "LocalLLMSettings.h"
 #include "Dom/JsonObject.h"
 #include "HAL/PlatformProcess.h"
+#include "HAL/PlatformTime.h"
 #include "HttpModule.h"
 #include "Interfaces/IHttpResponse.h"
 #include "Interfaces/IPluginManager.h"
+#include "Misc/DateTime.h"
+#include "Misc/Guid.h"
 #include "Misc/Paths.h"
 #include "Serialization/JsonReader.h"
 #include "Serialization/JsonSerializer.h"
@@ -134,8 +137,14 @@ void ULocalLLMRuntimeSubsystem::GenerateChat(const FLocalLLMChatRequest& Request
 	HttpRequest->SetVerb(TEXT("POST"));
 	HttpRequest->SetHeader(TEXT("Content-Type"), TEXT("application/json"));
 	HttpRequest->SetContentAsString(Json);
-	HttpRequest->OnProcessRequestComplete().BindWeakLambda(this, [this, Completed](FHttpRequestPtr, FHttpResponsePtr Response, bool bConnectedSuccessfully)
+	const FString RequestId = FGuid::NewGuid().ToString(EGuidFormats::Digits);
+	const double RequestStartedAt = FPlatformTime::Seconds();
+	UE_LOG(LogTemp, Display, TEXT("LLM generation started at %s (request=%s)"),
+		*FDateTime::Now().ToString(TEXT("%H:%M:%S:%s")), *RequestId);
+	HttpRequest->OnProcessRequestComplete().BindWeakLambda(this, [this, Completed, RequestId, RequestStartedAt](FHttpRequestPtr, FHttpResponsePtr Response, bool bConnectedSuccessfully)
 	{
+		const FString CompletedAt = FDateTime::Now().ToString(TEXT("%H:%M:%S:%s"));
+		const double ElapsedMs = (FPlatformTime::Seconds() - RequestStartedAt) * 1000.0;
 		FLocalLLMChatResult Result;
 		if (!bConnectedSuccessfully || !Response.IsValid())
 		{
@@ -167,9 +176,23 @@ void ULocalLLMRuntimeSubsystem::GenerateChat(const FLocalLLMChatRequest& Request
 				Result.Error = TEXT("llama.cpp returned a response without choices[0].message.content.");
 			}
 		}
+		if (Result.bSuccess)
+		{
+			UE_LOG(LogTemp, Display, TEXT("LLM generation completed at %s (request=%s, elapsed=%.0f ms)"),
+				*CompletedAt, *RequestId, ElapsedMs);
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("LLM generation failed at %s (request=%s, elapsed=%.0f ms)"),
+				*CompletedAt, *RequestId, ElapsedMs);
+		}
 		CompleteChat(Completed, Result);
 	});
-	HttpRequest->ProcessRequest();
+	if (!HttpRequest->ProcessRequest())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("LLM request could not be started at %s (request=%s)"),
+			*FDateTime::Now().ToString(TEXT("%H:%M:%S:%s")), *RequestId);
+	}
 }
 
 FString ULocalLLMRuntimeSubsystem::ResolveServerExecutablePath() const

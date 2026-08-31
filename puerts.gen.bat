@@ -1,4 +1,10 @@
 
+@echo off
+setlocal EnableExtensions
+cd /d "%~dp0"
+set "PROJECT_FILE=%~dp0CppGOWActionGame.uproject"
+for /f "delims=" %%E in ('powershell.exe -NoProfile -File "%~dp0Scripts\ResolveEngine.ps1"') do set "UE_ENGINE_DIR=%%E"
+if not exist "%UE_ENGINE_DIR%\Engine\Binaries\Win64\UnrealEditor-Cmd.exe" exit /b 1
 @REM -stdout
 @title puerts fix ......
 @REM start "puerts fix" /WAIT cmd /C "call fix.bat"
@@ -9,7 +15,7 @@ echo puerts fix ok
 @taskkill /F /IM CrashReportClientEditor* /T  >nul 2>&1
 
 @title puerts gen d.ts ......
-start "puerts gen d.ts" /WAIT ..\..\Engine\Binaries\Win64\UnrealEditor-Cmd.exe .\t6.uproject -TestExit="Fixed up redirectors for" -TestExitExecCmds="Puerts.Gen" -nullrhi -log -nosplash -nosound -nopauseonsuccess -nocontentbrowser -silent
+start "puerts gen d.ts" /WAIT "%UE_ENGINE_DIR%\Engine\Binaries\Win64\UnrealEditor-Cmd.exe" "%PROJECT_FILE%" -TestExit="Fixed up redirectors for" -TestExitExecCmds="Puerts.Gen" -nullrhi -log -nosplash -nosound -nopauseonsuccess -nocontentbrowser -silent
 
 echo puerts gen d.ts ok
 
@@ -37,7 +43,7 @@ set max_retry=1
 set retryCount=0
 
 :retry
-start "puerts gen bp and js" /WAIT ..\..\Engine\Binaries\Win64\UnrealEditor-Cmd.exe .\t6.uproject -TestExit="Puerts FINISH" -nullrhi -log -nosplash -nosound -nopauseonsuccess -nocontentbrowser -silent
+start "puerts gen bp and js" /WAIT "%UE_ENGINE_DIR%\Engine\Binaries\Win64\UnrealEditor-Cmd.exe" "%PROJECT_FILE%" -TestExit="Puerts FINISH" -nullrhi -log -nosplash -nosound -nopauseonsuccess -nocontentbrowser -silent
 set /a retryCount+=1
 if not exist ".\ts_file_versions_info.json" (
   if !retryCount! lss %max_retry% (

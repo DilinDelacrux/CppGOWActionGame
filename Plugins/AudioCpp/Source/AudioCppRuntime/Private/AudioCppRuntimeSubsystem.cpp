@@ -4,11 +4,14 @@
 #include "Dom/JsonObject.h"
 #include "HAL/FileManager.h"
 #include "HAL/PlatformProcess.h"
+#include "HAL/PlatformTime.h"
 #include "HttpModule.h"
 #include "Interfaces/IHttpResponse.h"
 #include "JsonObjectConverter.h"
 #include "Kismet/GameplayStatics.h"
+#include "Misc/DateTime.h"
 #include "Misc/FileHelper.h"
+#include "Misc/Guid.h"
 #include "Misc/Paths.h"
 #include "Serialization/JsonSerializer.h"
 #include "Serialization/JsonWriter.h"
@@ -63,6 +66,7 @@ bool UAudioCppRuntimeSubsystem::StartServer()
 		return false;
 	}
 
+	UE_LOG(LogTemp, Log, TEXT("Starting audio.cpp server: %s --config \"%s\" --no-ui"), *ExecutablePath, *ConfigPath);
 	ServerProcess = FPlatformProcess::CreateProc(*ExecutablePath, *FString::Printf(TEXT("--config \"%s\" --no-ui"), *ConfigPath), true, false, false, nullptr, 0, *FPaths::GetPath(ExecutablePath), nullptr);
 	if (!ServerProcess.IsValid())
 	{
@@ -133,8 +137,14 @@ void UAudioCppRuntimeSubsystem::SynthesizeSpeech(const FAudioCppSpeechRequest& R
 	HttpRequest->SetVerb(TEXT("POST"));
 	HttpRequest->SetHeader(TEXT("Content-Type"), TEXT("application/json"));
 	HttpRequest->SetContentAsString(Json);
-	HttpRequest->OnProcessRequestComplete().BindWeakLambda(this, [this, Completed](FHttpRequestPtr, FHttpResponsePtr Response, bool bConnectedSuccessfully)
+	const FString RequestId = FGuid::NewGuid().ToString(EGuidFormats::Digits);
+	const double RequestStartedAt = FPlatformTime::Seconds();
+	UE_LOG(LogTemp, Display, TEXT("TTS generation started at %s (request=%s)"),
+		*FDateTime::Now().ToString(TEXT("%H:%M:%S:%s")), *RequestId);
+	HttpRequest->OnProcessRequestComplete().BindWeakLambda(this, [this, Completed, RequestId, RequestStartedAt](FHttpRequestPtr, FHttpResponsePtr Response, bool bConnectedSuccessfully)
 	{
+		const FString CompletedAt = FDateTime::Now().ToString(TEXT("%H:%M:%S:%s"));
+		const double ElapsedMs = (FPlatformTime::Seconds() - RequestStartedAt) * 1000.0;
 		FAudioCppSpeechResult Result;
 		if (!bConnectedSuccessfully || !Response.IsValid())
 		{
@@ -159,9 +169,23 @@ void UAudioCppRuntimeSubsystem::SynthesizeSpeech(const FAudioCppSpeechRequest& R
 				Result.Error = TEXT("Could not write the generated WAV file.");
 			}
 		}
+		if (Result.bSuccess)
+		{
+			UE_LOG(LogTemp, Display, TEXT("TTS generation completed at %s (request=%s, elapsed=%.0f ms)"),
+				*CompletedAt, *RequestId, ElapsedMs);
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("TTS generation failed at %s (request=%s, elapsed=%.0f ms)"),
+				*CompletedAt, *RequestId, ElapsedMs);
+		}
 		CompleteSpeech(Completed, Result);
 	});
-	HttpRequest->ProcessRequest();
+	if (!HttpRequest->ProcessRequest())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("TTS request could not be started at %s (request=%s)"),
+			*FDateTime::Now().ToString(TEXT("%H:%M:%S:%s")), *RequestId);
+	}
 }
 
 bool UAudioCppRuntimeSubsystem::WriteServerConfig(FString& OutConfigPath, FString& OutError) const
@@ -173,7 +197,7 @@ bool UAudioCppRuntimeSubsystem::WriteServerConfig(FString& OutConfigPath, FStrin
 		return false;
 	}
 
-	const FString ModelPath = FPaths::ConvertRelativePathToFull(Settings->ModelFilePath.FilePath);
+	const FString ModelPath = AudioCppRuntime::ToAbsolutePath(Settings->ModelFilePath.FilePath, FPaths::ProjectDir());
 	if (!FPaths::FileExists(ModelPath))
 	{
 		OutError = FString::Printf(TEXT("Configured GGUF model file does not exist: %s"), *ModelPath);
@@ -210,7 +234,8 @@ bool UAudioCppRuntimeSubsystem::WriteServerConfig(FString& OutConfigPath, FStrin
 
 	const FString ConfigDirectory = FPaths::Combine(FPaths::ProjectSavedDir(), TEXT("AudioCpp"));
 	IFileManager::Get().MakeDirectory(*ConfigDirectory, true);
-	OutConfigPath = FPaths::Combine(ConfigDirectory, TEXT("server.json"));
+	// The child process runs from the plugin runtime directory, not UE's base directory.
+	OutConfigPath = FPaths::ConvertRelativePathToFull(FPaths::Combine(ConfigDirectory, TEXT("server.json")));
 	FString Json;
 	const TSharedRef<TJsonWriter<>> Writer = TJsonWriterFactory<>::Create(&Json);
 	FJsonSerializer::Serialize(Root, Writer);

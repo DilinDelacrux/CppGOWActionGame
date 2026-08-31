@@ -36,6 +36,7 @@ class UEWidget {
     nativePtr;
     slot;
     nativeSlotPtr;
+    children = new Set();
     constructor(type, props) {
         this.type = type;
         this.callbackRemovers = {};
@@ -129,16 +130,21 @@ class UEWidget {
     }
     unbindAll() {
         for (var key in this.callbackRemovers) {
-            this.callbackRemovers[key]();
+            this.callbackRemovers[key]?.();
         }
         this.callbackRemovers = {};
+        for (const child of this.children)
+            child.unbindAll();
+        this.children.clear();
     }
     appendChild(child) {
+        this.children.add(child);
         let nativeSlot = this.nativePtr.AddChild(child.nativePtr);
         //console.log("appendChild", (await this.nativePtr).toJSON(), (await child.nativePtr).toJSON());
         child.nativeSlot = nativeSlot;
     }
     removeChild(child) {
+        this.children.delete(child);
         child.unbindAll();
         this.nativePtr.RemoveChild(child.nativePtr);
         //console.log("removeChild", (await this.nativePtr).toJSON(), (await child.nativePtr).toJSON())
@@ -155,6 +161,7 @@ class UEWidget {
 class UEWidgetRoot {
     nativePtr;
     Added;
+    unmount;
     constructor(nativePtr) {
         this.nativePtr = nativePtr;
     }
@@ -173,6 +180,11 @@ class UEWidgetRoot {
         }
     }
     removeFromViewport() {
+        if (this.unmount) {
+            const unmount = this.unmount;
+            this.unmount = undefined;
+            unmount();
+        }
         this.nativePtr.RemoveFromViewport();
     }
     getWidget() {
@@ -246,10 +258,7 @@ const hostConfig = {
         }
     },
     removeChildFromContainer(container, child) {
-        console.error('removeChildFromContainer');
-        //container.removeChild(child).catch(e => {
-        //    console.error('removeChildFromContainer , e:' + e.message);
-        //});
+        container.removeChild(child);
     },
     removeChild(parent, child) {
         parent.removeChild(child);
@@ -274,6 +283,7 @@ exports.ReactUMG = {
         }
         let root = new UEWidgetRoot(UE.UMGManager.CreateReactWidget(world));
         const container = reconciler.createContainer(root, false, false);
+        root.unmount = () => reconciler.updateContainer(null, container, null, null);
         reconciler.updateContainer(reactElement, container, null, null);
         return root;
     },

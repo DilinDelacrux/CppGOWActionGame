@@ -1,0 +1,125 @@
+{
+  "day_duration_seconds": 120,
+  "energy_settings": { "fatigue_relax_action_id": 4 },
+  "interaction_rules": [
+    { "when_action_id": 4, "conversation_action_id": 5, "pairing": "sequential" }
+  ],
+  "npcs": [
+    {
+      "id": "cuihua", "name": "翠花", "profession": "采集者兼草药照料者",
+      "profile": {
+        "age": 24,
+        "personality": "细心、务实，有自己的主见；喜欢狗蛋，不接受牛二用物资换取亲近。",
+        "contribution": "采集野菜和草药，辨认可食植物，照料小伤病；依赖同伴提供蛋白质、柴火和可靠工具。",
+        "speech_style": "温和直接，谈采集时认真；被牛二调情时可以拒绝，被替她做感情决定时会生气。",
+        "faith_attitude": "承认神存在，对神保持中立，更看重实际行动。",
+        "sensitive_topics": ["替她决定喜欢谁", "拿感情交换物资", "追问药袋里的私人东西"]
+      },
+      "initial_state": { "personal_food": 3, "worship": 40, "mood": 10 },
+      "sequence_id": 0,
+      "energy": { "max": 100, "initial": 100 },
+      "events": [
+        { "at": "00:00", "node_id": 0 }, { "at": "06:30", "node_id": 1 },
+        { "at": "11:30", "node_id": 2 }, { "at": "12:30", "node_id": 3 },
+        { "at": "16:00", "node_id": 4 }, { "at": "18:00", "node_id": 5 },
+        { "at": "19:00", "node_id": 6 }, { "at": "22:00", "node_id": 7 }
+      ]
+    },
+    {
+      "id": "goudan", "name": "狗蛋", "profession": "岸边渔夫兼工具修补者",
+      "profile": {
+        "age": 25,
+        "personality": "踏实、嘴笨，喜欢翠花；面对牛二的挖苦会不服气，但不愿因此影响营地生存。",
+        "contribution": "在浅滩捕鱼，编鱼笼，修补采集工具和棚屋；依赖翠花辨药、牛二提供木料。",
+        "speech_style": "话不多，用实际帮助表达喜欢；被牛二挖苦时会回嘴，不主动挑衅翠花。",
+        "faith_attitude": "相信自己曾被神救过，物资不多仍虔诚敬神。",
+        "sensitive_topics": ["嘲笑他没本事", "逼他去深水区", "贬低翠花", "嘲弄他的祈祷"]
+      },
+      "initial_state": { "personal_food": 1, "worship": 80, "mood": 10 },
+      "sequence_id": 0,
+      "energy": { "max": 110, "initial": 110 },
+      "events": [
+        { "at": "00:00", "node_id": 0 }, { "at": "06:00", "node_id": 1 },
+        { "at": "11:30", "node_id": 2 }, { "at": "12:30", "node_id": 3 },
+        { "at": "16:00", "node_id": 4 }, { "at": "18:00", "node_id": 5 },
+        { "at": "19:00", "node_id": 6 }, { "at": "21:30", "node_id": 7 }
+      ]
+    },
+    {
+      "id": "niuer", "name": "牛二", "profession": "猎人兼营地搬运与警戒者",
+      "profile": {
+        "age": 27,
+        "personality": "好胜、爱显摆，喜欢翠花，嫉妒并讨厌狗蛋；有生存贡献，但不因此拥有决定翠花感情的权利。",
+        "contribution": "布置小型猎物陷阱，搬运柴火、警戒营地，制作肉干；依赖狗蛋修工具、翠花处理伤口。",
+        "speech_style": "对狗蛋爱说垃圾话，例如只会捞小鱼、笨手笨脚；对翠花夸耀收获并调情，不预设她会接受。",
+        "faith_attitude": "承认神存在，但认为收获主要靠自己，不愿主动崇拜。",
+        "sensitive_topics": ["拿他和狗蛋比较", "当众被翠花拒绝", "盘问他的私人物资"]
+      },
+      "initial_state": { "personal_food": 8, "worship": 10, "mood": 0 },
+      "sequence_id": 0,
+      "energy": { "max": 120, "initial": 120 },
+      "events": [
+        { "at": "00:00", "node_id": 0 }, { "at": "06:00", "node_id": 1 },
+        { "at": "12:00", "node_id": 2 }, { "at": "13:00", "node_id": 3 },
+        { "at": "17:00", "node_id": 4 }, { "at": "18:00", "node_id": 5 },
+        { "at": "19:00", "node_id": 6 }, { "at": "22:00", "node_id": 7 }
+      ]
+    }
+  ],
+  "camp": {
+    "schema_version": 1,
+    "id": "spring_survival_camp",
+    "name": "春溪营地",
+    "premise": "三个成年人的采集生存小团体，共享营地并互相依赖；翠花和狗蛋互相喜欢，牛二单方面追求翠花并敌视狗蛋。没有村长、商店或完整小镇经济。",
+    "initial_world": {
+      "season": "spring",
+      "weather": "clear",
+      "resource_abundance": 1.0,
+      "shared_resources": { "food": 18, "water": 12, "wood": 8, "herbs": 3 },
+      "daily_consumption_per_resident": { "food": 1, "water": 1 },
+      "active_event_ids": []
+    },
+    "relationships": [
+      { "from": "cuihua", "to": "goudan", "affection": 75, "attraction": 85, "trust": 80 },
+      { "from": "goudan", "to": "cuihua", "affection": 80, "attraction": 90, "trust": 85 },
+      { "from": "niuer", "to": "cuihua", "affection": 70, "attraction": 85, "trust": 45 },
+      { "from": "cuihua", "to": "niuer", "affection": 10, "attraction": 0, "trust": 35 },
+      { "from": "niuer", "to": "goudan", "affection": -65, "attraction": 0, "trust": 20 },
+      { "from": "goudan", "to": "niuer", "affection": -25, "attraction": 0, "trust": 35 }
+    ],
+    "facts": [
+      {
+        "id": "camp_cooperation", "visibility": "public", "subject_ids": ["cuihua", "goudan", "niuer"],
+        "text": "三人共同生活在春溪营地，分工采集、捕鱼修补、狩猎搬运，共享公共储备，也允许保留私人物资。"
+      },
+      {
+        "id": "spring_clear", "visibility": "public", "subject_ids": [],
+        "text": "开局是春天、晴天，野外资源处于正常丰度，尚无正在发生的灾害或神罚。"
+      },
+      {
+        "id": "god_exists", "visibility": "public", "subject_ids": [],
+        "text": "神客观存在，三人对此没有疑问，但是否崇拜以及崇拜程度不同。"
+      },
+      {
+        "id": "niuer_pursuit", "visibility": "public", "subject_ids": ["niuer", "cuihua", "goudan"],
+        "text": "牛二喜欢翠花，常对她调情，也会挖苦狗蛋；翠花没有答应牛二的追求。"
+      },
+      {
+        "id": "mutual_affection", "visibility": "private", "known_by": ["cuihua", "goudan"], "subject_ids": ["cuihua", "goudan"],
+        "text": "翠花和狗蛋已经私下表达过彼此的好感，尚未公开确定恋爱关系；牛二只知道他们亲近，不知道这次私下表达。"
+      },
+      {
+        "id": "cuihua_keeps_wooden_fish", "visibility": "private", "known_by": ["cuihua"], "subject_ids": ["cuihua", "goudan"],
+        "text": "翠花一直把狗蛋送的木鱼挂坠藏在药袋里，睡前会拿出来看，连狗蛋也不知道她如此珍惜。"
+      },
+      {
+        "id": "goudan_fears_deep_water", "visibility": "private", "known_by": ["goudan"], "subject_ids": ["goudan"],
+        "text": "狗蛋曾在深水中溺水获救，从此怕深水，只在岸边和浅滩捕鱼；他隐瞒这段经历，认为是神救了自己。"
+      },
+      {
+        "id": "niuer_hidden_jerky", "visibility": "private", "known_by": ["niuer"], "subject_ids": ["niuer"],
+        "text": "牛二将自己八份私人口粮中的两份肉干藏在营地外，留作意外时的后手，也想找机会单独送给翠花；不是公共仓库失窃。"
+      }
+    ]
+  }
+}

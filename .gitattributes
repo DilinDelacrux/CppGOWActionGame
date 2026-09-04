@@ -1,2 +1,8 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Preserve upstream font/license bytes for the SHA-256 import manifest.
+SourceArt/Fonts/Western/**/*.ttf binary
+SourceArt/Fonts/Western/**/OFL.txt -text whitespace=-blank-at-eol
+SourceArt/Fonts/Western/**/LICENSE.txt -text whitespace=-blank-at-eol
+SourceArt/Fonts/Western/**/AUTHORS.txt -text

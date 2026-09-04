@@ -1,0 +1,91 @@
+{
+  "downloaded_on": "2026-09-04",
+  "files": [
+    {
+      "path": "Rye/Rye-Regular.ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/rye/Rye-Regular.ttf",
+      "asset_name": "Rye_Regular",
+      "sha256": "b7edee5e615ae1b6b07e9d030c1309152bf3672a0e8a2a46293e273730f5adba",
+      "bytes": 183244
+    },
+    {
+      "path": "Rye/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/rye/OFL.txt",
+      "sha256": "399b33eb38cdfc76b8665defa5f81d52e8193d630ad5858c893db6bc20031bc9",
+      "bytes": 4393
+    },
+    {
+      "path": "IMFellEnglish/IMFeENrm28P.ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/imfellenglish/IMFeENrm28P.ttf",
+      "asset_name": "IMFellEnglish_Regular",
+      "sha256": "fe9705bbde51af802719246d4608d08d37bde956ab99d9a590da996a5221a24c",
+      "bytes": 194992
+    },
+    {
+      "path": "IMFellEnglish/IMFeENit28P.ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/imfellenglish/IMFeENit28P.ttf",
+      "asset_name": "IMFellEnglish_Italic",
+      "sha256": "47cd75dce54b1f2e0831359d22d5e688f519d68ae45706b664fd310fd0e3ccf7",
+      "bytes": 202368
+    },
+    {
+      "path": "IMFellEnglish/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/imfellenglish/OFL.txt",
+      "sha256": "2a3ca501fc4d5efcad9798531e3e06962b1e20c60e464f6cbd6c17630112c773",
+      "bytes": 4452
+    },
+    {
+      "path": "RobotoSlab/RobotoSlab-Regular.ttf",
+      "url": "https://raw.githubusercontent.com/googlefonts/robotoslab/main/fonts/ttf/RobotoSlab-Regular.ttf",
+      "asset_name": "RobotoSlab_Regular",
+      "sha256": "fd4d98f8403041d58d67735f4549a42ac7cfc79464d4fac5f02345e1404dd2ca",
+      "bytes": 171376
+    },
+    {
+      "path": "RobotoSlab/RobotoSlab-Bold.ttf",
+      "url": "https://raw.githubusercontent.com/googlefonts/robotoslab/main/fonts/ttf/RobotoSlab-Bold.ttf",
+      "asset_name": "RobotoSlab_Bold",
+      "sha256": "09cd9e359296e2f9482e2445ba921041913b55e652645df083079a85a272fce4",
+      "bytes": 176068
+    },
+    {
+      "path": "RobotoSlab/LICENSE.txt",
+      "url": "https://raw.githubusercontent.com/googlefonts/robotoslab/main/LICENSE.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "bytes": 11358
+    },
+    {
+      "path": "RobotoSlab/AUTHORS.txt",
+      "url": "https://raw.githubusercontent.com/googlefonts/robotoslab/main/AUTHORS.txt",
+      "sha256": "f492b1b74254bae7323a8968bae7e26f77ffd00ebccb624a341d80ce3035ec0f",
+      "bytes": 258
+    },
+    {
+      "path": "BarlowSemiCondensed/BarlowSemiCondensed-Regular.ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/barlowsemicondensed/BarlowSemiCondensed-Regular.ttf",
+      "asset_name": "BarlowSemiCondensed_Regular",
+      "sha256": "e8c7242f612b13d026e18a94b63b0fd079e91a3faf009d1b6981dbb5f16d1153",
+      "bytes": 105776
+    },
+    {
+      "path": "BarlowSemiCondensed/BarlowSemiCondensed-Medium.ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/barlowsemicondensed/BarlowSemiCondensed-Medium.ttf",
+      "asset_name": "BarlowSemiCondensed_Medium",
+      "sha256": "4998b693a190b76f2b11315844345a8546c1e2e6a320905507a9eed04edf8b48",
+      "bytes": 105560
+    },
+    {
+      "path": "BarlowSemiCondensed/BarlowSemiCondensed-SemiBold.ttf",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/barlowsemicondensed/BarlowSemiCondensed-SemiBold.ttf",
+      "asset_name": "BarlowSemiCondensed_SemiBold",
+      "sha256": "bd299f4bc5b44d30be8d42e9bad3a5df7d66af1cd55d0ed72a8b8916360a1424",
+      "bytes": 109772
+    },
+    {
+      "path": "BarlowSemiCondensed/OFL.txt",
+      "url": "https://raw.githubusercontent.com/google/fonts/main/ofl/barlowsemicondensed/OFL.txt",
+      "sha256": "186d750eb496a4c17a76385f82be6aea2ac1cf2de074a811d63786cf374ea73f",
+      "bytes": 4377
+    }
+  ]
+}

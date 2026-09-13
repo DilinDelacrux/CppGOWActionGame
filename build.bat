@@ -45,7 +45,9 @@ echo  Project : %PROJECT_FILE%
 echo ============================================================
 echo.
 
-call "%BUILD_BAT%" %TARGET_NAME% %PLATFORM% %CONFIG% -project="%PROJECT_FILE%" -waitmutex
+REM Keep compiler memory usage predictable. Multiple concurrent PCH mappings can
+REM trigger C3859/C1076 on machines with limited RAM or page-file capacity.
+call "%BUILD_BAT%" %TARGET_NAME% %PLATFORM% %CONFIG% -project="%PROJECT_FILE%" -waitmutex -NoXGE -MaxParallelActions=1
 
 if errorlevel 1 (
     echo.

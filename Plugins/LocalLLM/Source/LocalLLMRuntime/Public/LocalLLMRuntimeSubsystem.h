@@ -33,7 +33,7 @@ struct FLocalLLMChatRequest
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Local LLM")
 	float Temperature = -1.0f;
 
-	/** Qwen3 defaults to reasoning. Keep this enabled for low-latency NPC dialogue. */
+	/** Disable reasoning for lower latency and more predictable short NPC dialogue. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Local LLM")
 	bool bDisableThinking = true;
 };
@@ -81,14 +81,7 @@ public:
 	void GenerateChat(const FLocalLLMChatRequest& Request, FLocalLLMChatCompleted Completed);
 
 private:
-	FString ResolveServerExecutablePath() const;
-	FString ResolveModelPath() const;
-	FString GetBaseUrl() const;
-	void PollHealth();
 	void CompleteChat(const FLocalLLMChatCompleted& Completed, const FLocalLLMChatResult& Result) const;
 
 	ELocalLLMServerState ServerState = ELocalLLMServerState::Stopped;
-	FProcHandle ServerProcess;
-	FTimerHandle HealthTimer;
-	double StartupDeadlineSeconds = 0.0;
 };

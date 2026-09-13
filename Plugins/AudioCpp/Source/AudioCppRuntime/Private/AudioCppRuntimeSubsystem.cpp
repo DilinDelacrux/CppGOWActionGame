@@ -3,26 +3,139 @@
 #include "AudioCppSettings.h"
 #include "Dom/JsonObject.h"
 #include "HAL/FileManager.h"
-#include "HAL/PlatformProcess.h"
+#include "HAL/PlatformMisc.h"
 #include "HAL/PlatformTime.h"
 #include "HttpModule.h"
 #include "Interfaces/IHttpResponse.h"
-#include "JsonObjectConverter.h"
-#include "Kismet/GameplayStatics.h"
 #include "Misc/DateTime.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Guid.h"
 #include "Misc/Paths.h"
+#include "Misc/SecureHash.h"
+#include "Serialization/JsonReader.h"
 #include "Serialization/JsonSerializer.h"
 #include "Serialization/JsonWriter.h"
-#include "TimerManager.h"
-#include "Interfaces/IPluginManager.h"
 
 namespace AudioCppRuntime
 {
-	static FString ToAbsolutePath(const FString& Path, const FString& BasePath)
+	static FString ResolveVoice(const UAudioCppSettings* Settings, const FAudioCppSpeechRequest& Request)
 	{
-		return FPaths::ConvertRelativePathToFull(FPaths::IsRelative(Path) ? FPaths::Combine(BasePath, Path) : Path);
+		FString Voice = Request.Voice.TrimStartAndEnd();
+		const FString Character = Request.Speaker.TrimStartAndEnd();
+		if (Voice.IsEmpty() && !Character.IsEmpty())
+		{
+			for (const TPair<FString, FString>& Entry : Settings->CharacterVoices)
+			{
+				if (Entry.Key.Equals(Character, ESearchCase::IgnoreCase))
+				{
+					Voice = Entry.Value.TrimStartAndEnd();
+					break;
+				}
+			}
+			if (Voice.IsEmpty())
+			{
+				Voice = Character;
+			}
+		}
+		return Voice.IsEmpty() ? Settings->DefaultVoice.TrimStartAndEnd() : Voice;
+	}
+
+	static FString GetCachedWavPath(const UAudioCppSettings* Settings, const FString& Voice, const FString& Text)
+	{
+		const FString CacheKey = FString::Printf(TEXT("%s\n%s\n%s\n%s\n%d\n%d\n%.3f\n%.3f"),
+			*Settings->ModelId, *Voice, *Text, *Settings->LanguageHint,
+			Settings->SampleRate, Settings->Volume, Settings->Rate, Settings->Pitch);
+		FTCHARToUTF8 Utf8(*CacheKey);
+		FMD5 Md5;
+		Md5.Update(reinterpret_cast<const uint8*>(Utf8.Get()), Utf8.Length());
+		uint8 Digest[16];
+		Md5.Final(Digest);
+
+		const FString Directory = FPaths::Combine(FPaths::ProjectSavedDir(), TEXT("AudioCpp"), TEXT("Generated"));
+		IFileManager::Get().MakeDirectory(*Directory, true);
+		return FPaths::Combine(Directory, BytesToHex(Digest, UE_ARRAY_COUNT(Digest)).ToLower() + TEXT(".wav"));
+	}
+
+	static bool IsWav(const TArray<uint8>& Bytes)
+	{
+		return Bytes.Num() >= 12 &&
+			Bytes[0] == 'R' && Bytes[1] == 'I' && Bytes[2] == 'F' && Bytes[3] == 'F' &&
+			Bytes[8] == 'W' && Bytes[9] == 'A' && Bytes[10] == 'V' && Bytes[11] == 'E';
+	}
+
+	static uint32 ReadUInt32LE(const TArray<uint8>& Bytes, const int32 Offset)
+	{
+		return static_cast<uint32>(Bytes[Offset]) |
+			(static_cast<uint32>(Bytes[Offset + 1]) << 8) |
+			(static_cast<uint32>(Bytes[Offset + 2]) << 16) |
+			(static_cast<uint32>(Bytes[Offset + 3]) << 24);
+	}
+
+	static void WriteUInt32LE(TArray<uint8>& Bytes, const int32 Offset, const uint32 Value)
+	{
+		Bytes[Offset] = static_cast<uint8>(Value);
+		Bytes[Offset + 1] = static_cast<uint8>(Value >> 8);
+		Bytes[Offset + 2] = static_cast<uint8>(Value >> 16);
+		Bytes[Offset + 3] = static_cast<uint8>(Value >> 24);
+	}
+
+	static bool NormalizeWavHeader(TArray<uint8>& Bytes, bool& bOutChanged, FString& OutError)
+	{
+		bOutChanged = false;
+		if (!IsWav(Bytes))
+		{
+			OutError = TEXT("Missing RIFF/WAVE header.");
+			return false;
+		}
+
+		for (int32 ChunkOffset = 12; ChunkOffset + 8 <= Bytes.Num();)
+		{
+			const uint32 DeclaredChunkSize = ReadUInt32LE(Bytes, ChunkOffset + 4);
+			const bool bIsData = Bytes[ChunkOffset] == 'd' && Bytes[ChunkOffset + 1] == 'a' &&
+				Bytes[ChunkOffset + 2] == 't' && Bytes[ChunkOffset + 3] == 'a';
+			if (bIsData)
+			{
+				const uint32 ActualRiffSize = static_cast<uint32>(Bytes.Num() - 8);
+				const uint32 ActualDataSize = static_cast<uint32>(Bytes.Num() - ChunkOffset - 8);
+				bOutChanged = ReadUInt32LE(Bytes, 4) != ActualRiffSize || DeclaredChunkSize != ActualDataSize;
+				WriteUInt32LE(Bytes, 4, ActualRiffSize);
+				WriteUInt32LE(Bytes, ChunkOffset + 4, ActualDataSize);
+				return true;
+			}
+
+			const int64 NextChunkOffset = static_cast<int64>(ChunkOffset) + 8 + DeclaredChunkSize + (DeclaredChunkSize & 1);
+			if (NextChunkOffset > Bytes.Num())
+			{
+				OutError = TEXT("A WAV chunk exceeds the file boundary before the data chunk.");
+				return false;
+			}
+			ChunkOffset = static_cast<int32>(NextChunkOffset);
+		}
+
+		OutError = TEXT("Missing WAV data chunk.");
+		return false;
+	}
+
+	static bool NormalizeCachedWav(const FString& Path, FString& OutError)
+	{
+		TArray<uint8> Bytes;
+		if (!FFileHelper::LoadFileToArray(Bytes, *Path))
+		{
+			OutError = TEXT("Could not read the cached WAV file.");
+			return false;
+		}
+
+		bool bChanged = false;
+		if (!NormalizeWavHeader(Bytes, bChanged, OutError))
+		{
+			return false;
+		}
+		if (bChanged && !FFileHelper::SaveArrayToFile(Bytes, *Path))
+		{
+			OutError = TEXT("Could not repair the cached WAV header.");
+			return false;
+		}
+		return true;
 	}
 }
 
@@ -44,256 +157,205 @@ bool UAudioCppRuntimeSubsystem::ShouldCreateSubsystem(UObject* Outer) const
 
 bool UAudioCppRuntimeSubsystem::StartServer()
 {
-	if (ServerState == EAudioCppServerState::Ready || ServerState == EAudioCppServerState::Starting)
+	if (ServerState == EAudioCppServerState::Ready)
 	{
 		return true;
 	}
 
-	FString ConfigPath;
-	FString Error;
-	if (!WriteServerConfig(ConfigPath, Error))
-	{
-		UE_LOG(LogTemp, Error, TEXT("Audio.cpp server configuration failed: %s"), *Error);
-		ServerState = EAudioCppServerState::Failed;
-		return false;
-	}
-
-	const FString ExecutablePath = ResolveServerExecutablePath();
-	if (!FPaths::FileExists(ExecutablePath))
-	{
-		UE_LOG(LogTemp, Error, TEXT("Audio.cpp server executable is missing: %s"), *ExecutablePath);
-		ServerState = EAudioCppServerState::Failed;
-		return false;
-	}
-
-	UE_LOG(LogTemp, Log, TEXT("Starting audio.cpp server: %s --config \"%s\" --no-ui"), *ExecutablePath, *ConfigPath);
-	ServerProcess = FPlatformProcess::CreateProc(*ExecutablePath, *FString::Printf(TEXT("--config \"%s\" --no-ui"), *ConfigPath), true, false, false, nullptr, 0, *FPaths::GetPath(ExecutablePath), nullptr);
-	if (!ServerProcess.IsValid())
-	{
-		UE_LOG(LogTemp, Error, TEXT("Unable to start audio.cpp server."));
-		ServerState = EAudioCppServerState::Failed;
-		return false;
-	}
-
 	const UAudioCppSettings* Settings = GetDefault<UAudioCppSettings>();
-	ServerState = EAudioCppServerState::Starting;
-	StartupDeadlineSeconds = FPlatformTime::Seconds() + (Settings->StartupTimeoutMs / 1000.0);
-	GetWorld()->GetTimerManager().SetTimer(HealthTimer, this, &ThisClass::PollHealth, 0.25f, true);
+	if (Settings->ApiUrl.TrimStartAndEnd().IsEmpty() || Settings->ModelId.TrimStartAndEnd().IsEmpty() ||
+		Settings->ApiKeyEnvironmentVariable.TrimStartAndEnd().IsEmpty())
+	{
+		UE_LOG(LogTemp, Error, TEXT("CosyVoice API URL and model must be configured in Project Settings."));
+		ServerState = EAudioCppServerState::Failed;
+		return false;
+	}
+
+	if (FPlatformMisc::GetEnvironmentVariable(*Settings->ApiKeyEnvironmentVariable).IsEmpty())
+	{
+		UE_LOG(LogTemp, Error, TEXT("CosyVoice API key is missing. Set environment variable %s and restart Unreal Editor."),
+			*Settings->ApiKeyEnvironmentVariable);
+		ServerState = EAudioCppServerState::Failed;
+		return false;
+	}
+
+	ServerState = EAudioCppServerState::Ready;
+	UE_LOG(LogTemp, Log, TEXT("CosyVoice cloud TTS is configured and ready."));
 	return true;
 }
 
 void UAudioCppRuntimeSubsystem::StopServer()
 {
-	if (GetWorld())
-	{
-		GetWorld()->GetTimerManager().ClearTimer(HealthTimer);
-	}
-
-	if (ServerProcess.IsValid())
-	{
-		if (FPlatformProcess::IsProcRunning(ServerProcess))
-		{
-			FPlatformProcess::TerminateProc(ServerProcess, true);
-		}
-		FPlatformProcess::CloseProc(ServerProcess);
-		ServerProcess.Reset();
-	}
 	ServerState = EAudioCppServerState::Stopped;
 }
 
 void UAudioCppRuntimeSubsystem::SynthesizeSpeech(const FAudioCppSpeechRequest& Request, FAudioCppSpeechCompleted Completed)
 {
-	if (Request.Text.TrimStartAndEnd().IsEmpty())
+	const FString Text = Request.Text.TrimStartAndEnd();
+	if (Text.IsEmpty())
 	{
 		CompleteSpeech(Completed, { false, TEXT(""), TEXT("Text cannot be empty.") });
 		return;
 	}
 	if (ServerState != EAudioCppServerState::Ready)
 	{
-		CompleteSpeech(Completed, { false, TEXT(""), TEXT("Local audio.cpp server is not ready. Call StartServer and wait for Ready.") });
+		CompleteSpeech(Completed, { false, TEXT(""), TEXT("CosyVoice cloud TTS is not ready. Call StartServer first.") });
 		return;
 	}
 
 	const UAudioCppSettings* Settings = GetDefault<UAudioCppSettings>();
+	const FString Voice = AudioCppRuntime::ResolveVoice(Settings, Request);
+	if (Voice.IsEmpty())
+	{
+		CompleteSpeech(Completed, { false, TEXT(""), TEXT("No CosyVoice voice id was supplied or configured.") });
+		return;
+	}
+
+	const FString CachedWavPath = AudioCppRuntime::GetCachedWavPath(Settings, Voice, Text);
+	if (FPaths::FileExists(CachedWavPath))
+	{
+		FString WavError;
+		if (!AudioCppRuntime::NormalizeCachedWav(CachedWavPath, WavError))
+		{
+			CompleteSpeech(Completed, { false, TEXT(""), FString::Printf(TEXT("Invalid cached WAV: %s"), *WavError) });
+			return;
+		}
+		UE_LOG(LogTemp, Display, TEXT("TTS cache hit: %s"), *CachedWavPath);
+		CompleteSpeech(Completed, { true, CachedWavPath, TEXT("") });
+		return;
+	}
+
+	TSharedRef<FJsonObject> Input = MakeShared<FJsonObject>();
+	Input->SetStringField(TEXT("text"), Text);
+	Input->SetStringField(TEXT("voice"), Voice);
+	Input->SetStringField(TEXT("format"), TEXT("wav"));
+	Input->SetNumberField(TEXT("sample_rate"), Settings->SampleRate);
+	Input->SetNumberField(TEXT("volume"), Settings->Volume);
+	Input->SetNumberField(TEXT("rate"), Settings->Rate);
+	Input->SetNumberField(TEXT("pitch"), Settings->Pitch);
+	if (!Settings->LanguageHint.IsEmpty())
+	{
+		Input->SetArrayField(TEXT("language_hints"), { MakeShared<FJsonValueString>(Settings->LanguageHint) });
+	}
+	if (Request.Seed >= 0)
+	{
+		Input->SetNumberField(TEXT("seed"), FMath::Clamp(Request.Seed, 0, 65535));
+	}
+
 	TSharedRef<FJsonObject> Body = MakeShared<FJsonObject>();
 	Body->SetStringField(TEXT("model"), Settings->ModelId);
-	Body->SetStringField(TEXT("input"), Request.Text);
-	Body->SetNumberField(TEXT("max_tokens"), Request.MaxTokens);
-	if (!Request.Voice.IsEmpty()) Body->SetStringField(TEXT("voice"), Request.Voice);
-	if (!Request.Speaker.IsEmpty())
-	{
-		TSharedRef<FJsonObject> Options = MakeShared<FJsonObject>();
-		Options->SetStringField(TEXT("speaker"), Request.Speaker);
-		Body->SetObjectField(TEXT("options"), Options);
-	}
-	if (Request.Seed >= 0) Body->SetNumberField(TEXT("seed"), Request.Seed);
-
+	Body->SetObjectField(TEXT("input"), Input);
 	FString Json;
-	const TSharedRef<TJsonWriter<>> Writer = TJsonWriterFactory<>::Create(&Json);
-	FJsonSerializer::Serialize(Body, Writer);
+	FJsonSerializer::Serialize(Body, TJsonWriterFactory<>::Create(&Json));
 
+	const FString ApiKey = FPlatformMisc::GetEnvironmentVariable(*Settings->ApiKeyEnvironmentVariable);
 	TSharedRef<IHttpRequest> HttpRequest = FHttpModule::Get().CreateRequest();
-	HttpRequest->SetURL(GetBaseUrl() + TEXT("/v1/audio/speech"));
+	HttpRequest->SetURL(Settings->ApiUrl);
 	HttpRequest->SetVerb(TEXT("POST"));
+	HttpRequest->SetHeader(TEXT("Authorization"), TEXT("Bearer ") + ApiKey);
 	HttpRequest->SetHeader(TEXT("Content-Type"), TEXT("application/json"));
 	HttpRequest->SetContentAsString(Json);
+
 	const FString RequestId = FGuid::NewGuid().ToString(EGuidFormats::Digits);
 	const double RequestStartedAt = FPlatformTime::Seconds();
-	UE_LOG(LogTemp, Display, TEXT("TTS generation started at %s (request=%s)"),
-		*FDateTime::Now().ToString(TEXT("%H:%M:%S:%s")), *RequestId);
-	HttpRequest->OnProcessRequestComplete().BindWeakLambda(this, [this, Completed, RequestId, RequestStartedAt](FHttpRequestPtr, FHttpResponsePtr Response, bool bConnectedSuccessfully)
+	UE_LOG(LogTemp, Display, TEXT("CosyVoice generation started at %s (request=%s, voice=%s)"),
+		*FDateTime::Now().ToString(TEXT("%H:%M:%S:%s")), *RequestId, *Voice);
+
+	HttpRequest->OnProcessRequestComplete().BindWeakLambda(this,
+		[this, Completed, CachedWavPath, RequestId, RequestStartedAt](FHttpRequestPtr, FHttpResponsePtr Response, bool bConnected)
 	{
-		const FString CompletedAt = FDateTime::Now().ToString(TEXT("%H:%M:%S:%s"));
-		const double ElapsedMs = (FPlatformTime::Seconds() - RequestStartedAt) * 1000.0;
-		FAudioCppSpeechResult Result;
-		if (!bConnectedSuccessfully || !Response.IsValid())
+		if (!bConnected || !Response.IsValid())
 		{
-			Result.Error = TEXT("Failed to reach the local audio.cpp server.");
+			CompleteSpeech(Completed, { false, TEXT(""), TEXT("Failed to reach the CosyVoice API.") });
+			return;
 		}
-		else if (Response->GetResponseCode() < 200 || Response->GetResponseCode() >= 300)
+		if (Response->GetResponseCode() < 200 || Response->GetResponseCode() >= 300)
 		{
-			Result.Error = FString::Printf(TEXT("audio.cpp returned HTTP %d: %s"), Response->GetResponseCode(), *Response->GetContentAsString());
+			CompleteSpeech(Completed, { false, TEXT(""), FString::Printf(TEXT("CosyVoice returned HTTP %d: %s"),
+				Response->GetResponseCode(), *Response->GetContentAsString()) });
+			return;
 		}
-		else
+
+		TSharedPtr<FJsonObject> Root;
+		if (!FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Response->GetContentAsString()), Root) || !Root.IsValid())
 		{
-			const FString OutputDirectory = FPaths::Combine(FPaths::ProjectSavedDir(), TEXT("AudioCpp"), TEXT("Generated"));
-			IFileManager::Get().MakeDirectory(*OutputDirectory, true);
-			Result.WavFilePath = FPaths::Combine(OutputDirectory, FString::Printf(TEXT("tts_%s.wav"), *FGuid::NewGuid().ToString(EGuidFormats::Digits)));
-			if (FFileHelper::SaveArrayToFile(Response->GetContent(), *Result.WavFilePath))
+			CompleteSpeech(Completed, { false, TEXT(""), TEXT("CosyVoice returned invalid JSON.") });
+			return;
+		}
+
+		const TSharedPtr<FJsonObject>* Output = nullptr;
+		const TSharedPtr<FJsonObject>* Audio = nullptr;
+		FString AudioUrl;
+		if (!Root->TryGetObjectField(TEXT("output"), Output) || Output == nullptr || !Output->IsValid() ||
+			!(*Output)->TryGetObjectField(TEXT("audio"), Audio) || Audio == nullptr || !Audio->IsValid() ||
+			!(*Audio)->TryGetStringField(TEXT("url"), AudioUrl) || AudioUrl.IsEmpty())
+		{
+			CompleteSpeech(Completed, { false, TEXT(""), TEXT("CosyVoice response did not contain an audio URL.") });
+			return;
+		}
+
+		TSharedRef<IHttpRequest> Download = FHttpModule::Get().CreateRequest();
+		Download->SetURL(AudioUrl);
+		Download->SetVerb(TEXT("GET"));
+		Download->OnProcessRequestComplete().BindWeakLambda(this,
+			[this, Completed, CachedWavPath, RequestId, RequestStartedAt](FHttpRequestPtr, FHttpResponsePtr AudioResponse, bool bDownloaded)
+		{
+			FAudioCppSpeechResult Result;
+			if (!bDownloaded || !AudioResponse.IsValid())
 			{
-				Result.bSuccess = true;
+				Result.Error = TEXT("Failed to download the generated CosyVoice audio.");
+			}
+			else if (AudioResponse->GetResponseCode() < 200 || AudioResponse->GetResponseCode() >= 300)
+			{
+				Result.Error = FString::Printf(TEXT("CosyVoice audio download returned HTTP %d."), AudioResponse->GetResponseCode());
 			}
 			else
 			{
-				Result.WavFilePath.Reset();
-				Result.Error = TEXT("Could not write the generated WAV file.");
+				TArray<uint8> WavBytes = AudioResponse->GetContent();
+				bool bHeaderChanged = false;
+				if (!AudioCppRuntime::NormalizeWavHeader(WavBytes, bHeaderChanged, Result.Error))
+				{
+					Result.Error = TEXT("CosyVoice audio download was not a valid WAV file: ") + Result.Error;
+				}
+				else if (!FFileHelper::SaveArrayToFile(WavBytes, *CachedWavPath))
+				{
+					Result.Error = TEXT("Could not write the generated WAV file.");
+				}
+				else
+				{
+					Result.bSuccess = true;
+					Result.WavFilePath = CachedWavPath;
+				}
 			}
-		}
-		if (Result.bSuccess)
+
+			const double ElapsedMs = (FPlatformTime::Seconds() - RequestStartedAt) * 1000.0;
+			if (Result.bSuccess)
+			{
+				UE_LOG(LogTemp, Display, TEXT("CosyVoice generation completed (request=%s, elapsed=%.0f ms)"), *RequestId, ElapsedMs);
+			}
+			else
+			{
+				UE_LOG(LogTemp, Warning, TEXT("CosyVoice generation failed (request=%s, elapsed=%.0f ms): %s"),
+					*RequestId, ElapsedMs, *Result.Error);
+			}
+			CompleteSpeech(Completed, Result);
+		});
+		if (!Download->ProcessRequest())
 		{
-			UE_LOG(LogTemp, Display, TEXT("TTS generation completed at %s (request=%s, elapsed=%.0f ms)"),
-				*CompletedAt, *RequestId, ElapsedMs);
+			CompleteSpeech(Completed, { false, TEXT(""), TEXT("CosyVoice audio download could not be started.") });
 		}
-		else
-		{
-			UE_LOG(LogTemp, Warning, TEXT("TTS generation failed at %s (request=%s, elapsed=%.0f ms)"),
-				*CompletedAt, *RequestId, ElapsedMs);
-		}
-		CompleteSpeech(Completed, Result);
 	});
+
 	if (!HttpRequest->ProcessRequest())
 	{
-		UE_LOG(LogTemp, Warning, TEXT("TTS request could not be started at %s (request=%s)"),
-			*FDateTime::Now().ToString(TEXT("%H:%M:%S:%s")), *RequestId);
+		CompleteSpeech(Completed, { false, TEXT(""), TEXT("CosyVoice request could not be started.") });
 	}
-}
-
-bool UAudioCppRuntimeSubsystem::WriteServerConfig(FString& OutConfigPath, FString& OutError) const
-{
-	const UAudioCppSettings* Settings = GetDefault<UAudioCppSettings>();
-	if (Settings->ModelFilePath.FilePath.IsEmpty())
-	{
-		OutError = TEXT("Set Audio.cpp > Model File Path in Project Settings first.");
-		return false;
-	}
-
-	const FString ModelPath = AudioCppRuntime::ToAbsolutePath(Settings->ModelFilePath.FilePath, FPaths::ProjectDir());
-	if (!FPaths::FileExists(ModelPath))
-	{
-		OutError = FString::Printf(TEXT("Configured GGUF model file does not exist: %s"), *ModelPath);
-		return false;
-	}
-
-	TSharedRef<FJsonObject> Root = MakeShared<FJsonObject>();
-	Root->SetStringField(TEXT("host"), TEXT("127.0.0.1"));
-	Root->SetNumberField(TEXT("port"), Settings->Port);
-	Root->SetStringField(TEXT("backend"), Settings->Backend);
-	Root->SetNumberField(TEXT("threads"), Settings->Threads);
-	Root->SetBoolField(TEXT("lazy_load"), true);
-	Root->SetNumberField(TEXT("busy_timeout_ms"), 60000);
-
-	TSharedRef<FJsonObject> Model = MakeShared<FJsonObject>();
-	Model->SetStringField(TEXT("id"), Settings->ModelId);
-	Model->SetStringField(TEXT("family"), Settings->ModelFamily);
-	Model->SetStringField(TEXT("path"), ModelPath);
-	Model->SetStringField(TEXT("task"), TEXT("tts"));
-	Model->SetStringField(TEXT("mode"), TEXT("offline"));
-	if (!Settings->DefaultVoice.IsEmpty())
-	{
-		TSharedRef<FJsonObject> Voice = MakeShared<FJsonObject>();
-		Voice->SetStringField(TEXT("voice_id"), Settings->DefaultVoice);
-		Model->SetObjectField(TEXT("default_voice_preset"), Voice);
-	}
-	if (!Settings->DefaultSpeaker.IsEmpty())
-	{
-		TSharedRef<FJsonObject> DefaultRequestOptions = MakeShared<FJsonObject>();
-		DefaultRequestOptions->SetStringField(TEXT("speaker"), Settings->DefaultSpeaker);
-		Model->SetObjectField(TEXT("default_request_options"), DefaultRequestOptions);
-	}
-	Root->SetArrayField(TEXT("models"), { MakeShared<FJsonValueObject>(Model) });
-
-	const FString ConfigDirectory = FPaths::Combine(FPaths::ProjectSavedDir(), TEXT("AudioCpp"));
-	IFileManager::Get().MakeDirectory(*ConfigDirectory, true);
-	// The child process runs from the plugin runtime directory, not UE's base directory.
-	OutConfigPath = FPaths::ConvertRelativePathToFull(FPaths::Combine(ConfigDirectory, TEXT("server.json")));
-	FString Json;
-	const TSharedRef<TJsonWriter<>> Writer = TJsonWriterFactory<>::Create(&Json);
-	FJsonSerializer::Serialize(Root, Writer);
-	if (!FFileHelper::SaveStringToFile(Json, *OutConfigPath))
-	{
-		OutError = FString::Printf(TEXT("Could not write server config: %s"), *OutConfigPath);
-		return false;
-	}
-	return true;
-}
-
-FString UAudioCppRuntimeSubsystem::ResolveServerExecutablePath() const
-{
-	const UAudioCppSettings* Settings = GetDefault<UAudioCppSettings>();
-	const TSharedPtr<IPlugin> Plugin = IPluginManager::Get().FindPlugin(TEXT("AudioCpp"));
-	const FString PluginPath = Plugin.IsValid() ? Plugin->GetBaseDir() : FPaths::ProjectPluginsDir();
-	const FString ConfiguredPath = Settings->ServerExecutablePath.FilePath.IsEmpty() ? TEXT("ThirdParty/audio.cpp/Win64/audiocpp_server.exe") : Settings->ServerExecutablePath.FilePath;
-	return AudioCppRuntime::ToAbsolutePath(ConfiguredPath, PluginPath);
-}
-
-void UAudioCppRuntimeSubsystem::PollHealth()
-{
-	if (!ServerProcess.IsValid() || !FPlatformProcess::IsProcRunning(ServerProcess))
-	{
-		GetWorld()->GetTimerManager().ClearTimer(HealthTimer);
-		ServerState = EAudioCppServerState::Failed;
-		UE_LOG(LogTemp, Error, TEXT("audio.cpp server exited during startup."));
-		return;
-	}
-	if (FPlatformTime::Seconds() >= StartupDeadlineSeconds)
-	{
-		GetWorld()->GetTimerManager().ClearTimer(HealthTimer);
-		ServerState = EAudioCppServerState::Failed;
-		UE_LOG(LogTemp, Error, TEXT("Timed out waiting for audio.cpp server health check."));
-		return;
-	}
-
-	TSharedRef<IHttpRequest> Request = FHttpModule::Get().CreateRequest();
-	Request->SetURL(GetBaseUrl() + TEXT("/health"));
-	Request->SetVerb(TEXT("GET"));
-	Request->OnProcessRequestComplete().BindWeakLambda(this, [this](FHttpRequestPtr, FHttpResponsePtr Response, bool bSucceeded)
-	{
-		if (bSucceeded && Response.IsValid() && Response->GetResponseCode() == 200)
-		{
-			GetWorld()->GetTimerManager().ClearTimer(HealthTimer);
-			ServerState = EAudioCppServerState::Ready;
-			UE_LOG(LogTemp, Log, TEXT("audio.cpp local server is ready."));
-		}
-	});
-	Request->ProcessRequest();
 }
 
 void UAudioCppRuntimeSubsystem::CompleteSpeech(const FAudioCppSpeechCompleted& Completed, const FAudioCppSpeechResult& Result) const
 {
-	if (Completed.IsBound()) Completed.Execute(Result);
-}
-
-FString UAudioCppRuntimeSubsystem::GetBaseUrl() const
-{
-	return FString::Printf(TEXT("http://127.0.0.1:%d"), GetDefault<UAudioCppSettings>()->Port);
+	if (Completed.IsBound())
+	{
+		Completed.Execute(Result);
+	}
 }

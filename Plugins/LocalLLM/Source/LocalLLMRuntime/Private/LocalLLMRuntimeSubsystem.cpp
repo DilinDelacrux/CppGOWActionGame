@@ -2,26 +2,15 @@
 
 #include "LocalLLMSettings.h"
 #include "Dom/JsonObject.h"
-#include "HAL/PlatformProcess.h"
+#include "HAL/PlatformMisc.h"
 #include "HAL/PlatformTime.h"
 #include "HttpModule.h"
 #include "Interfaces/IHttpResponse.h"
-#include "Interfaces/IPluginManager.h"
 #include "Misc/DateTime.h"
 #include "Misc/Guid.h"
-#include "Misc/Paths.h"
 #include "Serialization/JsonReader.h"
 #include "Serialization/JsonSerializer.h"
 #include "Serialization/JsonWriter.h"
-#include "TimerManager.h"
-
-namespace LocalLLMRuntime
-{
-	static FString ToAbsolutePath(const FString& Path, const FString& BasePath)
-	{
-		return FPaths::ConvertRelativePathToFull(FPaths::IsRelative(Path) ? FPaths::Combine(BasePath, Path) : Path);
-	}
-}
 
 void ULocalLLMRuntimeSubsystem::Initialize(FSubsystemCollectionBase& Collection)
 {
@@ -41,56 +30,31 @@ bool ULocalLLMRuntimeSubsystem::ShouldCreateSubsystem(UObject* Outer) const
 
 bool ULocalLLMRuntimeSubsystem::StartServer()
 {
-	if (ServerState == ELocalLLMServerState::Ready || ServerState == ELocalLLMServerState::Starting)
+	if (ServerState == ELocalLLMServerState::Ready)
 	{
 		return true;
 	}
 
-	const FString ExecutablePath = ResolveServerExecutablePath();
-	const FString ModelPath = ResolveModelPath();
-	const bool bServerExists = FPaths::FileExists(ExecutablePath);
-	const bool bModelExists = FPaths::FileExists(ModelPath);
-	if (!bServerExists || !bModelExists)
-	{
-		UE_LOG(LogTemp, Error, TEXT("Local LLM runtime is missing. Server: %s [%s], Model: %s [%s]"),
-			*ExecutablePath, bServerExists ? TEXT("found") : TEXT("missing"),
-			*ModelPath, bModelExists ? TEXT("found") : TEXT("missing"));
-		ServerState = ELocalLLMServerState::Failed;
-		return false;
-	}
-
 	const ULocalLLMSettings* Settings = GetDefault<ULocalLLMSettings>();
-	const FString Arguments = FString::Printf(TEXT("--model \"%s\" --host 127.0.0.1 --port %d --ctx-size %d --n-gpu-layers %d --jinja"), *ModelPath, Settings->Port, Settings->ContextSize, Settings->GpuLayers);
-	ServerProcess = FPlatformProcess::CreateProc(*ExecutablePath, *Arguments, true, false, false, nullptr, 0, *FPaths::GetPath(ExecutablePath), nullptr);
-	if (!ServerProcess.IsValid())
+	const FString ApiKey = FPlatformMisc::GetEnvironmentVariable(*Settings->ApiKeyEnvironmentVariable);
+	if (Settings->ApiUrl.TrimStartAndEnd().IsEmpty() ||
+		Settings->ModelId.TrimStartAndEnd().IsEmpty() ||
+		Settings->ApiKeyEnvironmentVariable.TrimStartAndEnd().IsEmpty() ||
+		ApiKey.IsEmpty())
 	{
-		UE_LOG(LogTemp, Error, TEXT("Unable to start llama.cpp server."));
+		UE_LOG(LogTemp, Error, TEXT("Alibaba Cloud Qwen configuration is incomplete. Check ApiUrl, ModelId, and environment variable %s."),
+			*Settings->ApiKeyEnvironmentVariable);
 		ServerState = ELocalLLMServerState::Failed;
 		return false;
 	}
 
-	ServerState = ELocalLLMServerState::Starting;
-	StartupDeadlineSeconds = FPlatformTime::Seconds() + (Settings->StartupTimeoutMs / 1000.0);
-	GetWorld()->GetTimerManager().SetTimer(HealthTimer, this, &ThisClass::PollHealth, 0.25f, true);
+	ServerState = ELocalLLMServerState::Ready;
+	UE_LOG(LogTemp, Log, TEXT("Alibaba Cloud Qwen is ready (model=%s)."), *Settings->ModelId);
 	return true;
 }
 
 void ULocalLLMRuntimeSubsystem::StopServer()
 {
-	if (GetWorld())
-	{
-		GetWorld()->GetTimerManager().ClearTimer(HealthTimer);
-	}
-
-	if (ServerProcess.IsValid())
-	{
-		if (FPlatformProcess::IsProcRunning(ServerProcess))
-		{
-			FPlatformProcess::TerminateProc(ServerProcess, true);
-		}
-		FPlatformProcess::CloseProc(ServerProcess);
-		ServerProcess.Reset();
-	}
 	ServerState = ELocalLLMServerState::Stopped;
 }
 
@@ -103,11 +67,18 @@ void ULocalLLMRuntimeSubsystem::GenerateChat(const FLocalLLMChatRequest& Request
 	}
 	if (ServerState != ELocalLLMServerState::Ready)
 	{
-		CompleteChat(Completed, { false, TEXT(""), TEXT("Local LLM server is not ready. Call StartServer and wait for Ready.") });
+		CompleteChat(Completed, { false, TEXT(""), TEXT("Alibaba Cloud Qwen is not ready. Call StartServer first.") });
 		return;
 	}
 
 	const ULocalLLMSettings* Settings = GetDefault<ULocalLLMSettings>();
+	const FString ApiKey = FPlatformMisc::GetEnvironmentVariable(*Settings->ApiKeyEnvironmentVariable);
+	if (ApiKey.IsEmpty())
+	{
+		CompleteChat(Completed, { false, TEXT(""), FString::Printf(TEXT("Environment variable %s is empty."), *Settings->ApiKeyEnvironmentVariable) });
+		return;
+	}
+
 	TArray<TSharedPtr<FJsonValue>> Messages;
 	if (!Request.SystemPrompt.TrimStartAndEnd().IsEmpty())
 	{
@@ -118,14 +89,15 @@ void ULocalLLMRuntimeSubsystem::GenerateChat(const FLocalLLMChatRequest& Request
 	}
 	TSharedRef<FJsonObject> UserMessage = MakeShared<FJsonObject>();
 	UserMessage->SetStringField(TEXT("role"), TEXT("user"));
-	UserMessage->SetStringField(TEXT("content"), Request.bDisableThinking ? Request.UserPrompt + TEXT("\n/no_think") : Request.UserPrompt);
+	UserMessage->SetStringField(TEXT("content"), Request.UserPrompt);
 	Messages.Add(MakeShared<FJsonValueObject>(UserMessage));
 
 	TSharedRef<FJsonObject> Body = MakeShared<FJsonObject>();
-	Body->SetStringField(TEXT("model"), TEXT("local-town-dialogue"));
+	Body->SetStringField(TEXT("model"), Settings->ModelId);
 	Body->SetArrayField(TEXT("messages"), Messages);
-	Body->SetNumberField(TEXT("max_tokens"), Request.MaxTokens > 0 ? Request.MaxTokens : Settings->DefaultMaxTokens);
+	Body->SetNumberField(TEXT("max_completion_tokens"), Request.MaxTokens > 0 ? Request.MaxTokens : Settings->DefaultMaxTokens);
 	Body->SetNumberField(TEXT("temperature"), Request.Temperature >= 0.0f ? Request.Temperature : Settings->DefaultTemperature);
+	Body->SetBoolField(TEXT("enable_thinking"), !Request.bDisableThinking);
 	Body->SetBoolField(TEXT("stream"), false);
 
 	FString Json;
@@ -133,14 +105,18 @@ void ULocalLLMRuntimeSubsystem::GenerateChat(const FLocalLLMChatRequest& Request
 	FJsonSerializer::Serialize(Body, Writer);
 
 	TSharedRef<IHttpRequest> HttpRequest = FHttpModule::Get().CreateRequest();
-	HttpRequest->SetURL(GetBaseUrl() + TEXT("/v1/chat/completions"));
+	HttpRequest->SetURL(Settings->ApiUrl);
 	HttpRequest->SetVerb(TEXT("POST"));
+	HttpRequest->SetHeader(TEXT("Authorization"), FString::Printf(TEXT("Bearer %s"), *ApiKey));
 	HttpRequest->SetHeader(TEXT("Content-Type"), TEXT("application/json"));
+	HttpRequest->SetTimeout(Settings->RequestTimeoutSeconds);
 	HttpRequest->SetContentAsString(Json);
+
 	const FString RequestId = FGuid::NewGuid().ToString(EGuidFormats::Digits);
 	const double RequestStartedAt = FPlatformTime::Seconds();
-	UE_LOG(LogTemp, Display, TEXT("LLM generation started at %s (request=%s)"),
-		*FDateTime::Now().ToString(TEXT("%H:%M:%S:%s")), *RequestId);
+	UE_LOG(LogTemp, Display, TEXT("Qwen generation started at %s (request=%s, model=%s)"),
+		*FDateTime::Now().ToString(TEXT("%H:%M:%S:%s")), *RequestId, *Settings->ModelId);
+
 	HttpRequest->OnProcessRequestComplete().BindWeakLambda(this, [this, Completed, RequestId, RequestStartedAt](FHttpRequestPtr, FHttpResponsePtr Response, bool bConnectedSuccessfully)
 	{
 		const FString CompletedAt = FDateTime::Now().ToString(TEXT("%H:%M:%S:%s"));
@@ -148,11 +124,11 @@ void ULocalLLMRuntimeSubsystem::GenerateChat(const FLocalLLMChatRequest& Request
 		FLocalLLMChatResult Result;
 		if (!bConnectedSuccessfully || !Response.IsValid())
 		{
-			Result.Error = TEXT("Failed to reach the local llama.cpp server.");
+			Result.Error = TEXT("Failed to reach Alibaba Cloud Model Studio.");
 		}
 		else if (Response->GetResponseCode() < 200 || Response->GetResponseCode() >= 300)
 		{
-			Result.Error = FString::Printf(TEXT("llama.cpp returned HTTP %d: %s"), Response->GetResponseCode(), *Response->GetContentAsString());
+			Result.Error = FString::Printf(TEXT("Alibaba Cloud Qwen returned HTTP %d: %s"), Response->GetResponseCode(), *Response->GetContentAsString());
 		}
 		else
 		{
@@ -165,92 +141,34 @@ void ULocalLLMRuntimeSubsystem::GenerateChat(const FLocalLLMChatRequest& Request
 				if (Choice.IsValid() && Choice->HasTypedField<EJson::Object>(TEXT("message")))
 				{
 					const TSharedPtr<FJsonObject> Message = Choice->GetObjectField(TEXT("message"));
-					if (Message.IsValid() && Message->TryGetStringField(TEXT("content"), Result.Text) && !Result.Text.IsEmpty())
+					if (Message.IsValid() && Message->TryGetStringField(TEXT("content"), Result.Text))
 					{
-						Result.bSuccess = true;
+						Result.Text.TrimStartAndEndInline();
+						Result.bSuccess = !Result.Text.IsEmpty();
 					}
 				}
 			}
 			if (!Result.bSuccess)
 			{
-				Result.Error = TEXT("llama.cpp returned a response without choices[0].message.content.");
+				Result.Error = TEXT("Alibaba Cloud Qwen returned a response without choices[0].message.content.");
 			}
 		}
+
 		if (Result.bSuccess)
 		{
-			UE_LOG(LogTemp, Display, TEXT("LLM generation completed at %s (request=%s, elapsed=%.0f ms)"),
-				*CompletedAt, *RequestId, ElapsedMs);
+			UE_LOG(LogTemp, Display, TEXT("Qwen generation completed at %s (request=%s, elapsed=%.0f ms)"), *CompletedAt, *RequestId, ElapsedMs);
 		}
 		else
 		{
-			UE_LOG(LogTemp, Warning, TEXT("LLM generation failed at %s (request=%s, elapsed=%.0f ms)"),
-				*CompletedAt, *RequestId, ElapsedMs);
+			UE_LOG(LogTemp, Warning, TEXT("Qwen generation failed at %s (request=%s, elapsed=%.0f ms)"), *CompletedAt, *RequestId, ElapsedMs);
 		}
 		CompleteChat(Completed, Result);
 	});
+
 	if (!HttpRequest->ProcessRequest())
 	{
-		UE_LOG(LogTemp, Warning, TEXT("LLM request could not be started at %s (request=%s)"),
-			*FDateTime::Now().ToString(TEXT("%H:%M:%S:%s")), *RequestId);
+		CompleteChat(Completed, { false, TEXT(""), TEXT("Alibaba Cloud Qwen request could not be started.") });
 	}
-}
-
-FString ULocalLLMRuntimeSubsystem::ResolveServerExecutablePath() const
-{
-	const ULocalLLMSettings* Settings = GetDefault<ULocalLLMSettings>();
-	const TSharedPtr<IPlugin> Plugin = IPluginManager::Get().FindPlugin(TEXT("LocalLLM"));
-	const FString PluginPath = Plugin.IsValid() ? Plugin->GetBaseDir() : FPaths::ProjectPluginsDir();
-	const FString ConfiguredPath = Settings->ServerExecutablePath.FilePath.IsEmpty() ? TEXT("ThirdParty/llama.cpp/Win64/llama-server.exe") : Settings->ServerExecutablePath.FilePath;
-	const FString PluginExecutablePath = LocalLLMRuntime::ToAbsolutePath(ConfiguredPath, PluginPath);
-	if (FPaths::FileExists(PluginExecutablePath))
-	{
-		return PluginExecutablePath;
-	}
-
-	return FPaths::Combine(FPlatformProcess::BaseDir(), FPaths::GetCleanFilename(ConfiguredPath));
-}
-
-FString ULocalLLMRuntimeSubsystem::ResolveModelPath() const
-{
-	const FString ConfiguredPath = GetDefault<ULocalLLMSettings>()->ModelFilePath.FilePath;
-	return LocalLLMRuntime::ToAbsolutePath(ConfiguredPath, FPaths::ProjectDir());
-}
-
-FString ULocalLLMRuntimeSubsystem::GetBaseUrl() const
-{
-	return FString::Printf(TEXT("http://127.0.0.1:%d"), GetDefault<ULocalLLMSettings>()->Port);
-}
-
-void ULocalLLMRuntimeSubsystem::PollHealth()
-{
-	if (!ServerProcess.IsValid() || !FPlatformProcess::IsProcRunning(ServerProcess))
-	{
-		GetWorld()->GetTimerManager().ClearTimer(HealthTimer);
-		ServerState = ELocalLLMServerState::Failed;
-		UE_LOG(LogTemp, Error, TEXT("llama.cpp server exited during startup."));
-		return;
-	}
-	if (FPlatformTime::Seconds() >= StartupDeadlineSeconds)
-	{
-		GetWorld()->GetTimerManager().ClearTimer(HealthTimer);
-		ServerState = ELocalLLMServerState::Failed;
-		UE_LOG(LogTemp, Error, TEXT("Timed out waiting for llama.cpp server health check."));
-		return;
-	}
-
-	TSharedRef<IHttpRequest> Request = FHttpModule::Get().CreateRequest();
-	Request->SetURL(GetBaseUrl() + TEXT("/health"));
-	Request->SetVerb(TEXT("GET"));
-	Request->OnProcessRequestComplete().BindWeakLambda(this, [this](FHttpRequestPtr, FHttpResponsePtr Response, bool bSucceeded)
-	{
-		if (bSucceeded && Response.IsValid() && Response->GetResponseCode() == 200)
-		{
-			GetWorld()->GetTimerManager().ClearTimer(HealthTimer);
-			ServerState = ELocalLLMServerState::Ready;
-			UE_LOG(LogTemp, Log, TEXT("Local llama.cpp server is ready."));
-		}
-	});
-	Request->ProcessRequest();
 }
 
 void ULocalLLMRuntimeSubsystem::CompleteChat(const FLocalLLMChatCompleted& Completed, const FLocalLLMChatResult& Result) const

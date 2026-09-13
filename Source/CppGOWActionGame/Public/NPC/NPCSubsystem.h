@@ -16,7 +16,7 @@ class UNPCConversationCsvGenerationTask;
 class UNPCConversationPreGenerateTask;
 class UNPCConversationPlaybackTask;
 
-/** Parameters for one local LLM -> TTS NPC dialogue request. */
+/** Parameters for one local LLM -> cloud TTS NPC dialogue request. */
 USTRUCT(BlueprintType)
 struct CPPGOWACTIONGAME_API FNPCLocalAIDialogueRequest
 {
@@ -37,11 +37,11 @@ struct CPPGOWACTIONGAME_API FNPCLocalAIDialogueRequest
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "NPC|Local AI")
 	bool bDisableThinking = true;
 
-	/** Optional audio.cpp voice preset. Leave empty for the bundled Qwen3-TTS CustomVoice model. */
+	/** Optional CosyVoice voice id. Takes priority over Speaker and the configured default. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "NPC|Local AI")
 	FString Voice;
 
-	/** Qwen3-TTS CustomVoice speaker id, for example vivian, dylan, or uncle_fu. Empty uses Project Settings. */
+	/** Character id/name from the configured voice map, or a raw CosyVoice voice id. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "NPC|Local AI")
 	FString Speaker;
 
@@ -441,8 +441,8 @@ public:
 		BlueprintInternalUseOnly = "true",
 		WorldContext = "WorldContextObject",
 		DisplayName = "Generate NPC Conversation CSV",
-		CPP_Default_SpeakerATtsSpeaker = "dylan",
-		CPP_Default_SpeakerBTtsSpeaker = "vivian",
+		CPP_Default_SpeakerATtsSpeaker = "M1",
+		CPP_Default_SpeakerBTtsSpeaker = "W1",
 		CPP_Default_MaxLines = "8",
 		CPP_Default_Temperature = "0.7",
 		CPP_Default_PauseAfterSeconds = "0.25",

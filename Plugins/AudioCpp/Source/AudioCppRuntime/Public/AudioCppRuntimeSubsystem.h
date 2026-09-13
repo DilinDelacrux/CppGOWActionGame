@@ -21,14 +21,15 @@ struct FAudioCppSpeechRequest
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Audio.cpp")
 	FString Text;
 
-	/** Empty uses the model configured in Project Settings. */
+	/** CosyVoice voice id. Empty resolves Speaker as a character id, then uses the configured default. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Audio.cpp")
 	FString Voice;
 
-	/** Qwen3-TTS CustomVoice speaker. Empty uses the Project Settings default. */
+	/** Character id/name used by the Character Voices map; a raw voice id also works as a fallback. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Audio.cpp")
 	FString Speaker;
 
+	/** Retained for Blueprint compatibility; cloud CosyVoice does not use this value. */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Audio.cpp", meta=(ClampMin="1", ClampMax="4096"))
 	int32 MaxTokens = 256;
 
@@ -80,14 +81,7 @@ public:
 	void SynthesizeSpeech(const FAudioCppSpeechRequest& Request, FAudioCppSpeechCompleted Completed);
 
 private:
-	bool WriteServerConfig(FString& OutConfigPath, FString& OutError) const;
-	FString ResolveServerExecutablePath() const;
-	void PollHealth();
 	void CompleteSpeech(const FAudioCppSpeechCompleted& Completed, const FAudioCppSpeechResult& Result) const;
-	FString GetBaseUrl() const;
 
 	EAudioCppServerState ServerState = EAudioCppServerState::Stopped;
-	FProcHandle ServerProcess;
-	FTimerHandle HealthTimer;
-	double StartupDeadlineSeconds = 0.0;
 };

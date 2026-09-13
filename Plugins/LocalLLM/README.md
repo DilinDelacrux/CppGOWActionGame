@@ -1,18 +1,18 @@
-# Local LLM UE runtime plugin
+# Alibaba Cloud Qwen UE runtime plugin
 
-`ULocalLLMRuntimeSubsystem` runs a bundled CUDA-enabled `llama-server.exe` and calls its local OpenAI-compatible `/v1/chat/completions` endpoint asynchronously.
+`ULocalLLMRuntimeSubsystem` keeps its existing Blueprint/C++ API but now calls Alibaba Cloud Model Studio asynchronously instead of starting a local llama.cpp process.
 
 ## Setup
 
-1. Run `powershell -ExecutionPolicy Bypass -File Plugins/LocalLLM/SetupRuntime.ps1` to install the pinned official Windows Vulkan runtime under `ThirdParty/llama.cpp/Win64`.
-2. Put `Qwen3-4B-Q4_K_M.gguf` under `Content/LocalLLM/Models`.
-3. In **Project Settings > Plugins > Local LLM Runtime**, set the model path if it differs from the project default.
-4. Call `StartServer`, wait until `IsServerReady` is true, then call `GenerateChat`.
+1. Enable Model Studio in the Beijing region and create an API key.
+2. Store the key in the `DASHSCOPE_API_KEY` environment variable, then restart Unreal Editor.
+3. In **Project Settings > Plugins > Alibaba Cloud Qwen**, keep `Model Id` as `qwen-flash` for inexpensive, low-latency NPC dialogue.
+4. Existing code may call `StartServer`, check `IsServerReady`, and call `GenerateChat`. `StartServer` now only validates cloud configuration and returns immediately.
 
-`GenerateChat` disables Qwen3's reasoning mode by default (`/no_think`). Keep it enabled for short NPC dialogue; enable reasoning only for an explicitly slower, more complex task.
+Run a direct connectivity check from the project root:
 
-## NPC dialogue contract
+```powershell
+.\Scripts\TestQwenApi.ps1
+```
 
-Use deterministic game code to select the NPC pair, scene, topic, and relationship state. Pass those facts in `SystemPrompt` and ask for a short JSON payload in `UserPrompt`. Keep output below 96 tokens and cache completed dialogue before handing each line to AudioCpp for TTS.
-
-The model file is staged loose as NonUFS because llama.cpp needs an OS file path at runtime.
+Keep `bDisableThinking` enabled for short NPC dialogue. Do not store a production API key in project config or ship it in a public game build; use a backend relay or short-lived credentials before distribution.

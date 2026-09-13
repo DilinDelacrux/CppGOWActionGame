@@ -1,19 +1,21 @@
-# Audio.cpp UE runtime plugin
+# CosyVoice Cloud TTS UE runtime plugin
 
-This plugin runs `audiocpp_server.exe` locally and gives Blueprints/C++ a `UAudioCppRuntimeSubsystem` for offline TTS.
+The module keeps its original `AudioCppRuntime` name so existing C++ and Blueprint references remain valid, but it now calls Alibaba Cloud Model Studio instead of launching a local `audio.cpp` process.
 
 ## Setup
 
-1. Put the tested `audiocpp_server.exe` and its DLLs into `ThirdParty/audio.cpp/Win64`.
-2. Download an **audio.cpp-native** TTS GGUF model separately, then configure its real file path in **Project Settings > Plugins > Audio.cpp Local Runtime**. Do not substitute another project's same-named GGUF conversion.
-3. Configure the model family/id to match your audio.cpp server build. The defaults target Qwen3-TTS CustomVoice (`qwen3-tts-customvoice` / `qwen3_tts`).
-4. At game startup, call `StartServer`; wait until `GetServerState` returns `Ready`.
-5. Call `SynthesizeSpeech`. Its callback returns a WAV written to `Saved/AudioCpp/Generated`.
+1. Enable Alibaba Cloud Model Studio in the Beijing region and create a CosyVoice v3.5 Flash voice for each character.
+2. Set `DASHSCOPE_API_KEY` in the environment that launches Unreal Editor, then restart the editor.
+3. In **Project Settings > Plugins > CosyVoice Cloud TTS**, set `Default Voice` and add each game character id/name to `Character Voices` with its CosyVoice voice id.
+4. For lower mainland-China latency, replace `ApiUrl` with the workspace-specific endpoint shown by Model Studio: `https://{WorkspaceId}.cn-beijing.maas.aliyuncs.com/api/v1/services/audio/tts/SpeechSynthesizer`.
+5. Existing code may keep calling `StartServer`, wait for `Ready`, and call `SynthesizeSpeech`. `StartServer` now validates cloud configuration and returns immediately.
 
-The plugin never contacts an online API. It binds the child process to `127.0.0.1` and sends requests to it over localhost.
+After creating the first voice, verify the account and voice id without opening Unreal:
 
-## Packaging the model
+```powershell
+.\Scripts\TestCosyVoiceApi.ps1 -VoiceId "your_voice_id"
+```
 
-Model weights must remain loose files because audio.cpp reads them by an OS path. Stage your chosen model directory as `NonUFS` through Project Settings > Packaging > Additional Non-Asset Directories to Copy, then set `Model File Path` to the equivalent file under the installed game.
+`Voice` on a speech request takes priority. Otherwise `Speaker` is looked up in `Character Voices`; when no mapping exists it is treated as a raw CosyVoice voice id. The generated WAV is cached under `Saved/AudioCpp/Generated` by model, voice, and text, so repeated dialogue has no API cost or network delay.
 
-For Qwen3-TTS CustomVoice, ship the GGUF together with the model metadata/tokenizer files required by the audio.cpp builtin model spec: `config.json`, `generation_config.json`, `preprocessor_config.json`, `tokenizer_config.json`, `vocab.json`, `merges.txt`, and the `speech_tokenizer` metadata directory. The supplied project configuration stages `Content/AudioCpp/Models` as loose NonUFS content.
+Do not store a production API key in project config or ship it in a public game build. Use a backend relay or short-lived credentials before distribution.

@@ -1,10 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UUcAQksqlkc=",
+  "dgSpecHash": "OG1CKdZrMKg=",
   "success": true,
-  "projectFilePath": "E:\\_UE_Ref\\CppGOWActionGame\\Plugins\\Puerts\\Source\\CSharpParamDefaultValueMetas\\CSharpParamDefaultValueMetas.ubtplugin.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\admin\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512"
-  ],
+  "projectFilePath": "C:\\Users\\DiLin\\Documents\\_UnrealProject\\Main\\CppGOWActionGame\\Plugins\\Puerts\\Source\\CSharpParamDefaultValueMetas\\CSharpParamDefaultValueMetas.ubtplugin.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

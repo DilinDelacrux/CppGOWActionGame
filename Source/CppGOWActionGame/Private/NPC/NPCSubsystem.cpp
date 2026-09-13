@@ -317,11 +317,11 @@ void UNPCConversationCsvGenerationTask::Start()
 	}
 	if (Request.SpeakerATtsSpeaker.IsEmpty())
 	{
-		Request.SpeakerATtsSpeaker = TEXT("dylan");
+		Request.SpeakerATtsSpeaker = TEXT("M1");
 	}
 	if (Request.SpeakerBTtsSpeaker.IsEmpty())
 	{
-		Request.SpeakerBTtsSpeaker = TEXT("vivian");
+		Request.SpeakerBTtsSpeaker = TEXT("W1");
 	}
 	if (Request.FinalEndAction.IsEmpty())
 	{
@@ -332,13 +332,13 @@ void UNPCConversationCsvGenerationTask::Start()
 	LLMSubsystem = IsValid(GameInstance) ? GameInstance->GetSubsystem<ULocalLLMRuntimeSubsystem>() : nullptr;
 	if (!IsValid(LLMSubsystem))
 	{
-		Fail(TEXT("LocalLLMRuntime Subsystem 不可用。"));
+		Fail(TEXT("Qwen Cloud Subsystem 不可用。"));
 		return;
 	}
 	const ELocalLLMServerState LLMState = LLMSubsystem->GetServerState();
 	if ((LLMState == ELocalLLMServerState::Stopped || LLMState == ELocalLLMServerState::Failed) && !LLMSubsystem->StartServer())
 	{
-		Fail(TEXT("Local LLM 服务启动失败。"));
+		Fail(TEXT("Qwen Cloud API 配置失败。"));
 		return;
 	}
 
@@ -387,17 +387,17 @@ void UNPCConversationCsvGenerationTask::PollLLMService()
 	}
 	if (!IsValid(LLMSubsystem))
 	{
-		Fail(TEXT("等待 Local LLM 时 Subsystem 已失效。"));
+		Fail(TEXT("等待 Qwen Cloud 时 Subsystem 已失效。"));
 		return;
 	}
 	if (LLMSubsystem->GetServerState() == ELocalLLMServerState::Failed)
 	{
-		Fail(TEXT("等待 Local LLM 启动时服务失败。"));
+		Fail(TEXT("等待 Qwen Cloud 时服务失败。"));
 		return;
 	}
 	if (FPlatformTime::Seconds() - ServiceWaitStartedAt > NPCSubsystemPrivate::ServiceStartTimeoutSeconds)
 	{
-		Fail(TEXT("等待 Local LLM 服务就绪超时。"));
+		Fail(TEXT("等待 Qwen Cloud 服务就绪超时。"));
 		return;
 	}
 	if (LLMSubsystem->IsServerReady())
@@ -670,26 +670,26 @@ void UNPCVoiceDialogueTask::Start()
 	TTSSubsystem = GameInstance->GetSubsystem<UAudioCppRuntimeSubsystem>();
 	if (!IsValid(LLMSubsystem) || !IsValid(TTSSubsystem))
 	{
-		Fail(TEXT("LocalLLMRuntime 或 AudioCppRuntime Subsystem 不可用。"));
+		Fail(TEXT("Qwen Cloud 或 CosyVoice TTS Subsystem 不可用。"));
 		return;
 	}
 
 	if (TTSSubsystem->GetServerState() == EAudioCppServerState::Failed)
 	{
-		Fail(TEXT("Audio.cpp 服务处于失败状态，请检查模型与服务路径。"));
+		Fail(TEXT("CosyVoice 服务处于失败状态，请检查 API 配置。"));
 		return;
 	}
 
 	const ELocalLLMServerState LLMState = LLMSubsystem->GetServerState();
 	if ((LLMState == ELocalLLMServerState::Stopped || LLMState == ELocalLLMServerState::Failed) && !LLMSubsystem->StartServer())
 	{
-		Fail(TEXT("Local LLM 服务启动失败。"));
+		Fail(TEXT("Qwen Cloud API 配置失败。"));
 		return;
 	}
 
 	if (TTSSubsystem->GetServerState() == EAudioCppServerState::Stopped && !TTSSubsystem->StartServer())
 	{
-		Fail(TEXT("Audio.cpp 服务启动失败。"));
+		Fail(TEXT("CosyVoice 服务配置失败。"));
 		return;
 	}
 
@@ -701,7 +701,7 @@ void UNPCVoiceDialogueTask::Start()
 	}
 
 	ServiceWaitStartedAt = FPlatformTime::Seconds();
-	UE_LOG(LogNPCSubsystem, Display, TEXT("Waiting for Local LLM and Audio.cpp services."));
+	UE_LOG(LogNPCSubsystem, Display, TEXT("Waiting for Qwen Cloud and CosyVoice services."));
 	World->GetTimerManager().SetTimer(
 		ServicePollTimer,
 		this,
@@ -747,13 +747,13 @@ void UNPCVoiceDialogueTask::PollServices()
 	if (LLMSubsystem->GetServerState() == ELocalLLMServerState::Failed ||
 		TTSSubsystem->GetServerState() == EAudioCppServerState::Failed)
 	{
-		Fail(TEXT("等待 Local LLM 或 Audio.cpp 启动时服务失败。"));
+		Fail(TEXT("等待 Qwen Cloud 或 CosyVoice 就绪时服务失败。"));
 		return;
 	}
 
 	if (FPlatformTime::Seconds() - ServiceWaitStartedAt > NPCSubsystemPrivate::ServiceStartTimeoutSeconds)
 	{
-		Fail(TEXT("等待 Local LLM 与 Audio.cpp 服务就绪超时。"));
+		Fail(TEXT("等待 Qwen Cloud 与 CosyVoice 服务就绪超时。"));
 		return;
 	}
 
@@ -964,13 +964,13 @@ void UNPCConversationPreGenerateTask::Start()
 
 	if (TTSSubsystem->GetServerState() == EAudioCppServerState::Failed)
 	{
-		Fail(TEXT("Audio.cpp 服务处于失败状态，请检查模型与服务路径。"));
+		Fail(TEXT("CosyVoice 服务处于失败状态，请检查 API 配置。"));
 		return;
 	}
 
 	if (TTSSubsystem->GetServerState() == EAudioCppServerState::Stopped && !TTSSubsystem->StartServer())
 	{
-		Fail(TEXT("Audio.cpp 服务启动失败。"));
+		Fail(TEXT("CosyVoice 服务配置失败。"));
 		return;
 	}
 
@@ -1020,13 +1020,13 @@ void UNPCConversationPreGenerateTask::PollTTSService()
 
 	if (!IsValid(TTSSubsystem) || TTSSubsystem->GetServerState() == EAudioCppServerState::Failed)
 	{
-		Fail(TEXT("等待 Audio.cpp 启动时服务失败。"));
+		Fail(TEXT("等待 CosyVoice 就绪时服务失败。"));
 		return;
 	}
 
 	if (FPlatformTime::Seconds() - ServiceWaitStartedAt > NPCSubsystemPrivate::ServiceStartTimeoutSeconds)
 	{
-		Fail(TEXT("等待 Audio.cpp 服务就绪超时。"));
+		Fail(TEXT("等待 CosyVoice 服务就绪超时。"));
 		return;
 	}
 

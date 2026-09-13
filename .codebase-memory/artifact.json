@@ -1,11 +1,11 @@
 {
     "schema_version": 2,
-    "commit": "240b428dd667a0e675878d68423b050fb3189ef6",
-    "indexed_at": "2026-08-30T11:22:46Z",
+    "commit": "526ebd6f91ee0885a00fb5a35b0064ac611b9c3c",
+    "indexed_at": "2026-08-31T14:55:44Z",
     "project": "CppGOWActionGame",
-    "nodes": 37863,
-    "edges": 93805,
-    "original_size": 63307776,
-    "compressed_size": 9758709,
+    "nodes": 38115,
+    "edges": 94840,
+    "original_size": 63700992,
+    "compressed_size": 9811643,
     "compression_level": 9
 }

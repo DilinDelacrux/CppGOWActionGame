@@ -47,6 +47,10 @@
 		{
 			"Name": "ReactUMG",
 			"Enabled": true
+		},
+		{
+			"Name": "Monolith",
+			"Enabled": true
 		}
 	]
 }

@@ -14,7 +14,7 @@ void UWarriorAbilitySystemComponent::OnAbilityInputPressed(const FGameplayTag& I
 	{
 		if(!AbilitySpec.DynamicAbilityTags.HasTagExact(InInputTag))continue;
 		
-		if (InInputTag.MatchesTag(WarriorGameplayTags::InputTag_Toggleable) && AbilitySpec.IsActive())
+		if (InInputTag.MatchesTag(WarriorGameplayTags::InputTag_Toggleable))
 		{	
 			if (AbilitySpec.IsActive())
 			{
@@ -87,8 +87,8 @@ void UWarriorAbilitySystemComponent::RemovedGrantedWeaponAbilities(
 		{
 			ClearAbility(AbilitySpec);
 		}
-		InSpecHandlesToRemove.Empty();
 	}
+	InSpecHandlesToRemove.Empty();
 }
 
 bool UWarriorAbilitySystemComponent::TryActivateAbilityByTag(FGameplayTag AbilityTagToActivate)

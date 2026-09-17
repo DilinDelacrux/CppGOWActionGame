@@ -118,18 +118,20 @@ void AWarriorEnemyCharacter::InitEnemySetupData()
 		}
 	}
 	
+	TWeakObjectPtr<AWarriorEnemyCharacter> WeakThis(this);
 	UAssetManager::GetStreamableManager().RequestAsyncLoad(
 		CharacterStartUpData.ToSoftObjectPath(),
 
-		FStreamableDelegate::CreateLambda([this,AbilityApplyLevel]()
+		FStreamableDelegate::CreateLambda([WeakThis, AbilityApplyLevel]()
 		{
-			if(UDataAsset_StartUpDataBase* LoadedData=CharacterStartUpData.Get())
+			if (!WeakThis.IsValid()) return;
+			if (UDataAsset_StartUpDataBase* LoadedData = WeakThis->CharacterStartUpData.Get())
 			{
-				LoadedData->GiveToAbilitySystemComponent(WarriorAbilitySystemComponent,AbilityApplyLevel);
-				Debug::Print(TEXT("EnemyStartUpDataLoaded"),FColor::Green);
+				LoadedData->GiveToAbilitySystemComponent(WeakThis->WarriorAbilitySystemComponent, AbilityApplyLevel);
+				Debug::Print(TEXT("EnemyStartUpDataLoaded"), FColor::Green);
 			}
 		})
-		);
+	);
 }
 
 #if WITH_EDITOR

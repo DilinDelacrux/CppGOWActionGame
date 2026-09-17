@@ -1,4 +1,4 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
+// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "AbilitySystem/Abilities/HeroGameplayAbility_TargetLock.h"
@@ -21,6 +21,12 @@
 void UHeroGameplayAbility_TargetLock::ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData)
 {	
 	TryLockOnTarget();
+
+	if (!CurrentLockedActor)
+	{
+		return;
+	}
+
 	InitTargetLockMovement();
 	InitTargetLockMappingContext();
 
@@ -60,6 +66,7 @@ void UHeroGameplayAbility_TargetLock::OnTargetLockTick(float DeltaTime)
 	const FRotator CurrentControlRot = GetHeroControllerFromActorInfo()->GetControlRotation();
 	
 	FRotator LookAtRot = UKismetMathLibrary::FindLookAtRotation(GetHeroCharacterFromActorInfo()->GetActorLocation(),CurrentLockedActor->GetActorLocation());
+	LookAtRot.Pitch -= TargetLockCameraOffsetDistance;
 	
 	const FRotator TargetRot = FMath::RInterpTo(CurrentControlRot,LookAtRot,DeltaTime,TargetLockRotationInterpSpeed);
 
@@ -68,7 +75,6 @@ void UHeroGameplayAbility_TargetLock::OnTargetLockTick(float DeltaTime)
 	
 	if (bShouldOverrideRotation)
 	{
-		LookAtRot -= FRotator(TargetLockCameraOffsetDistance,0.f,0.f);
 		GetHeroCharacterFromActorInfo()->SetActorRotation(FRotator(0.f,TargetRot.Yaw,0.f));
 	}
 
@@ -148,7 +154,8 @@ void UHeroGameplayAbility_TargetLock::GetAvailableActorsToLock()
 	{
 		if (AActor* HitActor = TraceHit.GetActor())
 		{
-			if (HitActor != GetHeroCharacterFromActorInfo())
+			if (HitActor != GetHeroCharacterFromActorInfo() &&
+				!UWarriorFunctionLibrary::NativeDoesActorHaveTag(HitActor, WarriorGameplayTags::Shared_Status_Dead))
 			{
 				AvailableActorsToLock.AddUnique(HitActor);
 			}
@@ -298,10 +305,13 @@ void UHeroGameplayAbility_TargetLock::ResetTargetLockMappingContext()
 	}
 
 	const ULocalPlayer* LocalPlayer = GetHeroControllerFromActorInfo()->GetLocalPlayer();
+	if (!LocalPlayer)
+	{
+		return;
+	}
 
-	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(LocalPlayer);
-
-	check(Subsystem)
-
-	Subsystem->RemoveMappingContext(TargetLockMappingContext);
+	if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(LocalPlayer))
+	{
+		Subsystem->RemoveMappingContext(TargetLockMappingContext);
+	}
 }

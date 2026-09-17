@@ -1,4 +1,4 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
+// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Controllers/WarriorAIController.h"
@@ -20,7 +20,7 @@ AWarriorAIController::AWarriorAIController(const FObjectInitializer& ObjectIniti
 	AISenseConfig_Sight->DetectionByAffiliation.bDetectFriendlies = false;
 	AISenseConfig_Sight->DetectionByAffiliation.bDetectNeutrals = false;
 	AISenseConfig_Sight->SightRadius = 5000.f;
-	AISenseConfig_Sight->LoseSightRadius = 0.f;
+	AISenseConfig_Sight->LoseSightRadius = 5500.f;
 	AISenseConfig_Sight->PeripheralVisionAngleDegrees = 360.f;
 
 	EnemyPerceptionComponent = CreateDefaultSubobject<UAIPerceptionComponent>("EnemyPerceptionComponent");
@@ -34,8 +34,13 @@ AWarriorAIController::AWarriorAIController(const FObjectInitializer& ObjectIniti
 ETeamAttitude::Type AWarriorAIController::GetTeamAttitudeTowards(const AActor& Other) const
 {
 	const APawn* PawnToCheck = Cast<const APawn>(&Other);
+	if (!PawnToCheck) return ETeamAttitude::Neutral;
 
 	const IGenericTeamAgentInterface* OtherTeamAgent = Cast<IGenericTeamAgentInterface>(PawnToCheck->GetController());
+	if (!OtherTeamAgent)
+	{
+		OtherTeamAgent = Cast<IGenericTeamAgentInterface>(PawnToCheck);
+	}
 
 	if (OtherTeamAgent && OtherTeamAgent->GetGenericTeamId() < GetGenericTeamId())
 	{

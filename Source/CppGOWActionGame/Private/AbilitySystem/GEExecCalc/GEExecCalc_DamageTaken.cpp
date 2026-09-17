@@ -55,7 +55,8 @@ float UGEExecCalc_DamageTaken::HandlePhysicalDamage(float SourceAttackPower, flo
 		const float DamageIncreasePercentHeavy = UsedHeavyAttackComboCount * 0.15f + 1.f;
 		BaseDamage *= DamageIncreasePercentHeavy;
 	}
-	float FinalDamage = BaseDamage * SourceAttackPower / TargetDefensePower;
+	const float SafeTargetDefensePower = FMath::Max(1.0f, TargetDefensePower);
+	float FinalDamage = BaseDamage * SourceAttackPower / SafeTargetDefensePower;
 	
 	// Debug::Print(FString::Printf(TEXT("物理伤害计算: 基础伤害=%.1f, 轻击连段=%d, 重击连段=%d, 攻击力=%.1f, 防御力=%.1f, 最终伤害=%.1f"), 
 	// 	OriginalBaseDamage, UsedLightAttackComboCount, UsedHeavyAttackComboCount, SourceAttackPower, TargetDefensePower, FinalDamage), 

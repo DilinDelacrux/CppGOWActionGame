@@ -183,13 +183,16 @@ bool UWarriorFunctionLibrary::IsValidBlock(AActor* InAttacker, AActor* InDefende
 {
 	check(InAttacker && InDefender);
 
-	const float DotResult = FVector::DotProduct(InAttacker->GetActorForwardVector(),InDefender->GetActorForwardVector());
+	const FVector DefenderForward = InDefender->GetActorForwardVector().GetSafeNormal2D();
+	const FVector DefenderToAttacker = (InAttacker->GetActorLocation() - InDefender->GetActorLocation()).GetSafeNormal2D();
 
-	const FString DebugString = FString::Printf(TEXT("Dot Result: %f %s"),DotResult,DotResult<-threshold? TEXT("Valid Block") : TEXT("InvalidBlock"));
+	const float FacingDot = FVector::DotProduct(DefenderForward, DefenderToAttacker);
+	const bool bValidBlock = FacingDot > threshold;
 
-	Debug::Print(DebugString,DotResult<-threshold? FColor::Green : FColor::Red);
+	const FString DebugString = FString::Printf(TEXT("Facing Dot Result: %f %s"), FacingDot, bValidBlock ? TEXT("Valid Block") : TEXT("InvalidBlock"));
+	Debug::Print(DebugString, bValidBlock ? FColor::Green : FColor::Red);
 
-	return DotResult<-threshold? true : false;
+	return bValidBlock;
 }
 
 bool UWarriorFunctionLibrary::ApplyGameplayEffectSpecHandleToTargetActor(AActor* InInstigator, AActor* InTargetActor,
@@ -672,7 +675,7 @@ bool UWarriorFunctionLibrary::FindNearestHostileActorInBox(const UObject* WorldC
 	}
     
 	// 1. 计算搜索盒的世界中心位置
-	const FVector SearchBoxCenter = QueryActor->GetActorLocation() + BoxCenterOffset;
+	const FVector SearchBoxCenter = QueryActor->GetActorLocation() + QueryActor->GetActorRotation().RotateVector(BoxCenterOffset);
 
 	// 2. 准备 BoxOverlapActors 的参数
 	TArray<AActor*> OverlappingActors;

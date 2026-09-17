@@ -1,4 +1,4 @@
-﻿#include "Items/WarriorProjectileBase.h"
+#include "Items/WarriorProjectileBase.h"
 
 #include "AbilitySystemBlueprintLibrary.h"
 #include "Components/BoxComponent.h"
@@ -17,7 +17,6 @@ AWarriorProjectileBase::AWarriorProjectileBase()
 	ProjectileCollisionBox->SetCollisionResponseToChannel(ECC_Pawn,ECR_Block);
 	ProjectileCollisionBox->SetCollisionResponseToChannel(ECC_WorldDynamic,ECR_Block);
 	ProjectileCollisionBox->SetCollisionResponseToChannel(ECC_WorldStatic,ECR_Block);
-	ProjectileCollisionBox->IgnoreActorWhenMoving(GetOwner(), true);
 	ProjectileNiagaraComponent = CreateDefaultSubobject<UNiagaraComponent>(TEXT("ProjectileNiagaraComponent"));
 	ProjectileNiagaraComponent->SetupAttachment(GetRootComponent());
 
@@ -35,6 +34,10 @@ AWarriorProjectileBase::AWarriorProjectileBase()
 void AWarriorProjectileBase::BeginPlay()
 {
 	Super::BeginPlay();
+	if (GetInstigator())
+	{
+		ProjectileCollisionBox->IgnoreActorWhenMoving(GetInstigator(), true);
+	}
 	if (ProjectileDamagePolicy == EProjectileDamagePolicy::OnBeginOverlap)
 	{
 		ProjectileCollisionBox->SetCollisionResponseToChannel(ECC_Pawn,ECR_Overlap);
@@ -48,8 +51,9 @@ void AWarriorProjectileBase::OnProjectileHit(UPrimitiveComponent* HitComponent, 
 	BP_OnSpawnProjectileHitFX(Hit.ImpactPoint);
 
 	APawn* HitPawn = Cast<APawn>(OtherActor);
+	APawn* InstigatorPawn = GetInstigator();
 
-	if (!HitPawn || !UWarriorFunctionLibrary::IsTargetPawnHostile(GetInstigator(),HitPawn))
+	if (!HitPawn || !InstigatorPawn || !UWarriorFunctionLibrary::IsTargetPawnHostile(InstigatorPawn, HitPawn))
 	{
 		Destroy();
 		return;
@@ -94,13 +98,14 @@ void AWarriorProjectileBase::OnProjectileBeginOverlap(UPrimitiveComponent* Overl
 
 	if (APawn* HitPawn = Cast<APawn>(OtherActor))
 	{	
-		FGameplayEventData Data;
-		Data.Instigator = GetInstigator();
-		Data.Target = HitPawn;
-
-		if (UWarriorFunctionLibrary::IsTargetPawnHostile(GetInstigator(),HitPawn))
+		APawn* InstigatorPawn = GetInstigator();
+		if (InstigatorPawn && UWarriorFunctionLibrary::IsTargetPawnHostile(InstigatorPawn, HitPawn))
 		{
-			HandleApplyProjectileDamage(HitPawn,Data);
+			FGameplayEventData Data;
+			Data.Instigator = InstigatorPawn;
+			Data.Target = HitPawn;
+
+			HandleApplyProjectileDamage(HitPawn, Data);
 		}
 	}
 }

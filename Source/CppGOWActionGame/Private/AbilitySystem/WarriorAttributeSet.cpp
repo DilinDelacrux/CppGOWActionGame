@@ -24,17 +24,22 @@ UWarriorAttributeSet::UWarriorAttributeSet()
 
 void UWarriorAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data)
 {
+	Super::PostGameplayEffectExecute(Data);
+
 	if (!CachedPawnUIInterface.IsValid())
 	{
 		CachedPawnUIInterface = TWeakInterfacePtr<IPawnUIInterface>(Data.Target.GetAvatarActor());
 	}
 
-	UPawnUIComponent* PawnUIComponent = CachedPawnUIInterface->GetPawnUIComponent();
+	UPawnUIComponent* PawnUIComponent = CachedPawnUIInterface.IsValid() ? CachedPawnUIInterface->GetPawnUIComponent() : nullptr;
 	if(Data.EvaluatedData.Attribute==GetCurrentHealthAttribute())
 	{
 		const float NewCurrentHealth=FMath::Clamp(GetCurrentHealth(),0.0f,GetMaxHealth());
 		SetCurrentHealth(NewCurrentHealth);
-		PawnUIComponent->OnCurrentHealthChanged.Broadcast(GetCurrentHealth()/GetMaxHealth());
+		if (PawnUIComponent && GetMaxHealth() > 0.f)
+		{
+			PawnUIComponent->OnCurrentHealthChanged.Broadcast(GetCurrentHealth()/GetMaxHealth());
+		}
 	}
 	if (Data.EvaluatedData.Attribute == GetCurrentRageAttribute())
 	{
@@ -55,9 +60,15 @@ void UWarriorAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffec
 			UWarriorFunctionLibrary::RemoveGameplayTagToActorIfFound(Data.Target.GetAvatarActor(),WarriorGameplayTags::Player_Status_Rage_None);
 		}
 		
-		if (UHeroUIComponent* HeroUIComponent = CachedPawnUIInterface->GetHeroUIComponent())
+		if (CachedPawnUIInterface.IsValid())
 		{
-			HeroUIComponent->OnCurrentRageChanged.Broadcast(GetCurrentRage()/GetMaxRage());
+			if (UHeroUIComponent* HeroUIComponent = CachedPawnUIInterface->GetHeroUIComponent())
+			{
+				if (GetMaxRage() > 0.f)
+				{
+					HeroUIComponent->OnCurrentRageChanged.Broadcast(GetCurrentRage()/GetMaxRage());
+				}
+			}
 		}
 	}
 
@@ -66,17 +77,23 @@ void UWarriorAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffec
 		const float OldHealth = GetCurrentHealth();
 		const float DamageDone = GetDamageTaken();
 		const float NewCurrentHealth = FMath::Clamp(OldHealth - DamageDone,0.f,GetMaxHealth());
-		if (Data.EffectSpec.Def->GetAssetTags().HasTagExact(WarriorGameplayTags::Shared_DamageType_Fire))
+
+		SetDamageTaken(0.f);
+
+		if (PawnUIComponent)
 		{
-			PawnUIComponent->OnReceiveDamage.Broadcast(DamageDone,EDamageType::Fire);
-		}
-		else if (Data.EffectSpec.Def->GetAssetTags().HasTagExact(WarriorGameplayTags::Shared_DamageType_Ice))
-		{
-			PawnUIComponent->OnReceiveDamage.Broadcast(DamageDone,EDamageType::Ice);
-		}
-		else
-		{
-			PawnUIComponent->OnReceiveDamage.Broadcast(DamageDone,EDamageType::Physical);
+			if (Data.EffectSpec.Def && Data.EffectSpec.Def->GetAssetTags().HasTagExact(WarriorGameplayTags::Shared_DamageType_Fire))
+			{
+				PawnUIComponent->OnReceiveDamage.Broadcast(DamageDone,EDamageType::Fire);
+			}
+			else if (Data.EffectSpec.Def && Data.EffectSpec.Def->GetAssetTags().HasTagExact(WarriorGameplayTags::Shared_DamageType_Ice))
+			{
+				PawnUIComponent->OnReceiveDamage.Broadcast(DamageDone,EDamageType::Ice);
+			}
+			else
+			{
+				PawnUIComponent->OnReceiveDamage.Broadcast(DamageDone,EDamageType::Physical);
+			}
 		}
 		
 		SetCurrentHealth(NewCurrentHealth);
@@ -89,7 +106,10 @@ void UWarriorAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffec
 		);
 		Debug::Print(DebugString,FColor::Green);
 
-		PawnUIComponent->OnCurrentHealthChanged.Broadcast(GetCurrentHealth()/GetMaxHealth());
+		if (PawnUIComponent && GetMaxHealth() > 0.f)
+		{
+			PawnUIComponent->OnCurrentHealthChanged.Broadcast(GetCurrentHealth()/GetMaxHealth());
+		}
 
 		if (NewCurrentHealth == 0.f)
 		{

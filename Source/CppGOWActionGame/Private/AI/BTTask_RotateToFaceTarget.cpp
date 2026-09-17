@@ -1,4 +1,4 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
+// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "AI/BTTask_RotateToFaceTarget.h"
@@ -77,6 +77,7 @@ void UBTTask_RotateToFaceTarget::TickTask(UBehaviorTreeComponent& OwnerComp, uin
 	if (!Memory->IsValid())
 	{
 		FinishLatentTask(OwnerComp,EBTNodeResult::Failed);
+		return;
 	}
 
 	if (HasReachedAnglePrecision(Memory->OwningPawn.Get(),Memory->TargetActor.Get()))
@@ -89,14 +90,16 @@ void UBTTask_RotateToFaceTarget::TickTask(UBehaviorTreeComponent& OwnerComp, uin
 		const FRotator LookAtRot = UKismetMathLibrary::FindLookAtRotation(Memory->OwningPawn->GetActorLocation(),Memory->TargetActor->GetActorLocation());
 		const FRotator TargetRot = FMath::RInterpTo(Memory->OwningPawn->GetActorRotation(),LookAtRot,DeltaSeconds,RotationInterpSpeed);
 
-		Memory->OwningPawn->SetActorRotation(TargetRot);
+		Memory->OwningPawn->SetActorRotation(FRotator(0.f, TargetRot.Yaw, 0.f));
 	}
 }
 
 bool UBTTask_RotateToFaceTarget::HasReachedAnglePrecision(APawn* QueryPawn, AActor* TargetActor) const
 {
-	const FVector OwnerForward = QueryPawn->GetActorForwardVector();
-	const FVector OwnerToTargetNormalized = (TargetActor->GetActorLocation() - QueryPawn->GetActorLocation()).GetSafeNormal();
+	if (!QueryPawn || !TargetActor) return false;
+
+	const FVector OwnerForward = QueryPawn->GetActorForwardVector().GetSafeNormal2D();
+	const FVector OwnerToTargetNormalized = (TargetActor->GetActorLocation() - QueryPawn->GetActorLocation()).GetSafeNormal2D();
 
 	const float DotResult = FVector::DotProduct(OwnerForward,OwnerToTargetNormalized);
 	const float AngleDiff = UKismetMathLibrary::DegAcos(DotResult);

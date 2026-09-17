@@ -1,4 +1,4 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
+// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "AI/BTService_OrientToTargetActor.h"
@@ -49,6 +49,6 @@ void UBTService_OrientToTargetActor::TickNode(UBehaviorTreeComponent& OwnerComp,
 		const FRotator LookAtRot = UKismetMathLibrary::FindLookAtRotation(OwningPawn->GetActorLocation(),TargetActor->GetActorLocation());
 		const FRotator TargetRot = FMath::RInterpTo(OwningPawn->GetActorRotation(),LookAtRot,DeltaSeconds,RotationInterpSpeed);
 
-		OwningPawn->SetActorRotation(TargetRot);
+		OwningPawn->SetActorRotation(FRotator(0.f, TargetRot.Yaw, 0.f));
 	}
 }
